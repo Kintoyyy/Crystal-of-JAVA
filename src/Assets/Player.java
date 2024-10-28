@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 import Game.Game;
 import Game.Handler;
-import Game.World;
+import World.World;
 import ImageStuff.PlayerAnimation;
 import States.BattleState;
 
@@ -143,23 +143,23 @@ public class Player extends Creature {
 
 
     private void checkEncounter() {
-        World w = handler.getWorld();
-        if ((w.getTile(w.getSpawnX() + ((int) Creature.xPosition) / 64,
-                w.getSpawnY() + ((int) Creature.yPosition) / 64) == Tile.bush) && !BattleState.encounterFlag
-                && Math.random() >= 0.99) {
-            a = w.getSpawnX() + ((int) Creature.xPosition) / 64;
-            b = w.getSpawnY() + ((int) Creature.yPosition) / 64;
-            if (!flag3) {
-                flag3 = true;
-                Game.flag = true;
-            }
-
-        } else if (BattleState.encounterFlag) {
-            if (a != w.getSpawnX() + ((int) Creature.xPosition) / 64
-                    || b != w.getSpawnY() + ((int) Creature.yPosition) / 64) {
-                BattleState.encounterFlag = false;
-                flag3 = false;
-            }
-        }
+//        World w = handler.getWorld();
+//        if ((w.getTile(w.getSpawnX() + ((int) Creature.xPosition) / 64,
+//                w.getSpawnY() + ((int) Creature.yPosition) / 64) == Tile.bush) && !BattleState.encounterFlag
+//                && Math.random() >= 0.99) {
+//            a = w.getSpawnX() + ((int) Creature.xPosition) / 64;
+//            b = w.getSpawnY() + ((int) Creature.yPosition) / 64;
+//            if (!flag3) {
+//                flag3 = true;
+//                Game.flag = true;
+//            }
+//
+//        } else if (BattleState.encounterFlag) {
+//            if (a != w.getSpawnX() + ((int) Creature.xPosition) / 64
+//                    || b != w.getSpawnY() + ((int) Creature.yPosition) / 64) {
+//                BattleState.encounterFlag = false;
+//                flag3 = false;
+//            }
+//        }
     }
 }

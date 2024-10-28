@@ -1,36 +1,41 @@
 package World;
 
+import ImageStuff.ImageLoader;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 public class Tile {
+
     protected BufferedImage image;
-    protected final int id;
-    protected boolean isSolid;
-    protected boolean isFront;
+    protected String path;
+    protected String name;
 
-    public static final int TILE_SIZE = 16;
+    public static final int TILEWIDTH = 64;
+    public static final int TILEHEIGHT = 64;
+    public static final Tile defaultTile  = new Tile(ImageLoader.loadImage("/Tiles/Grass/Grass_1_Middle.png"), "grass");
 
-    public Tile(BufferedImage image, int id, boolean isSolid, boolean isFront) {
+    public Tile(BufferedImage image, String name) {
         this.image = image;
-        this.id = id;
-        this.isSolid = isSolid;
-        this.isFront = isFront;
+        this.name = name;
+    }
+
+    public Tile(BufferedImage image, String name, String path) {
+        this.image = image;
+        this.name = name;
+        this.path = path;
     }
 
     public void render(Graphics g, int x, int y) {
-        g.drawImage(image, x, y, TILE_SIZE, TILE_SIZE, null);
+        g.drawImage(image, x, y, TILEWIDTH, TILEHEIGHT, null);
     }
 
-    public boolean isSolid() {
-        return isSolid;
+    public String getName() {
+        return name;
     }
 
-    public boolean front() {
-        return isFront;
-    }
-
-    public int getId() {
-        return id;
+    public String getPath() {
+        return path;
     }
 }

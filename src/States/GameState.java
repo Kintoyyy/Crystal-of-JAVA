@@ -6,7 +6,8 @@ import Assets.Description;
 import Assets.Player;
 import Assets.Text;
 import Game.Handler;
-import Game.World;
+import World.World;
+
 
 public class GameState extends State{
 
@@ -19,9 +20,9 @@ public class GameState extends State{
 	private Text coinsText;
 
 	public GameState(Handler handler) {
-		super(handler); //calls constructor of "State" class
+		super(handler);
 
-		world = new World(handler, "res/worlds/test_map.xml");
+		world = new World(handler, "res/worlds/world_1.tmx");
 
 		handler.setWorld(world);
 		
@@ -39,7 +40,6 @@ public class GameState extends State{
 
 	@Override
 	public void render(Graphics g) {
-
 		world.render(g);
 //		playerDescription.render(g);
 //		coinsText = new Text(coins + "", 50, 126, 4, 4);

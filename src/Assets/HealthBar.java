@@ -12,6 +12,8 @@ import Game.Handler;
 import States.BattleState;
 import States.State;
 
+import World.Tile;
+
 public class HealthBar {
 	
 	private int x;

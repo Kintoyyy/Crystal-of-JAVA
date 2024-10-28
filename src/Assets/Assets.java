@@ -46,8 +46,6 @@ public class Assets {
         int startIdx = 9; // Start placing 2x2 tiles after the 9 tiles from 3x3
         for (int i = 0; i < 2; i++) { // Rows for the 2x2 section
             for (int j = 0; j < 2; j++) { // Columns for the 2x2 section
-                System.out.println("x" + (x + j) * tileWidth + "y" + (y + 3) * tileHeight);
-
                 tile[startIdx + i * 2 + j] = sheet.crop((x + j) * tileWidth, (y + 3) * tileHeight, tileWidth, tileHeight);
             }
         }
@@ -79,27 +77,8 @@ public class Assets {
         grass_tiles[2] = loadTileSet(grassSheet, 0, 5, 16, 16);
         grass_tiles[3] = loadTileSet(grassSheet, 3, 5, 16, 16);
 
-//        int grassType = 1;
-
         grass = ImageLoader.loadImage("/Tiles/Grass/Grass_1_Middle.png");
 
-//        ledgeCornerTopRight = grass_tiles[grassType][6];
-//        ledgeCornerTopLeft = grass_tiles[grassType][8];
-//        leftCornerLedge = grass_tiles[grassType][12];
-//
-//        ledgeTopLeft = grass_tiles[grassType][9];
-//        ledgeTopRight = grass_tiles[grassType][10];
-//        ledgeTopMiddle = grass_tiles[grassType][7];
-//
-//        ledgeMiddleRight = grass_tiles[grassType][3];
-//        ledgeMiddleLeft = grass_tiles[grassType][5];
-//
-//        bottomMiddleLedge = grass_tiles[grassType][12];
-//        bottomRightLedge = grass_tiles[grassType][12];
-//        ledgeMiddleMiddle = grass_tiles[grassType][12];
-//
-//        ledge = grass_tiles[grassType][0];
-//        grassLedge = grass_tiles[grassType][12];
 
         grassPlatform = barSheet.crop(101, 40, 86, 37);
 

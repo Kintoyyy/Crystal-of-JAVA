@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 import Game.Game;
 import Game.Handler;
-import Assets.Tile;
+import World.Tile;
 
 public class Tree extends Entity{
 	private int type;

@@ -3,7 +3,7 @@ package Assets;
 import Game.Handler;
 
 import Game.KeyManager;
-import Assets.Tile;
+import World.Tile;
 
 public abstract class Creature extends Entity{
 	
@@ -87,10 +87,11 @@ public abstract class Creature extends Entity{
 	}
 	
 	protected boolean collisionWithTile(int x, int y) {
-		if(handler.getWorld().getTile(x, y).isSolid()) {
-			collided = true;
-		}
-		return handler.getWorld().getTile(x, y).isSolid();
+//		if(handler.getWorld().getTile(x, y).isSolid()) {
+//			collided = true;
+//		}
+//		return handler.getWorld().getTile(x, y).isSolid();
+		return false;
 	}
 
 //	public float getxMove() {

@@ -1,5 +1,7 @@
 package Game;
 
+import World.World;
+
 public class Handler {
 
 	private Game game;

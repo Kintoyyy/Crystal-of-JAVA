@@ -1,7 +1,7 @@
 package Game;
 
 import Assets.Entity;
-import Assets.Tile;
+import World.Tile;
 
 public class GameCamera {
 	
