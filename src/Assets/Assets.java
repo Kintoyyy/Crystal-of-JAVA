@@ -7,17 +7,20 @@ import ImageStuff.SpriteSheet;
 
 public class Assets {
 
-    private static final int width = 16; //Size of each tile in sprite sheet
-    private static final int height = 16;
+    private static final int width = 32; //Size of each tile in sprite sheet
+    private static final int height = 32;
 
     private static final int pWidth = 32;
     private static final int pHeight = 32;
+
+    public static BufferedImage[][] player_animation, grass_tiles;
+    public static BufferedImage[] ui_frame = new BufferedImage[2];
 
     public static BufferedImage grass, rock, ledgeMiddleLeft, tree, bush, leftCornerLedge, ledge, bottomMiddleLedge, bottomRightLedge,
             ledgeMiddleRight, ledgeTopLeft, ledgeTopMiddle, ledgeTopRight, ledgeMiddleMiddle, grassLedge, ledgeCornerTopRight, ledgeCornerTopLeft, bar,
             critBar, barGrass, grassPlatform, enemyDescription, enemyHealthBar, slash, monsterLevel, monsterBar, playerDescription,
             greySquare, barOutline, coin, xp; //images from sprite sheet
-    public static BufferedImage[][] player_animation, grass_tiles;
+
     public static BufferedImage[] buttonStart, trees, attackButton, escapeButton, alphabet, numbers, slashAnimation, attackBar, damageNumbers,
             miniAlphabet, statsButton, redNumbers, arrow, moneyNumbers, xpNumbers, monsters;
 
@@ -68,19 +71,24 @@ public class Assets {
         SpriteSheet barSheet = new SpriteSheet(ImageLoader.loadImage("/textures/Bar.png"));
         SpriteSheet monsterSheet = new SpriteSheet(ImageLoader.loadImage("/textures/Monsters.png"));
 
+        SpriteSheet ui_bars = new SpriteSheet(ImageLoader.loadImage("/ui/UI_Bars.png"));
+        SpriteSheet ui_inventory = new SpriteSheet(ImageLoader.loadImage("/ui/UI_Premade.png"));
 
-        SpriteSheet grassSheet = new SpriteSheet(ImageLoader.loadImage("/Tiles/Grass/Grass_Tiles_1.png"));
-        grass_tiles = new BufferedImage[4][13];
+        ui_frame[0] = ui_bars.crop(96, 6, 46, 22);
+        ui_frame[1] = ui_inventory.crop(33, 25, 196, 160);
 
-        grass_tiles[0] = loadTileSet(grassSheet, 0, 0, 16, 16);
-        grass_tiles[1] = loadTileSet(grassSheet, 3, 0, 16, 16);
-        grass_tiles[2] = loadTileSet(grassSheet, 0, 5, 16, 16);
-        grass_tiles[3] = loadTileSet(grassSheet, 3, 5, 16, 16);
-
-        grass = ImageLoader.loadImage("/Tiles/Grass/Grass_1_Middle.png");
-
-
-        grassPlatform = barSheet.crop(101, 40, 86, 37);
+//        SpriteSheet grassSheet = new SpriteSheet(ImageLoader.loadImage("/Tiles/Grass/Grass_Tiles_1.png"));
+//        grass_tiles = new BufferedImage[4][13];
+//
+//        grass_tiles[0] = loadTileSet(grassSheet, 0, 0, 16, 16);
+//        grass_tiles[1] = loadTileSet(grassSheet, 3, 0, 16, 16);
+//        grass_tiles[2] = loadTileSet(grassSheet, 0, 5, 16, 16);
+//        grass_tiles[3] = loadTileSet(grassSheet, 3, 5, 16, 16);
+//
+//        grass = ImageLoader.loadImage("/Tiles/Grass/Grass_1_Middle.png");
+//
+//
+//        grassPlatform = barSheet.crop(101, 40, 86, 37);
 
 
 

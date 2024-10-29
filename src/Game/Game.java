@@ -9,6 +9,7 @@ import States.BattleState;
 import States.GameState;
 import States.MenuState;
 import States.State;
+import Utils.DebugMode;
 
 public class Game implements Runnable{
 	
@@ -19,7 +20,6 @@ public class Game implements Runnable{
 	public String title;
 	public boolean running = false;
 	
-	public static boolean showHitboxes = true;
 	public static boolean flag = false;
 	public static boolean flag2 = false;
 	public static boolean battling = false;
@@ -42,6 +42,8 @@ public class Game implements Runnable{
 	
 	private Handler handler;
 	private Transition transition;
+
+	private DebugMode debugMode;
 	
 	private int fps;
 	private double timePerTick; 
@@ -71,7 +73,7 @@ public class Game implements Runnable{
 		
 		handler = new Handler(this);
 		gameCamera = new GameCamera(handler, 0, 0);
-		
+		debugMode = new DebugMode(handler);
 		gameState = new GameState(handler);
 		menuState = new MenuState(handler);
 		//battleState = new BattleState(handler);

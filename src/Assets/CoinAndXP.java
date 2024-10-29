@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-public class CoinAndXP {
+public class  CoinAndXP {
 	
 	private int x;
 	private int y;

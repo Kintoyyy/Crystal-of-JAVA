@@ -36,7 +36,8 @@ public class TileSet {
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < columns; col++) {
                     BufferedImage img = sheet.crop(col * tileWidth, row * tileHeight, tileWidth, tileHeight);
-                    tiles.put(tileId++, new Tile(img, name, path));
+                    int id = tileId++;
+                    tiles.put(id, new Tile(img, name, path, id));
                 }
             }
         }

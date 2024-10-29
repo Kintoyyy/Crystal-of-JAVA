@@ -1,9 +1,6 @@
 package Assets;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -81,6 +78,9 @@ public class Monster {
 	public void render(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		Composite ogComposite = g2d.getComposite();
+
+		g2d.setColor(Color.RED);
+		g2d.drawRect(x, y, width, height);
 		
 		if(!BattleState.showBars) {
 			text.render(g);

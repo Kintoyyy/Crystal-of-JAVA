@@ -29,7 +29,7 @@ public class Transition {
 	public void render(Graphics g) {
 		//System.out.println(milliSecondsPassed);
 			if(milliSecondsPassed > 400) {
-				g.setColor(Color.white);
+				g.setColor(Color.darkGray);
 				g.fillRect(0, 0, 800, 800);
 			}
 			if(milliSecondsPassed > 475) {

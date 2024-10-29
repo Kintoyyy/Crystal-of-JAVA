@@ -2,6 +2,7 @@ package World;
 
 import Assets.*;
 
+import Utils.DebugMode;
 import World.Tile;
 import Game.Handler;
 import org.w3c.dom.*;
@@ -56,15 +57,20 @@ public class World {
                 for (int j = xStart; j < xEnd; j++) {
                     Tile tile = getTile(i, j, layer);
                     if (tile != null) {
-                        tile.render(g,
-                                (int) (j * Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
-                                (int) (i * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset())
-                        );
+                        int tilePosX = (int) (j * Tile.TILEWIDTH - handler.getGameCamera().getxOffset());
+                        int tilePosY = (int) (i * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset());
+                        tile.render(g, tilePosX, tilePosY);
+
+                        if (DebugMode.debugMode()) {
+                            if (layer == DebugMode.getRenderedLayerIndex()) {
+                                g.drawRect(tilePosX, tilePosY, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+                            }
+                        }
                     }
                 }
             }
 
-            if (layer == 1) {
+            if (layer == tiles.length - 1) {
                 entityManager.render(g);
             }
         }
@@ -76,10 +82,16 @@ public class World {
         }
 
         Tile t = tileSet.getTile(tiles[layer][x][y]);
+
         if (t == null) {
-            return Tile.defaultTile;
+            return Tile.transparentTile;
         }
+
         return t;
+    }
+
+    public Tile getTile(int x, int y) {
+        return getTile(x, y, 1);
     }
 
     private void loadWorld(String path) {
@@ -143,4 +155,6 @@ public class World {
     public void setSpawnY(int spawnY) {
         this.spawnY = spawnY;
     }
+
+
 }

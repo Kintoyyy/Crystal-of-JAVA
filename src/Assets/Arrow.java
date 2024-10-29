@@ -32,7 +32,6 @@ public class Arrow extends UIObject{
 		this.clicker = clicker;
 		this.images = images;
 		bounds = new Rectangle((int)x, (int)y, width, height);
-		
 	}
 
 	public void tick() {	

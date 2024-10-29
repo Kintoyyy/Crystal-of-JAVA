@@ -41,14 +41,12 @@ public final class PlayerAnimation {
     public static int getFrameSet(int action, String direction) {
         return switch (action) {
             case ATTACK -> switch (direction) {
-                case UP -> 8;
+                case UP, LEFT, RIGHT -> 8;
                 case DOWN -> 6;
-                case LEFT, RIGHT -> 8;
                 default -> 0;
             };
             case IDLE -> switch (direction) {
                 case UP -> 2;
-                case DOWN -> 0;
                 case LEFT, RIGHT -> 1;
                 default -> 0;
             };

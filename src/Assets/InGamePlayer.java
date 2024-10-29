@@ -23,7 +23,7 @@ public class InGamePlayer {
 		description.render(g);
 		Color c = new Color(184, 184, 184);
 		g.setColor(c);
-		//g.fillRect(396, 516, 400, 12);
+		g.fillRect(396, 516, 400, 12);
 	}
 
 }
