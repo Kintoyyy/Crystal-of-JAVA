@@ -1,6 +1,6 @@
 package World;
 
-import ImageStuff.ImageLoader;
+import Utils.ImageUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,8 +14,8 @@ public class Tile {
 
     public static final int TILEWIDTH = 64;
     public static final int TILEHEIGHT = 64;
-    public static final Tile defaultTile = new Tile(ImageLoader.loadImage("/Tiles/Grass/Grass_1_Middle.png"), "default", 0);
-    public static final Tile transparentTile = null; // Set to null for transparency
+    public static final Tile defaultTile = new Tile(ImageUtils.loadImage("/Tiles/Grass/Grass_1_Middle.png"), "default", 0);
+    public static final Tile transparentTile = null;
 
     public Tile(BufferedImage image, String name, int id) {
         this.image = image;

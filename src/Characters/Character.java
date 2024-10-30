@@ -1,8 +1,8 @@
 package Characters;
 
-import ImageStuff.ImageLoader;
-import ImageStuff.SpriteSheet;
+import Utils.SpriteSheet;
 import Skills.Skill;
+import Utils.ImageUtils;
 
 import java.util.ArrayList;
 
@@ -11,9 +11,9 @@ public abstract class Character {
     private String name;
     private String description = "";
     private int level;
-    public int health;
-    public int mana;
-    public int baseHealth;
+    private int health;
+    private int mana;
+    private int baseHealth;
     public ArrayList<Skill> skills;
     public SpriteSheet spriteSheet;
 
@@ -24,7 +24,7 @@ public abstract class Character {
         this.mana = mana;
         this.baseHealth = baseHealth;
         this.skills = skills;
-        this.spriteSheet = new SpriteSheet(ImageLoader.loadImage("/textures/Default.png"));
+        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Default.png"));
     }
 
     public String getName() {

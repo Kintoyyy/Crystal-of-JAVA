@@ -1,14 +1,16 @@
 package Characters;
 
 import Utils.SpriteSheet;
-import Skills.*;
+import Skills.Basic;
+import Skills.Healing;
+import Skills.Skill;
 import Utils.ImageUtils;
 
 import java.util.ArrayList;
 
-public class Kent extends Character {
+public class Cedi extends Character {
 
-    private String name = "Kent";
+    private String name = "Cedi";
     private String description = "";
     private int level = 1;
     private int health = 100;
@@ -16,9 +18,9 @@ public class Kent extends Character {
     private int baseHealth = 100;
     private ArrayList<Skill> skills = new ArrayList<>();
 
-    public Kent() {
+    public Cedi() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Kent", 1, 100, 100, 100, new ArrayList<>());
+        super("Cedi", 1, 100, 100, 100, new ArrayList<>());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
 

@@ -13,11 +13,11 @@ import java.io.File;
 
 public class World {
 
-    private Handler handler;
+    private final Handler handler;
     private int width, height;
     private int spawnX, spawnY;
     private int[][][] tiles;
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     private TileSet tileSet;
 
@@ -27,11 +27,11 @@ public class World {
 
         loadWorld(path);
 
-        for (int layer = 0; layer < tiles.length; layer++) {
+        for (int[][] tile : tiles) {
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
-                    if (tiles[layer][j][i] >= 96 && tiles[layer][j][i] < 100) {
-                        entityManager.addEntity(new Tree(handler, (int) (j * Tile.TILEWIDTH), (int) (i * Tile.TILEWIDTH) - (int) (Tile.TILEWIDTH * 1.5), 99 - tiles[layer][j][i]));
+                    if (tile[j][i] >= 96 && tile[j][i] < 100) {
+                        entityManager.addEntity(new Tree(handler, (int) (j * Tile.TILEWIDTH), (int) (i * Tile.TILEWIDTH) - (int) (Tile.TILEWIDTH * 1.5), 99 - tile[j][i]));
                     }
                 }
             }

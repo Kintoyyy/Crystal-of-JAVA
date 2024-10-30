@@ -8,7 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import Game.Handler;
-import ImageStuff.Animation;
+import Animations.Animation;
 import States.BattleState;
 
 public class AttackBarManager {

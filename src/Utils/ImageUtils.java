@@ -1,7 +1,5 @@
 package Utils;
 
-import ImageStuff.ImageLoader;
-
 import javax.imageio.ImageIO;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -13,8 +11,7 @@ public class ImageUtils {
 
     public static BufferedImage loadImage(String path) {
         try {
-            //load in image
-            return ImageIO.read(Objects.requireNonNull(ImageLoader.class.getResource(path)));
+            return ImageIO.read(Objects.requireNonNull(ImageUtils.class.getResource(path)));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -22,11 +19,6 @@ public class ImageUtils {
         return null;
     }
 
-    /**
-     * Flip a given image horizontally (X-axis).
-     * @param image The BufferedImage to flip.
-     * @return The flipped BufferedImage.
-     */
     public BufferedImage flipX(BufferedImage image) {
         AffineTransform transform = new AffineTransform();
         transform.scale(-1, 1);  // Flip horizontally
@@ -36,11 +28,6 @@ public class ImageUtils {
         return op.filter(image, null);
     }
 
-    /**
-     * Flip a given image vertically (Y-axis).
-     * @param image The BufferedImage to flip.
-     * @return The flipped BufferedImage.
-     */
     public BufferedImage flipY(BufferedImage image) {
         AffineTransform transform = new AffineTransform();
         transform.scale(1, -1);  // Flip vertically
@@ -49,14 +36,7 @@ public class ImageUtils {
         AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         return op.filter(image, null);
     }
-    /**
-     * Crop a specific image from the sprite sheet.
-     * @param col The column index of the sprite.
-     * @param row The row index of the sprite.
-     * @param width The width of the sprite.
-     * @param height The height of the sprite.
-     * @return The cropped BufferedImage.
-     */
+
     public BufferedImage crop(BufferedImage image, int col, int row, int width, int height) {
         return image.getSubimage(col * width, row * height, width, height);
     }

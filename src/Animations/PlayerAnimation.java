@@ -1,4 +1,4 @@
-package ImageStuff;
+package Animations;
 
 import Utils.ImageUtils;
 
@@ -7,9 +7,10 @@ import java.awt.image.BufferedImage;
 import static Constants.PlayerAnimation.*;
 
 public class PlayerAnimation {
-    private int speed, index;
+    private final int speed;
+    private int index;
     private long lastTime, timer;
-    private BufferedImage[][] frames;
+    private final BufferedImage[][] frames;
     private int action;
     ImageUtils img = new ImageUtils();
 

@@ -8,9 +8,10 @@ import Game.Game;
 import Game.Handler;
 import Utils.DebugMode;
 import World.World;
-import ImageStuff.PlayerAnimation;
+import Animations.PlayerAnimation;
 import States.BattleState;
 import World.Tile;
+import enums.ViewEnums;
 
 import static Constants.PlayerAnimation.*;
 
@@ -89,6 +90,16 @@ public class Player extends Creature {
 
         if (debounceKeyPress(handler.getKeymanager().f3)) {
             DebugMode.SetDebugMode(!DebugMode.debugMode());
+        }
+
+        if (debounceKeyPress(handler.getKeymanager().f9)) {
+            System.out.println("GAME VIEW");
+            handler.getViewManager().setView(ViewEnums.GAME);
+        }
+
+        if (debounceKeyPress(handler.getKeymanager().f10)) {
+            System.out.println("MENU VIEW");
+            handler.getViewManager().setView(ViewEnums.MAIN_MENU);
         }
 
         if (debounceKeyPress(handler.getKeymanager().f12)) {

@@ -6,10 +6,10 @@ import java.awt.image.BufferStrategy;
 import Assets.Assets;
 import Assets.Transition;
 import States.BattleState;
-import States.GameState;
 import States.MenuState;
 import States.State;
 import Utils.DebugMode;
+import Views.ViewManager;
 
 public class Game implements Runnable{
 	
@@ -44,6 +44,8 @@ public class Game implements Runnable{
 	private Transition transition;
 
 	private DebugMode debugMode;
+	private ViewManager viewManager;
+
 	
 	private int fps;
 	private double timePerTick; 
@@ -63,7 +65,7 @@ public class Game implements Runnable{
 	}
 	
 	private void init() {
-		display = new Display("RPG Game", width, height);
+		display = new Display("Crystal of JAVA :)", width, height);
 		display.getFrame().addKeyListener(keyManager);
 		display.getFrame().addMouseListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
@@ -74,18 +76,25 @@ public class Game implements Runnable{
 		handler = new Handler(this);
 		gameCamera = new GameCamera(handler, 0, 0);
 		debugMode = new DebugMode(handler);
-		gameState = new GameState(handler);
-		menuState = new MenuState(handler);
+		viewManager = new ViewManager(handler);
+
+//		gameState = new GameState(handler);
+
+//		menuState = new MenuState(handler);
 		//battleState = new BattleState(handler);
-		State.setState(gameState); //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//		State.setState(gameState); //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 	
 	private void tick() { //updates all variables
 		keyManager.tick();
+
+//		if(viewManager.hasLayers()){
+			viewManager.tick();
+//		}
 		
-		if(State.getState() != null) {
-			State.getState().tick();
-		}
+//		if(State.getState() != null) {
+//			State.getState().tick();
+//		}
 		
 		if(flag) {
 			flag = false;
@@ -96,7 +105,7 @@ public class Game implements Runnable{
 				Transition.canStart = false;
 				battling = true;
 				battleState = new BattleState(handler);
-				State.setState(handler.getGame().battleState);
+//				State.setState(handler.getGame().battleState);
 			}
 	}
 	
@@ -114,10 +123,14 @@ public class Game implements Runnable{
 		g.clearRect(0, 0, width, height);
 		
 		//Draws stuff in the screen-
-		
-		if(State.getState() != null) {
-			State.getState().render(g);
+
+		if(viewManager.hasLayers()){
+			viewManager.render(g);
 		}
+		
+//		if(State.getState() != null) {
+//			State.getState().render(g);
+//		}
 		
 		if(flag2) {
 			transition.render(g);
@@ -152,7 +165,7 @@ public class Game implements Runnable{
 				delta--;
 			}
 			if(timer >= 1000000000) { //if timer exceeds one second
-				System.out.println("FPS: " + ticks);
+//				System.out.println("FPS: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}

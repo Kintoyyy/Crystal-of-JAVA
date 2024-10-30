@@ -1,15 +1,13 @@
-package ImageStuff;
+package Animations;
 
-import Assets.Player;
-
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Animation {
 	
-	private int speed, index;
+	private final int speed;
+    private int index;
 	private long lastTime, timer;
-	private BufferedImage[] frames;
+	private final BufferedImage[] frames;
 	
 	public Animation(int speed, BufferedImage[] frames) {
 		this.speed = speed;
@@ -18,7 +16,6 @@ public class Animation {
 		lastTime = System.currentTimeMillis();
 	}
 
-	
 	public void tick() {
 		timer += System.currentTimeMillis() - lastTime;
 		lastTime = System.currentTimeMillis();

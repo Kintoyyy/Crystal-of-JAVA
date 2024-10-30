@@ -1,18 +1,16 @@
 package Skills;
 
 public abstract class Skill {
-    public String name;
-    public String description;
-    public String type;
-    public int damage;
-    public int cost;
+    private final String name;
+    private final String type;
+    private final int damage;
+    private final int cost;
 
     public Skill(String name,String description, int cost, int damage, String type) {
         this.name = name;
         this.cost = cost;
         this.damage = damage;
         this.type = type;
-        this.description = description;
     }
 
     public String getName() {
@@ -31,6 +29,5 @@ public abstract class Skill {
         return type;
     }
 
-    // Method to use the skill
     public abstract void useSkill();
 }

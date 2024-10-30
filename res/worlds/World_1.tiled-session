@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "world_2.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -46,6 +46,23 @@
         "world_1.tmx#environment": {
             "dynamicWrapping": true,
             "scaleInEditor": 4
+        },
+        "world_2.tmx": {
+            "scale": 2.2978125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 159.9347205222358,
+                "y": 160.15231878144974
+            }
+        },
+        "world_2.tmx#Beach_Decor_Tiles": {
+            "scaleInDock": 1
+        },
+        "world_2.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "world_2.tmx#Grass_Tiles_3": {
+            "scaleInDock": 1
         }
     },
     "frame.defaultDuration": 200,
@@ -57,10 +74,12 @@
     "map.tileWidth": 16,
     "map.width": 20,
     "openFiles": [
+        "world_2.tmx"
     ],
     "project": "World_1.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "world_2.tmx",
         "world_1.tmx"
     ],
     "tileset.embedInMap": true,

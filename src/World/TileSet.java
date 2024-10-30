@@ -1,7 +1,7 @@
 package World;
 
-import ImageStuff.ImageLoader;
-import ImageStuff.SpriteSheet;
+import Utils.SpriteSheet;
+import Utils.ImageUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -9,18 +9,18 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public class TileSet {
-    private HashMap<Integer, Tile> tiles;
+    private final HashMap<Integer, Tile> tiles;
 
-    public TileSet(NodeList tilesets) {
+    public TileSet(NodeList filesets) {
         tiles = new HashMap<>();
-        for (int i = 0; i < tilesets.getLength(); i++) {
-            Element tileset = (Element) tilesets.item(i);
+        for (int i = 0; i < filesets.getLength(); i++) {
+            Element tileSet = (Element) filesets.item(i);
 
-            int tileWidth = Integer.parseInt(tileset.getAttribute("tilewidth"));
-            int tileHeight = Integer.parseInt(tileset.getAttribute("tileheight"));
-            int firstId = Integer.parseInt(tileset.getAttribute("firstgid"));
+            int tileWidth = Integer.parseInt(tileSet.getAttribute("tilewidth"));
+            int tileHeight = Integer.parseInt(tileSet.getAttribute("tileheight"));
+            int firstId = Integer.parseInt(tileSet.getAttribute("firstgid"));
 
-            Element imageElement = (Element) tileset.getElementsByTagName("image").item(0);
+            Element imageElement = (Element) tileSet.getElementsByTagName("image").item(0);
             String path = imageElement.getAttribute("source");
             String name = imageElement.getAttribute("name");
 
@@ -29,8 +29,7 @@ public class TileSet {
             int columns = imageWidth / tileWidth;
             int rows = imageHeight / tileHeight;
 
-            System.out.println("loading image: " + path);
-            SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage(path));
+            SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage(path));
 
             int tileId = firstId;
             for (int row = 0; row < rows; row++) {

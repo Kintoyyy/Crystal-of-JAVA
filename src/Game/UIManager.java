@@ -34,6 +34,7 @@ public class UIManager {
 	
 	public void onMouseRelease(MouseEvent e) {
 		for(UIObject o : objects) {
+			System.out.println(e.getX() + " " + e.getY());
 			o.onMouseRelease(e);
 		}
 	}

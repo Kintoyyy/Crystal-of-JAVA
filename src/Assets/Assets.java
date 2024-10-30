@@ -2,8 +2,8 @@ package Assets;
 
 import java.awt.image.BufferedImage;
 
-import ImageStuff.ImageLoader;
-import ImageStuff.SpriteSheet;
+import Utils.SpriteSheet;
+import Utils.ImageUtils;
 
 public class Assets {
 
@@ -15,6 +15,7 @@ public class Assets {
 
     public static BufferedImage[][] player_animation, grass_tiles;
     public static BufferedImage[] ui_frame = new BufferedImage[2];
+    public static BufferedImage background;
 
     public static BufferedImage grass, rock, ledgeMiddleLeft, tree, bush, leftCornerLedge, ledge, bottomMiddleLedge, bottomRightLedge,
             ledgeMiddleRight, ledgeTopLeft, ledgeTopMiddle, ledgeTopRight, ledgeMiddleMiddle, grassLedge, ledgeCornerTopRight, ledgeCornerTopLeft, bar,
@@ -35,63 +36,28 @@ public class Assets {
         return animationFrames;
     }
 
-    private static BufferedImage[] loadTileSet(SpriteSheet sheet, int x, int y, int tileWidth, int tileHeight) {
-        BufferedImage[] tile = new BufferedImage[13]; // Total of 13 tiles: 9 from 3x3 and 4 from 2x2
-
-        // Load 3x3 tiles
-        for (int i = 0; i < 3; i++) { // Rows for the 3x3 section
-            for (int j = 0; j < 3; j++) { // Columns for the 3x3 section
-                tile[i * 3 + j] = sheet.crop((x + j) * tileWidth, (y + i) * tileHeight, tileWidth, tileHeight);
-            }
-        }
-
-        // Load 2x2 tiles below the 3x3 tiles
-        int startIdx = 9; // Start placing 2x2 tiles after the 9 tiles from 3x3
-        for (int i = 0; i < 2; i++) { // Rows for the 2x2 section
-            for (int j = 0; j < 2; j++) { // Columns for the 2x2 section
-                tile[startIdx + i * 2 + j] = sheet.crop((x + j) * tileWidth, (y + 3) * tileHeight, tileWidth, tileHeight);
-            }
-        }
-
-        return tile;
-    }
-
-
     public static void init() {
 
 
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/Tiles.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/textures/Tiles.png"));
 
-        SpriteSheet playerSheet = new SpriteSheet(ImageLoader.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
+        SpriteSheet playerSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
         player_animation = loadAnimations(playerSheet);
 
 
-        SpriteSheet ledgeSheet = new SpriteSheet(ImageLoader.loadImage("/textures/LedgeTiles2.png"));
-        SpriteSheet treeSheet = new SpriteSheet(ImageLoader.loadImage("/textures/Trees.png"));
-        SpriteSheet barSheet = new SpriteSheet(ImageLoader.loadImage("/textures/Bar.png"));
-        SpriteSheet monsterSheet = new SpriteSheet(ImageLoader.loadImage("/textures/Monsters.png"));
+        SpriteSheet ledgeSheet = new SpriteSheet(ImageUtils.loadImage("/textures/LedgeTiles2.png"));
+        SpriteSheet treeSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Trees.png"));
+        SpriteSheet barSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Bar.png"));
+        SpriteSheet monsterSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Monsters.png"));
 
-        SpriteSheet ui_bars = new SpriteSheet(ImageLoader.loadImage("/ui/UI_Bars.png"));
-        SpriteSheet ui_inventory = new SpriteSheet(ImageLoader.loadImage("/ui/UI_Premade.png"));
+        SpriteSheet ui_bars = new SpriteSheet(ImageUtils.loadImage("/ui/UI_Bars.png"));
+        SpriteSheet ui_inventory = new SpriteSheet(ImageUtils.loadImage("/ui/UI_Premade.png"));
 
         ui_frame[0] = ui_bars.crop(96, 6, 46, 22);
         ui_frame[1] = ui_inventory.crop(33, 25, 196, 160);
 
-//        SpriteSheet grassSheet = new SpriteSheet(ImageLoader.loadImage("/Tiles/Grass/Grass_Tiles_1.png"));
-//        grass_tiles = new BufferedImage[4][13];
-//
-//        grass_tiles[0] = loadTileSet(grassSheet, 0, 0, 16, 16);
-//        grass_tiles[1] = loadTileSet(grassSheet, 3, 0, 16, 16);
-//        grass_tiles[2] = loadTileSet(grassSheet, 0, 5, 16, 16);
-//        grass_tiles[3] = loadTileSet(grassSheet, 3, 5, 16, 16);
-//
-//        grass = ImageLoader.loadImage("/Tiles/Grass/Grass_1_Middle.png");
-//
-//
-//        grassPlatform = barSheet.crop(101, 40, 86, 37);
-
-
-
+        SpriteSheet backgroundSheet = new SpriteSheet(ImageUtils.loadImage("/Backgrounds/Background_1.png"));
+        background = backgroundSheet.crop(0,0,800,678);
 
         bush = sheet.crop(0, height * 3, width, height);
 
