@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class UIManager {
 	
 	private Handler handler;
-	private ArrayList<UIObject> objects;
+	private final ArrayList<UIObject> objects;
 	
 	public UIManager(Handler handler) {
 		this.setHandler(handler);

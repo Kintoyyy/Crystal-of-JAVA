@@ -2,10 +2,9 @@ package Views;
 
 import Assets.*;
 import Game.ClickListener;
-import Game.Handler;
 import Game.UIImageButton;
 import Game.UIManager;
-import Utils.SuperPixelFont;
+import fonts.SuperPixelFont;
 import World.World;
 
 import java.awt.*;

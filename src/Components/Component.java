@@ -1,28 +1,114 @@
 package Components;
 
+import enums.*;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-abstract class Component {
+import static enums.ComponentStateEnums.*;
 
-    protected BufferedImage image;
-    protected float x, y;
-    protected int width, height;
+public abstract class Component {
+
+    protected float x;
+    protected float y;
+    protected int width;
+    protected int height;
+    private Component parent;
+    private final ArrayList<Component> childComponents;
+
+    protected Rectangle bounds;
+    protected ComponentStateEnums state = IDLE;
     protected boolean hovering = false;
     protected boolean moved;
-    protected Rectangle bounds;
 
-
-//    public Component(BufferedImage image, int height, int width) {
-//        this.image = image;
-//        this.height = height;
-//        this.width = width;
-//    }
+    public Component(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        bounds = new Rectangle(x, y, width, height);
+        childComponents = new ArrayList<Component>();
+        updateBounds();
+    }
 
     abstract public void tick();
+
     abstract public void render(Graphics g);
-    abstract public void onMouseMove(MouseEvent e);
-    abstract public void onMouseClick();
-    abstract public void onMouseRelease(MouseEvent e);
+
+    public abstract void onClick();
+
+    public Component updateBounds() {
+        int parentX = parent != null ? (int) parent.x : 0;
+        int parentY = parent != null ? (int) parent.y : 0;
+        bounds.x = parentX + (int) this.x;
+        bounds.y = parentY + (int) this.y;
+        bounds.width = this.width;
+        bounds.height = this.height;
+        return this;
+    }
+
+    public void onMouseMove(MouseEvent e) {
+        moved = true;
+        if (bounds.contains(e.getX(), e.getY())) {
+            state = HOVERED;
+            System.out.println("Hovering");
+            hovering = true;
+        } else {
+            state = IDLE;
+            moved = false;
+            hovering = false;
+        }
+    }
+
+    public void onMouseRelease(MouseEvent e) {
+        if ((hovering || moved) && e.getButton() == MouseEvent.BUTTON1) {
+            System.out.println("Clicked");
+            onClick();
+        }
+    }
+
+    public Component setLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+        updateBounds();
+        return this;
+    }
+
+    public Component setDimensions(int width, int height) {
+        this.width = width;
+        this.height = height;
+        updateBounds();
+        return this;
+    }
+
+    // Set the parent component
+    public Component setParent(Component parent) {
+        this.parent = parent;
+        this.height = parent.height;
+        this.width = parent.width;
+        updateBounds();
+        return this;
+    }
+
+    // Add child components
+    public Component children(Component... componentsArray) {
+        childComponents.addAll(Arrays.asList(componentsArray));
+        return this;
+    }
+
+    // Render child components
+    public void renderChildren(Graphics g) {
+        for (Component component : childComponents) {
+            component.render(g);
+        }
+    }
+
+    // Tick child components
+    public void tickChildren() {
+        for (Component component : childComponents) {
+            component.tick();
+        }
+    }
 }

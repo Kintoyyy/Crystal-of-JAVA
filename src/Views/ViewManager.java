@@ -3,19 +3,15 @@ package Views;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
 
-import Assets.Assets;
 import Components.ComponentManager;
 import Game.Handler;
 import enums.ViewEnums;
 
 public class ViewManager {
-    private HashMap<ViewEnums, View> views = new HashMap<>();
-    private ArrayList<View> layers = new ArrayList<>();
-    private Handler handler;
-    private ComponentManager componentManager;
+    private final HashMap<ViewEnums, View> views = new HashMap<>();
+    private final ArrayList<View> layers = new ArrayList<>();
+    private final Handler handler;
 
     public ViewManager(Handler handler) {
         this.handler = handler;
@@ -25,7 +21,7 @@ public class ViewManager {
         views.put(ViewEnums.GAME, new GameView(this));
         views.put(ViewEnums.MAIN_MENU, new MenuView(this));
 
-        layers.add(views.get(ViewEnums.GAME));
+        layers.add(views.get(ViewEnums.MAIN_MENU));
     }
 
     public void setView(ViewEnums viewEnum) {

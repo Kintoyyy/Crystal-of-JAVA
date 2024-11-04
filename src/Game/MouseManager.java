@@ -86,7 +86,5 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 		} else if(e.getButton() == MouseEvent.BUTTON3) { //right click
 			rightPressed = false;
 		}
-		
 	}
-
 }

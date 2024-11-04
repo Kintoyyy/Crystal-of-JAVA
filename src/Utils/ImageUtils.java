@@ -9,14 +9,31 @@ import java.util.Objects;
 
 public class ImageUtils {
 
+    private static final String FALLBACK_IMAGE_PATH = "/fallback.png";
+    private static boolean isFallbackImage = false;
+
     public static BufferedImage loadImage(String path) {
+        BufferedImage image;
         try {
-            return ImageIO.read(Objects.requireNonNull(ImageUtils.class.getResource(path)));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
+            image = ImageIO.read(Objects.requireNonNull(ImageUtils.class.getResource(path)));
+            isFallbackImage = false;  // Set to false if the main image loads successfully
+        } catch (IOException | NullPointerException e) {
+            System.err.println("Image not found at path: " + path + ". Loading fallback image.");
+            try {
+                image = ImageIO.read(Objects.requireNonNull(ImageUtils.class.getResource(FALLBACK_IMAGE_PATH)));
+                isFallbackImage = true;  // Set to true if loading fallback image
+            } catch (IOException | NullPointerException fallbackException) {
+                System.err.println("Fallback image also not found. Exiting.");
+                fallbackException.printStackTrace();
+                System.exit(1);
+                return null;
+            }
         }
-        return null;
+        return image;
+    }
+
+    public static boolean isFallback() {
+        return isFallbackImage;
     }
 
     public BufferedImage flipX(BufferedImage image) {
@@ -38,6 +55,25 @@ public class ImageUtils {
     }
 
     public BufferedImage crop(BufferedImage image, int col, int row, int width, int height) {
-        return image.getSubimage(col * width, row * height, width, height);
+        // Check if the image is a fallback image
+        if (isFallback()) {
+            System.err.println("Cropping not allowed on fallback image.");
+            return image;
+        }
+
+        // Ensure crop dimensions are within the image bounds
+        int cropX = col * width;
+        int cropY = row * height;
+        int cropWidth = Math.min(width, image.getWidth() - cropX);
+        int cropHeight = Math.min(height, image.getHeight() - cropY);
+
+        // Check if the crop region is valid
+        if (cropX >= image.getWidth() || cropY >= image.getHeight() || cropWidth <= 0 || cropHeight <= 0) {
+            System.err.println("Invalid crop region. Returning original image.");
+            return image;
+        }
+
+        return image.getSubimage(cropX, cropY, cropWidth, cropHeight);
     }
+
 }

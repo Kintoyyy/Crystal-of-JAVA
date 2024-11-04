@@ -54,6 +54,4 @@ public class GameCamera {
 	public void setyOffset(float yOffset) {
 		this.yOffset = yOffset;
 	}
-	
-
 }

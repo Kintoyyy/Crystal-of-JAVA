@@ -1,12 +1,12 @@
 package Game;
 
 import Characters.Character;
+import Inputs.InputMouseListener;
 import Utils.DebugMode;
 import Views.ViewManager;
 import World.World;
 
 public class Handler {
-
     private Game game;
     private World world;
     private DebugMode debugMode;
@@ -22,14 +22,21 @@ public class Handler {
     }
 
     public KeyManager getKeymanager() {
+
         return game.getKeyManager();
     }
 
     public MouseManager getMouseManager() {
+
         return game.getMouseManager();
     }
 
+    public InputMouseListener getInputMouseListener() {
+        return game.getInputMouseListener();
+    }
+
     public int getWidth() {
+
         return game.getWidth();
     }
 
@@ -57,6 +64,7 @@ public class Handler {
         return debugMode;
     }
 
+    // TODO: Character should be inside the game class();
     public Character getCharacter() {
         return character;
     }
@@ -64,7 +72,6 @@ public class Handler {
     public void setCharacter(Character character) {
         this.character = character;
     }
-
 
     public ViewManager getViewManager() {
         return viewManager;

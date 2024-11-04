@@ -9,8 +9,8 @@ import States.BattleState;
 
 public class UIImageButton extends UIObject{
 	
-	private BufferedImage[] images;
-	private ClickListener clicker;
+	private final BufferedImage[] images;
+	private final ClickListener clicker;
 
 	public UIImageButton(float x, float y, int width, int height, BufferedImage[] images, ClickListener clicker) {
 		super(x, y, width, height);
