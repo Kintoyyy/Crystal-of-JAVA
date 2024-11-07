@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "world_1.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -13,11 +13,11 @@
             "scaleInEditor": 5.5
         },
         "world_1.tmx": {
-            "scale": 4,
+            "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 266.375,
-                "y": 399.25
+                "x": 130.5,
+                "y": 293.66666666666663
             }
         },
         "world_1.tmx#Beach_Decor_Tiles": {
@@ -83,14 +83,12 @@
     "map.tileWidth": 16,
     "map.width": 20,
     "openFiles": [
-        "world_2.tmx",
-        "world_1.tmx"
     ],
     "project": "World_1.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "world_2.tmx",
-        "world_1.tmx"
+        "world_1.tmx",
+        "world_2.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {

@@ -20,9 +20,9 @@ public class ViewManager {
         views.put(ViewEnums.BATTLE, new BattleView(this));
         views.put(ViewEnums.GAME, new GameView(this));
         views.put(ViewEnums.MAIN_MENU, new MenuView(this));
-        views.put(ViewEnums.TEST, new TestView(this));
+        views.put(ViewEnums.START_MENU, new StartMenuView(this));
 
-        layers.add(views.get(ViewEnums.TEST));
+        layers.add(views.get(ViewEnums.START_MENU));
     }
 
     public void setComponentManager(ComponentManager componentManager) {
@@ -30,19 +30,19 @@ public class ViewManager {
     }
 
     public void setView(ViewEnums viewEnum) {
-
         if (views.get(viewEnum) == null){
-
             return;
         }
-        System.out.println(viewEnum);
+
+//        System.out.println(viewEnum);
+
 //        if (!views.get(viewEnum).isOverlay){
-            layers.clear();
-            layers.add(views.get(viewEnum));
+//            layers.clear();
+//            layers.add(views.get(viewEnum));
 //            return;
 //        }
-//
-//        layers.add(views.get(viewEnum));
+        layers.clear();
+        layers.add(views.get(viewEnum));
     }
 
     public boolean hasLayers(){

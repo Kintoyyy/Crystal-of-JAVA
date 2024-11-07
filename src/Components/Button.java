@@ -1,5 +1,6 @@
 package Components;
 
+import Game.CallBackAction;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import fonts.SimplePixelFont;
@@ -11,15 +12,16 @@ public class Button extends Component {
     private BufferedImage[] buttonSheet = new BufferedImage[3];
     private boolean hideText = false;
     private Text text;
+    private CallBackAction clicker;
 
     public Button(String textContent) {
         super(0, 0, 200, 60);
 
         SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Menu_UI.png"));
 
-        buttonSheet[0] = sheet.crop(0, 0, 47, 14);
-        buttonSheet[1] = sheet.crop(48, 0, 47, 14);
-        buttonSheet[2] = sheet.crop(96, 0, 47, 14);
+        buttonSheet[0] = sheet.crop(0, 16, 47, 14);
+        buttonSheet[1] = sheet.crop(48, 16, 47, 14);
+        buttonSheet[2] = sheet.crop(96, 16, 47, 14);
 
         this.text = (Text) new Text(textContent)
                 .setFont(new SimplePixelFont(24))
@@ -34,6 +36,11 @@ public class Button extends Component {
             throw new IllegalArgumentException("At most 3 images allowed.");
         }
         this.buttonSheet = buttonSheet;
+        return this;
+    }
+
+    public Button setAction(CallBackAction clicker) {
+        this.clicker = clicker;
         return this;
     }
 
@@ -69,7 +76,7 @@ public class Button extends Component {
             text.render(g);
         }
 
-        if(showBounds){
+        if (showBounds) {
             g.setColor(Color.BLUE);
             g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
         }
@@ -77,6 +84,6 @@ public class Button extends Component {
 
     @Override
     public void onClick() {
-        // Define behavior on button click
+        clicker.onClick();
     }
 }

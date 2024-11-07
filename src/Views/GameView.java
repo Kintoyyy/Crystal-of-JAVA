@@ -19,8 +19,6 @@ public class GameView extends View {
     public static int xp = 0;
     private Text coinsText;
 
-    private UIManager uiManager;
-
     public GameView(ViewManager viewManager) {
         super(viewManager);
         world = new World(handler, "res/worlds/world_1.tmx");
@@ -29,25 +27,16 @@ public class GameView extends View {
 
         playerDescription = new Description(2, Player.name, Player.health, Player.baseHealth, Player.level, handler);
 
-        uiManager = new UIManager(handler);
-        uiManager.addObject(new UIImageButton(50, 680, 49 * 4, 17 * 4, Assets.attackButton, new ClickListener() {
-            @Override
-            public void onClick() {
-                System.out.println("Clicked");
-            }
-        }));
     }
 
     @Override
     public void tick() {
         world.tick();
-        uiManager.tick();
     }
 
     @Override
     public void render(Graphics g) {
         world.render(g);
-        uiManager.render(g);
 
         g.setColor(Color.white);
         g.setFont(new SuperPixelFont(30));

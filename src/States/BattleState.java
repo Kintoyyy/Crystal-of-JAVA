@@ -128,14 +128,14 @@ public class BattleState extends State {
             }
         }));
 
-//        uiManager.addObject(new UIImageButton(300, 680, 49 * 4, 17 * 4, Assets.statsButton, new ClickListener() {
-//            @Override
-//            public void onClick() {
-//                if (!showBars) {
-//
-//                }
-//            }
-//        }));
+        uiManager.addObject(new UIImageButton(300, 680, 49 * 4, 17 * 4, Assets.statsButton, new ClickListener() {
+            @Override
+            public void onClick() {
+                if (!showBars) {
+
+                }
+            }
+        }));
 
         uiManager.addObject(new UIImageButton(550, 680, 49 * 4, 17 * 4, Assets.escapeButton, new ClickListener() {
             @Override
