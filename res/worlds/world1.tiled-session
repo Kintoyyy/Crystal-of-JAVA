@@ -9,9 +9,15 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
     },
+    "last.imagePath": "C:/Users/Kintoyyy/Documents/GitHub/Crystal-of-JAVA-v1278365/res/Tiles/Grass",
     "openFiles": [
     ],
     "project": "world1.tiled-project",
     "recentFiles": [
-    ]
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
 }

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Components.Component;
 import Components.ComponentManager;
 import Game.Handler;
 import enums.ViewEnums;
@@ -12,11 +13,16 @@ public class ViewManager {
     private final HashMap<ViewEnums, View> views = new HashMap<>();
     private final ArrayList<View> layers = new ArrayList<>();
     private final Handler handler;
+    private ComponentManager componentManager;
+
+    // Semi-transparent gray color for overlay effect
+    private static final Color OVERLAY_COLOR = new Color(200, 200, 200, 128);
 
     public ViewManager(Handler handler) {
         this.handler = handler;
         this.handler.setViewManager(this);
-        // set the views
+
+        // Initialize views and set default layer
         views.put(ViewEnums.BATTLE, new BattleView(this));
         views.put(ViewEnums.GAME, new GameView(this));
         views.put(ViewEnums.MAIN_MENU, new MenuView(this));
@@ -26,59 +32,48 @@ public class ViewManager {
     }
 
     public void setComponentManager(ComponentManager componentManager) {
-
+        this.componentManager = componentManager;
     }
 
     public void setView(ViewEnums viewEnum) {
-        if (views.get(viewEnum) == null){
-            return;
+        View selectedView = views.get(viewEnum);
+        if (selectedView == null) {
+            return;  // Exit if view does not exist
         }
 
-//        System.out.println(viewEnum);
-
-//        if (!views.get(viewEnum).isOverlay){
-//            layers.clear();
-//            layers.add(views.get(viewEnum));
-//            return;
-//        }
         layers.clear();
-        layers.add(views.get(viewEnum));
+        layers.add(selectedView);
+
+        // Optionally add overlay management here if needed
     }
 
-    public boolean hasLayers(){
+    public boolean hasLayers() {
         return !layers.isEmpty();
     }
 
-    public Handler getHandler(){
+    public Handler getHandler() {
         return handler;
     }
 
-    public void tick(){
-        if (layers.isEmpty()){
-            return;
+    public void tick() {
+        if (!layers.isEmpty()) {
+            layers.forEach(View::tick);
         }
-        layers.forEach(View::tick);
     }
 
-    public void render(Graphics g) {
-//        layers.forEach(view -> view.render(g));
 
+    public void render(Graphics g) {
         for (int i = 0; i < layers.size(); i++) {
-//            System.out.println(layers.size());
             layers.get(i).render(g);
-            if (i != layers.size() - 1) {
-                overlay(g);
+            if (i < layers.size() - 1) {  // Apply overlay if not last layer
+                applyOverlay(g);
             }
         }
     }
 
-    private void overlay(Graphics g){
-        //  TODO: Change to blur image next time
-        Color gray = new Color(200, 200, 200, 128); // RGBA (Red, Green, Blue, Alpha)
-        
-        g.setColor(gray);
+
+    private void applyOverlay(Graphics g) {
+        g.setColor(OVERLAY_COLOR);
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
     }
-
-
 }
