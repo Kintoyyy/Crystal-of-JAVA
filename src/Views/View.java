@@ -6,11 +6,11 @@ import Game.Handler;
 import java.awt.*;
 import java.util.ArrayList;
 
-abstract class View {
+public abstract class View {
 
-    final Handler handler;
+    protected final Handler handler;
     final ViewManager manager;
-    final ComponentManager components;
+    protected final ComponentManager components;
     protected boolean isOverlay = false;
 
 

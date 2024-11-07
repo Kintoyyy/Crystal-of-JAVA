@@ -99,7 +99,7 @@ public class Player extends Creature {
 
         if (debounceKeyPress(handler.getKeymanager().f10)) {
             System.out.println("MENU VIEW");
-            handler.getViewManager().setView(ViewEnums.MAIN_MENU);
+//            handler.getViewManager().setView(ViewEnums.MAIN_MENU);
         }
 
         if (debounceKeyPress(handler.getKeymanager().f12)) {

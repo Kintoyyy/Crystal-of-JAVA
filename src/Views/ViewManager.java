@@ -2,18 +2,22 @@ package Views;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 
-import Components.Component;
 import Components.ComponentManager;
 import Game.Handler;
+import Views.Battle.BattleView;
+import Views.Game.GameView;
+import Views.Menu.MenuView;
+import Views.Menu.Setting;
+import Views.Overlay.Pause;
 import enums.ViewEnums;
 
 public class ViewManager {
-    private final HashMap<ViewEnums, View> views = new HashMap<>();
+    private final EnumMap<ViewEnums, View> views = new EnumMap<>(ViewEnums.class);
+
     private final ArrayList<View> layers = new ArrayList<>();
     private final Handler handler;
-    private ComponentManager componentManager;
 
     // Semi-transparent gray color for overlay effect
     private static final Color OVERLAY_COLOR = new Color(200, 200, 200, 128);
@@ -25,29 +29,36 @@ public class ViewManager {
         // Initialize views and set default layer
         views.put(ViewEnums.BATTLE, new BattleView(this));
         views.put(ViewEnums.GAME, new GameView(this));
-        views.put(ViewEnums.MAIN_MENU, new MenuView(this));
-        views.put(ViewEnums.START_MENU, new StartMenuView(this));
+        views.put(ViewEnums.MENU, new MenuView(this));
+        views.put(ViewEnums.SETTINGS, new MenuView(this));
+        views.put(ViewEnums.SELECT_CHARACTER, new MenuView(this));
+        views.put(ViewEnums.PAUSE, new Pause(this));
+//        views.put(ViewEnums.SETTINGS, new Setting(this));
 
-        layers.add(views.get(ViewEnums.START_MENU));
-    }
-
-    public void setComponentManager(ComponentManager componentManager) {
-        this.componentManager = componentManager;
+        // initialize the game view
+        layers.add(views.get(ViewEnums.GAME));
+        layers.add(views.get(ViewEnums.PAUSE));
     }
 
     public void setView(ViewEnums viewEnum) {
         View selectedView = views.get(viewEnum);
+
         if (selectedView == null) {
             return;  // Exit if view does not exist
         }
 
-        // TODO: need to refactor this please :(
         handler.getInputMouseListener().setComponentManager(selectedView.getComponentManager());
+
+        if (selectedView.isOverlay) {
+            layers.add(selectedView);
+            return;
+        }
 
         layers.clear();
         layers.add(selectedView);
 
-        // Optionally add overlay management here if needed
+        // TODO: need to refactor this please :(
+//        handler.getInputMouseListener().setComponentManager(layers.getLast().getComponentManager());
     }
 
     public boolean hasLayers() {
@@ -64,7 +75,6 @@ public class ViewManager {
         }
     }
 
-
     public void render(Graphics g) {
         for (int i = 0; i < layers.size(); i++) {
             layers.get(i).render(g);
@@ -72,10 +82,14 @@ public class ViewManager {
                 applyOverlay(g);
             }
         }
+        g.setFont(new Font("Arial", Font.PLAIN, 12));
+        g.setColor(Color.GRAY);
+        g.drawString("Layers: " + layers, 10, 20);
     }
 
 
     private void applyOverlay(Graphics g) {
+
         g.setColor(OVERLAY_COLOR);
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
     }

@@ -33,7 +33,6 @@ public class Game implements Runnable {
 
     //States
     public State gameState;
-    public State menuState;
     public State battleState;
 
     //Input
@@ -82,20 +81,14 @@ public class Game implements Runnable {
         gameCamera = new GameCamera(handler, 0, 0);
         debugMode = new DebugMode(handler);
         viewManager = new ViewManager(handler);
-
-//		gameState = new GameState(handler);
-
-//		menuState = new MenuState(handler);
-        //battleState = new BattleState(handler);
-//		State.setState(gameState); //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     private void tick() { //updates all variables
         keyManager.tick();
 
-//		if(viewManager.hasLayers()){
-        viewManager.tick();
-//		}
+        if (viewManager.hasLayers()) {
+            viewManager.tick();
+        }
 
 //		if(State.getState() != null) {
 //			State.getState().tick();

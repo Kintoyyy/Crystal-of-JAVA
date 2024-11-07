@@ -2,11 +2,9 @@ package enums;
 
 public enum ViewEnums {
     GAME,
-    MAIN_MENU,
-    START_MENU,
-    SELECT_CHARACTER,
+    MENU,
     BATTLE,
     PAUSE,
-    CHARACTER_SELECTION,
-    TEST
+    SETTINGS,
+    SELECT_CHARACTER
 }

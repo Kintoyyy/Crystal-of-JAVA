@@ -1,21 +1,25 @@
-package Views;
+package Views.Menu;
 
 import Components.Button.Button;
 import Components.Button.PlayButton;
 import Game.CallBackAction;
+import Views.View;
+import Views.ViewManager;
 import enums.ViewEnums;
 
 import java.awt.*;
 
-public class StartMenuView extends View {
-    public StartMenuView(ViewManager viewManager) {
+public class Setting extends View {
+    public Setting(ViewManager viewManager) {
         super(viewManager);
+        this.isOverlay = true;
         components.init(
                 new PlayButton()
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
-                                viewManager.setView(ViewEnums.GAME);
+//                                viewManager.setView(ViewEnums.SELECT_CHARACTER);
+
                             }
                         })
                         .showBounds()
@@ -48,7 +52,6 @@ public class StartMenuView extends View {
 
     @Override
     public void render(Graphics g) {
-//        g.drawImage(Assets.background, 0, 0, handler.getWidth(), handler.getHeight(), null);
         components.render(g);
     }
 }
