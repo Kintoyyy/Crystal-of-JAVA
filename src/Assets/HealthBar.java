@@ -1,13 +1,12 @@
 package Assets;
 
 import java.awt.AlphaComposite;
-import States.GameState;
+import States.GameStateOld;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import Game.Game;
 import Game.Handler;
 import States.BattleState;
 import States.State;
@@ -57,10 +56,10 @@ public class HealthBar {
 				BattleState.switchGameStates = true;
 				
 				if(i > 100) {
-					State.setState(handler.getGame().gameState);
+//					State.setState(handler.getGame().gameState);
 					Player.health = 100;
-					GameState.coins = 0;
-					GameState.xp = 0;
+					GameStateOld.coins = 0;
+					GameStateOld.xp = 0;
 					handler.getGameCamera().setxOffset(0);
 					handler.getGameCamera().setyOffset(0);
 					handler.getWorld().getEntityManager().getPlayer().setX(24 * Tile.TILEWIDTH + 10);

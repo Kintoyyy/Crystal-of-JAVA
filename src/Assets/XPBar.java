@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import States.GameState;
+import States.GameStateOld;
 
 public class XPBar {
 	
@@ -37,7 +37,7 @@ public class XPBar {
 		
 		c = new Color(0, 0, 255);
 		g.setColor(c);
-		for(int i = 0; i < GameState.xp * 10; i++) {
+		for(int i = 0; i < GameStateOld.xp * 10; i++) {
 			g.fillRect(x + 88 + i , y + 44, 2, 20);
 		}
 

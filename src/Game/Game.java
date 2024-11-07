@@ -32,8 +32,10 @@ public class Game implements Runnable {
     private Graphics g;
 
     //States
-    public State gameState;
-    public State battleState;
+//    public State gameState;
+//    public State battleState;
+
+    private GameState gameState;
 
     //Input
     private KeyManager keyManager;
@@ -52,6 +54,7 @@ public class Game implements Runnable {
     private int fps;
     private double timePerTick;
 
+    //timing variables
     double delta;
     long now;
     long lastTime;
@@ -65,6 +68,7 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
         inputMouseListener = new InputMouseListener();
+        gameState = new GameState();
     }
 
     private void init() {
@@ -94,26 +98,28 @@ public class Game implements Runnable {
 //			State.getState().tick();
 //		}
 
-        if (flag) {
-            flag = false;
-            transition = new Transition();
-            flag2 = true;
-        }
-        if (Transition.canStart) {
-            Transition.canStart = false;
-            battling = true;
-            battleState = new BattleState(handler);
-//				State.setState(handler.getGame().battleState);
-        }
+//        if (flag) {
+//            flag = false;
+//            transition = new Transition();
+//            flag2 = true;
+//        }
+//        if (Transition.canStart) {
+//            Transition.canStart = false;
+//            battling = true;
+//            battleState = new BattleState(handler);
+////				State.setState(handler.getGame().battleState);
+//        }
     }
 
 
     private void render() { //renders all objects
         bs = display.getCanvas().getBufferStrategy();
+
         if (bs == null) {
             display.getCanvas().createBufferStrategy(3);
             return;
         }
+
         g = bs.getDrawGraphics();
 
         //Clears certain portion of screen (in this case the whole screen)
@@ -129,9 +135,11 @@ public class Game implements Runnable {
 //			State.getState().render(g);
 //		}
 
-        if (flag2) {
-            transition.render(g);
-        }
+//        if (flag2) {
+//            transition.render(g);
+//        }
+
+        g.drawString("FPS: " + ticks, 10, 10);
 
         //End drawings-
         bs.show();

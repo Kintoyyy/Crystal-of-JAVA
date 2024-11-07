@@ -111,7 +111,7 @@ public class BattleState extends State {
         handler.getMouseManager().setUIManager(null);
         Transition.canStart = false;
 //		Game.flag2 = false;
-        State.setState(handler.getGame().gameState);
+//        State.setState(handler.getGame().gameState);
         BattleState.switchGameStates = true;
         destroy();
     }
