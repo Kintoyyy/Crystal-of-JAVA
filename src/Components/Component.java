@@ -15,6 +15,7 @@ public abstract class Component {
     protected float y;
     protected int width;
     protected int height;
+    protected boolean showBounds = false;
     private Component parent;
     private final ArrayList<Component> childComponents;
 
@@ -108,7 +109,14 @@ public abstract class Component {
     // Tick child components
     public void tickChildren() {
         for (Component component : childComponents) {
+            component.setDimensions(bounds.width - 40, bounds.height - 40);
             component.tick();
         }
     }
+
+    public Component showBounds() {
+        this.showBounds = true;
+        return this;
+    }
+
 }

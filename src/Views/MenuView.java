@@ -21,8 +21,6 @@ public class MenuView extends View {
             System.out.println("No character selected...");
         }
 
-//        handler.getInputMouseListener().setComponentManager(components);
-
         String testText = "In the heart of Cytu, where myths linger like morning mist, fate calls upon a new hero. Unknown forces stir in the shadows, and the hour grows dark. It is here, on the edge of the Whispering Woods, that Nathaniel begins his journey.";
 
         components.init(
@@ -34,13 +32,14 @@ public class MenuView extends View {
 //                        .setLocation(40, 600)
 //                        .setDimensions(880, 200)
 //
-//                new Button("Test button")
-//                        .hideText()
-//                        .setLocation(300, 400),
-//
+
                 new Dialog(testText)
-                        .setLocation(60, 560)
-                        .setDimensions(860, 180)
+                        .setLocation(50, 480)
+                        .setDimensions(900, 260),
+
+                new Button("Test button")
+                        .hideText()
+                        .setLocation(740, 700)
         );
     }
 

@@ -6,4 +6,5 @@ public enum ViewEnums {
     BATTLE,
     PAUSE,
     CHARACTER_SELECTION,
+    TEST
 }

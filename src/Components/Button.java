@@ -69,8 +69,10 @@ public class Button extends Component {
             text.render(g);
         }
 
-        g.setColor(Color.BLUE);
-        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        if(showBounds){
+            g.setColor(Color.BLUE);
+            g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        }
     }
 
     @Override

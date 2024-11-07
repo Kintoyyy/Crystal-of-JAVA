@@ -88,8 +88,10 @@ public class Text extends Component {
             baseY += lineHeight;
         }
         // Draw bounds for debugging
-        g.setColor(Color.YELLOW);
-        g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        if(showBounds){
+            g.setColor(Color.YELLOW);
+            g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        }
     }
 
     @Override

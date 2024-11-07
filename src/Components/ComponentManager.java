@@ -15,6 +15,7 @@ public class ComponentManager {
     public ComponentManager(ViewManager viewManager) {
         this.setHandler(viewManager.getHandler());
         components = new ArrayList<Component>();
+        handler.getViewManager().setComponentManager(this);
     }
 
     public void tick() {
