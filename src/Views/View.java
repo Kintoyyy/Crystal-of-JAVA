@@ -20,6 +20,10 @@ abstract class View {
         this.components = new ComponentManager(viewManager);
     }
 
+    public ComponentManager getComponentManager() {
+        return components;
+    }
+
     public abstract void render(Graphics g);
     public abstract void tick();
 }

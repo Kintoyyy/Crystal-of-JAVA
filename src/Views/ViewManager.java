@@ -41,6 +41,9 @@ public class ViewManager {
             return;  // Exit if view does not exist
         }
 
+        // TODO: need to refactor this please :(
+        handler.getInputMouseListener().setComponentManager(selectedView.getComponentManager());
+
         layers.clear();
         layers.add(selectedView);
 
