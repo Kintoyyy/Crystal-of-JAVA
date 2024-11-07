@@ -4,8 +4,8 @@ import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
 public final class PlayButton extends Button {
-    public PlayButton(String textContent) {
-        super(textContent);
+    public PlayButton() {
+        super("play button");
 
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Menu_UI.png"));
 

@@ -27,6 +27,7 @@ public class ComponentManager {
     public void render(Graphics g) {
         for (Component component : components) {
             component.render(g);
+            component.showBounds();
         }
     }
 

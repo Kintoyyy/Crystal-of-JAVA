@@ -11,7 +11,7 @@ public class StartMenuView extends View {
     public StartMenuView(ViewManager viewManager) {
         super(viewManager);
         components.init(
-                new PlayButton("Test button")
+                new PlayButton()
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
@@ -25,10 +25,11 @@ public class StartMenuView extends View {
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
-                                viewManager.setView(ViewEnums.MAIN_MENU);
+                                viewManager.setView(ViewEnums.BATTLE);
                             }
                         })
                         .setLocation(400, 400),
+
                 new Button("Exit")
                         .setAction(new CallBackAction() {
                             @Override

@@ -51,19 +51,16 @@ public abstract class Component {
 
     public void onMouseMove(MouseEvent e) {
         moved = true;
-        System.out.println(bounds.contains(e.getX(), e.getY()));
         if (bounds.contains(e.getX(), e.getY())) {
             state = HOVERED;
-            hovering = true;
         } else {
             state = IDLE;
             moved = false;
-            hovering = false;
         }
     }
 
     public void onMouseRelease(MouseEvent e) {
-        if ((hovering || moved) && e.getButton() == MouseEvent.BUTTON1) {
+        if ((state == HOVERED || moved) && e.getButton() == MouseEvent.BUTTON1) {
             state = PRESSED;
             onClick();
         }
