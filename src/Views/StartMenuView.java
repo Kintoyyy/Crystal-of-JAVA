@@ -1,6 +1,7 @@
 package Views;
 
-import Components.Button;
+import Components.Button.Button;
+import Components.Button.PlayButton;
 import Game.CallBackAction;
 import enums.ViewEnums;
 
@@ -10,34 +11,31 @@ public class StartMenuView extends View {
     public StartMenuView(ViewManager viewManager) {
         super(viewManager);
         components.init(
-                new Button("Test button")
+                new PlayButton("Test button")
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
                                 viewManager.setView(ViewEnums.GAME);
                             }
                         })
-                        .hideText()
                         .showBounds()
                         .setLocation(400, 320),
 
-                new Button("Test button")
+                new Button("play")
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
                                 viewManager.setView(ViewEnums.MAIN_MENU);
                             }
                         })
-                        .hideText()
                         .setLocation(400, 400),
-                new Button("Test button")
+                new Button("Exit")
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
                                 System.out.println("Exit clicked");
                             }
                         })
-                        .hideText()
                         .setLocation(400, 480)
         );
     }

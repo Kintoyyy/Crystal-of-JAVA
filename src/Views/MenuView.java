@@ -1,7 +1,7 @@
 package Views;
 
 import Assets.Assets;
-import Components.Button;
+import Components.Button.Button;
 import Components.Dialog;
 import Game.CallBackAction;
 
