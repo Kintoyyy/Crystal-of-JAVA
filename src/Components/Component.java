@@ -15,6 +15,7 @@ public abstract class Component {
     protected float y;
     protected int width;
     protected int height;
+    protected boolean showBounds = false;
     private Component parent;
     private final ArrayList<Component> childComponents;
 
@@ -39,21 +40,20 @@ public abstract class Component {
 
     public abstract void onClick();
 
-    public Component updateBounds() {
+    public void updateBounds() {
         int parentX = parent != null ? (int) parent.x : 0;
         int parentY = parent != null ? (int) parent.y : 0;
         bounds.x = parentX + (int) this.x;
         bounds.y = parentY + (int) this.y;
         bounds.width = this.width;
         bounds.height = this.height;
-        return this;
     }
 
     public void onMouseMove(MouseEvent e) {
         moved = true;
+        System.out.println(bounds.contains(e.getX(), e.getY()));
         if (bounds.contains(e.getX(), e.getY())) {
             state = HOVERED;
-            System.out.println("Hovering");
             hovering = true;
         } else {
             state = IDLE;
@@ -64,7 +64,7 @@ public abstract class Component {
 
     public void onMouseRelease(MouseEvent e) {
         if ((hovering || moved) && e.getButton() == MouseEvent.BUTTON1) {
-            System.out.println("Clicked");
+            state = PRESSED;
             onClick();
         }
     }
@@ -108,7 +108,14 @@ public abstract class Component {
     // Tick child components
     public void tickChildren() {
         for (Component component : childComponents) {
+            component.setDimensions(bounds.width - 40, bounds.height - 40);
             component.tick();
         }
     }
+
+    public Component showBounds() {
+        this.showBounds = true;
+        return this;
+    }
+
 }

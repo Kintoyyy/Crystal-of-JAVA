@@ -65,16 +65,17 @@ public class Game implements Runnable {
         this.title = title;
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
+        inputMouseListener = new InputMouseListener();
     }
 
     private void init() {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
 
-        display.getFrame().addMouseListener(mouseManager);
-        display.getFrame().addMouseMotionListener(mouseManager);
-        display.getCanvas().addMouseListener(mouseManager);
-        display.getCanvas().addMouseMotionListener(mouseManager);
+        display.getFrame().addMouseListener(inputMouseListener);
+        display.getFrame().addMouseMotionListener(inputMouseListener);
+        display.getCanvas().addMouseListener(inputMouseListener);
+        display.getCanvas().addMouseMotionListener(inputMouseListener);
         Assets.init();
 
         handler = new Handler(this);

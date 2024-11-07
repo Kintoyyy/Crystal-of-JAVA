@@ -15,10 +15,10 @@ public class ComponentManager {
     public ComponentManager(ViewManager viewManager) {
         this.setHandler(viewManager.getHandler());
         components = new ArrayList<Component>();
+        handler.getInputMouseListener().setComponentManager(this);
     }
 
     public void tick() {
-//        System.out.println("ComponentManager tick");
         for (Component o : components) {
             o.tick();
         }
@@ -32,14 +32,12 @@ public class ComponentManager {
 
     public void onMouseMove(MouseEvent e) {
         for (Component o : components) {
-            System.out.println(e.getX() + " " + e.getY());
             o.onMouseMove(e);
         }
     }
 
     public void onMouseRelease(MouseEvent e) {
         for (Component o : components) {
-            System.out.println(e.getX() + " " + e.getY());
             o.onMouseRelease(e);
         }
     }
@@ -48,7 +46,7 @@ public class ComponentManager {
         components.addAll(Arrays.asList(componentsArray));
     }
 
-    public void removeObject(Component component) {
+    public void removeComponent(Component component) {
         components.remove(component);
     }
 

@@ -35,14 +35,14 @@ public class InputMouseListener implements MouseListener, MouseMotionListener{
     @Override
     public void mouseDragged(MouseEvent e) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseX = e.getX();
         mouseY = e.getY();
-
+//        System.out.println(componentManager);
+//        System.out.println("Mouse moved to: " + mouseX + " " + mouseY);
         if(componentManager != null) {
             componentManager.onMouseMove(e);
         }
@@ -51,23 +51,24 @@ public class InputMouseListener implements MouseListener, MouseMotionListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
-
+//        System.out.println("Mouse clicked");
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         // TODO Auto-generated method stub
-
+//        System.out.println("Mouse entered");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
-
+//        System.out.println("Mouse exited");
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+//        System.out.println("Mouse pressed");
         if(e.getButton() == MouseEvent.BUTTON1) {
             leftPressed = true;
         } else if(e.getButton() == MouseEvent.BUTTON3) {
@@ -82,6 +83,7 @@ public class InputMouseListener implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
+//        System.out.println("Mouse released");
         if(e.getButton() == MouseEvent.BUTTON1) {
             leftPressed = false;
         } else if(e.getButton() == MouseEvent.BUTTON3) {
