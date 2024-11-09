@@ -36,8 +36,7 @@ public class ViewManager {
 //        views.put(ViewEnums.SETTINGS, new Setting(this));
 
         // initialize the game view
-        layers.add(views.get(ViewEnums.GAME));
-        layers.add(views.get(ViewEnums.PAUSE));
+        layers.add(views.get(ViewEnums.MENU));
     }
 
     public void setView(ViewEnums viewEnum) {

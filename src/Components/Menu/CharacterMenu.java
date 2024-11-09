@@ -4,60 +4,81 @@ import Components.Component;
 import Components.Frame.CharacterFrame;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
 import Characters.Character;
+import Game.CallBackAction;
+import Game.Handler;
 
 public class CharacterMenu extends Menu {
-    private ArrayList<CharacterFrame> characterFrames = new ArrayList<>(4);
-    private static final int FRAME_SPACING = 4; // Spacing between frames
+    private Character currentCharacter;
+    private ArrayList<Character> characters;
+    private final Handler handler;
 
-    public CharacterMenu(ArrayList<Character> characters) {
-        super(0, 0, 200, 60);
+    public CharacterMenu(Handler handler) {
+        super(0, 0, 0, 0);
+        this.handler = handler;
+        characters = handler.getGameState().getCharacters();
 
-        int xOffset = 0; // Initial x position for the first frame
+        int characterIndex = 0;
+
+        // Create frames for existing characters without setting locations
         for (Character character : characters) {
-            CharacterFrame frame = new CharacterFrame(character);
-            frame.setLocation(xOffset, (int) this.y); // Set position based on xOffset and current y position of menu
-            characterFrames.add(frame);
+            int finalIndex = characterIndex;
 
-            // Update xOffset for the next frame, considering width and spacing
-            xOffset += frame.getWidth() + FRAME_SPACING;
+            CharacterFrame frame = (CharacterFrame) new CharacterFrame(character).setAction(new CallBackAction() {
+                @Override
+                public void onClick() {
+                    currentCharacter = character;
+                    System.out.println("Selected: " + currentCharacter.getName());
+
+                    handler.getGameState().setPlayerByIndex(finalIndex);
+                }
+            });
+
+            childComponents.add(frame);
+            characterIndex++;
+        }
+
+        // Add empty frames if fewer than 4 characters
+        while (childComponents.size() < 4) {
+            CharacterFrame emptyFrame = (CharacterFrame) new CharacterFrame(null);
+            childComponents.add(emptyFrame);
         }
     }
 
     @Override
     public void tick() {
-        for (CharacterFrame frame : characterFrames) {
-            frame.tick();
-        }
-    }
-
-    // TODO: SHOULD BE USING THE CHILD COMPONENTS INSTEAD OF THE FRAMES
-    public void onMouseMove(MouseEvent e) {
-        for (CharacterFrame frame : characterFrames) {
-            frame.onMouseMove(e);
-        }
-    }
-
-    public void onMouseRelease(MouseEvent e) {
-        for (CharacterFrame frame : characterFrames) {
-            frame.onMouseRelease(e);
+        for (Component component : childComponents) {
+            component.tick();
         }
     }
 
     @Override
     public void render(Graphics g) {
-        for (CharacterFrame frame : characterFrames) {
-            frame.render(g);
+        Character player = handler.getGameState().getPlayer();
+        int xOffset = 0;
+
+        for (Component component : childComponents) {
+            if (component instanceof CharacterFrame frame) {
+
+                // Dynamically set location during render
+                frame.setLocation(xOffset, (int) this.y);
+
+                // Activate frame if its character matches the current player
+                frame.isActive(player != null && player.equals(frame.getPlayer()));
+
+                // Increment xOffset for the next frame position
+                xOffset += frame.getWidth();
+            }
+            // Render each component
+            component.render(g);
         }
     }
 
     @Override
     public void onClick() {
-        for (CharacterFrame frame : characterFrames) {
-            frame.onClick();
+        for (Component component : childComponents) {
+            component.onClick();
         }
     }
 }

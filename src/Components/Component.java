@@ -17,7 +17,7 @@ public abstract class Component {
     protected int height;
     protected boolean showBounds = false;
     private Component parent;
-    private final ArrayList<Component> childComponents;
+    protected ArrayList<Component> childComponents;
 
     protected Rectangle bounds;
     protected ComponentStateEnums state = IDLE;
@@ -57,12 +57,18 @@ public abstract class Component {
             state = IDLE;
             moved = false;
         }
+        for (Component component : childComponents) {
+            component.onMouseMove(e);
+        }
     }
 
     public void onMouseRelease(MouseEvent e) {
         if ((state == HOVERED || moved) && e.getButton() == MouseEvent.BUTTON1) {
             state = PRESSED;
             onClick();
+        }
+        for (Component component : childComponents) {
+            component.onMouseRelease(e);
         }
     }
 

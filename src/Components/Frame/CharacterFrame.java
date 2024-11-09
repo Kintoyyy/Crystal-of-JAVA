@@ -4,6 +4,8 @@ import Characters.Character;
 import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
+import enums.Alignment;
+import fonts.SuperPixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,7 +15,8 @@ import static enums.ComponentStateEnums.PRESSED;
 
 public class CharacterFrame extends Frame {
     private BufferedImage playerProfile;
-    private Text tooltip;
+    private final Text tooltip;
+    private Character player;
 
     public CharacterFrame(Character player) {
         super("Character Frame");
@@ -26,11 +29,16 @@ public class CharacterFrame extends Frame {
         this.setDimensions(28, 28);
         this.scale(3);
 
-        this.playerProfile = player.getProfile();
+        this.player = player;
+        if (player != null) {
+            this.playerProfile = player.getProfile();
+        }
 
-//        tooltip = (Text) new Text(player.getName()).setLocation(bounds.x + 50, bounds.y + 50);
-
-
+        tooltip = (Text) new Text(this.player != null ? this.player.getName() : "")
+                .setAlignment(Alignment.CENTER)
+                .setColor(new Color(234, 212, 170))
+                .setFont(new SuperPixelFont(15))
+                .setDimensions(this.width, this.height);
     }
 
     public CharacterFrame isActive(boolean isActive) {
@@ -42,6 +50,7 @@ public class CharacterFrame extends Frame {
 
     @Override
     public void tick() {
+        tooltip.tick();
         super.tick();
     }
 
@@ -52,8 +61,6 @@ public class CharacterFrame extends Frame {
             case PRESSED -> buttonSheet[2];
             default -> buttonSheet[0];
         };
-
-
 
         if (buttonImage != null) {
             g.setColor(new Color(184, 111, 80));
@@ -66,14 +73,19 @@ public class CharacterFrame extends Frame {
 
             g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
         }
-//
-//        if(state == HOVERED){
-//            tooltip.render(g);
-//        }
+
+        if(state == HOVERED){
+            tooltip.setLocation(bounds.x , bounds.y - 30);
+            tooltip.render(g);
+        }
 
         if (showBounds) {
             g.setColor(Color.BLUE);
             g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
         }
+    }
+
+    public Character getPlayer() {
+        return player;
     }
 }

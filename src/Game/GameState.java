@@ -19,15 +19,19 @@ public class GameState {
         this.characters.add(new Kent());
         this.characters.add(new Cedi());
         this.characters.add(new Nathan());
-        this.characters.add(new Ambot());
+//        this.characters.add(new Ambot());
     }
 
     public Character getPlayer() {
         return this.characters.get(currentCharacterIndex);
     }
 
-    public void setPlayer(int index) {
+    public void setPlayerByIndex(int index) {
         this.currentCharacterIndex = index;
+    }
+
+    public int getCurrentCharacterIndex() {
+        return this.currentCharacterIndex;
     }
 
     public ArrayList<Character> getCharacters() {

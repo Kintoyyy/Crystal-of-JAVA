@@ -48,20 +48,21 @@ public class GameView extends View {
                         })
                         .setLocation(900, 20),
 
-                new Button("change")
-                        .setAction(new CallBackAction() {
-                            @Override
-                            public void onClick() {
+//                new Button("change")
+//                        .setAction(new CallBackAction() {
+//                            @Override
+//                            public void onClick() {
+//
+//                                i++;
+//                                handler.getGameState().setPlayerByIndex(i % 4);
+//
+//                                System.out.println(i % 4 + " " + handler.getGameState().getPlayer().getName());
+//                            }
+//                        })
+//                        .setLocation(600, 60),
 
-                                i++;
-                                handler.getGameState().setPlayer(i % 4);
-
-                                System.out.println(i % 4 + " " + handler.getGameState().getPlayer().getName());
-                            }
-                        })
-                        .setLocation(600, 60),
-
-                new Components.Menu.CharacterMenu(handler.getGameState().getCharacters()).setLocation(300,300)
+                new Components.Menu.CharacterMenu(handler)
+                        .setLocation(20, 700)
 //                new CharacterFrame(handler.getGameState().getPlayer()).isActive(true).setLocation(300, 300)
 //                new CharacterMenu(handler.getGameState().getCharacters())
         );
