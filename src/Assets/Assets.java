@@ -16,6 +16,7 @@ public class Assets {
     public static BufferedImage[][] player_animation, grass_tiles;
     public static BufferedImage[] ui_frame = new BufferedImage[2];
     public static BufferedImage background;
+    public static SpriteSheet playerSheet;
 
     public static BufferedImage grass, rock, ledgeMiddleLeft, tree, bush, leftCornerLedge, ledge, bottomMiddleLedge, bottomRightLedge,
             ledgeMiddleRight, ledgeTopLeft, ledgeTopMiddle, ledgeTopRight, ledgeMiddleMiddle, grassLedge, ledgeCornerTopRight, ledgeCornerTopLeft, bar,
@@ -42,7 +43,7 @@ public class Assets {
         SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/textures/Tiles.png"));
 
         SpriteSheet playerSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
-        player_animation = loadAnimations(playerSheet);
+//        player_animation = loadAnimations(playerSheet);
 
 
         SpriteSheet ledgeSheet = new SpriteSheet(ImageUtils.loadImage("/textures/LedgeTiles2.png"));

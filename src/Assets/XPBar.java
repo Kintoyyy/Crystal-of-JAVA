@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import Entities.Player;
 import States.GameStateOld;
 
 public class XPBar {

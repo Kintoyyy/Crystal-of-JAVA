@@ -1,11 +1,11 @@
 package Assets;
 
+import Entities.Entity;
 import Game.Handler;
 
-import Game.KeyManager;
 import World.Tile;
 
-public abstract class Creature extends Entity{
+public abstract class Creature extends Entity {
 	
 	public static final int DEFAULT_HEALTH = 10;
 	public static final float DEFAULT_SPEED = 4.0f;

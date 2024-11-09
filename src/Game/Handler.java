@@ -2,6 +2,7 @@ package Game;
 
 import Characters.Character;
 import Inputs.InputMouseListener;
+import Inputs.InputKeyboardManager;
 import Utils.DebugMode;
 import Views.ViewManager;
 import World.World;
@@ -12,6 +13,7 @@ public class Handler {
     private DebugMode debugMode;
     private Character character;
     private ViewManager viewManager;
+    private GameState gameState;
 
     public Handler(Game game) {
         this.game = game;
@@ -21,14 +23,9 @@ public class Handler {
         return game.getGameCamera();
     }
 
-    public KeyManager getKeymanager() {
+    public InputKeyboardManager getKeymanager() {
 
         return game.getKeyManager();
-    }
-
-    public MouseManager getMouseManager() {
-
-        return game.getMouseManager();
     }
 
     public InputMouseListener getInputMouseListener() {
@@ -79,5 +76,13 @@ public class Handler {
 
     public void setViewManager(ViewManager viewManager) {
         this.viewManager = viewManager;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }

@@ -3,6 +3,7 @@ package Assets;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Entities.Player;
 import Game.Handler;
 
 public class InGamePlayer {

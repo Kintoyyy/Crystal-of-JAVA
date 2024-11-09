@@ -115,4 +115,10 @@ public abstract class Component {
         return this;
     }
 
+    public Component scale(int i) {
+        this.width *= i;
+        this.height *= i;
+        updateBounds();
+        return this;
+    }
 }

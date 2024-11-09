@@ -1,5 +1,6 @@
 package Characters;
 
+import Animations.PlayerAnimation;
 import Utils.SpriteSheet;
 import Skills.Skill;
 import Utils.ImageUtils;
@@ -14,8 +15,10 @@ public abstract class Character {
     private int health;
     private int mana;
     private int baseHealth;
-    public ArrayList<Skill> skills;
+    private int experience;
+    public ArrayList<Skill> skills = new ArrayList<>(3);
     public SpriteSheet spriteSheet;
+    private PlayerAnimation animation;
 
     public Character(String name, int level, int health, int mana, int baseHealth, ArrayList<Skill> skills) {
         this.name = name;
@@ -24,7 +27,9 @@ public abstract class Character {
         this.mana = mana;
         this.baseHealth = baseHealth;
         this.skills = skills;
-        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Default.png"));
+        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
+        this.animation = new PlayerAnimation(120, this.spriteSheet);
+        this.experience = 0;
     }
 
     public String getName() {
@@ -62,6 +67,10 @@ public abstract class Character {
     public abstract void useSkill(int index);
 
     public abstract void useSkill(Skill skill);
+
+    public PlayerAnimation getAnimation() {
+        return animation;
+    }
 }
 
 

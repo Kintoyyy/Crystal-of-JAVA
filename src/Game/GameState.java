@@ -1,30 +1,33 @@
 package Game;
 
-import Characters.Cedi;
-import Characters.Kent;
-import Characters.Character; // Assuming Character is a superclass of Kent
+import Characters.*;
+import Characters.Character;
+import World.World;
+import Item.Item;
+
 import java.util.ArrayList;
 
 public class GameState {
-    private Character player;
     private ArrayList<Character> characters = new ArrayList<>(4);
+    private int currentCharacterIndex = 0;
+    private World world;
+    private ArrayList<Item> items = new ArrayList<>(10);
+
 
     public GameState() {
-        //initialize character
-        this.player = new Kent();
-
         //initialize available characters
-        this.characters.add(player);
+        this.characters.add(new Kent());
         this.characters.add(new Cedi());
-
+        this.characters.add(new Nathan());
+        this.characters.add(new Ambot());
     }
 
     public Character getPlayer() {
-        return this.player;
+        return this.characters.get(currentCharacterIndex);
     }
 
-    public void setPlayer(Character player) {
-        this.player = player;
+    public void setPlayer(int index) {
+        this.currentCharacterIndex = index;
     }
 
     public ArrayList<Character> getCharacters() {

@@ -33,6 +33,11 @@ public class Button extends Component {
                 .setDimensions(this.width, this.height);
     }
 
+    public Button setButtonSheet(BufferedImage[] buttonSheet) {
+        this.buttonSheet = buttonSheet;
+        return this;
+    }
+
     public Button setAction(CallBackAction clicker) {
         this.clicker = clicker;
         return this;

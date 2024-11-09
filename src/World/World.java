@@ -2,8 +2,9 @@ package World;
 
 import Assets.*;
 
+import Entities.EntityManager;
+import Entities.Player;
 import Utils.DebugMode;
-import World.Tile;
 import Game.Handler;
 import org.w3c.dom.*;
 
@@ -23,6 +24,7 @@ public class World {
 
     public World(Handler handler, String path) {
         this.handler = handler;
+
         entityManager = new EntityManager(handler, new Player(handler, 0, 0));
 
         loadWorld(path);

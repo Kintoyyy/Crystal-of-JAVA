@@ -1,11 +1,16 @@
 package Views.Game;
 
 import Assets.*;
+import Characters.Character;
 import Components.Button.BackButton;
 import Components.Button.Button;
+import Components.CharacterMenu;
+import Components.Text.Text;
+import Entities.Player;
 import Game.CallBackAction;
 import Views.View;
 import Views.ViewManager;
+import enums.Alignment;
 import enums.ViewEnums;
 import World.World;
 
@@ -21,11 +26,16 @@ public class GameView extends View {
     public static int xp = 0;
     private Text coinsText;
 
+    private int i = 0;
+
+    private CharacterMenu characterMenu;
+
     public GameView(ViewManager viewManager) {
         super(viewManager);
         world = new World(handler, "res/worlds/world_1.tmx");
         handler.setWorld(world);
-//        playerDescription = new Description(2, Player.name, Player.health, Player.baseHealth, Player.level, handler);
+        Character player = handler.getGameState().getPlayer();
+        playerDescription = new Description(2, "asdasd",100, 100, 69, handler);
 //        handler.getWidth()
         components.init(
                 new BackButton()
@@ -35,7 +45,22 @@ public class GameView extends View {
                                 viewManager.setView(ViewEnums.PAUSE);
                             }
                         })
-                        .setLocation(900, 20)
+                        .setLocation(900, 20),
+
+                new Button("change")
+                        .setAction(new CallBackAction() {
+                            @Override
+                            public void onClick() {
+
+                                i++;
+                                handler.getGameState().setPlayer(i % 4);
+
+                                System.out.println(i % 4 + " " + handler.getGameState().getPlayer().getName());
+                            }
+                        })
+                        .setLocation(600, 60),
+
+                new CharacterMenu(handler.getGameState().getCharacters())
         );
 
     }
@@ -44,7 +69,7 @@ public class GameView extends View {
     public void tick() {
         components.tick();
         world.tick();
-
+//        characterMenu.tick();
     }
 
     @Override
@@ -52,11 +77,13 @@ public class GameView extends View {
         world.render(g);
         components.render(g);
 
+//        characterMenu.render(g);
+
 //        g.setColor(Color.white);
 //        g.setFont(new SuperPixelFont(30));
 
-//        g.drawString("Hello World", 100, 200);
-//        g.drawImage(Assets.ui_frame[0], 0, 0, 300, 130, null);
+        g.drawString(handler.getGameState().getPlayer().getName(), 100, 200);
+        g.drawImage(Assets.ui_frame[0], 0, 0, 300, 130, null);
 
 //        g.drawImage(Assets.ui_frame[1], 120,120, 739, 600, null);
 //		playerDescription.render(g);

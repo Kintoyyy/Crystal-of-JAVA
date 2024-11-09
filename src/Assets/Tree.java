@@ -4,12 +4,12 @@ import java.awt.Color;
 
 import java.awt.Graphics;
 
-import Game.Game;
+import Entities.Entity;
 import Game.Handler;
 import Utils.DebugMode;
 import World.Tile;
 
-public class Tree extends Entity{
+public class Tree extends Entity {
 	private int type;
 	public Tree(Handler handler, float x, float y, int type) {
 		super(handler, x, y, Tile.TILEWIDTH * 3, Tile.TILEHEIGHT * 3);

@@ -3,7 +3,7 @@ package States;
 import java.awt.Graphics;
 
 import Assets.Description;
-import Assets.Player;
+import Entities.Player;
 import Assets.Text;
 import Game.Handler;
 import World.World;

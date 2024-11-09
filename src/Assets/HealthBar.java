@@ -1,6 +1,8 @@
 package Assets;
 
 import java.awt.AlphaComposite;
+
+import Entities.Player;
 import States.GameStateOld;
 
 import java.awt.Color;
@@ -9,7 +11,6 @@ import java.awt.Graphics2D;
 
 import Game.Handler;
 import States.BattleState;
-import States.State;
 
 import World.Tile;
 
@@ -49,7 +50,6 @@ public class HealthBar {
 			if(Player.health <= 0) {
 				BattleState.encounterFlag = true;
 				Player.health = 0;
-				handler.getMouseManager().setUIManager(null);
 				Transition.canStart = false;
 //				Game.flag2 = false;
 				i++;

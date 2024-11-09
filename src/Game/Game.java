@@ -7,8 +7,7 @@ import java.awt.image.BufferStrategy;
 import Assets.Assets;
 import Assets.Transition;
 import Inputs.InputMouseListener;
-import States.BattleState;
-import States.State;
+import Inputs.InputKeyboardManager;
 import Utils.DebugMode;
 import Views.ViewManager;
 
@@ -38,8 +37,7 @@ public class Game implements Runnable {
     private GameState gameState;
 
     //Input
-    private KeyManager keyManager;
-    private MouseManager mouseManager;
+    private InputKeyboardManager inputKeyboardManager;
 
     private GameCamera gameCamera;
 
@@ -65,15 +63,15 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         this.title = title;
-        keyManager = new KeyManager();
-        mouseManager = new MouseManager();
+        inputKeyboardManager = new InputKeyboardManager();
         inputMouseListener = new InputMouseListener();
+
         gameState = new GameState();
     }
 
     private void init() {
         display = new Display(title, width, height);
-        display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addKeyListener(inputKeyboardManager);
 
         display.getFrame().addMouseListener(inputMouseListener);
         display.getFrame().addMouseMotionListener(inputMouseListener);
@@ -82,13 +80,20 @@ public class Game implements Runnable {
         Assets.init();
 
         handler = new Handler(this);
-        gameCamera = new GameCamera(handler, 0, 0);
+
+        // set the debug mode
         debugMode = new DebugMode(handler);
+
+        // set the game state
+        handler.setGameState(gameState);
+
+        gameCamera = new GameCamera(handler, 0, 0);
+
         viewManager = new ViewManager(handler);
     }
 
     private void tick() { //updates all variables
-        keyManager.tick();
+        inputKeyboardManager.tick();
 
         if (viewManager.hasLayers()) {
             viewManager.tick();
@@ -179,12 +184,8 @@ public class Game implements Runnable {
         stop();
     }
 
-    public KeyManager getKeyManager() {
-        return keyManager;
-    }
-
-    public MouseManager getMouseManager() {
-        return mouseManager;
+    public InputKeyboardManager getKeyManager() {
+        return inputKeyboardManager;
     }
 
     public InputMouseListener getInputMouseListener() {

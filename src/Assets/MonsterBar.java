@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
+import Entities.Player;
 import States.BattleState;
 
 public class MonsterBar {
