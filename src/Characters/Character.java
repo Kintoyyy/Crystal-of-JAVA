@@ -5,6 +5,7 @@ import Utils.SpriteSheet;
 import Skills.Skill;
 import Utils.ImageUtils;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class Character {
@@ -19,6 +20,7 @@ public abstract class Character {
     public ArrayList<Skill> skills = new ArrayList<>(3);
     public SpriteSheet spriteSheet;
     private PlayerAnimation animation;
+    private BufferedImage playerProfile;
 
     public Character(String name, int level, int health, int mana, int baseHealth, ArrayList<Skill> skills) {
         this.name = name;
@@ -28,6 +30,7 @@ public abstract class Character {
         this.baseHealth = baseHealth;
         this.skills = skills;
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
+        this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         this.experience = 0;
     }
@@ -70,6 +73,10 @@ public abstract class Character {
 
     public PlayerAnimation getAnimation() {
         return animation;
+    }
+
+    public BufferedImage getProfile() {
+        return playerProfile;
     }
 }
 

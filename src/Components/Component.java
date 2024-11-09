@@ -121,4 +121,12 @@ public abstract class Component {
         updateBounds();
         return this;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    protected int getHeight() {
+        return height;
+    }
 }

@@ -5,6 +5,7 @@ import Characters.Character;
 import Components.Button.BackButton;
 import Components.Button.Button;
 import Components.CharacterMenu;
+import Components.Frame.CharacterFrame;
 import Components.Text.Text;
 import Entities.Player;
 import Game.CallBackAction;
@@ -35,7 +36,7 @@ public class GameView extends View {
         world = new World(handler, "res/worlds/world_1.tmx");
         handler.setWorld(world);
         Character player = handler.getGameState().getPlayer();
-        playerDescription = new Description(2, "asdasd",100, 100, 69, handler);
+        playerDescription = new Description(2, "asdasd", 100, 100, 69, handler);
 //        handler.getWidth()
         components.init(
                 new BackButton()
@@ -60,7 +61,9 @@ public class GameView extends View {
                         })
                         .setLocation(600, 60),
 
-                new CharacterMenu(handler.getGameState().getCharacters())
+                new Components.Menu.CharacterMenu(handler.getGameState().getCharacters()).setLocation(300,300)
+//                new CharacterFrame(handler.getGameState().getPlayer()).isActive(true).setLocation(300, 300)
+//                new CharacterMenu(handler.getGameState().getCharacters())
         );
 
     }
@@ -77,13 +80,8 @@ public class GameView extends View {
         world.render(g);
         components.render(g);
 
-//        characterMenu.render(g);
-
-//        g.setColor(Color.white);
-//        g.setFont(new SuperPixelFont(30));
-
         g.drawString(handler.getGameState().getPlayer().getName(), 100, 200);
-        g.drawImage(Assets.ui_frame[0], 0, 0, 300, 130, null);
+//        g.drawImage(Assets.ui_frame[0], 0, 0, 300, 130, null);
 
 //        g.drawImage(Assets.ui_frame[1], 120,120, 739, 600, null);
 //		playerDescription.render(g);
