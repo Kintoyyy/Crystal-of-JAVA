@@ -13,7 +13,7 @@ public class InGamePlayer {
 	
 	public InGamePlayer(Handler handler) {
 		this.handler = handler;
-		description = new Description(1, Player.name, Player.health, Player.baseHealth, Player.level, 392, 396, handler);
+//		description = new Description(1, Player.name, Player.health, Player.baseHealth, Player.level, 392, 396, handler);
 	}
 	
 	public void tick() {

@@ -1,5 +1,7 @@
 package Characters;
 
+import Characters.Stats.Health;
+import Characters.Stats.Mana;
 import Utils.SpriteSheet;
 import Skills.Basic;
 import Skills.Healing;
@@ -20,7 +22,7 @@ public class Nathan extends Character {
 
     public Nathan() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Nathan", 1, 100, 100, 100, new ArrayList<>());
+        super("Nathan", 1, new Health(100, 100), new Mana(90, 100),  new ArrayList<>());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
 

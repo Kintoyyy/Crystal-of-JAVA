@@ -92,4 +92,8 @@ public class ViewManager {
         g.setColor(OVERLAY_COLOR);
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
     }
+
+    public boolean isInGame() {
+        return layers.contains(views.get(ViewEnums.GAME));
+    }
 }

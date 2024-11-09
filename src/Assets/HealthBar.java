@@ -70,7 +70,7 @@ public class HealthBar {
 				}
 				
 			}
-			healthText.setHealth(Player.health, Player.baseHealth);
+//			healthText.setHealth(Player.health, Player.baseHealth);
 		}
 	}
 	
@@ -91,8 +91,8 @@ public class HealthBar {
 			combinedDamage = Monster.baseHealth - Monster.health;
 			baseHealth = Monster.baseHealth;
 		} else if(type == 1) {
-			combinedDamage = Player.baseHealth - Player.health;
-			baseHealth = Player.baseHealth;
+//			combinedDamage = Player.baseHealth - Player.health;
+//			baseHealth = Player.baseHealth;
 		}
 		
 		Color c = new Color(0, 255, 0);

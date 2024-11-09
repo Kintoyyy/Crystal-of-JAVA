@@ -26,8 +26,8 @@ public class Player extends Creature {
     public static String dir = "down";
     public static float xPosition;
     public static float yPosition;
-    public static int health;
-    public static int baseHealth;
+    public static double health;
+    public static double baseHealth;
     public static int level;
     public static String name;
 
@@ -49,8 +49,8 @@ public class Player extends Creature {
     }
 
     private void initializePlayer( Character player) {
-        health = player.getHealth();
-        baseHealth = player.getBaseHealth();
+        health = player.getHealth().getHealth();
+        baseHealth = player.getHealth().getBaseHealth();
         level = player.getLevel();
         name = player.getName();
         animation = player.getAnimation();

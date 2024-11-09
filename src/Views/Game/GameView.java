@@ -6,6 +6,7 @@ import Components.Button.BackButton;
 import Components.Button.Button;
 import Components.CharacterMenu;
 import Components.Frame.CharacterFrame;
+import Components.Menu.CharacterTopLeftMenu;
 import Components.Text.Text;
 import Entities.Player;
 import Game.CallBackAction;
@@ -62,7 +63,11 @@ public class GameView extends View {
 //                        .setLocation(600, 60),
 
                 new Components.Menu.CharacterMenu(handler)
-                        .setLocation(20, 700)
+                        .setLocation(20, 700),
+
+                new CharacterTopLeftMenu(handler)
+                        .setLocation(12, 12)
+                        .scale(6)
 //                new CharacterFrame(handler.getGameState().getPlayer()).isActive(true).setLocation(300, 300)
 //                new CharacterMenu(handler.getGameState().getCharacters())
         );

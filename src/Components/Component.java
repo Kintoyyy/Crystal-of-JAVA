@@ -15,6 +15,7 @@ public abstract class Component {
     protected float y;
     protected int width;
     protected int height;
+    protected int scale = 1;
     protected boolean showBounds = false;
     private Component parent;
     protected ArrayList<Component> childComponents;
@@ -122,6 +123,7 @@ public abstract class Component {
     }
 
     public Component scale(int i) {
+        this.scale = i;
         this.width *= i;
         this.height *= i;
         updateBounds();

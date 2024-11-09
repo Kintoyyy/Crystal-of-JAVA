@@ -66,7 +66,7 @@ public class Game implements Runnable {
         inputKeyboardManager = new InputKeyboardManager();
         inputMouseListener = new InputMouseListener();
 
-        gameState = new GameState();
+
     }
 
     private void init() {
@@ -81,6 +81,8 @@ public class Game implements Runnable {
 
         handler = new Handler(this);
 
+        gameState = new GameState(handler);
+
         // set the debug mode
         debugMode = new DebugMode(handler);
 
@@ -90,6 +92,8 @@ public class Game implements Runnable {
         gameCamera = new GameCamera(handler, 0, 0);
 
         viewManager = new ViewManager(handler);
+
+
     }
 
     private void tick() { //updates all variables
@@ -98,6 +102,8 @@ public class Game implements Runnable {
         if (viewManager.hasLayers()) {
             viewManager.tick();
         }
+
+        gameState.tick();
 
 //		if(State.getState() != null) {
 //			State.getState().tick();
