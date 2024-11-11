@@ -23,7 +23,8 @@ public class ViewManager {
         this.handler.setViewManager(this);
 
         initializeViews();
-        layers.add(views.get(ViewEnums.MENU));  // Set default view layer
+
+        setView(ViewEnums.MENU);
     }
 
     private void initializeViews() {
