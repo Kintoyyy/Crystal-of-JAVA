@@ -1,6 +1,7 @@
 package Views.Battle;
 
 import Components.Button.Button;
+import Components.Button.PauseButton;
 import Game.CallBackAction;
 import Views.View;
 import Views.ViewManager;
@@ -13,23 +14,50 @@ public class BattleView extends View { // Extend JComponent instead of View
         super(viewManager);
 
         components.init(
-                new Components.Button.Button("pause")
+                new PauseButton()
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
                                 viewManager.setView(ViewEnums.PAUSE);
                             }
                         })
-                        .setLocation(700, 400),
+                        .setLocation(900, 20),
 
-                new Button("attack")
+                new Button("chicken")
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
-                                System.out.println("attack clicked");
+                                System.out.println("chicken out");
                             }
                         })
-                        .setLocation(400, 480)
+                        .setLocation(680, 20),
+
+                new Button("skill1")
+                        .setAction(new CallBackAction() {
+                            @Override
+                            public void onClick() {
+                                System.out.println("attack 1 clicked");
+                            }
+                        })
+                        .setLocation(20, 700),
+
+                new Button("skill1")
+                        .setAction(new CallBackAction() {
+                            @Override
+                            public void onClick() {
+                                System.out.println("attack 2 clicked");
+                            }
+                        })
+                        .setLocation(230, 700),
+
+                new Button("skill1")
+                        .setAction(new CallBackAction() {
+                            @Override
+                            public void onClick() {
+                                System.out.println("attack 3 clicked");
+                            }
+                        })
+                        .setLocation(440, 700)
         );
 
     }

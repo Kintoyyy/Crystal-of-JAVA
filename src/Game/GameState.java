@@ -16,15 +16,18 @@ public class GameState {
 
     public GameState(Handler handler) {
         this.handler = handler;
+
+
         //initialize available characters
         this.characters.add(new Kent());
         this.characters.add(new Cedi());
-        this.characters.add(new Nathan());
+//        this.characters.add(new Nathan());
 //        this.characters.add(new Ambot());
+
     }
 
     public void tick() {
-        if(handler.getViewManager().isInGame()) {
+        if (handler.getViewManager().isInGame()) {
             for (Character character : characters) {
                 character.regenHealth();
                 character.regenMana();

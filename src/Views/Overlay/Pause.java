@@ -8,19 +8,27 @@ import enums.ViewEnums;
 
 import java.awt.*;
 
-import static enums.ViewEnums.*;
-
 public class Pause extends View {
 
     public Pause(ViewManager viewManager) {
         super(viewManager);
         this.isOverlay = true;
 
+        initComponents(viewManager);
+    }
+
+    private void initComponents(ViewManager viewManager) {
         components.init(
-                createChangeViewButton("resume", 330, GAME),
-                createChangeViewButton("setting", 400, SETTINGS),
-                createChangeViewButton("Menu", 470, MENU)
+                createResumeButton(viewManager),
+                createChangeViewButton("Settings", 400, ViewEnums.SETTINGS),
+                createChangeViewButton("Menu", 470, ViewEnums.MENU)
         );
+    }
+
+    private Button createResumeButton(ViewManager viewManager) {
+        return (Button) new Button("Resume")
+                .setAction(() -> viewManager.removeView(ViewEnums.PAUSE))
+                .setLocation(400, 330);
     }
 
     private Button createChangeViewButton(String label, int yPosition, ViewEnums targetView) {

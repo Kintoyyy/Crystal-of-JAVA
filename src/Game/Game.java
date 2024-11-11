@@ -30,10 +30,6 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
 
-    //States
-//    public State gameState;
-//    public State battleState;
-
     private GameState gameState;
 
     //Input

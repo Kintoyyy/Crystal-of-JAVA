@@ -11,13 +11,11 @@ import World.World;
 import java.awt.*;
 
 public class GameView extends View {
-    private World world;
+    private final World world;
 
     public GameView(ViewManager viewManager) {
         super(viewManager);
-        world = new World(handler, "res/worlds/world_1.tmx");
-
-        handler.setWorld(world);
+        world = handler.getWorld();
 
         components.init(
                 new PauseButton()
@@ -49,6 +47,4 @@ public class GameView extends View {
         world.render(g);
         components.render(g);
     }
-
-
 }
