@@ -19,14 +19,6 @@ public class DialogScene extends View {
         String testText = "In the heart of Cytu, where myths linger like morning mist, fate calls upon a new hero. Unknown forces stir in the shadows, and the hour grows dark. It is here, on the edge of the Whispering Woods, that Nathaniel begins his journey.";
 
         components.init(
-//                new Text(testText)
-//                        .typing()
-//                        .setFont(new SimplePixelFont(16))
-//                        .setColor(Color.WHITE)
-//                        .setAlignment(Alignment.LEFT)
-//                        .setLocation(40, 30)
-//                        .setDimensions(880, 200),
-
                 new Dialog(testText)
                         .showBounds()
                         .setLocation(50, 480)

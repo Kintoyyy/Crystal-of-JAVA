@@ -41,4 +41,38 @@ public class Mana {
             mana = baseMana;
         }
     }
+
+    public void useMana(double mana) {
+        this.mana -= mana;
+        if (this.mana < 0) {
+            this.mana = 0;
+        }
+    }
+
+    public void addMana(double mana) {
+        this.mana += mana;
+        if (this.mana > baseMana) {
+            this.mana = baseMana;
+        }
+    }
+
+    public boolean hasEnoughMana(double mana) {
+        return this.mana >= mana;
+    }
+
+    public boolean isOutOfMana() {
+        return this.mana == 0;
+    }
+
+    public boolean isFullMana() {
+        return this.mana == this.baseMana;
+    }
+
+    public void resetMana() {
+        this.mana = 0;
+    }
+
+    public void resetMana(int mana) {
+        this.mana = mana;
+    }
 }

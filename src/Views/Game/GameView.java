@@ -48,14 +48,6 @@ public class GameView extends View {
     public void render(Graphics g) {
         world.render(g);
         components.render(g);
-
-        g.drawString(handler.getGameState().getPlayer().getName(), 100, 200);
-//        g.drawImage(Assets.ui_frame[0], 0, 0, 300, 130, null);
-
-//        g.drawImage(Assets.ui_frame[1], 120,120, 739, 600, null);
-//		playerDescription.render(g);
-//		coinsText = new Text(coins + "", 50, 126, 4, 4);
-//		coinsText.render(g);
     }
 
 

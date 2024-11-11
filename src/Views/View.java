@@ -4,18 +4,16 @@ import Components.ComponentManager;
 import Game.Handler;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public abstract class View {
 
     protected final Handler handler;
-    final ViewManager manager;
+    protected  ViewManager viewManager;
     protected final ComponentManager components;
     protected boolean isOverlay = false;
 
-
     public View(ViewManager viewManager) {
-        this.manager = viewManager;
+        this.viewManager = viewManager;
         this.handler = viewManager.getHandler();
         this.components = new ComponentManager(viewManager);
     }

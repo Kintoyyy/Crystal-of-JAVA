@@ -5,13 +5,14 @@ import Components.Button.Button;
 import Game.CallBackAction;
 import Views.View;
 import Views.ViewManager;
-import enums.ViewEnums.*;
+import enums.ViewEnums;
 
 import java.awt.*;
 
 import static enums.ViewEnums.*;
 
 public class MenuView extends View {
+
     public MenuView(ViewManager viewManager) {
         super(viewManager);
 
@@ -20,24 +21,8 @@ public class MenuView extends View {
         }
 
         components.init(
-                new Button("play")
-                        .setAction(new CallBackAction() {
-                            @Override
-                            public void onClick() {
-                                viewManager.setView(GAME);
-                            }
-                        })
-                        .setLocation(400, 330),
-
-                new Button("setting")
-                        .setAction(new CallBackAction() {
-                            @Override
-                            public void onClick() {
-                                viewManager.setView(SETTINGS);
-                            }
-                        })
-                        .setLocation(400, 400),
-
+                createChangeViewButton("play", 330, GAME),
+                createChangeViewButton("setting", 400, SETTINGS),
                 new Button("Exit")
                         .setAction(new CallBackAction() {
                             @Override
@@ -47,6 +32,12 @@ public class MenuView extends View {
                         })
                         .setLocation(400, 470)
         );
+    }
+
+    private Button createChangeViewButton(String label, int yPosition, ViewEnums targetView) {
+        return (Button) new Button(label)
+                .setAction(() -> viewManager.setView(targetView))
+                .setLocation(400, yPosition);
     }
 
     @Override

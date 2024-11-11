@@ -41,4 +41,30 @@ public class Health {
             health = baseHealth;
         }
     }
+
+    public void takeDamage(double damage) {
+        health -= damage;
+        if (health < 0) {
+            health = 0;
+        }
+    }
+
+    public void heal(double heal) {
+        health += heal;
+        if (health > baseHealth) {
+            health = baseHealth;
+        }
+    }
+
+    public boolean isDead() {
+        return health == 0;
+    }
+
+    public void resetHealth() {
+        health = baseHealth;
+    }
+
+    public boolean isFullHealth() {
+        return this.health == this.baseHealth;
+    }
 }
