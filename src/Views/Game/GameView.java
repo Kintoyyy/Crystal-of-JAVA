@@ -1,46 +1,26 @@
 package Views.Game;
 
-import Assets.*;
-import Characters.Character;
-import Components.Button.BackButton;
-import Components.Button.Button;
-import Components.CharacterMenu;
-import Components.Frame.CharacterFrame;
+import Components.Button.PauseButton;
 import Components.Menu.CharacterTopLeftMenu;
-import Components.Text.Text;
-import Entities.Player;
 import Game.CallBackAction;
 import Views.View;
 import Views.ViewManager;
-import enums.Alignment;
 import enums.ViewEnums;
 import World.World;
 
 import java.awt.*;
 
 public class GameView extends View {
-    private Player player;
     private World world;
-    public static boolean flag;
-    private Description playerDescription;
-
-    public static int coins = 0;
-    public static int xp = 0;
-    private Text coinsText;
-
-    private int i = 0;
-
-    private CharacterMenu characterMenu;
 
     public GameView(ViewManager viewManager) {
         super(viewManager);
         world = new World(handler, "res/worlds/world_1.tmx");
+
         handler.setWorld(world);
-        Character player = handler.getGameState().getPlayer();
-        playerDescription = new Description(2, "asdasd", 100, 100, 69, handler);
-//        handler.getWidth()
+
         components.init(
-                new BackButton()
+                new PauseButton()
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
@@ -49,36 +29,19 @@ public class GameView extends View {
                         })
                         .setLocation(900, 20),
 
-//                new Button("change")
-//                        .setAction(new CallBackAction() {
-//                            @Override
-//                            public void onClick() {
-//
-//                                i++;
-//                                handler.getGameState().setPlayerByIndex(i % 4);
-//
-//                                System.out.println(i % 4 + " " + handler.getGameState().getPlayer().getName());
-//                            }
-//                        })
-//                        .setLocation(600, 60),
-
                 new Components.Menu.CharacterMenu(handler)
-                        .setLocation(20, 700),
+                        .setLocation(350, 700),
 
                 new CharacterTopLeftMenu(handler)
                         .setLocation(12, 12)
                         .scale(6)
-//                new CharacterFrame(handler.getGameState().getPlayer()).isActive(true).setLocation(300, 300)
-//                new CharacterMenu(handler.getGameState().getCharacters())
         );
-
     }
 
     @Override
     public void tick() {
         components.tick();
         world.tick();
-//        characterMenu.tick();
     }
 
     @Override

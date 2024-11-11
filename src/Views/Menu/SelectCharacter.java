@@ -1,7 +1,6 @@
 package Views.Menu;
 
 import Components.Button.Button;
-import Components.Button.PlayButton;
 import Game.CallBackAction;
 import Views.View;
 import Views.ViewManager;
@@ -14,16 +13,6 @@ public class SelectCharacter extends View {
         super(viewManager);
         this.isOverlay = true;
         components.init(
-                new PlayButton()
-                        .setAction(new CallBackAction() {
-                            @Override
-                            public void onClick() {
-//                                viewManager.setView(ViewEnums.SELECT_CHARACTER);
-                            }
-                        })
-                        .showBounds()
-                        .setLocation(400, 320),
-
                 new Button("play")
                         .setAction(new CallBackAction() {
                             @Override

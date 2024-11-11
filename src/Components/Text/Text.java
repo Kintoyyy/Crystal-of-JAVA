@@ -10,21 +10,19 @@ import java.util.List;
 public class Text extends Component {
 
     private final String fullText;
-    private String displayedText;
+    private String displayedText = "";
     private Alignment alignment = Alignment.LEFT;
     private Color color = Color.WHITE;
     private Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
     private int currentIndex = 0;
-    private int typingSpeed;
-    private long lastTick;
+    private int typingSpeed = 25;
+    private long lastTick = System.currentTimeMillis();
     private boolean typingEffect = false;
 
     public Text(String text) {
-        super(0, 0, 700, 0);
+        super();
+        this.width = 700;
         this.fullText = text;
-        this.displayedText = "";
-        this.typingSpeed = 25;
-        this.lastTick = System.currentTimeMillis();
     }
 
     public Text setFont(Font font) {
@@ -43,7 +41,7 @@ public class Text extends Component {
     }
 
     public Text typing(int typingSpeed) {
-        typing();
+        this.typingEffect = true;
         this.typingSpeed = typingSpeed;
         return this;
     }
@@ -55,14 +53,10 @@ public class Text extends Component {
 
     @Override
     public void tick() {
-        if (typingEffect) {
-            long currentTime = System.currentTimeMillis();
-            if (currentTime - lastTick >= typingSpeed) {
-                if (currentIndex < fullText.length()) {
-                    displayedText += fullText.charAt(currentIndex);
-                    currentIndex++;
-                    lastTick = currentTime;
-                }
+        if (typingEffect && System.currentTimeMillis() - lastTick >= typingSpeed) {
+            if (currentIndex < fullText.length()) {
+                displayedText += fullText.charAt(currentIndex++);
+                lastTick = System.currentTimeMillis();
             }
         } else {
             displayedText = fullText;
@@ -81,15 +75,15 @@ public class Text extends Component {
         this.height = lineHeight * lines.size();
         updateBounds();
 
-        int baseY = (int) (bounds.y + lineHeight);
+        int baseY = bounds.y + lineHeight;
 
         for (String line : lines) {
             g.drawString(line, (int) calculateHorizontalPosition(fm, line), baseY);
-//            g.drawString(line, (int) calculateHorizontalPosition(fm, line), baseY);
             baseY += lineHeight;
         }
-        // Draw bounds for debugging
-        if(showBounds){
+
+        // Show bounds for debugging
+        if (showBounds) {
             g.setColor(Color.YELLOW);
             g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
         }
@@ -97,20 +91,19 @@ public class Text extends Component {
 
     @Override
     public void onClick() {
-        // Custom action on click
+        // Define click action here if needed
     }
 
     private List<String> wrapText(FontMetrics fm, String text) {
         List<String> lines = new ArrayList<>();
-        String[] words = text.split(" ");
         StringBuilder currentLine = new StringBuilder();
 
-        for (String word : words) {
+        for (String word : text.split(" ")) {
             if (fm.stringWidth(currentLine + word) <= width) {
                 currentLine.append(word).append(" ");
             } else {
                 lines.add(currentLine.toString().trim());
-                currentLine = new StringBuilder(word + " ");
+                currentLine = new StringBuilder(word).append(" ");
             }
         }
 
@@ -124,7 +117,7 @@ public class Text extends Component {
     private float calculateHorizontalPosition(FontMetrics fm, String line) {
         int lineWidth = fm.stringWidth(line);
         return switch (alignment) {
-            case CENTER, JUSTIFY -> bounds.x + (float) (bounds.width - lineWidth) / 2;
+            case CENTER, JUSTIFY -> bounds.x + (bounds.width - lineWidth) / 2f;
             case LEFT -> bounds.x;
             case RIGHT -> bounds.x + bounds.width - lineWidth;
         };

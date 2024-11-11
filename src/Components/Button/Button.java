@@ -19,7 +19,10 @@ public class Button extends Component {
     private final Text text;
 
     public Button(String textContent) {
-        super(0, 0, 200, 60);
+        super();
+
+        this.width = 200;
+        this.height = 60;
 
         buttonSheet[0] = sheet.crop(0, 0, 47, 14);
         buttonSheet[1] = sheet.crop(48, 0, 47, 14);

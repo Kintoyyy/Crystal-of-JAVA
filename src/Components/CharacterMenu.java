@@ -18,7 +18,7 @@ public class CharacterMenu extends Component {
     private Button button;
 
     public CharacterMenu(ArrayList<Character> characters) {
-        super(0, 0, 200, 60);
+        super();
         this.characters = characters;
 
         buttonSheet[1] = sheet.crop(29, 92, 28, 28);

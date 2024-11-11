@@ -10,48 +10,43 @@ import fonts.SuperPixelFont;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.HOVERED;
-import static enums.ComponentStateEnums.PRESSED;
+import static enums.ComponentStateEnums.*;
 
 public class CharacterFrame extends Frame {
-    private BufferedImage playerProfile;
+    private final BufferedImage playerProfile;
     private final Text tooltip;
-    private Character player;
+    private final Character player;
 
     public CharacterFrame(Character player) {
         super("Character Frame");
-        this.hideText();
+        hideText();
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Game_UI.png"));
-        buttonSheet[1] = sheet.crop(29, 92, 28, 28);
-        buttonSheet[0] = sheet.crop(58, 92, 28, 28);
-        buttonSheet[2] = sheet.crop(0, 92, 28, 28);
 
-        this.setDimensions(28, 28);
-        this.scale(3);
+        buttonSheet[0] = sheet.crop(58, 92, 28, 28); // default
+        buttonSheet[1] = sheet.crop(29, 92, 28, 28); // hovered
+        buttonSheet[2] = sheet.crop(0, 92, 28, 28);  // pressed
+
+        setDimensions(28, 28);
+        scale(3);
 
         this.player = player;
-        if (player != null) {
-            this.playerProfile = player.getProfile();
-        }
+        this.playerProfile = player != null ? player.getProfile() : null;
 
-        tooltip = (Text) new Text(this.player != null ? this.player.getName() : "")
+        tooltip = (Text) new Text(player != null ? player.getName() : "")
                 .setAlignment(Alignment.CENTER)
                 .setColor(new Color(234, 212, 170))
                 .setFont(new SuperPixelFont(15))
-                .setDimensions(this.width, this.height);
+                .setDimensions(width, height);
     }
 
-    public CharacterFrame isActive(boolean isActive) {
-        if (isActive) {
-            state = PRESSED;
-        }
-        return this;
+    public void isActive(boolean isActive) {
+        state = isActive ? PRESSED : state;
     }
 
     @Override
     public void tick() {
-        tooltip.tick();
         super.tick();
+        tooltip.tick();
     }
 
     @Override
@@ -62,20 +57,17 @@ public class CharacterFrame extends Frame {
             default -> buttonSheet[0];
         };
 
-        if (buttonImage != null) {
-            g.setColor(new Color(184, 111, 80));
-            g.fillRect(bounds.x + 10, bounds.y + 10, width - 20, height - 20);
+        g.setColor(new Color(184, 111, 80));
+        g.fillRect(bounds.x + 10, bounds.y + 10, width - 20, height - 20);
 
-            // Only draw the player profile if it's not null
-            if (playerProfile != null) {
-                g.drawImage(playerProfile, bounds.x + 1, bounds.y + 8, width, height, null);
-            }
-
-            g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
+        if (playerProfile != null) {
+            g.drawImage(playerProfile, bounds.x + 1, bounds.y + 8, width, height, null);
         }
 
-        if(state == HOVERED){
-            tooltip.setLocation(bounds.x , bounds.y - 30);
+        g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
+
+        if (state == HOVERED) {
+            tooltip.setLocation(bounds.x, bounds.y - 30);
             tooltip.render(g);
         }
 

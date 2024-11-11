@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class Menu extends Component {
 
-    public Menu(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public Menu() {
+        super();
     }
 
 

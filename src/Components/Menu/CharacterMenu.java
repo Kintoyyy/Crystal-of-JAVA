@@ -2,83 +2,73 @@ package Components.Menu;
 
 import Components.Component;
 import Components.Frame.CharacterFrame;
-
-import java.awt.*;
-import java.util.ArrayList;
 import Characters.Character;
 import Game.CallBackAction;
 import Game.Handler;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class CharacterMenu extends Menu {
     private Character currentCharacter;
-    private ArrayList<Character> characters;
+    private final ArrayList<Character> characters;
     private final Handler handler;
 
     public CharacterMenu(Handler handler) {
-        super(0, 0, 0, 0);
+        super();
         this.handler = handler;
-        characters = handler.getGameState().getCharacters();
+        this.characters = handler.getGameState().getCharacters();
 
-        int characterIndex = 0;
+        // Create frames for each character
+        initCharacterFrames();
+        ensureMinimumFrames(4);  // Ensures we always have at least 4 frames
+    }
 
-        // Create frames for existing characters without setting locations
-        for (Character character : characters) {
-            int finalIndex = characterIndex;
+    private void initCharacterFrames() {
+        for (int i = 0; i < characters.size(); i++) {
+            Character character = characters.get(i);
 
-            CharacterFrame frame = (CharacterFrame) new CharacterFrame(character).setAction(new CallBackAction() {
-                @Override
-                public void onClick() {
-                    currentCharacter = character;
-                    System.out.println("Selected: " + currentCharacter.getName());
+            // Define a final variable to capture the index for lambda usage
+            final int index = i;
 
-                    handler.getGameState().setPlayerByIndex(finalIndex);
-                }
-            });
-
+            CharacterFrame frame = (CharacterFrame) new CharacterFrame(character)
+                    .setAction(() -> {
+                        currentCharacter = character;
+                        System.out.println("Selected: " + currentCharacter.getName());
+                        handler.getGameState().setPlayerByIndex(index);
+                    });
             childComponents.add(frame);
-            characterIndex++;
         }
+    }
 
-        // Add empty frames if fewer than 4 characters
-        while (childComponents.size() < 4) {
-            CharacterFrame emptyFrame = (CharacterFrame) new CharacterFrame(null);
-            childComponents.add(emptyFrame);
+    private void ensureMinimumFrames(int minFrames) {
+        while (childComponents.size() < minFrames) {
+            childComponents.add(new CharacterFrame(null));
         }
     }
 
     @Override
     public void tick() {
-        for (Component component : childComponents) {
-            component.tick();
-        }
+        childComponents.forEach(Component::tick);
     }
 
     @Override
     public void render(Graphics g) {
         Character player = handler.getGameState().getPlayer();
-        int xOffset = 0;
+        int xOffset = (int) this.x;
 
         for (Component component : childComponents) {
             if (component instanceof CharacterFrame frame) {
-
-                // Dynamically set location during render
                 frame.setLocation(xOffset, (int) this.y);
-
-                // Activate frame if its character matches the current player
                 frame.isActive(player != null && player.equals(frame.getPlayer()));
-
-                // Increment xOffset for the next frame position
                 xOffset += frame.getWidth();
             }
-            // Render each component
             component.render(g);
         }
     }
 
     @Override
     public void onClick() {
-        for (Component component : childComponents) {
-            component.onClick();
-        }
+        childComponents.forEach(Component::onClick);
     }
 }

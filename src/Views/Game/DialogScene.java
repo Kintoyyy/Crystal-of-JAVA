@@ -28,9 +28,9 @@ public class DialogScene extends View {
 //                        .setDimensions(880, 200),
 
                 new Dialog(testText)
-                        .setScale(5)
                         .showBounds()
-                        .setLocation(50, 480),
+                        .setLocation(50, 480)
+                        .scale(2),
 //                        .setDimensions(900, 260)
                 new Button("Test button")
                         .setAction(new CallBackAction() {
