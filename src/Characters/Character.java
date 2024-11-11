@@ -22,7 +22,7 @@ public abstract class Character {
     protected Mana mana;
     protected Energy energy;
     protected int experience;
-    protected ArrayList<Skill> skills = new ArrayList<>(3);
+    protected ArrayList<Skill> skills = new ArrayList<>(4);
     public SpriteSheet spriteSheet;
     private PlayerAnimation animation;
     private BufferedImage playerProfile;

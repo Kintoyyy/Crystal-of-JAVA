@@ -14,6 +14,9 @@ public class Kent extends Character {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Kent", 1, new Health(67, 100), new Mana(34, 100), new ArrayList<>());
 
+        this.skills.add(new SkillExample1());
+        this.skills.add(new SkillExample3());
+
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
     }
 

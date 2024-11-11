@@ -5,7 +5,7 @@ import Utils.SpriteSheet;
 
 public class PauseButton extends Button {
     public PauseButton() {
-        super("Back");
+        super("Pause");
 
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Menu_UI.png"));
 

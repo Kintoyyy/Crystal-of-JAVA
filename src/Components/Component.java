@@ -87,6 +87,12 @@ public abstract class Component {
         }
     }
 
+    public void onClickChildren() {
+        for (Component component : childComponents) {
+            component.onClick();
+        }
+    }
+
     public void tickChildren() {
         for (Component component : childComponents) {
             component.setDimensions(bounds.width - 40, bounds.height - 40);

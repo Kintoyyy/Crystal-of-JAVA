@@ -1,68 +1,82 @@
 package Components.Menu;
 
-import Characters.Character;
+import Components.Button.RoundedButton;
 import Components.Component;
-import Components.Frame.CharacterFrame;
 import Game.Handler;
+import Skills.Skill;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SkillMenu extends Menu {
-    private Character currentCharacter;
-    private final ArrayList<Character> characters;
+    private Skill currentSkill;
+    private List<Skill> skills;
+    private static final int BUTTON_SPACING = 10; // Spacing between buttons
     private final Handler handler;
 
     public SkillMenu(Handler handler) {
         super();
         this.handler = handler;
-        this.characters = handler.getGameState().getCharacters();
-
-        // Create frames for each character
-        initCharacterFrames();
-        ensureMinimumFrames(4);  // Ensures we always have at least 4 frames
+        this.skills = new ArrayList<>(handler.getGameState().getPlayer().getSkills());
+        initSkillFrames();
     }
 
-    private void initCharacterFrames() {
-        for (int i = 0; i < characters.size(); i++) {
-            Character character = characters.get(i);
+    private void initSkillFrames() {
+        childComponents.clear(); // Clear existing components before re-adding
 
-            // Define a final variable to capture the index for lambda usage
-            final int index = i;
-
-            CharacterFrame frame = (CharacterFrame) new CharacterFrame(character)
+        for (Skill skill : skills) {
+            RoundedButton frame = (RoundedButton) new RoundedButton(skill.getName())
                     .setAction(() -> {
-                        currentCharacter = character;
-                        System.out.println("Selected: " + currentCharacter.getName());
-                        handler.getGameState().setPlayerByIndex(index);
+                        currentSkill = skill;
+                        System.out.println("Selected Skill: " + currentSkill.getName());
                     });
             childComponents.add(frame);
         }
     }
 
-    private void ensureMinimumFrames(int minFrames) {
-        while (childComponents.size() < minFrames) {
-            childComponents.add(new CharacterFrame(null));
-        }
-    }
-
     @Override
     public void tick() {
+        // Only update skills if they have changed
+        List<Skill> newSkills = handler.getGameState().getPlayer().getSkills();
+
+        if (!newSkills.equals(this.skills)) {
+            this.skills = new ArrayList<>(newSkills);
+            initSkillFrames();
+        }
+        // Tick each component
         childComponents.forEach(Component::tick);
     }
 
     @Override
     public void render(Graphics g) {
-        Character player = handler.getGameState().getPlayer();
         int xOffset = (int) this.x;
+        int yOffset = (int) this.y;
 
-        for (Component component : childComponents) {
-            if (component instanceof CharacterFrame frame) {
-                frame.setLocation(xOffset, (int) this.y);
-                frame.isActive(player != null && player.equals(frame.getPlayer()));
-                xOffset += frame.getWidth();
+        if (skills.size() == 4) {
+            // Arrange in a 2x2 grid if there are exactly 4 skills
+            int col = 0, row = 0;
+            for (Component component : childComponents) {
+                if (component instanceof RoundedButton frame) {
+                    frame.setLocation(xOffset + col * (200 + BUTTON_SPACING),
+                            yOffset + row * (60 + BUTTON_SPACING));
+                    col++;
+                    if (col >= 2) { // Move to the next row after two columns
+                        col = 0;
+                        row++;
+                    }
+                }
+                component.render(g);
             }
-            component.render(g);
+        } else {
+            // Default to a single row layout
+            for (Component component : childComponents) {
+                if (component instanceof RoundedButton frame) {
+                    frame.setLocation(xOffset, yOffset);
+                    xOffset += frame.getWidth() + BUTTON_SPACING;
+                }
+                component.render(g);
+            }
         }
     }
 

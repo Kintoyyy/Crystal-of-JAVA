@@ -3,7 +3,6 @@ package Components.Menu;
 import Components.Component;
 import Components.Frame.CharacterFrame;
 import Characters.Character;
-import Game.CallBackAction;
 import Game.Handler;
 
 import java.awt.*;
