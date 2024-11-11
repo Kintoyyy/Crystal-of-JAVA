@@ -15,11 +15,6 @@ public class MenuView extends View {
 
     public MenuView(ViewManager viewManager) {
         super(viewManager);
-
-        if (this.handler.getCharacter() == null) {
-            System.out.println("No character selected...");
-        }
-
         components.init(
                 createChangeViewButton("play", 330, GAME),
                 createChangeViewButton("setting", 400, SETTINGS),
@@ -27,7 +22,7 @@ public class MenuView extends View {
                         .setAction(new CallBackAction() {
                             @Override
                             public void onClick() {
-                                System.out.println("Exit clicked");
+                                handler.getGame().stop();
                             }
                         })
                         .setLocation(400, 470)

@@ -107,7 +107,6 @@ public class World {
             NodeList map = doc.getElementsByTagName("map");
             if (map.getLength() > 0) {
                 Element mapElement = (Element) map.item(0);
-                System.out.println("TEST");
                 // Initialize TileSet
                 NodeList tilesets = mapElement.getElementsByTagName("tileset");
                 tileSet = new TileSet(tilesets);

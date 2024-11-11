@@ -1,8 +1,11 @@
 package Characters;
 
 import Animations.PlayerAnimation;
+import Characters.Stats.Energy;
 import Characters.Stats.Health;
 import Characters.Stats.Mana;
+import Skills.Basic;
+import Skills.Healing;
 import Utils.SpriteSheet;
 import Skills.Skill;
 import Utils.ImageUtils;
@@ -12,13 +15,14 @@ import java.util.ArrayList;
 
 public abstract class Character {
 
-    private String name;
-    private String description = "";
-    private int level;
-    private Health health;
-    private Mana mana;
-    private int experience;
-    public ArrayList<Skill> skills = new ArrayList<>(3);
+    protected String name;
+    protected String description = "";
+    protected int level;
+    protected Health health;
+    protected Mana mana;
+    protected Energy energy;
+    protected int experience;
+    protected ArrayList<Skill> skills = new ArrayList<>(3);
     public SpriteSheet spriteSheet;
     private PlayerAnimation animation;
     private BufferedImage playerProfile;
@@ -28,11 +32,15 @@ public abstract class Character {
         this.level = level;
         this.health = health;
         this.mana = mana;
+        this.energy = new Energy(100, 100);
         this.skills = skills;
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
         this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         this.experience = 0;
+
+        this.skills.add(new Basic());
+        this.skills.add(new Healing());
     }
 
     public String getName() {

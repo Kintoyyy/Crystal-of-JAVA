@@ -17,9 +17,9 @@ public class Game implements Runnable {
 
     private final int width;
     private final int height;
-    public final String title;
+    private final String title;
 
-    public boolean running = false;
+    private boolean running = false;
 
     public static boolean flag = false;
     public static boolean flag2 = false;
@@ -61,8 +61,6 @@ public class Game implements Runnable {
         this.title = title;
         inputKeyboardManager = new InputKeyboardManager();
         inputMouseListener = new InputMouseListener();
-
-
     }
 
     private void init() {
@@ -225,9 +223,13 @@ public class Game implements Runnable {
     }
 
     public synchronized void stop() {
+        System.out.println("Exiting the game...");
+        System.exit(0);
+
         if (!running) {
             return;
         }
+
         running = false;
 
         try {

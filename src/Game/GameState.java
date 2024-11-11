@@ -21,8 +21,8 @@ public class GameState {
         //initialize available characters
         this.characters.add(new Kent());
         this.characters.add(new Cedi());
-//        this.characters.add(new Nathan());
-//        this.characters.add(new Ambot());
+        this.characters.add(new Nathan());
+        this.characters.add(new Ambot());
 
     }
 

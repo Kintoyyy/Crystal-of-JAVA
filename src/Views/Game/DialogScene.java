@@ -12,10 +12,6 @@ import java.awt.*;
 public class DialogScene extends View {
     public DialogScene(ViewManager viewManager) {
         super(viewManager);
-        if (this.handler.getCharacter() == null) {
-            System.out.println("No character selected...");
-        }
-
         String testText = "In the heart of Cytu, where myths linger like morning mist, fate calls upon a new hero. Unknown forces stir in the shadows, and the hour grows dark. It is here, on the edge of the Whispering Woods, that Nathaniel begins his journey.";
 
         components.init(
