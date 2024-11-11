@@ -22,6 +22,7 @@ public abstract class Component {
     protected ArrayList<Component> childComponents = new ArrayList<>();
     protected Rectangle bounds = new Rectangle();
     protected ComponentStateEnums state = IDLE;
+    private String text;
 
     public Component() {
         updateBounds();
@@ -117,5 +118,9 @@ public abstract class Component {
 
     protected int getHeight() {
         return height;
+    }
+
+    public String getText() {
+        return text;
     }
 }

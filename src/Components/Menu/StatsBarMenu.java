@@ -30,13 +30,15 @@ public class StatsBarMenu extends Menu {
         // Initialize sprite sheet and UI components
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Game_UI.png"));
         this.addChildren(
-                new Text("Kent")
+                new Text("Player")
                         .setFont(new SuperPixelFont(30))
+                        .setText(handler.getGameState().getPlayer().getName())
                         .setAlignment(Alignment.LEFT)
                         .setColor(new Color(184, 111, 80))
                         .setParent(this)
                         .setLocation(30, 15)
                         .setDimensions(this.width, this.height),
+
                 new Text("lvl: nnn")
                         .setFont(new SuperPixelFont(30))
                         .setAlignment(Alignment.RIGHT)

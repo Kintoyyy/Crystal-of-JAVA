@@ -18,6 +18,7 @@ public class Text extends Component {
     private int typingSpeed = 25;
     private long lastTick = System.currentTimeMillis();
     private boolean typingEffect = false;
+    private String text;
 
     public Text(String text) {
         super();
@@ -121,5 +122,14 @@ public class Text extends Component {
             case LEFT -> bounds.x;
             case RIGHT -> bounds.x + bounds.width - lineWidth;
         };
+    }
+
+    public Text setText(String text) {
+        this.text = text;
+        return this;
+    }
+
+    public String getText() {
+        return text;
     }
 }
