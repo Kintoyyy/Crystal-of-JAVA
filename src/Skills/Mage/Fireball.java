@@ -1,14 +1,16 @@
-package Skills;
+package Skills.Mage;
 
-public class SkillExample3 extends Skill {
+import Skills.Skill;
 
-    private static final String name = "three";
+public class Fireball extends Skill {
+
+    private static final String name = "Fireball";
     private static final int cost = 0;
     private static final int damage = 20;
-    private static final String description = "Basic";
+    private static final String description = "Moderate AoE damage";
     private static final String type = "Basic";
 
-    public SkillExample3() {
+    public Fireball() {
         super(name, description, cost, damage, type);
     }
 

@@ -1,9 +1,7 @@
 package Characters;
 
 import Animations.PlayerAnimation;
-import Characters.Stats.Energy;
-import Characters.Stats.Health;
-import Characters.Stats.Mana;
+import Characters.Stats.*;
 import Skills.Basic;
 import Skills.Healing;
 import Utils.SpriteSheet;
@@ -22,25 +20,28 @@ public abstract class Character {
     protected Mana mana;
     protected Energy energy;
     protected int experience;
+
+    protected Defense defense;
+    protected AttackPower attackPower;
+
     protected ArrayList<Skill> skills = new ArrayList<>(4);
     public SpriteSheet spriteSheet;
     private PlayerAnimation animation;
     private BufferedImage playerProfile;
 
-    public Character(String name, int level, Health health, Mana mana, ArrayList<Skill> skills) {
+    public Character(String name, int level, Health health, Mana mana, AttackPower attackPower, Defense defense, ArrayList<Skill> skills) {
         this.name = name;
         this.level = level;
         this.health = health;
         this.mana = mana;
+        this.attackPower = attackPower;
+        this.defense = defense;
         this.energy = new Energy(100, 100);
         this.skills = skills;
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
         this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         this.experience = 0;
-
-        this.skills.add(new Basic());
-        this.skills.add(new Healing());
     }
 
     public String getName() {

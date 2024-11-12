@@ -5,8 +5,8 @@ public class Mana {
     private double baseMana;
     private double manaRegenRate;
 
-    public Mana(int mana, int baseMana) {
-        this.mana = mana;
+    public Mana(int baseMana) {
+        this.mana = baseMana;
         this.baseMana = baseMana;
         this.manaRegenRate = 0.01;
     }

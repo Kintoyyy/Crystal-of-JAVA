@@ -1,19 +1,28 @@
 package Characters;
 
+import Characters.Stats.AttackPower;
+import Characters.Stats.Defense;
 import Characters.Stats.Health;
 import Characters.Stats.Mana;
-import Skills.Basic;
-import Skills.Healing;
+import Skills.Healer.Blessing;
+import Skills.Healer.DivineShield;
+import Skills.Healer.Restore;
+import Skills.Healer.Revive;
 import Skills.Skill;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
 import java.util.ArrayList;
 
-public class Ambot extends Character {
-    public Ambot() {
+public class Zeith extends Character {
+    public Zeith() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Ambot", 1, new Health(100, 100), new Mana(100, 100), new ArrayList<>());
+        super("Zeith", 1, new Health(75), new Mana(100), new AttackPower(12), new Defense(5), new ArrayList<>());
+
+        this.skills.add(new Restore());
+        this.skills.add(new DivineShield());
+        this.skills.add(new Revive());
+        this.skills.add(new Blessing());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
     }

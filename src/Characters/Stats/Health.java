@@ -5,8 +5,8 @@ public class Health {
     private double baseHealth;
     private double healthRegenRate;
 
-    public Health(int health, int baseHealth) {
-        this.health = health;
+    public Health(double baseHealth) {
+        this.health = baseHealth;
         this.baseHealth = baseHealth;
         this.healthRegenRate = 0.04;
     }
