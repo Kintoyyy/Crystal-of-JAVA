@@ -5,11 +5,18 @@ import Characters.Stats.AttackPower;
 import Characters.Stats.Defense;
 import Characters.Stats.Health;
 import Enemies.SpecialSkill.SpecialSkill;
+import Utils.ImageUtils;
+import Utils.SpriteSheet;
+
+import java.awt.image.BufferedImage;
 
 public abstract class Enemy {
 
-    protected String name;
-    protected String description;
+    protected String name = "Enemy";
+    protected String description = "A generic enemy";
+
+    protected SpriteSheet spriteSheet;
+    private BufferedImage playerProfile;
 
     protected Health health;
     protected AttackPower attackPower;
@@ -20,21 +27,28 @@ public abstract class Enemy {
     protected double maxDamage = 1.5;
     protected double lowHealthThreshold = 0.3; // Threshold to consider health as "low" (30%)
 
-    Enemy(Health health, AttackPower attackPower, Defense defence) {
-        this.health = health;
-        this.attackPower = attackPower;
-        this.defence = defence;
-    }
 
     Enemy(Health health, AttackPower attackPower, Defense defence, SpecialSkill specialSkill) {
+        this(health, attackPower, defence);
+        this.specialSkill = specialSkill;
+    }
+
+    Enemy(Health health, AttackPower attackPower, Defense defence) {
+
+        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
+        this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
+
         this.health = health;
         this.attackPower = attackPower;
         this.defence = defence;
-        this.specialSkill = specialSkill;
     }
 
     protected double calculateDamage() {
         return attackPower.getAttackPower() * (Math.random() * (maxDamage - minDamage) + minDamage);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean isAlive() {
@@ -86,4 +100,14 @@ public abstract class Enemy {
             System.out.println(this.name + " used " + specialSkill.getName() + "!");
         }
     }
+
+    public Defense getDefense() {
+        return defence;
+    }
+
+    public Health getHealth() {
+        return health;
+    }
+
+
 }

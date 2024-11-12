@@ -2,11 +2,10 @@ package Views.Battle;
 
 import Components.Button.Button;
 import Components.Button.PauseButton;
+import Components.Frame.EnemyFrame;
 import Components.Layouts.CharacterLayout;
-import Components.Menu.BattleCharacterMenu;
+import Components.Layouts.EnemyLayout;
 import Components.Menu.BattleSkillMenu;
-import Components.Menu.SkillMenu;
-import Components.Menu.StatsBarMenu;
 import Enemies.Kai;
 import Game.CallBackAction;
 import Views.View;
@@ -15,23 +14,27 @@ import enums.ViewEnums;
 
 import java.awt.*;
 
-public class BattleView extends View { // Extend JComponent instead of View
+public class BattleView extends View {
     public BattleView(ViewManager viewManager) {
         super(viewManager);
 
-        // test enemy
         handler.getGameState().getEnemies().add(new Kai());
 
         components.init(
-//                new SkillMenu(handler)
-//                        .setLocation(20, 600),
-
                 new CharacterLayout(handler)
                         .setLocation(100, 300)
                         .scale(6),
 
+//                new EnemyLayout(handler)
+//                        .setLocation(100, 100)
+//                        .showBounds()
+//                        .scale(6),
+
+                new EnemyFrame(handler.getGameState().getEnemies().get(0))
+                        .setLocation(700, 300),
+
                 new BattleSkillMenu(handler)
-                        .setLocation(600, 600),
+                        .setLocation(600, 650),
 
                 new PauseButton()
                         .setAction(new CallBackAction() {
@@ -51,6 +54,14 @@ public class BattleView extends View { // Extend JComponent instead of View
                         })
                         .setLocation(680, 20)
         );
+    }
+
+    @Override
+    public void tick() {
+
+
+
+        components.tick();
 
     }
 
@@ -70,9 +81,5 @@ public class BattleView extends View { // Extend JComponent instead of View
         g.drawString(handler.getGameState().getEnemies().toString(), 20, 70);
     }
 
-    @Override
-    public void tick() {
-        components.tick();
 
-    }
 }
