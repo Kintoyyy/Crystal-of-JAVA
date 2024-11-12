@@ -10,14 +10,4 @@ public class Orc extends Enemy {
     public Orc() {
         super(new Health(130), new AttackPower(15), new Defense(8));
     }
-
-    @Override
-    void attack(Character character) {
-
-    }
-
-    @Override
-    void useSpecialSkill(Character character) {
-
-    }
 }

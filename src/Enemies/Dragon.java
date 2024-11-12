@@ -11,14 +11,4 @@ public class Dragon extends Enemy {
     public Dragon() {
         super(new Health(200), new AttackPower(25), new Defense(12), new FireBreath());
     }
-
-    @Override
-    void attack(Character character) {
-
-    }
-
-    @Override
-    void useSpecialSkill(Character character) {
-
-    }
 }

@@ -27,6 +27,7 @@ public class SkillMenu extends Menu {
 
         for (Skill skill : skills) {
             RoundedButton frame = (RoundedButton) new RoundedButton(skill.getName())
+                    .hideText()
                     .setAction(() -> {
                         currentSkill = skill;
                         System.out.println("Selected Skill: " + currentSkill.getName());

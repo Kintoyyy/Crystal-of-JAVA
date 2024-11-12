@@ -11,14 +11,4 @@ public class Vampire extends Enemy {
     public Vampire() {
         super(new Health(100), new AttackPower(12), new Defense(5), new LifeSteal());
     }
-
-    @Override
-    void attack(Character character) {
-
-    }
-
-    @Override
-    void useSpecialSkill(Character character) {
-
-    }
 }

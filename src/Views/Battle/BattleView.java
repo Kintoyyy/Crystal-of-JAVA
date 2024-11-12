@@ -30,6 +30,10 @@ public class BattleView extends View { // Extend JComponent instead of View
                 new SkillMenu(handler)
                         .setLocation(20, 600),
 
+                new Components.Menu.CharacterMenu(handler)
+                        .setLocation(200, 550)
+                        .scale(6),
+
                 new PauseButton()
                         .setAction(new CallBackAction() {
                             @Override

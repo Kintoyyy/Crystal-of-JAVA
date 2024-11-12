@@ -21,10 +21,10 @@ public class Nathan extends Character {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Nathan", 1, new Health( 90), new Mana(60),new AttackPower(12), new Defense(6), new ArrayList<>());
 
-        this.skills.add(new PrecisionShot());
-        this.skills.add(new MultiShot());
-        this.skills.add(new PoisonArrow());
-        this.skills.add(new Evasion());
+        this.addSkill(new PrecisionShot());
+        this.addSkill(new MultiShot());
+        this.addSkill(new PoisonArrow());
+        this.addSkill(new Evasion());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
     }

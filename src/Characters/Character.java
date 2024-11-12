@@ -2,8 +2,6 @@ package Characters;
 
 import Animations.PlayerAnimation;
 import Characters.Stats.*;
-import Skills.Basic;
-import Skills.Healing;
 import Utils.SpriteSheet;
 import Skills.Skill;
 import Utils.ImageUtils;
@@ -23,9 +21,10 @@ public abstract class Character {
 
     protected Defense defense;
     protected AttackPower attackPower;
+    protected double dodgeChance = 0.0;
 
     protected ArrayList<Skill> skills = new ArrayList<>(4);
-    public SpriteSheet spriteSheet;
+    protected SpriteSheet spriteSheet;
     private PlayerAnimation animation;
     private BufferedImage playerProfile;
 
@@ -42,6 +41,19 @@ public abstract class Character {
         this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         this.experience = 0;
+    }
+
+    public void addSkill(Skill skill) {
+        skill.setCharacter(this);
+        skills.add(skill);
+    }
+
+    public Defense getDefense() {
+        return defense;
+    }
+
+    public double getDodge() {
+        return dodgeChance;
     }
 
     public String getName() {

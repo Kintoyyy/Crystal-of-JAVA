@@ -19,10 +19,10 @@ public class Zeith extends Character {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Zeith", 1, new Health(75), new Mana(100), new AttackPower(12), new Defense(5), new ArrayList<>());
 
-        this.skills.add(new Restore());
-        this.skills.add(new DivineShield());
-        this.skills.add(new Revive());
-        this.skills.add(new Blessing());
+        this.addSkill(new Restore());
+        this.addSkill(new DivineShield());
+        this.addSkill(new Revive());
+        this.addSkill(new Blessing());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
     }

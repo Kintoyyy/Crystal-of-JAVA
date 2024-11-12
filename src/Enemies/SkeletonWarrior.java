@@ -10,14 +10,4 @@ public class SkeletonWarrior extends Enemy {
     public SkeletonWarrior() {
         super(new Health(85), new AttackPower(7), new Defense(10));
     }
-
-    @Override
-    void attack(Character character) {
-
-    }
-
-    @Override
-    void useSpecialSkill(Character character) {
-
-    }
 }

@@ -1,10 +1,13 @@
 package Skills;
 
+import Characters.Character;
+
 public abstract class Skill {
     private final String name;
     private final String type;
     private final int damage;
     private final int cost;
+    private Character character;
 
     public Skill(String name,String description, int cost, int damage, String type) {
         this.name = name;
@@ -15,6 +18,10 @@ public abstract class Skill {
 
     public String getName() {
         return name;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 
     public int getCost() {

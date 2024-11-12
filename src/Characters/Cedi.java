@@ -20,10 +20,10 @@ public class Cedi extends Character {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Cedi", 1, new Health( 80), new Mana( 120), new AttackPower(10),new Defense(4), new ArrayList<>());
 
-        this.skills.add(new Fireball());
-        this.skills.add(new ShieldBlock());
-        this.skills.add(new FrostBolt());
-        this.skills.add(new ArcaneShield());
+        this.addSkill(new Fireball());
+        this.addSkill(new ShieldBlock());
+        this.addSkill(new FrostBolt());
+        this.addSkill(new ArcaneShield());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
     }

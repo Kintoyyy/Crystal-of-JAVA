@@ -10,14 +10,4 @@ public class Golem extends Enemy {
     public Golem() {
         super(new Health(180), new AttackPower(8), new Defense(15));
     }
-
-    @Override
-    void attack(Character character) {
-
-    }
-
-    @Override
-    void useSpecialSkill(Character character) {
-
-    }
 }

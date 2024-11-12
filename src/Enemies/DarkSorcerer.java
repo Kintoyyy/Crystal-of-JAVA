@@ -11,14 +11,4 @@ public class DarkSorcerer extends Enemy {
     public DarkSorcerer() {
         super(new Health(50), new AttackPower(20), new Defense(4),  new ManaDrain());
     }
-
-    @Override
-    void attack(Character character) {
-
-    }
-
-    @Override
-    void useSpecialSkill(Character character) {
-
-    }
 }

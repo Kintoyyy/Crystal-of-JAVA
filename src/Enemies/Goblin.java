@@ -10,14 +10,4 @@ public class Goblin extends Enemy {
     public Goblin() {
         super(new Health(60), new AttackPower(10), new Defense(5));
     }
-
-    @Override
-    void attack(Character character) {
-
-    }
-
-    @Override
-    void useSpecialSkill(Character character) {
-
-    }
 }
