@@ -17,9 +17,4 @@ public class Evasion extends Skill {
     @Override
     public void useSkill() {
     }
-
-    @Override
-    public void attack(Enemy enemy) {
-        System.out.println("Attacking enemy with Evasion");
-    }
 }

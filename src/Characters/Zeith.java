@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Zeith extends Character {
     public Zeith() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Zeith", 1, new Health(75), new Mana(100), new AttackPower(12), new Defense(5), new ArrayList<>());
+        super("Zeith", 1, new Health(1000), new Mana(180), new AttackPower(90), new Defense(20), new ArrayList<>());
 
         this.addSkill(new Restore());
         this.addSkill(new DivineShield());

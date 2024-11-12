@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Nathan extends Character {
     public Nathan() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Nathan", 1, new Health( 90), new Mana(60),new AttackPower(12), new Defense(6), new ArrayList<>());
+        super("Nathan", 1, new Health( 900), new Mana(120),new AttackPower(140), new Defense(15), new ArrayList<>());
 
         this.addSkill(new PrecisionShot());
         this.addSkill(new MultiShot());

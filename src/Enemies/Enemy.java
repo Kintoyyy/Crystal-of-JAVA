@@ -110,7 +110,8 @@ public abstract class Enemy {
     }
 
 
-    public void takeDamage(int damage) {
+    public void takeDamage(double damage) {
+        System.out.println(this.name + " takes " + damage + " damage!");
         health.takeDamage(damage);
     }
 }

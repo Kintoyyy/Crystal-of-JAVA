@@ -1,13 +1,13 @@
 package Characters.Stats;
 
 public class AttackPower {
-    private int attackPower;
+    private double attackPower;
 
     public AttackPower(int attackPower) {
         this.attackPower = attackPower;
     }
 
-    public int getAttackPower() {
+    public double getAttackPower() {
         return attackPower;
     }
 

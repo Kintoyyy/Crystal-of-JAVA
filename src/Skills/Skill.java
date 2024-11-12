@@ -6,13 +6,17 @@ import Enemies.Enemy;
 public abstract class Skill {
     private final String name;
     private final String type;
-    private final int damage;
+    protected final double damage;
     private final int cost;
-    private Character character;
+    protected Character player;
     private String description;
     protected String imagePath;
+    protected int cooldownTurns = 0;
+    protected int effectDurationTurns = 0;
 
-    public Skill(String name,String description, int cost, int damage, String type) {
+    protected Enemy enemy;
+
+    public Skill(String name,String description, int cost, double damage, String type) {
         this.name = name;
         this.cost = cost;
         this.damage = damage;
@@ -23,15 +27,24 @@ public abstract class Skill {
         return name;
     }
 
-    public void setCharacter(Character character) {
-        this.character = character;
+    public void updateTurns() {
+        if(cooldownTurns > 0) {
+            cooldownTurns--;
+        }
+        if(effectDurationTurns > 0) {
+            effectDurationTurns--;
+        }
+    }
+
+    public void setCharacter(Character player) {
+        this.player = player;
     }
 
     public int getCost() {
         return cost;
     }
 
-    public int getDamage() {
+    public double getDamage() {
         return damage;
     }
 
@@ -39,18 +52,27 @@ public abstract class Skill {
         return type;
     }
 
+
     public abstract void useSkill();
 
     public void attack(Enemy enemy) {
-        if(!character.getMana().hasEnoughMana(cost)) {
-            System.out.println("Not enough mana");
-            return;
+        this.enemy = enemy;
+
+        if(checkIfSkillIsAvailable()) {
+            useSkill();
         }
+    }
 
-        character.getMana().useMana(cost);
-
-        enemy.takeDamage(damage);
-
-        enemy.attack(character);
+    private boolean checkIfSkillIsAvailable() {
+        if(cooldownTurns > 0) {
+            System.out.println("Skill is on cooldown");
+            return false;
+        }
+        if(!player.getMana().hasEnoughMana(cost)) {
+            System.out.println("Not enough mana");
+            return false;
+        }
+        player.getMana().useMana(cost);
+        return true;
     }
 }
