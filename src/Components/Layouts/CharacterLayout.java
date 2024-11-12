@@ -1,26 +1,25 @@
-package Components.Menu;
+package Components.Layouts;
 
-import Components.Component;
-import Components.Frame.CharacterMenuFrame;
 import Characters.Character;
+import Components.Component;
+import Components.Frame.CharacterFrame;
+import Components.Frame.CharacterMenuFrame;
 import Game.Handler;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CharacterMenu extends Menu {
-    private Character currentCharacter;
+public class CharacterLayout extends Layout{
+    private Characters.Character currentCharacter;
     private final ArrayList<Character> characters;
     private final Handler handler;
 
-    public CharacterMenu(Handler handler) {
+    public CharacterLayout(Handler handler) {
         super();
         this.handler = handler;
         this.characters = handler.getGameState().getCharacters();
 
-        // Create frames for each character
         initCharacterFrames();
-        ensureMinimumFrames(4);  // Ensures we always have at least 4 frames
     }
 
     private void initCharacterFrames() {
@@ -30,7 +29,7 @@ public class CharacterMenu extends Menu {
             // Define a final variable to capture the index for lambda usage
             final int index = i;
 
-            CharacterMenuFrame frame = (CharacterMenuFrame) new CharacterMenuFrame(character)
+            CharacterFrame frame = (CharacterFrame) new CharacterFrame(character)
                     .setAction(() -> {
                         currentCharacter = character;
                         System.out.println("Selected: " + currentCharacter.getName());
@@ -40,11 +39,6 @@ public class CharacterMenu extends Menu {
         }
     }
 
-    private void ensureMinimumFrames(int minFrames) {
-        while (childComponents.size() < minFrames) {
-            childComponents.add(new CharacterMenuFrame(null));
-        }
-    }
 
     @Override
     public void tick() {
@@ -57,7 +51,7 @@ public class CharacterMenu extends Menu {
         int xOffset = (int) this.x;
 
         for (Component component : childComponents) {
-            if (component instanceof CharacterMenuFrame frame) {
+            if (component instanceof CharacterFrame frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 frame.isActive(player != null && player.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();

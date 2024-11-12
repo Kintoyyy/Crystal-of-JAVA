@@ -44,6 +44,8 @@ public abstract class Character {
     }
 
     public void addSkill(Skill skill) {
+        // TODO: need to check if skill is compatible with the character
+        if( skill == null || skills.contains(skill)) return;
         skill.setCharacter(this);
         skills.add(skill);
     }

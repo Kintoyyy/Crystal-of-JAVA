@@ -1,8 +1,6 @@
 package Components.Frame;
 
 import Characters.Character;
-import Components.Component;
-import Components.Menu.MiniHealthBar;
 import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -12,23 +10,21 @@ import fonts.SuperPixelFont;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.HOVERED;
-import static enums.ComponentStateEnums.PRESSED;
+import static enums.ComponentStateEnums.*;
 
-public class CharacterFrame extends Frame {
+public class CharacterMenuFrame extends Frame {
     private final BufferedImage playerProfile;
-//    private final Text tooltip;
-    private final MiniHealthBar healthBar;
+    private final Text tooltip;
     private final Character player;
 
-    public CharacterFrame(Character player) {
+    public CharacterMenuFrame(Character player) {
         super("Character Frame");
         hideText();
-        sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
+        sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Game_UI.png"));
 
-        buttonSheet[0] = sheet.crop(105, 0, 1, 1); // default
-        buttonSheet[1] = sheet.crop(105, 0, 1, 1); // hovered
-        buttonSheet[2] = sheet.crop(105, 0, 28, 28);  // pressed
+        buttonSheet[0] = sheet.crop(58, 92, 28, 28); // default
+        buttonSheet[1] = sheet.crop(29, 92, 28, 28); // hovered
+        buttonSheet[2] = sheet.crop(0, 92, 28, 28);  // pressed
 
         setDimensions(28, 28);
         scale(3);
@@ -36,9 +32,11 @@ public class CharacterFrame extends Frame {
         this.player = player;
         this.playerProfile = player != null ? player.getProfile() : null;
 
-
-        healthBar = (MiniHealthBar) new MiniHealthBar(player)
-                .scale(3);
+        tooltip = (Text) new Text(player != null ? player.getName() : "")
+                .setAlignment(Alignment.CENTER)
+                .setColor(new Color(234, 212, 170))
+                .setFont(new SuperPixelFont(15))
+                .setDimensions(width, height);
     }
 
     public void isActive(boolean isActive) {
@@ -48,7 +46,7 @@ public class CharacterFrame extends Frame {
     @Override
     public void tick() {
         super.tick();
-        healthBar.tick();
+        tooltip.tick();
     }
 
     @Override
@@ -59,14 +57,19 @@ public class CharacterFrame extends Frame {
             default -> buttonSheet[0];
         };
 
+        g.setColor(new Color(184, 111, 80));
+        g.fillRect(bounds.x + 10, bounds.y + 10, width - 20, height - 20);
+
         if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x - 4, bounds.y + 2, width + 12, height + 12, null);
+            g.drawImage(playerProfile, bounds.x + 1, bounds.y + 8, width, height, null);
         }
 
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
 
-        healthBar.setLocation(bounds.x + 10, bounds.y + 90);
-        healthBar.render(g);
+        if (state == HOVERED) {
+            tooltip.setLocation(bounds.x, bounds.y - 30);
+            tooltip.render(g);
+        }
 
         if (showBounds) {
             g.setColor(Color.BLUE);

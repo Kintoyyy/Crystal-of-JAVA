@@ -2,8 +2,11 @@ package Views.Battle;
 
 import Components.Button.Button;
 import Components.Button.PauseButton;
+import Components.Layouts.CharacterLayout;
+import Components.Menu.BattleCharacterMenu;
 import Components.Menu.SkillMenu;
 import Components.Menu.StatsBarMenu;
+import Enemies.Kai;
 import Game.CallBackAction;
 import Views.View;
 import Views.ViewManager;
@@ -12,26 +15,18 @@ import enums.ViewEnums;
 import java.awt.*;
 
 public class BattleView extends View { // Extend JComponent instead of View
-
-    StringBuilder skillsString = new StringBuilder();
-
     public BattleView(ViewManager viewManager) {
         super(viewManager);
 
+        // test enemy
+        handler.getGameState().getEnemies().add(new Kai());
+
         components.init(
-                new StatsBarMenu(handler)
-                        .setLocation(20, 20)
-                        .scale(4),
-
-                new StatsBarMenu(handler)
-                        .setLocation(600, 550)
-                        .scale(4),
-
                 new SkillMenu(handler)
                         .setLocation(20, 600),
 
-                new Components.Menu.CharacterMenu(handler)
-                        .setLocation(200, 550)
+                new CharacterLayout(handler)
+                        .setLocation(100, 300)
                         .scale(6),
 
                 new PauseButton()
@@ -57,14 +52,18 @@ public class BattleView extends View { // Extend JComponent instead of View
 
     @Override
     public void render(Graphics g) {
+        // return to the game view if there are no enemies left
+        if(handler.getGameState().getEnemies().isEmpty()) {
+            viewManager.setView(ViewEnums.GAME);
+        }
+
         components.render(g);
 
         // Display the skill names at the specified position
         g.setColor(Color.GRAY);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString(handler.getGameState().getPlayer().getSkills().toString(), 20, 400);
-
-
+        g.drawString(handler.getGameState().getPlayer().getSkills().toString(), 20, 50);
+        g.drawString(handler.getGameState().getEnemies().toString(), 20, 70);
     }
 
     @Override

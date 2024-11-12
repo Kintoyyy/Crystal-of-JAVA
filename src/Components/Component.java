@@ -73,7 +73,8 @@ public abstract class Component {
 
     public Component setParent(Component parent) {
         this.parent = parent;
-        setDimensions(parent.width, parent.height);
+//        setDimensions(parent.width, parent.height);
+
         updateBounds();
         return this;
     }
@@ -96,7 +97,7 @@ public abstract class Component {
 
     public void tickChildren() {
         for (Component component : childComponents) {
-            component.setDimensions(bounds.width - 40, bounds.height - 40);
+//            component.setDimensions(bounds.width - 40, bounds.height - 40);
             component.tick();
         }
     }

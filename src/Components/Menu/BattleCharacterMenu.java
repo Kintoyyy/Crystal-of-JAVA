@@ -1,27 +1,41 @@
 package Components.Menu;
 
+import Characters.Character;
 import Components.Component;
 import Components.Frame.CharacterMenuFrame;
-import Characters.Character;
 import Game.Handler;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CharacterMenu extends Menu {
+public class BattleCharacterMenu extends Menu {
     private Character currentCharacter;
     private final ArrayList<Character> characters;
     private final Handler handler;
 
-    public CharacterMenu(Handler handler) {
+    public BattleCharacterMenu(Handler handler) {
         super();
         this.handler = handler;
         this.characters = handler.getGameState().getCharacters();
 
         // Create frames for each character
         initCharacterFrames();
-        ensureMinimumFrames(4);  // Ensures we always have at least 4 frames
     }
+
+
+//    private int[] framePositions(int size) {
+//        int size = characters.size();
+//        int cols = 1;
+//        int rows = size;
+//
+//        if (size > 1) {
+//            cols = (int) Math.ceil(Math.sqrt(size));
+//            rows = (int) Math.ceil((double) size / cols);
+//        }
+//
+//        return new int[]{cols, rows};
+//    }
+
 
     private void initCharacterFrames() {
         for (int i = 0; i < characters.size(); i++) {
@@ -37,12 +51,6 @@ public class CharacterMenu extends Menu {
                         handler.getGameState().setPlayerByIndex(index);
                     });
             childComponents.add(frame);
-        }
-    }
-
-    private void ensureMinimumFrames(int minFrames) {
-        while (childComponents.size() < minFrames) {
-            childComponents.add(new CharacterMenuFrame(null));
         }
     }
 

@@ -6,7 +6,7 @@ import Characters.Stats.Defense;
 import Characters.Stats.Health;
 import Enemies.SpecialSkill.SpecialSkill;
 
-abstract class Enemy {
+public abstract class Enemy {
 
     protected String name;
     protected String description;

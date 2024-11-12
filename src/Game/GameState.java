@@ -2,6 +2,7 @@ package Game;
 
 import Characters.*;
 import Characters.Character;
+import Enemies.Enemy;
 import World.World;
 import Item.Item;
 
@@ -12,6 +13,7 @@ public class GameState {
     private int currentCharacterIndex = 0;
     private World world;
     private ArrayList<Item> items = new ArrayList<>(10);
+    private ArrayList<Enemy> enemies = new ArrayList<>();
     private Handler handler;
 
     public GameState(Handler handler) {
@@ -49,5 +51,13 @@ public class GameState {
 
     public ArrayList<Character> getCharacters() {
         return this.characters;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(ArrayList<Enemy> enemies) {
+        this.enemies = enemies;
     }
 }
