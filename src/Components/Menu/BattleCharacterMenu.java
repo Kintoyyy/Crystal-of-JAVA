@@ -2,7 +2,7 @@ package Components.Menu;
 
 import Characters.Character;
 import Components.Component;
-import Components.Frame.CharacterMenuFrame;
+import Components.Frame.GameCharacterFrame;
 import Game.Handler;
 
 import java.awt.*;
@@ -44,7 +44,7 @@ public class BattleCharacterMenu extends Menu {
             // Define a final variable to capture the index for lambda usage
             final int index = i;
 
-            CharacterMenuFrame frame = (CharacterMenuFrame) new CharacterMenuFrame(character)
+            GameCharacterFrame frame = (GameCharacterFrame) new GameCharacterFrame(character)
                     .setAction(() -> {
                         currentCharacter = character;
                         System.out.println("Selected: " + currentCharacter.getName());
@@ -65,7 +65,7 @@ public class BattleCharacterMenu extends Menu {
         int xOffset = (int) this.x;
 
         for (Component component : childComponents) {
-            if (component instanceof CharacterMenuFrame frame) {
+            if (component instanceof GameCharacterFrame frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 frame.isActive(player != null && player.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();

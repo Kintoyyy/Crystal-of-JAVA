@@ -4,6 +4,7 @@ import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Layouts.CharacterLayout;
 import Components.Menu.BattleCharacterMenu;
+import Components.Menu.BattleSkillMenu;
 import Components.Menu.SkillMenu;
 import Components.Menu.StatsBarMenu;
 import Enemies.Kai;
@@ -22,12 +23,15 @@ public class BattleView extends View { // Extend JComponent instead of View
         handler.getGameState().getEnemies().add(new Kai());
 
         components.init(
-                new SkillMenu(handler)
-                        .setLocation(20, 600),
+//                new SkillMenu(handler)
+//                        .setLocation(20, 600),
 
                 new CharacterLayout(handler)
                         .setLocation(100, 300)
                         .scale(6),
+
+                new BattleSkillMenu(handler)
+                        .setLocation(600, 600),
 
                 new PauseButton()
                         .setAction(new CallBackAction() {

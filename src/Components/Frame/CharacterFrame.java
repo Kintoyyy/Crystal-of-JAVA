@@ -26,9 +26,9 @@ public class CharacterFrame extends Frame {
         hideText();
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
 
-        buttonSheet[0] = sheet.crop(105, 0, 1, 1); // default
-        buttonSheet[1] = sheet.crop(105, 0, 1, 1); // hovered
-        buttonSheet[2] = sheet.crop(105, 0, 28, 28);  // pressed
+        buttonSheet[0] = sheet.crop(106, 0, 1, 1); // default
+        buttonSheet[1] = sheet.crop(106, 0, 1, 1); // hovered
+        buttonSheet[2] = sheet.crop(106, 0, 28, 28);  // pressed
 
         setDimensions(28, 28);
         scale(3);

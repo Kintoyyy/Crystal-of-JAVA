@@ -26,6 +26,7 @@ public class SkillMenu extends Menu {
         childComponents.clear(); // Clear existing components before re-adding
 
         for (Skill skill : skills) {
+
             RoundedButton frame = (RoundedButton) new RoundedButton(skill.getName())
                     .hideText()
                     .setAction(() -> {
@@ -52,32 +53,14 @@ public class SkillMenu extends Menu {
     @Override
     public void render(Graphics g) {
         int xOffset = (int) this.x;
-        int yOffset = (int) this.y;
 
-        if (skills.size() == 4) {
-            // Arrange in a 2x2 grid if there are exactly 4 skills
-            int col = 0, row = 0;
-            for (Component component : childComponents) {
-                if (component instanceof RoundedButton frame) {
-                    frame.setLocation(xOffset + col * (200 + BUTTON_SPACING),
-                            yOffset + row * (60 + BUTTON_SPACING));
-                    col++;
-                    if (col >= 2) { // Move to the next row after two columns
-                        col = 0;
-                        row++;
-                    }
-                }
-                component.render(g);
+        // Default to a single row layout
+        for (Component component : childComponents) {
+            if (component instanceof RoundedButton frame) {
+                frame.setLocation(xOffset, (int) this.y);
+                xOffset += frame.getWidth() + BUTTON_SPACING;
             }
-        } else {
-            // Default to a single row layout
-            for (Component component : childComponents) {
-                if (component instanceof RoundedButton frame) {
-                    frame.setLocation(xOffset, yOffset);
-                    xOffset += frame.getWidth() + BUTTON_SPACING;
-                }
-                component.render(g);
-            }
+            component.render(g);
         }
     }
 

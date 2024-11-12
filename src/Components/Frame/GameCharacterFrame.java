@@ -12,12 +12,12 @@ import java.awt.image.BufferedImage;
 
 import static enums.ComponentStateEnums.*;
 
-public class CharacterMenuFrame extends Frame {
+public class GameCharacterFrame extends Frame {
     private final BufferedImage playerProfile;
     private final Text tooltip;
     private final Character player;
 
-    public CharacterMenuFrame(Character player) {
+    public GameCharacterFrame(Character player) {
         super("Character Frame");
         hideText();
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Game_UI.png"));

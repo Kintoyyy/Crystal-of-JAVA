@@ -8,6 +8,8 @@ public abstract class Skill {
     private final int damage;
     private final int cost;
     private Character character;
+    private String description;
+    protected String imagePath;
 
     public Skill(String name,String description, int cost, int damage, String type) {
         this.name = name;

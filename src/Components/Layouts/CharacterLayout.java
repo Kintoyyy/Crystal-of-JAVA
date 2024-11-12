@@ -3,7 +3,6 @@ package Components.Layouts;
 import Characters.Character;
 import Components.Component;
 import Components.Frame.CharacterFrame;
-import Components.Frame.CharacterMenuFrame;
 import Game.Handler;
 
 import java.awt.*;

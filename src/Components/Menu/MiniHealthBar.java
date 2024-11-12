@@ -30,10 +30,10 @@ public class MiniHealthBar extends Menu {
         // Initialize sprite sheet and UI components
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
 
-        frame = sheet.crop(83, 0, 21, 10);
-        healthBar = sheet.crop(84, 11, 19, 2);
-        manaBar = sheet.crop(84, 13, 19, 2);
-        defenseBar = sheet.crop(84, 15, 19, 2);
+        frame = sheet.crop(84, 0, 21, 10);
+        healthBar = sheet.crop(85, 11, 19, 2);
+        manaBar = sheet.crop(85, 13, 19, 2);
+        defenseBar = sheet.crop(85, 15, 19, 2);
     }
 
     @Override
@@ -60,7 +60,6 @@ public class MiniHealthBar extends Menu {
         g.drawString(String.valueOf(mana), bounds.x, bounds.y + 50);
         g.drawString(String.valueOf(defense), bounds.x, bounds.y + 60);
 
-        System.out.println(x + " " + y + " " + bounds.x + " " + bounds.y);
         // Frame rendering
         g.drawImage(frame, bounds.x, bounds.y, width, height, null);
 //        this.renderChildren(g);

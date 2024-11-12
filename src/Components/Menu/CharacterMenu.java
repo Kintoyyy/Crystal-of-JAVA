@@ -1,7 +1,7 @@
 package Components.Menu;
 
 import Components.Component;
-import Components.Frame.CharacterMenuFrame;
+import Components.Frame.GameCharacterFrame;
 import Characters.Character;
 import Game.Handler;
 
@@ -30,7 +30,7 @@ public class CharacterMenu extends Menu {
             // Define a final variable to capture the index for lambda usage
             final int index = i;
 
-            CharacterMenuFrame frame = (CharacterMenuFrame) new CharacterMenuFrame(character)
+            GameCharacterFrame frame = (GameCharacterFrame) new GameCharacterFrame(character)
                     .setAction(() -> {
                         currentCharacter = character;
                         System.out.println("Selected: " + currentCharacter.getName());
@@ -42,7 +42,7 @@ public class CharacterMenu extends Menu {
 
     private void ensureMinimumFrames(int minFrames) {
         while (childComponents.size() < minFrames) {
-            childComponents.add(new CharacterMenuFrame(null));
+            childComponents.add(new GameCharacterFrame(null));
         }
     }
 
@@ -57,7 +57,7 @@ public class CharacterMenu extends Menu {
         int xOffset = (int) this.x;
 
         for (Component component : childComponents) {
-            if (component instanceof CharacterMenuFrame frame) {
+            if (component instanceof GameCharacterFrame frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 frame.isActive(player != null && player.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();
