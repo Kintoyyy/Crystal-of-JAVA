@@ -56,9 +56,9 @@ public class MiniHealthBar extends Menu {
             renderHealthManaBars(g);
         }
 
-        g.drawString(String.valueOf(health), bounds.x, bounds.y + 40);
-        g.drawString(String.valueOf(mana), bounds.x, bounds.y + 50);
-        g.drawString(String.valueOf(defense), bounds.x, bounds.y + 60);
+        g.drawString("Health: " + health, bounds.x, bounds.y + 40);
+        g.drawString("Mana: " + mana, bounds.x, bounds.y + 50);
+        g.drawString("Defense: " + defense, bounds.x, bounds.y + 60);
 
         // Frame rendering
         g.drawImage(frame, bounds.x, bounds.y, width, height, null);
@@ -76,9 +76,9 @@ public class MiniHealthBar extends Menu {
         int defenseWidth = (int) ((defense / maxDefense) * (19 * scale));
 
         // Draw health and mana bars
-        g.drawImage(healthBar, bounds.x + (1 * scale), bounds.y + (1 * scale), healthWidth, 2 * scale, null);
-        g.drawImage(manaBar, bounds.x + (1 * scale), bounds.y + (4 * scale), manaWidth, 2 * scale, null);
-        g.drawImage(defenseBar, bounds.x + (1 * scale), bounds.y + (7 * scale), defenseWidth, 2 * scale, null);
+        g.drawImage(healthBar, bounds.x + (scale), bounds.y + (scale), healthWidth, 2 * scale, null);
+        g.drawImage(manaBar, bounds.x + (scale), bounds.y + (4 * scale), manaWidth, 2 * scale, null);
+        g.drawImage(defenseBar, bounds.x + (scale), bounds.y + (7 * scale), defenseWidth, 2 * scale, null);
     }
 
     @Override

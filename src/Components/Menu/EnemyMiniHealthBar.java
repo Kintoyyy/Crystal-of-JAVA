@@ -50,9 +50,8 @@ public class EnemyMiniHealthBar extends Menu {
             renderHealthManaBars(g);
         }
 
-        g.drawString(String.valueOf(health), bounds.x, bounds.y + 40);
-        g.drawString(String.valueOf(defense), bounds.x, bounds.y + 60);
-
+        g.drawString("Health: " + health, bounds.x, bounds.y + height + 10);
+        g.drawString("Defence: " + defense, bounds.x, bounds.y  + height + 20);
         // Frame rendering
         g.drawImage(frame, bounds.x, bounds.y, width, height, null);
 //        this.renderChildren(g);

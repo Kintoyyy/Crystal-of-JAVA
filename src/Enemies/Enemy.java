@@ -110,4 +110,7 @@ public abstract class Enemy {
     }
 
 
+    public void takeDamage(int damage) {
+        health.takeDamage(damage);
+    }
 }

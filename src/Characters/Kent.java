@@ -21,6 +21,7 @@ public class Kent extends Character {
         super("Kent", 1, new Health(120), new Mana(40), new AttackPower(15), new Defense(10), new ArrayList<>());
 
 
+
         this.addSkill(new PowerStrike());
         this.addSkill(new ShieldBlock());
         this.addSkill(new WarCry());

@@ -2,6 +2,7 @@ package Characters;
 
 import Animations.PlayerAnimation;
 import Characters.Stats.*;
+import Skills.Basic;
 import Utils.SpriteSheet;
 import Skills.Skill;
 import Utils.ImageUtils;
@@ -41,6 +42,8 @@ public abstract class Character {
         this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         this.experience = 0;
+
+        this.addSkill(new Basic());
     }
 
     public void addSkill(Skill skill) {

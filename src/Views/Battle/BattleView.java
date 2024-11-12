@@ -25,16 +25,18 @@ public class BattleView extends View {
                         .setLocation(100, 300)
                         .scale(6),
 
+                new BattleSkillMenu(handler)
+                        .setLocation(500, 650),
+
 //                new EnemyLayout(handler)
 //                        .setLocation(100, 100)
 //                        .showBounds()
 //                        .scale(6),
 
-                new EnemyFrame(handler.getGameState().getEnemies().get(0))
+                new EnemyFrame(handler.getGameState().getEnemies().getFirst())
                         .setLocation(700, 300),
 
-                new BattleSkillMenu(handler)
-                        .setLocation(600, 650),
+
 
                 new PauseButton()
                         .setAction(new CallBackAction() {
@@ -58,11 +60,7 @@ public class BattleView extends View {
 
     @Override
     public void tick() {
-
-
-
         components.tick();
-
     }
 
     @Override

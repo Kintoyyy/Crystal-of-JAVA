@@ -1,6 +1,7 @@
 package Skills;
 
 import Characters.Character;
+import Enemies.Enemy;
 
 public abstract class Skill {
     private final String name;
@@ -39,4 +40,17 @@ public abstract class Skill {
     }
 
     public abstract void useSkill();
+
+    public void attack(Enemy enemy) {
+        if(!character.getMana().hasEnoughMana(cost)) {
+            System.out.println("Not enough mana");
+            return;
+        }
+
+        character.getMana().useMana(cost);
+
+        enemy.takeDamage(damage);
+
+        enemy.attack(character);
+    }
 }

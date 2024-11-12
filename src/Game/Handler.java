@@ -15,6 +15,7 @@ public class Handler {
     private ViewManager viewManager;
     private GameState gameState;
 
+
     public Handler(Game game) {
         this.game = game;
     }
