@@ -19,6 +19,7 @@ public abstract class Character {
     protected Mana mana;
     protected Energy energy;
     protected int experience;
+    protected double dodgeRate = 0.0;
 
     protected Defense defense;
     protected AttackPower attackPower;

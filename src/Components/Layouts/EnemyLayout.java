@@ -28,7 +28,7 @@ public class EnemyLayout extends Layout {
             final int index = i; // Capture index for lambda use
 
             EnemyButton frame = (EnemyButton) new EnemyButton(enemy)
-                    .setAction(() -> handler.getGameState().setPlayerByIndex(index));
+                    .setAction(() -> System.out.println("Enemy " + enemy.getName() + " clicked"));
             childComponents.add(frame);
         }
     }

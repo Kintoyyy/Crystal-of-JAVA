@@ -2,29 +2,31 @@ package Skills;
 
 import Characters.Character;
 import Enemies.Enemy;
+import Game.BattleManager;
 
 public abstract class Skill {
     private final String name;
-    private final String type;
+    private final SkillType skillType;
     protected final double damage;
     private final int cost;
     protected Character player;
     private String description;
     protected String imagePath;
-    protected int cooldownTurns = 0;
-    protected int effectDurationTurns = 0;
+    private int cooldownTurns = 0;
+    private int effectDurationTurns = 0;
+    protected BattleManager battleManager;
 
     protected Enemy enemy;
 
-    public Skill(String name,String description, int cost, double damage, String type) {
-        this(name, description, cost, damage, type, 0, 0);
+    public Skill(String name,String description, int cost, double damage, SkillType skillType) {
+        this(name, description, cost, damage, skillType, 0, 0);
     }
 
-    public Skill(String name,String description, int cost, double damage, String type, int cooldownTurns, int effectDurationTurns) {
+    public Skill(String name, String description, int cost, double damage, SkillType skillType, int cooldownTurns, int effectDurationTurns) {
         this.name = name;
         this.cost = cost;
         this.damage = damage;
-        this.type = type;
+        this.skillType = skillType;
         this.cooldownTurns = cooldownTurns;
         this.effectDurationTurns = effectDurationTurns;
     }
@@ -45,11 +47,14 @@ public abstract class Skill {
         return damage;
     }
 
-    public String getType() {
-        return type;
+    public SkillType getType() {
+        return skillType;
     }
 
-
+    // battleManager.getLastEnemy()
+    // battleManager.attackLowest()
+    // battleManager.attackAll()
+    // etc
     public abstract void useSkill();
 
     public void attack(Enemy enemy) {

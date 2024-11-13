@@ -1,5 +1,6 @@
 package Skills.Warrior;
 
+import Skills.SkillType;
 import Skills.Skill;
 
 public class Taunt extends Skill {
@@ -8,10 +9,10 @@ public class Taunt extends Skill {
     private static final int cost = 10;
     private static final int damage = 20;
     private static final String description = "Forces enemies to target Warrior for 1 turn";
-    private static final String type = "warrior";
+    private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
 
     public Taunt() {
-        super(name, description, cost, damage, type);
+        super(name, description, cost, damage, SKILL_TYPE);
     }
 
     @Override

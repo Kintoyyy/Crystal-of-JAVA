@@ -6,22 +6,28 @@ import Enemies.Enemy;
 import Utils.Timer;
 import World.World;
 import Item.Item;
+import enums.ViewEnums;
 
 import java.util.ArrayList;
 
 public class GameState {
     private ArrayList<Character> characters = new ArrayList<>(4);
     private int currentCharacterIndex = 0;
+
+    private ArrayList<Enemy> enemies = new ArrayList<>();
+
     private World world;
     private ArrayList<Item> items = new ArrayList<>(10);
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+
     private Handler handler;
     private int seconds = 0;
     private Timer timer = new Timer();
 
+    private boolean isBattleActive = false;
+    private TurnState turnState = TurnState.PLAYER;
+
     public GameState(Handler handler) {
         this.handler = handler;
-
 
         //initialize available characters
         this.characters.add(new Kent());
@@ -47,6 +53,19 @@ public class GameState {
         }
     }
 
+    public void newBattle( ArrayList<Enemy> enemies) {
+        handler.getViewManager().setView(ViewEnums.BATTLE);
+        this.enemies = enemies;
+        isBattleActive = true;
+    }
+
+    public void updateTurnState() {
+        if (turnState == TurnState.PLAYER) {
+            turnState = TurnState.ENEMY;
+        } else {
+            turnState = TurnState.PLAYER;
+        }
+    }
 
     public Character getPlayer() {
         return this.characters.get(currentCharacterIndex);

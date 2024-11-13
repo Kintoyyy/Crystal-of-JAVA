@@ -4,8 +4,10 @@ import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Button.EnemyButton;
 import Components.Layouts.CharacterLayout;
+import Components.Layouts.EnemyLayout;
 import Components.Menu.SkillMenu;
 import Enemies.Kai;
+import Enemies.Orc;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
@@ -14,12 +16,16 @@ import enums.ViewEnums;
 import java.awt.*;
 
 public class BattleView extends View {
+
     public BattleView(ViewManager viewManager) {
         super(viewManager);
-
         handler.getGameState().getEnemies().add(new Kai());
+        handler.getGameState().getEnemies().add(new Orc());
+//
+        handler.getGameState().newBattle(handler.getGameState().getEnemies());
 
         components.init(
+
                 new CharacterLayout(handler)
                         .setLocation(100, 300)
                         .scale(6),
@@ -27,14 +33,10 @@ public class BattleView extends View {
                 new SkillMenu(handler)
                         .setLocation(500, 650),
 
-//                new EnemyLayout(handler)
-//                        .setLocation(100, 100)
-//                        .showBounds()
-//                        .scale(6),
-
-                new EnemyButton(handler.getGameState().getEnemies().getFirst())
-                        .setLocation(700, 300),
-
+                new EnemyLayout(handler)
+                        .setLocation(700, 300)
+                        .showBounds()
+                        .scale(6),
 
                 new PauseButton()
                         .setAction(new CallBackAction() {
@@ -59,15 +61,17 @@ public class BattleView extends View {
     @Override
     public void tick() {
 
+        if (handler.getGameState().getEnemies().isEmpty()) {
+            viewManager.setView(ViewEnums.GAME);
+        }
+
         components.tick();
     }
 
     @Override
     public void render(Graphics g) {
         // return to the game view if there are no enemies left
-        if(handler.getGameState().getEnemies().isEmpty()) {
-            viewManager.setView(ViewEnums.GAME);
-        }
+
 
         components.render(g);
 

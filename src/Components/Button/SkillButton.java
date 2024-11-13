@@ -20,7 +20,7 @@ public class SkillButton extends Button {
         buttonSheet[0] = sheet.crop(56, 0, 28, 28); // default
         buttonSheet[1] = sheet.crop(28, 0, 28, 28); // hovered
         buttonSheet[2] = sheet.crop(0, 0, 28, 28);  // pressed
-        skillImage = sheet.crop(135, 0, 18, 18);
+        skillImage = sheet.crop(164, 0, 18, 18);
 
         setDimensions(28, 28);
         scale(3);

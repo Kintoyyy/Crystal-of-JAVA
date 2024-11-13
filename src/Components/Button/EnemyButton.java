@@ -18,9 +18,9 @@ public class EnemyButton extends Button {
         hideText();
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
 
-        buttonSheet[0] = sheet.crop(106, 0, 1, 1); // Default
-        buttonSheet[1] = sheet.crop(106, 0, 1, 1); // Hovered
-        buttonSheet[2] = sheet.crop(106, 0, 28, 28);  // Pressed
+        buttonSheet[0] = sheet.crop(135, 0, 1, 1); // Default
+        buttonSheet[1] = sheet.crop(135, 0, 1, 1); // Hovered
+        buttonSheet[2] = sheet.crop(135, 0, 28, 28);  // Pressed
 
         setDimensions(28, 28);
         scale(3);
