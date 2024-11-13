@@ -18,10 +18,5 @@ public class PowerStrike extends Skill {
     @Override
     public void useSkill() {
 
-        battleManager.attackCurrentEnemy();
-
-//        enemy.takeDamage(player.getAttackPower() * damage);
-//
-//        enemy.attack(player);
     }
 }

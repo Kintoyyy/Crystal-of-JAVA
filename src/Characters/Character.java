@@ -25,7 +25,7 @@ public abstract class Character {
     protected AttackPower attackPower;
     protected double dodgeChance = 0.0;
 
-    protected ArrayList<Skill> skills = new ArrayList<>(4);
+    protected ArrayList<Skill> skills;
     protected SpriteSheet spriteSheet;
     private PlayerAnimation animation;
     private BufferedImage playerProfile;
@@ -52,6 +52,14 @@ public abstract class Character {
         if( skill == null || skills.contains(skill)) return;
         skill.setCharacter(this);
         skills.add(skill);
+    }
+
+    public double getDodgeRate() {
+        return dodgeRate;
+    }
+
+    public void setDodgeRate(double dodgeRate) {
+        this.dodgeRate = dodgeRate;
     }
 
     public Defense getDefense() {

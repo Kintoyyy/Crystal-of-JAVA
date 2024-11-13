@@ -38,7 +38,7 @@ public class CharacterCard extends Card {
     public void tick() {
         super.tick();
 
-        player = handler.getGameState().getPlayer();
+        player = handler.getGameState().getCharacterManger().getPlayer();
         if (player != null) {
             playerProfile = player.getProfile();
             health = player.getHealth().getHealth();

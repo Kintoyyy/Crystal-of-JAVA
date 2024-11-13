@@ -35,6 +35,14 @@ public abstract class Skill {
         return name;
     }
 
+    public int getCooldownTurns() {
+        return cooldownTurns;
+    }
+
+    public int getEffectDurationTurns() {
+        return effectDurationTurns;
+    }
+
     public void setCharacter(Character player) {
         this.player = player;
     }
@@ -57,11 +65,12 @@ public abstract class Skill {
     // etc
     public abstract void useSkill();
 
-    public void attack(Enemy enemy) {
-        this.enemy = enemy;
+    public void attack(BattleManager battleManager) {
+        this.enemy = battleManager.getCurrentEnemy();
 
         if(checkIfSkillIsAvailable()) {
             useSkill();
+            battleManager.updateTurnState();
         }
     }
 

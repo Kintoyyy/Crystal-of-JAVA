@@ -1,5 +1,6 @@
 package Components.Menu;
 
+import Characters.CharacterManager;
 import Components.Component;
 import Components.Button.CharacterSelector;
 import Characters.Character;
@@ -9,32 +10,24 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CharacterMenu extends Menu {
-    private Character currentCharacter;
-    private final ArrayList<Character> characters;
-    private final Handler handler;
+    private final CharacterManager characterManager;
 
     public CharacterMenu(Handler handler) {
         super();
-        this.handler = handler;
-        this.characters = handler.getGameState().getCharacters();
-
-        // Create frames for each character
+        characterManager = handler.getGameState().getCharacterManger();
         initCharacterFrames();
-        ensureMinimumFrames(4);  // Ensures we always have at least 4 frames
+        ensureMinimumFrames(4);
     }
 
     private void initCharacterFrames() {
-        for (int i = 0; i < characters.size(); i++) {
-            Character character = characters.get(i);
+        for (int i = 0; i < characterManager.getSize(); i++) {
+            Character character = characterManager.getCharacterByIndex(i);
 
-            // Define a final variable to capture the index for lambda usage
             final int index = i;
 
             CharacterSelector frame = (CharacterSelector) new CharacterSelector(character)
                     .setAction(() -> {
-                        currentCharacter = character;
-                        System.out.println("Selected: " + currentCharacter.getName());
-                        handler.getGameState().setPlayerByIndex(index);
+                        characterManager.setPlayer(index);
                     });
             childComponents.add(frame);
         }
@@ -53,7 +46,7 @@ public class CharacterMenu extends Menu {
 
     @Override
     public void render(Graphics g) {
-        Character player = handler.getGameState().getPlayer();
+        Character player = characterManager.getPlayer();
         int xOffset = (int) this.x;
 
         for (Component component : childComponents) {

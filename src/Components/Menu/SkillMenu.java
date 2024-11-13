@@ -3,6 +3,7 @@ package Components.Menu;
 import Characters.Character;
 import Components.Component;
 import Components.Button.SkillButton;
+import Game.BattleManager;
 import Game.Handler;
 import Skills.Skill;
 
@@ -11,11 +12,11 @@ import java.util.ArrayList;
 
 public class SkillMenu extends Menu {
     private ArrayList<Skill> skills;
-    private final Handler handler;
+    private final BattleManager battleManager;
 
-    public SkillMenu(Handler handler) {
+    public SkillMenu(BattleManager battleManager) {
         super();
-        this.handler = handler;
+        this.battleManager = battleManager;
         this.skills = new ArrayList<>();
         scale(6);
         initCharacterFrames();
@@ -29,7 +30,7 @@ public class SkillMenu extends Menu {
         for (Skill skill : skills) {
             SkillButton frame = (SkillButton) new SkillButton(skill)
                     .setAction(() -> {
-                        skill.attack(handler.getGameState().getEnemies().getFirst());
+                        skill.attack(battleManager);
                     });
             childComponents.add(frame);
         }
@@ -38,7 +39,7 @@ public class SkillMenu extends Menu {
     @Override
     public void tick() {
         // Get the updated list of skills
-        ArrayList<Skill> updatedSkills = handler.getGameState().getPlayer().getSkills();
+        ArrayList<Skill> updatedSkills = battleManager.getPlayer().getSkills();
 
         // Check if skills have changed
         if (!skills.equals(updatedSkills)) {
@@ -53,7 +54,7 @@ public class SkillMenu extends Menu {
 
     @Override
     public void render(Graphics g) {
-        Character player = handler.getGameState().getPlayer();
+        Character player = battleManager.getPlayer();
         int xOffset = (int) this.x;
 
         // Render the skill frames

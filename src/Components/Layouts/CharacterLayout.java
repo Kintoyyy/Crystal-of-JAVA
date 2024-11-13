@@ -1,38 +1,30 @@
 package Components.Layouts;
 
 import Characters.Character;
+import Characters.CharacterManager;
 import Components.Component;
 import Components.Button.CharacterButton;
-import Game.Handler;
+import Game.BattleManager;
 
 import java.awt.*;
-import java.util.ArrayList;
 
-public class CharacterLayout extends Layout{
-    private Characters.Character currentCharacter;
-    private final ArrayList<Character> characters;
-    private final Handler handler;
+public class CharacterLayout extends Layout {
+    private final CharacterManager characters;
 
-    public CharacterLayout(Handler handler) {
+    public CharacterLayout(BattleManager battleManager) {
         super();
-        this.handler = handler;
-        this.characters = handler.getGameState().getCharacters();
-
+        characters = battleManager.getCharacterManager();
         initCharacterFrames();
     }
 
     private void initCharacterFrames() {
-        for (int i = 0; i < characters.size(); i++) {
-            Character character = characters.get(i);
-
+        for (int i = 0; i < characters.getCharacters().size(); i++) {
+            Character character = characters.getCharacters().get(i);
             // Define a final variable to capture the index for lambda usage
             final int index = i;
-
             CharacterButton frame = (CharacterButton) new CharacterButton(character)
                     .setAction(() -> {
-                        currentCharacter = character;
-                        System.out.println("Selected: " + currentCharacter.getName());
-                        handler.getGameState().setPlayerByIndex(index);
+                        characters.setPlayerByIndex(index);
                     });
             childComponents.add(frame);
         }
@@ -46,7 +38,7 @@ public class CharacterLayout extends Layout{
 
     @Override
     public void render(Graphics g) {
-        Character player = handler.getGameState().getPlayer();
+        Character player = characters.getPlayer();
         int xOffset = (int) this.x;
 
         for (Component component : childComponents) {

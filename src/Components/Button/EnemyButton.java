@@ -8,6 +8,8 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import static enums.ComponentStateEnums.PRESSED;
+
 
 public class EnemyButton extends Button {
     private final Enemy enemy;
@@ -64,5 +66,9 @@ public class EnemyButton extends Button {
 
     public Enemy getEnemy() {
         return enemy;
+    }
+
+    public void isActive(boolean b) {
+        state = b ? PRESSED : state;
     }
 }

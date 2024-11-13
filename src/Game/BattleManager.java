@@ -1,30 +1,38 @@
 package Game;
 
 import Characters.Character;
+import Characters.CharacterManager;
 import Enemies.Enemy;
+import Enemies.EnemyManager;
+import Utils.Timer;
 import enums.ViewEnums;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class BattleManager {
+    private final CharacterManager characterManager;
+    private EnemyManager enemyManager;
+
     private boolean isBattleActive = false;
     private TurnState turnState = TurnState.PLAYER;
-    private ArrayList<Character> characters;
-    private int currentCharacterIndex = 0;
-    private ArrayList<Enemy> enemies;
-    private int currentEnemyIndex = 0;
+
     private Handler handler;
 
-    public BattleManager(Handler handler, ArrayList<Character> characters) {
+    private int seconds = 0;
+    private Timer timer = new Timer();
+
+    public BattleManager(Handler handler) {
         this.handler = handler;
-        this.characters = characters;
-        enemies = null;
+        characterManager = handler.getGameState().getCharacterManger();
+
+        timer = new Timer().setDelay(60).setAction(() -> System.out.println("Timer 1 Action"));
+
+        timer.start();
     }
 
-    public void newBattle( ArrayList<Enemy> enemies) {
+    public void newBattle(EnemyManager enemyManager) {
+        this.enemyManager = enemyManager;
         handler.getViewManager().setView(ViewEnums.BATTLE);
-        this.enemies = enemies;
         isBattleActive = true;
     }
 
@@ -38,20 +46,18 @@ public class BattleManager {
 
     public void tick() {
         if (turnState == TurnState.PLAYER) {
-            for (Character character : characters) {
 
-            }
         } else {
-
+            timer.update();
         }
     }
 
-    public ArrayList<Character> getCharacters() {
-        return characters;
+    public Character getPlayer() {
+        return characterManager.getPlayer();
     }
 
-    public ArrayList<Enemy> getEnemies() {
-        return enemies;
+    public ArrayList<Character> getCharacters() {
+        return characterManager.getCharacters();
     }
 
     public void attackCurrentEnemy() {
@@ -66,25 +72,20 @@ public class BattleManager {
         // Get the current player
     }
 
-
     public boolean isBattleActive() {
         return isBattleActive;
     }
 
-    public int getCurrentCharacterIndex() {
-        return currentCharacterIndex;
+    public CharacterManager getCharacterManager() {
+        return characterManager;
     }
 
-    public void setCurrentCharacterIndex(int currentCharacterIndex) {
-        this.currentCharacterIndex = currentCharacterIndex;
+    public EnemyManager getEnemyManager() {
+        return enemyManager;
     }
 
-    public int getCurrentEnemyIndex() {
-        return currentEnemyIndex;
-    }
-
-    public void setCurrentEnemyIndex(int currentEnemyIndex) {
-        this.currentEnemyIndex = currentEnemyIndex;
+    public Enemy getCurrentEnemy() {
+        return enemyManager.getCurrentEnemy();
     }
 }
 
