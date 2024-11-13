@@ -5,4 +5,5 @@ public enum ComponentStateEnums {
     PRESSED,
     HOVERED,
     DRAGGED,
+    ACTIVE,
 }

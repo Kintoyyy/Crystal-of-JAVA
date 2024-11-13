@@ -1,6 +1,6 @@
 package Components;
 
-import enums.*;
+import enums.ComponentStateEnums;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,52 +10,40 @@ import java.util.Arrays;
 import static enums.ComponentStateEnums.*;
 
 public abstract class Component {
-
-    protected float x;
-    protected float y;
-    protected int width;
-    protected int height;
+    protected float x = 0;
+    protected float y = 0;
+    protected int width = 0;
+    protected int height = 0;
+    protected int scale = 1;
     protected boolean showBounds = false;
+    protected boolean moved = false;
+
     private Component parent;
-    private final ArrayList<Component> childComponents;
-
-    protected Rectangle bounds;
+    protected ArrayList<Component> childComponents = new ArrayList<>();
+    protected Rectangle bounds = new Rectangle();
     protected ComponentStateEnums state = IDLE;
-    protected boolean hovering = false;
-    protected boolean moved;
+    private String text;
 
-    public Component(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        bounds = new Rectangle(x, y, width, height);
-        childComponents = new ArrayList<Component>();
+    public Component() {
         updateBounds();
     }
 
-    abstract public void tick();
-
-    abstract public void render(Graphics g);
-
+    public abstract void tick();
+    public abstract void render(Graphics g);
     public abstract void onClick();
 
     public void updateBounds() {
         int parentX = parent != null ? (int) parent.x : 0;
         int parentY = parent != null ? (int) parent.y : 0;
-        bounds.x = parentX + (int) this.x;
-        bounds.y = parentY + (int) this.y;
-        bounds.width = this.width;
-        bounds.height = this.height;
+        bounds.setBounds(parentX + (int) x, parentY + (int) y, width, height);
     }
 
     public void onMouseMove(MouseEvent e) {
-        moved = true;
-        if (bounds.contains(e.getX(), e.getY())) {
-            state = HOVERED;
-        } else {
-            state = IDLE;
-            moved = false;
+        moved = bounds.contains(e.getX(), e.getY());
+        state = moved ? HOVERED : IDLE;
+
+        for (Component component : childComponents) {
+            component.onMouseMove(e);
         }
     }
 
@@ -63,6 +51,9 @@ public abstract class Component {
         if ((state == HOVERED || moved) && e.getButton() == MouseEvent.BUTTON1) {
             state = PRESSED;
             onClick();
+        }
+        for (Component component : childComponents) {
+            component.onMouseRelease(e);
         }
     }
 
@@ -80,32 +71,33 @@ public abstract class Component {
         return this;
     }
 
-    // Set the parent component
     public Component setParent(Component parent) {
         this.parent = parent;
-        this.height = parent.height;
-        this.width = parent.width;
+//        setDimensions(parent.width, parent.height);
+
         updateBounds();
         return this;
     }
 
-    // Add child components
-    public Component children(Component... componentsArray) {
+    public void addChildren(Component... componentsArray) {
         childComponents.addAll(Arrays.asList(componentsArray));
-        return this;
     }
 
-    // Render child components
     public void renderChildren(Graphics g) {
         for (Component component : childComponents) {
             component.render(g);
         }
     }
 
-    // Tick child components
+    public void onClickChildren() {
+        for (Component component : childComponents) {
+            component.onClick();
+        }
+    }
+
     public void tickChildren() {
         for (Component component : childComponents) {
-            component.setDimensions(bounds.width - 40, bounds.height - 40);
+//            component.setDimensions(bounds.width - 40, bounds.height - 40);
             component.tick();
         }
     }
@@ -115,4 +107,21 @@ public abstract class Component {
         return this;
     }
 
+    public Component scale(int i) {
+        this.scale = i;
+        setDimensions(width * i, height * i);
+        return this;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    protected int getHeight() {
+        return height;
+    }
+
+    public String getText() {
+        return text;
+    }
 }

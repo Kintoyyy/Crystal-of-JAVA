@@ -10,36 +10,34 @@ import java.util.Arrays;
 
 public class ComponentManager {
     private Handler handler;
-    private final ArrayList<Component> components;
+    private final ArrayList<Component> components = new ArrayList<>();
 
     public ComponentManager(ViewManager viewManager) {
-        this.setHandler(viewManager.getHandler());
-        components = new ArrayList<Component>();
+        setHandler(viewManager.getHandler());
         handler.getInputMouseListener().setComponentManager(this);
     }
 
     public void tick() {
-        for (Component o : components) {
-            o.tick();
+        for (Component component : components) {
+            component.tick();
         }
     }
 
     public void render(Graphics g) {
         for (Component component : components) {
             component.render(g);
-            component.showBounds();
         }
     }
 
     public void onMouseMove(MouseEvent e) {
-        for (Component o : components) {
-            o.onMouseMove(e);
+        for (Component component : components) {
+            component.onMouseMove(e);
         }
     }
 
     public void onMouseRelease(MouseEvent e) {
-        for (Component o : components) {
-            o.onMouseRelease(e);
+        for (Component component : components) {
+            component.onMouseRelease(e);
         }
     }
 

@@ -2,8 +2,9 @@ package World;
 
 import Assets.*;
 
+import Entities.EntityManager;
+import Entities.Player;
 import Utils.DebugMode;
-import World.Tile;
 import Game.Handler;
 import org.w3c.dom.*;
 
@@ -23,6 +24,7 @@ public class World {
 
     public World(Handler handler, String path) {
         this.handler = handler;
+
         entityManager = new EntityManager(handler, new Player(handler, 0, 0));
 
         loadWorld(path);
@@ -105,7 +107,6 @@ public class World {
             NodeList map = doc.getElementsByTagName("map");
             if (map.getLength() > 0) {
                 Element mapElement = (Element) map.item(0);
-                System.out.println("TEST");
                 // Initialize TileSet
                 NodeList tilesets = mapElement.getElementsByTagName("tileset");
                 tileSet = new TileSet(tilesets);

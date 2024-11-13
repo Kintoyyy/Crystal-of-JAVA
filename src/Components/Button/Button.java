@@ -1,12 +1,11 @@
 package Components.Button;
 
 import Components.Component;
-import Components.Text;
+import Components.Text.Text;
 import Game.CallBackAction;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import enums.Alignment;
-import enums.ComponentStateEnums;
 import fonts.SuperPixelFont;
 
 import java.awt.*;
@@ -20,7 +19,10 @@ public class Button extends Component {
     private final Text text;
 
     public Button(String textContent) {
-        super(0, 0, 200, 60);
+        super();
+
+        this.width = 200;
+        this.height = 60;
 
         buttonSheet[0] = sheet.crop(0, 0, 47, 14);
         buttonSheet[1] = sheet.crop(48, 0, 47, 14);
@@ -32,6 +34,11 @@ public class Button extends Component {
                 .setColor(new Color(184, 111, 80))
                 .setParent(this)
                 .setDimensions(this.width, this.height);
+    }
+
+    public Button setButtonSheet(BufferedImage[] buttonSheet) {
+        this.buttonSheet = buttonSheet;
+        return this;
     }
 
     public Button setAction(CallBackAction clicker) {
@@ -76,7 +83,7 @@ public class Button extends Component {
     @Override
     public void onClick() {
         if (clicker != null) {
-            clicker.onClick();
+            clicker.onAction();
         } else {
             System.out.println("Warning: No action defined for button click.");
         }

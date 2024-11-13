@@ -1,16 +1,16 @@
 package Assets;
 
 import java.awt.AlphaComposite;
-import States.GameState;
+
+import Entities.Player;
+import States.GameStateOld;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import Game.Game;
 import Game.Handler;
 import States.BattleState;
-import States.State;
 
 import World.Tile;
 
@@ -50,17 +50,16 @@ public class HealthBar {
 			if(Player.health <= 0) {
 				BattleState.encounterFlag = true;
 				Player.health = 0;
-				handler.getMouseManager().setUIManager(null);
 				Transition.canStart = false;
 //				Game.flag2 = false;
 				i++;
 				BattleState.switchGameStates = true;
 				
 				if(i > 100) {
-					State.setState(handler.getGame().gameState);
+//					State.setState(handler.getGame().gameState);
 					Player.health = 100;
-					GameState.coins = 0;
-					GameState.xp = 0;
+					GameStateOld.coins = 0;
+					GameStateOld.xp = 0;
 					handler.getGameCamera().setxOffset(0);
 					handler.getGameCamera().setyOffset(0);
 					handler.getWorld().getEntityManager().getPlayer().setX(24 * Tile.TILEWIDTH + 10);
@@ -71,7 +70,7 @@ public class HealthBar {
 				}
 				
 			}
-			healthText.setHealth(Player.health, Player.baseHealth);
+//			healthText.setHealth(Player.health, Player.baseHealth);
 		}
 	}
 	
@@ -92,8 +91,8 @@ public class HealthBar {
 			combinedDamage = Monster.baseHealth - Monster.health;
 			baseHealth = Monster.baseHealth;
 		} else if(type == 1) {
-			combinedDamage = Player.baseHealth - Player.health;
-			baseHealth = Player.baseHealth;
+//			combinedDamage = Player.baseHealth - Player.health;
+//			baseHealth = Player.baseHealth;
 		}
 		
 		Color c = new Color(0, 255, 0);

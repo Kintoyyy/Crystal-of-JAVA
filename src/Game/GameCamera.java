@@ -1,6 +1,6 @@
 package Game;
 
-import Assets.Entity;
+import Entities.Entity;
 import World.Tile;
 
 public class GameCamera {

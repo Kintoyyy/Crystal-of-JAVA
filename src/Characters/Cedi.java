@@ -1,31 +1,31 @@
 package Characters;
 
+import Characters.Stats.AttackPower;
+import Characters.Stats.Defense;
+import Characters.Stats.Health;
+import Characters.Stats.Mana;
+import Skills.*;
+import Skills.Mage.ArcaneShield;
+import Skills.Mage.Fireball;
+import Skills.Mage.FrostBolt;
+import Skills.Warrior.PowerStrike;
+import Skills.Warrior.ShieldBlock;
 import Utils.SpriteSheet;
-import Skills.Basic;
-import Skills.Healing;
-import Skills.Skill;
 import Utils.ImageUtils;
 
 import java.util.ArrayList;
 
 public class Cedi extends Character {
-
-    private String name = "Cedi";
-    private String description = "";
-    private int level = 1;
-    private int health = 100;
-    private int mana = 100;
-    private int baseHealth = 100;
-    private ArrayList<Skill> skills = new ArrayList<>();
-
     public Cedi() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Cedi", 1, 100, 100, 100, new ArrayList<>());
+        super("Cedi", 1, new Health( 800), new Mana( 200), new AttackPower(120),new Defense(10), new ArrayList<>());
+
+        this.addSkill(new Fireball());
+        this.addSkill(new ShieldBlock());
+        this.addSkill(new FrostBolt());
+        this.addSkill(new ArcaneShield());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
-
-        this.skills.add(new Basic());
-        this.skills.add(new Healing());
     }
 
     @Override

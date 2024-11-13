@@ -1,31 +1,32 @@
 package Characters;
 
+import Characters.Stats.AttackPower;
+import Characters.Stats.Defense;
+import Characters.Stats.Health;
+import Characters.Stats.Mana;
+import Skills.*;
+import Skills.Archer.Evasion;
+import Skills.Archer.MultiShot;
+import Skills.Archer.PoisonArrow;
+import Skills.Archer.PrecisionShot;
+import Skills.Warrior.ShieldBlock;
+import Skills.Warrior.WarCry;
 import Utils.SpriteSheet;
-import Skills.Basic;
-import Skills.Healing;
-import Skills.Skill;
 import Utils.ImageUtils;
 
 import java.util.ArrayList;
 
 public class Nathan extends Character {
-
-    private String name = "Nathan";
-    private String description = "";
-    private int level = 1;
-    private int health = 100;
-    private int mana = 100;
-    private int baseHealth = 100;
-    private ArrayList<Skill> skills = new ArrayList<>();
-
     public Nathan() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Nathan", 1, 100, 100, 100, new ArrayList<>());
+        super("Nathan", 1, new Health( 900), new Mana(120),new AttackPower(140), new Defense(15), new ArrayList<>());
+
+        this.addSkill(new PrecisionShot());
+        this.addSkill(new MultiShot());
+        this.addSkill(new PoisonArrow());
+        this.addSkill(new Evasion());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
-
-        this.skills.add(new Basic());
-        this.skills.add(new Healing());
     }
 
     @Override

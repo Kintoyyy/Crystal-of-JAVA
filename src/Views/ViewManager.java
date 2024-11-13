@@ -2,52 +2,81 @@ package Views;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 
-import Components.Component;
-import Components.ComponentManager;
 import Game.Handler;
+import Views.Battle.BattleView;
+import Views.Game.GameView;
+import Views.Menu.MenuView;
+import Views.Overlay.Pause;
+import World.World;
 import enums.ViewEnums;
 
 public class ViewManager {
-    private final HashMap<ViewEnums, View> views = new HashMap<>();
+    private final EnumMap<ViewEnums, View> views = new EnumMap<>(ViewEnums.class);
     private final ArrayList<View> layers = new ArrayList<>();
     private final Handler handler;
-    private ComponentManager componentManager;
+    private final World world;
 
-    // Semi-transparent gray color for overlay effect
-    private static final Color OVERLAY_COLOR = new Color(200, 200, 200, 128);
+    private static final Color OVERLAY_COLOR = new Color(0, 0, 0, 128);
 
     public ViewManager(Handler handler) {
         this.handler = handler;
+        world = new World(handler, "res/worlds/world_1.tmx");
+
+        handler.setWorld(world);
         this.handler.setViewManager(this);
+        initializeViews();
 
-        // Initialize views and set default layer
-        views.put(ViewEnums.BATTLE, new BattleView(this));
-        views.put(ViewEnums.GAME, new GameView(this));
-        views.put(ViewEnums.MAIN_MENU, new MenuView(this));
-        views.put(ViewEnums.START_MENU, new StartMenuView(this));
-
-        layers.add(views.get(ViewEnums.START_MENU));
+        setView(ViewEnums.BATTLE);
     }
 
-    public void setComponentManager(ComponentManager componentManager) {
-        this.componentManager = componentManager;
+    public World getWorld() {
+        return world;
+    }
+
+    private void initializeViews() {
+        views.put(ViewEnums.BATTLE, new BattleView(this));
+        views.put(ViewEnums.GAME, new GameView(this));
+        views.put(ViewEnums.MENU, new MenuView(this));
+        views.put(ViewEnums.SETTINGS, new MenuView(this));
+        views.put(ViewEnums.SELECT_CHARACTER, new MenuView(this));
+        views.put(ViewEnums.PAUSE, new Pause(this));
     }
 
     public void setView(ViewEnums viewEnum) {
         View selectedView = views.get(viewEnum);
-        if (selectedView == null) {
-            return;  // Exit if view does not exist
-        }
 
-        // TODO: need to refactor this please :(
+        if (selectedView == null) return;
+
         handler.getInputMouseListener().setComponentManager(selectedView.getComponentManager());
 
-        layers.clear();
-        layers.add(selectedView);
+        if (selectedView.isOverlay) {
+            layers.add(selectedView);
+        } else {
+            layers.clear();
+            layers.add(selectedView);
+        }
 
-        // Optionally add overlay management here if needed
+        // Update mouse listener to always point to the last (topmost) layer's component manager
+        View topLayer = layers.getLast();
+        handler.getInputMouseListener().setComponentManager(topLayer.getComponentManager());
+    }
+
+    public void removeView(ViewEnums viewEnum) {
+        View selectedView = views.get(viewEnum);
+        if (selectedView == null) return;
+
+        // Check if the selected view is in the layers list, and remove it
+        if (layers.contains(selectedView) && layers.size() > 1) {
+            layers.remove(selectedView);
+        }
+
+        // If the layers list is not empty, update the mouse listener to the topmost layer
+        if (!layers.isEmpty()) {
+            View topLayer = layers.getLast();
+            handler.getInputMouseListener().setComponentManager(topLayer.getComponentManager());
+        }
     }
 
     public boolean hasLayers() {
@@ -64,19 +93,25 @@ public class ViewManager {
         }
     }
 
-
     public void render(Graphics g) {
         for (int i = 0; i < layers.size(); i++) {
             layers.get(i).render(g);
-            if (i < layers.size() - 1) {  // Apply overlay if not last layer
-                applyOverlay(g);
+            if (i < layers.size() - 1) {
+                applyOverlay(g);  // Apply overlay for non-top layers
             }
         }
-    }
 
+        g.setFont(new Font("Arial", Font.PLAIN, 12));
+        g.setColor(Color.GRAY);
+        g.drawString("Layers: " + layers, 10, 20);
+    }
 
     private void applyOverlay(Graphics g) {
         g.setColor(OVERLAY_COLOR);
         g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
+    }
+
+    public boolean isInGame() {
+        return layers.contains(views.get(ViewEnums.GAME));
     }
 }

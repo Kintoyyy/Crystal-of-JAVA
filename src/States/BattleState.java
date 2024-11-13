@@ -66,7 +66,7 @@ public class BattleState extends State {
         if (Monster.deathState != 0) {
             if (!f) {
                 f = true;
-                handler.getMouseManager().setUIManager(arrowManager);
+//                handler.getMouseManager().setUIManager(arrowManager);
             }
             arrowManager.tick();
             if (switchGameStates) {
@@ -108,10 +108,10 @@ public class BattleState extends State {
 
     private void switchToGameState() {
         encounterFlag = true;
-        handler.getMouseManager().setUIManager(null);
+//        handler.getMouseManager().setUIManager(null);
         Transition.canStart = false;
 //		Game.flag2 = false;
-        State.setState(handler.getGame().gameState);
+//        State.setState(handler.getGame().gameState);
         BattleState.switchGameStates = true;
         destroy();
     }
@@ -119,7 +119,7 @@ public class BattleState extends State {
     private void initializeUI() {
         uiManager = new UIManager(handler);
         arrowManager = new UIManager(handler);
-        handler.getMouseManager().setUIManager(uiManager);
+//        handler.getMouseManager().setUIManager(uiManager);
 
         uiManager.addObject(new UIImageButton(50, 680, 49 * 4, 17 * 4, Assets.attackButton, new ClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package Animations;
 
 import Utils.ImageUtils;
+import Utils.SpriteSheet;
 
 import java.awt.image.BufferedImage;
 
@@ -14,10 +15,15 @@ public class PlayerAnimation {
     private int action;
     ImageUtils img = new ImageUtils();
 
+    private static final int width = 32; //Size of each tile in sprite sheet
+    private static final int height = 32;
 
-    public PlayerAnimation(int speed, BufferedImage[][] frames) {
+    private static final int pWidth = 32;
+    private static final int pHeight = 32;
+
+    public PlayerAnimation(int speed, SpriteSheet sheet) {
         this.speed = speed;
-        this.frames = frames;
+        this.frames = loadAnimations(sheet);;
         index = 0;
         lastTime = System.currentTimeMillis();
     }
@@ -41,5 +47,15 @@ public class PlayerAnimation {
             return img.flipX(frames[frameSet][index]);
         }
         return frames[frameSet][index];
+    }
+
+    private static BufferedImage[][] loadAnimations(SpriteSheet spriteSheet) {
+        BufferedImage[][] animationFrames = new BufferedImage[13][8];
+        for (int i = 0; i < animationFrames.length; i++) {
+            for (int j = 0; j < animationFrames[i].length; j++) {
+                animationFrames[i][j] = spriteSheet.crop(j * pWidth, i * pHeight, pWidth, pHeight);
+            }
+        }
+        return animationFrames;
     }
 }
