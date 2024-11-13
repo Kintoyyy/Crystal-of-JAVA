@@ -26,6 +26,7 @@ public class EnemyLayout extends Layout {
             EnemyButton frame = (EnemyButton) new EnemyButton(enemy)
                     .setAction(() -> {
                         System.out.println("Enemy " + enemy.getName() + " clicked");
+                        enemyManager.setAutoSelectEnemy(false);
                         enemyManager.setCurrentEnemy(index);
                     });
             childComponents.add(frame);

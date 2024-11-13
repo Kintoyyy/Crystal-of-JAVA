@@ -10,5 +10,6 @@ public class Kai extends Enemy {
     public Kai() {
         super(new Health(3000), new AttackPower(300, 500), new Defense(20));
         this.name = "Kai";
+        this.dodge = 0.3; // 30% chance to dodge attacks
     }
 }

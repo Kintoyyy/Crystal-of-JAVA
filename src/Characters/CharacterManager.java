@@ -26,6 +26,10 @@ public class CharacterManager {
         return characters.get(currentCharacterIndex);
     }
 
+    public boolean isPlayerAlive() {
+        return !characters.get(currentCharacterIndex).getHealth().isDead();
+    }
+
     public void setPlayerByIndex(int index) {
         if (index < 0 || index >= characters.size()) {
             System.out.println("Invalid index");

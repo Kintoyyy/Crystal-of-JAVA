@@ -1,6 +1,7 @@
 package Characters;
 
 import Animations.PlayerAnimation;
+import Characters.Effects.Effect;
 import Characters.Stats.*;
 import Skills.Basic;
 import Utils.SpriteSheet;
@@ -29,6 +30,8 @@ public abstract class Character {
     protected SpriteSheet spriteSheet;
     private PlayerAnimation animation;
     private BufferedImage playerProfile;
+
+    private ArrayList<Effect> effects = new ArrayList<>();
 
     public Character(String name, int level, Health health, Mana mana, AttackPower attackPower, Defense defense, ArrayList<Skill> skills) {
         this.name = name;

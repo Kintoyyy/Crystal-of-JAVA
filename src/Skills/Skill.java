@@ -14,9 +14,7 @@ public abstract class Skill {
     protected final double damage;
     private final int cost;
 
-
     private String description;
-
 
     private int cooldownTurns = 0;
     private int baseCooldownTurns = 0;
@@ -84,6 +82,16 @@ public abstract class Skill {
 
     public void attack(BattleManager battleManager) {
         this.enemy = battleManager.getCurrentEnemy();
+
+        if(!battleManager.getCharacterManager().isPlayerAlive()){
+            System.out.println("Player is dead");
+            return;
+        }
+
+        if(!battleManager.isPlayersTurn()){
+            System.out.println("Not players turn");
+            return;
+        }
 
         if (checkIfSkillIsAvailable()) {
             useSkill();

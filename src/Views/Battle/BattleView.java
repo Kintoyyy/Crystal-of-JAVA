@@ -70,13 +70,13 @@ public class BattleView extends View {
     public void render(Graphics g) {
         // return to the game view if there are no enemies left
 
-
         components.render(g);
 
         // Display the skill names at the specified position
-        g.setColor(Color.GRAY);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.PLAIN, 20));
         g.drawString(handler.getGameState().getCharacterManger().getPlayer().getSkills().toString(), 20, 50);
+        g.drawString(battleManager.getTurnState(), 500, 400);
 //        g.drawString(handler.getGameState(), 20, 70);
     }
 

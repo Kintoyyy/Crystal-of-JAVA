@@ -13,7 +13,7 @@ public class BattleManager {
     private final CharacterManager characterManager;
     private EnemyManager enemyManager;
 
-    private boolean isBattleActive = false;
+    private boolean isBattleActive = true;
     private TurnState turnState = TurnState.PLAYER;
 
     private Handler handler;
@@ -25,9 +25,9 @@ public class BattleManager {
         this.handler = handler;
         characterManager = handler.getGameState().getCharacterManger();
 
-        timer = new Timer().setDelay(60).setAction(() -> System.out.println("Timer 1 Action"));
+        timer = new Timer();
 
-        timer.start();
+
     }
 
     public void newBattle(EnemyManager enemyManager) {
@@ -42,16 +42,32 @@ public class BattleManager {
         } else {
             turnState = TurnState.PLAYER;
         }
+        System.out.println("Turn State: " + turnState);
+        enemyManager.setAutoSelectEnemy(true);
 
+        if(turnState == TurnState.ENEMY) {
+            timer.start().setDelay(1).setAction(() -> {
+                enemyManager.getCurrentEnemy().attack(characterManager.getPlayer());
+                System.out.println("Timer 1 Action");
+                turnState = TurnState.PLAYER;
+                timer.reset();
+            });
+        }
         characterManager.updateTurns();
     }
 
-    public void tick() {
-        if (turnState == TurnState.PLAYER) {
+    public String getTurnState() {
+        return turnState == TurnState.PLAYER ? "Player" : "Enemy";
+    }
 
-        } else {
-            timer.update();
-        }
+    public void tick() {
+
+        timer.update();
+//        if (turnState == TurnState.PLAYER) {
+//
+//        } else {
+//            timer.update();
+//        }
     }
 
     public Character getPlayer() {
@@ -76,6 +92,10 @@ public class BattleManager {
 
     public boolean isBattleActive() {
         return isBattleActive;
+    }
+
+    public boolean isPlayersTurn() {
+        return turnState == TurnState.PLAYER;
     }
 
     public CharacterManager getCharacterManager() {

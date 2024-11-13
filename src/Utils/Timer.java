@@ -25,9 +25,10 @@ public class Timer {
         return this;
     }
 
-    public void start() {
+    public Timer start() {
         this.active = true; // Set this timer as active
         this.elapsedTime = 0; // Reset elapsed time
+        return this;
     }
 
     public void update() {

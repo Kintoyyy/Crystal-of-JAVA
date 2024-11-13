@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 public class EnemyManager {
     private final ArrayList<Enemy> enemies = new ArrayList<>();
+    private int attackingEnemyIndex = 0;
     private int currentEnemyIndex = 0;
+    private boolean autoSelectEnemy = false;
 
     public ArrayList<Enemy> getEnemies() {
         return enemies;
@@ -21,6 +23,14 @@ public class EnemyManager {
 
     public void tick() {
 
+    }
+
+    public void updateTurns() {
+        if (attackingEnemyIndex < enemies.size() - 1) {
+            attackingEnemyIndex++;
+        } else {
+            attackingEnemyIndex = 0;
+        }
     }
 
     public void addEnemy(Enemy enemy) {
@@ -40,6 +50,19 @@ public class EnemyManager {
     }
 
     public Enemy getCurrentEnemy() {
+//        if(autoSelectEnemy) {
+//            int size = enemies.size();
+//            int randomIndex = (int) (Math.random() * size);
+//            return enemies.get(randomIndex);
+//        }
         return enemies.get(currentEnemyIndex);
+    }
+
+    public boolean isAutoSelectEnemy() {
+        return autoSelectEnemy;
+    }
+
+    public void setAutoSelectEnemy(boolean autoSelectEnemy) {
+        this.autoSelectEnemy = autoSelectEnemy;
     }
 }

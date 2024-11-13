@@ -26,6 +26,7 @@ public abstract class Enemy {
     protected double minDamage = 0.5;
     protected double maxDamage = 1.5;
     protected double lowHealthThreshold = 0.3; // Threshold to consider health as "low" (30%)
+    protected double dodge = 0.05;
 
 
     Enemy(Health health, AttackPower attackPower, Defense defence, SpecialSkill specialSkill) {
@@ -111,7 +112,13 @@ public abstract class Enemy {
 
 
     public void takeDamage(double damage) {
+        if (Math.random() < dodge) {
+            System.out.println(this.name + " dodged the attack!");
+            return;
+        }
+
         System.out.println(this.name + " takes " + damage + " damage!");
         health.takeDamage(damage);
     }
+
 }
