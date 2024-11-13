@@ -42,6 +42,8 @@ public class BattleManager {
         } else {
             turnState = TurnState.PLAYER;
         }
+
+        characterManager.updateTurns();
     }
 
     public void tick() {

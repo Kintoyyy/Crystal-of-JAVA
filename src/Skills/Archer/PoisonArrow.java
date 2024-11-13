@@ -12,6 +12,7 @@ public class PoisonArrow extends Skill {
 
     public PoisonArrow() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(54, 36, 18, 18);
     }
 
     @Override

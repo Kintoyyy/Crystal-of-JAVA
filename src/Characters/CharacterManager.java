@@ -1,6 +1,8 @@
 
 package Characters;
 
+import Skills.Skill;
+
 import java.util.ArrayList;
 
 public class CharacterManager {
@@ -69,5 +71,13 @@ public class CharacterManager {
 
     public void setPlayer(int index) {
         this.currentCharacterIndex = index;
+    }
+
+    public void updateTurns() {
+        for (Character character : characters) {
+            for(Skill skill : character.getSkills()) {
+                skill.updateTurns();
+            }
+        }
     }
 }

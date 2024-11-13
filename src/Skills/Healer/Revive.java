@@ -12,6 +12,7 @@ public class Revive extends Skill {
 
     public Revive() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(54, 54, 18, 18);
     }
 
     @Override

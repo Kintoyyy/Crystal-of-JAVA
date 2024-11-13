@@ -12,6 +12,7 @@ public class PrecisionShot extends Skill {
 
     public PrecisionShot() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(18, 36, 18, 18);
     }
 
     @Override

@@ -12,6 +12,7 @@ public class MultiShot extends Skill {
 
     public MultiShot() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(36, 36, 18, 18);
     }
 
     @Override

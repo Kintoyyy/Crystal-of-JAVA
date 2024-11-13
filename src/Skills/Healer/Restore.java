@@ -12,6 +12,7 @@ public class Restore extends Skill {
 
     public Restore() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(18, 54, 18, 18);
     }
 
     @Override

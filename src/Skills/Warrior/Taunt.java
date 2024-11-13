@@ -12,7 +12,8 @@ public class Taunt extends Skill {
     private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
 
     public Taunt() {
-        super(name, description, cost, damage, SKILL_TYPE);
+        super(name, description, cost, damage, SKILL_TYPE,4,3);
+        skillImage = sheet.crop(72, 0, 18, 18);
     }
 
     @Override

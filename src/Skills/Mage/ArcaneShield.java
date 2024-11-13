@@ -13,6 +13,7 @@ public class ArcaneShield extends Skill {
 
     public ArcaneShield() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(72, 18, 18, 18);
     }
 
     @Override

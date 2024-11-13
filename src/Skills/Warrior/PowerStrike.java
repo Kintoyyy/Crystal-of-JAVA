@@ -12,11 +12,12 @@ public class PowerStrike extends Skill {
     private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
 
     public PowerStrike() {
-        super(name, description, cost, damage, SKILL_TYPE);
+        super(name, description, cost, damage, SKILL_TYPE, 2, 0);
+        skillImage = sheet.crop(18, 0, 18, 18);
     }
 
     @Override
     public void useSkill() {
-
+        enemy.takeDamage(player.getAttackPower() * damage);
     }
 }

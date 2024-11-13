@@ -13,6 +13,7 @@ public class Evasion extends Skill {
 
     public Evasion() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(72, 36, 18, 18);
     }
 
     @Override

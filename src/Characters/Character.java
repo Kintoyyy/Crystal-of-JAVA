@@ -43,8 +43,6 @@ public abstract class Character {
         this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         this.experience = 0;
-
-        this.addSkill(new Basic(this.attackPower));
     }
 
     public void addSkill(Skill skill) {

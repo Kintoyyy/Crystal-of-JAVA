@@ -13,6 +13,7 @@ public class ManaSurge extends Skill {
 
     public ManaSurge() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(36, 18, 18, 18);
     }
 
     @Override

@@ -90,7 +90,7 @@ public abstract class Enemy {
     }
 
     private boolean calculateHit(double accuracy, double dodge) {
-        return Math.random() < accuracy * (1 - dodge); // Basic hit calculation
+        return Math.random() < accuracy * (1 - dodge); // Warrior hit calculation
     }
 
     // Use special skill if the enemy has one

@@ -12,7 +12,8 @@ public class ShieldBlock extends Skill {
     private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
 
     public ShieldBlock() {
-        super(name, description, cost, damage, SKILL_TYPE);
+        super(name, description, cost, damage, SKILL_TYPE,3,1);
+        skillImage = sheet.crop(36, 0, 18, 18);
     }
 
     @Override

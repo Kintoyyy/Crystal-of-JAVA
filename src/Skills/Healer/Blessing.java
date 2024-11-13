@@ -12,6 +12,7 @@ public class Blessing extends Skill {
 
     public Blessing() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(72, 54, 18, 18);
     }
 
     @Override

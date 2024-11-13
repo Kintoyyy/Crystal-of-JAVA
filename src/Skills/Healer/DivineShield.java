@@ -12,6 +12,7 @@ public class DivineShield extends Skill {
 
     public DivineShield() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(36, 54, 18, 18);
     }
 
     @Override

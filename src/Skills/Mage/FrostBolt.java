@@ -13,6 +13,7 @@ public class FrostBolt extends Skill {
 
     public FrostBolt() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(54, 18, 18, 18);
     }
 
     @Override

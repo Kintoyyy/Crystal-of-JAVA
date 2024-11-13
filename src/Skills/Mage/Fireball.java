@@ -13,6 +13,7 @@ public class Fireball extends Skill {
 
     public Fireball() {
         super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(18,18, 18, 18);
     }
 
     @Override

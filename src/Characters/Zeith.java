@@ -4,10 +4,7 @@ import Characters.Stats.AttackPower;
 import Characters.Stats.Defense;
 import Characters.Stats.Health;
 import Characters.Stats.Mana;
-import Skills.Healer.Blessing;
-import Skills.Healer.DivineShield;
-import Skills.Healer.Restore;
-import Skills.Healer.Revive;
+import Skills.Healer.*;
 import Skills.Skill;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -19,6 +16,8 @@ public class Zeith extends Character {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Zeith", 1, new Health(1000), new Mana(180), new AttackPower(90), new Defense(20), new ArrayList<>());
 
+
+        this.addSkill(new Healer(this));
         this.addSkill(new Restore());
         this.addSkill(new DivineShield());
         this.addSkill(new Revive());

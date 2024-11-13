@@ -12,7 +12,8 @@ public class WarCry extends Skill {
     private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
 
     public WarCry() {
-        super(name, description, cost, damage, SKILL_TYPE);
+        super(name, description, cost, damage, SKILL_TYPE,3,1);
+        skillImage = sheet.crop(54, 0, 18, 18);
     }
 
     @Override
