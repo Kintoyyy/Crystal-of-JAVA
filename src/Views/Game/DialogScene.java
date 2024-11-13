@@ -3,7 +3,7 @@ package Views.Game;
 import Assets.Assets;
 import Components.Button.Button;
 import Components.Dialog.Dialog;
-import Game.CallBackAction;
+import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
 

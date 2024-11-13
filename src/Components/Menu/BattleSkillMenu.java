@@ -29,7 +29,6 @@ public class BattleSkillMenu extends Menu {
         for (Skill skill : skills) {
             SkillFrame frame = (SkillFrame) new SkillFrame(skill)
                     .setAction(() -> {
-//                        System.out.println("Selected Skill: " + skill.getName());
                         skill.attack(handler.getGameState().getEnemies().getFirst());
                     });
             childComponents.add(frame);

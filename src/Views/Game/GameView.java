@@ -3,15 +3,13 @@ package Views.Game;
 import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Menu.CharacterTopLeftMenu;
-import Game.CallBackAction;
-import Skills.Skill;
+import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
 import enums.ViewEnums;
 import World.World;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GameView extends View {
     private final World world;

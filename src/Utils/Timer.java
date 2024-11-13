@@ -1,7 +1,5 @@
 package Utils;
 
-import Game.CallBackAction;
-
 public class Timer {
     private CallBackAction callBackAction;
     private int elapsedTime = 0;
@@ -52,6 +50,7 @@ public class Timer {
             // Deactivate this timer and activate the next in the chain
             active = false;
 
+            //TODO: need to fix this
             if (nextTimer != null) {
                 System.out.println("Starting next timer in chain.");
                 nextTimer.start();
@@ -68,7 +67,6 @@ public class Timer {
         double decimalTime = (double) elapsedTime / tickRate;
         return Math.round(decimalTime * 100.0) / 100.0;
     }
-
 
     public boolean isDone() {
         return !active;

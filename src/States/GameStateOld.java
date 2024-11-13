@@ -2,7 +2,6 @@ package States;
 
 import java.awt.Graphics;
 
-import Assets.Description;
 import Entities.Player;
 import Assets.Text;
 import Game.Handler;
@@ -14,7 +13,7 @@ public class GameStateOld extends State{
 	private Player player;
 	private World world;
 	public static boolean flag;
-	private Description playerDescription;
+//	private Description playerDescription;
 
 	public static int coins = 0;
 	public static int xp = 0;

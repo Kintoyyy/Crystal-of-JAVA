@@ -36,9 +36,7 @@ public class GameState {
 
     public void tick() {
         // Call the timer update method to handle the delay
-
         timer.update();
-        System.out.println("Timer: " + timer.getElapsedTime());
 
         // Perform actions that should happen every tick
         if (handler.getViewManager().isInGame()) {

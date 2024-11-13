@@ -4,10 +4,9 @@ import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Frame.EnemyFrame;
 import Components.Layouts.CharacterLayout;
-import Components.Layouts.EnemyLayout;
 import Components.Menu.BattleSkillMenu;
 import Enemies.Kai;
-import Game.CallBackAction;
+import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
 import enums.ViewEnums;
@@ -59,6 +58,7 @@ public class BattleView extends View {
 
     @Override
     public void tick() {
+
         components.tick();
     }
 

@@ -2,7 +2,7 @@ package Views.Menu;
 
 import Assets.Assets;
 import Components.Button.Button;
-import Game.CallBackAction;
+import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
 import enums.ViewEnums;

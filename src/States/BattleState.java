@@ -9,7 +9,7 @@ import Assets.Arrow;
 import Assets.Assets;
 import Assets.AttackBarManager;
 import Assets.Bar;
-import Assets.InGamePlayer;
+//import Assets.InGamePlayer;
 import Assets.Monster;
 import Assets.Transition;
 import Game.Handler;
@@ -24,7 +24,7 @@ public class BattleState extends State {
     Bar bar;
     ArrayList<Monster> monsters = new ArrayList<>();
     Monster monster;
-    InGamePlayer inGamePlayer;
+//    InGamePlayer inGamePlayer;
     AttackBarManager attackBarManager;
     private UIManager uiManager;
     private UIManager arrowManager;
@@ -45,7 +45,7 @@ public class BattleState extends State {
         //monsters.add(new Monster("Angry Radish", Assets.monsters[1], 23 * 4, 41 * 4, 480, 110, 1, 20, 1));
 
         monster = monsters.get(0);
-        inGamePlayer = new InGamePlayer(handler);
+//        inGamePlayer = new InGamePlayer(handler);
         attackBarManager = new AttackBarManager(handler);
         switchGameStates = false;
         initializeUI();
@@ -61,7 +61,7 @@ public class BattleState extends State {
         }
         uiManager.tick();
         monster.tick();
-        inGamePlayer.tick();
+//        inGamePlayer.tick();
 
         if (Monster.deathState != 0) {
             if (!f) {
@@ -83,7 +83,7 @@ public class BattleState extends State {
     public void render(Graphics g) {
         drawBackground(g);
         monster.render(g);
-        inGamePlayer.render(g);
+//        inGamePlayer.render(g);
 
         if (showBars) {
             bar.render(g);

@@ -1,7 +1,6 @@
 package Views.Overlay;
 
 import Components.Button.Button;
-import Game.CallBackAction;
 import Views.View;
 import Views.ViewManager;
 import enums.ViewEnums;
