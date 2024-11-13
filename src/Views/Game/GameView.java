@@ -24,7 +24,7 @@ public class GameView extends View {
                 new PauseButton()
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 viewManager.setView(ViewEnums.PAUSE);
                             }
                         })
@@ -33,7 +33,7 @@ public class GameView extends View {
                 new Button("battle")
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 viewManager.setView(ViewEnums.BATTLE);
                             }
                         })

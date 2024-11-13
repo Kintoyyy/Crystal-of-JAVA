@@ -17,23 +17,20 @@ public abstract class Skill {
     protected Enemy enemy;
 
     public Skill(String name,String description, int cost, double damage, String type) {
+        this(name, description, cost, damage, type, 0, 0);
+    }
+
+    public Skill(String name,String description, int cost, double damage, String type, int cooldownTurns, int effectDurationTurns) {
         this.name = name;
         this.cost = cost;
         this.damage = damage;
         this.type = type;
+        this.cooldownTurns = cooldownTurns;
+        this.effectDurationTurns = effectDurationTurns;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void updateTurns() {
-        if(cooldownTurns > 0) {
-            cooldownTurns--;
-        }
-        if(effectDurationTurns > 0) {
-            effectDurationTurns--;
-        }
     }
 
     public void setCharacter(Character player) {
@@ -74,5 +71,14 @@ public abstract class Skill {
         }
         player.getMana().useMana(cost);
         return true;
+    }
+
+    public void updateTurns() {
+        if(cooldownTurns > 0) {
+            cooldownTurns--;
+        }
+        if(effectDurationTurns > 0) {
+            effectDurationTurns--;
+        }
     }
 }

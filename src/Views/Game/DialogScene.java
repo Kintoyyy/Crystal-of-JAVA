@@ -23,7 +23,7 @@ public class DialogScene extends View {
                 new Button("Test button")
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 System.out.println("Button clicked");
                             }
                         })

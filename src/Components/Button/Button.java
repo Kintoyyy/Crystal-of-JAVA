@@ -83,7 +83,7 @@ public class Button extends Component {
     @Override
     public void onClick() {
         if (clicker != null) {
-            clicker.onClick();
+            clicker.onAction();
         } else {
             System.out.println("Warning: No action defined for button click.");
         }

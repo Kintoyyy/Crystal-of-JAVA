@@ -86,8 +86,6 @@ public class Game implements Runnable {
         gameCamera = new GameCamera(handler, 0, 0);
 
         viewManager = new ViewManager(handler);
-
-
     }
 
     private void tick() { //updates all variables

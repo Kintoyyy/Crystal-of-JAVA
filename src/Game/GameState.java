@@ -3,6 +3,7 @@ package Game;
 import Characters.*;
 import Characters.Character;
 import Enemies.Enemy;
+import Utils.Timer;
 import World.World;
 import Item.Item;
 
@@ -15,6 +16,8 @@ public class GameState {
     private ArrayList<Item> items = new ArrayList<>(10);
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private Handler handler;
+    private int seconds = 0;
+    private Timer timer = new Timer();
 
     public GameState(Handler handler) {
         this.handler = handler;
@@ -26,9 +29,18 @@ public class GameState {
         this.characters.add(new Nathan());
         this.characters.add(new Zeith());
 
+        timer = new Timer().setDelay(60).setAction(() -> System.out.println("Timer 1 Action"));
+
+        timer.start();
     }
 
     public void tick() {
+        // Call the timer update method to handle the delay
+
+        timer.update();
+        System.out.println("Timer: " + timer.getElapsedTime());
+
+        // Perform actions that should happen every tick
         if (handler.getViewManager().isInGame()) {
             for (Character character : characters) {
                 character.regenHealth();
@@ -36,6 +48,7 @@ public class GameState {
             }
         }
     }
+
 
     public Character getPlayer() {
         return this.characters.get(currentCharacterIndex);

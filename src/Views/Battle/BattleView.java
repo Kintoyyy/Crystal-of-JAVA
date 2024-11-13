@@ -37,11 +37,10 @@ public class BattleView extends View {
                         .setLocation(700, 300),
 
 
-
                 new PauseButton()
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 viewManager.setView(ViewEnums.PAUSE);
                             }
                         })
@@ -50,7 +49,7 @@ public class BattleView extends View {
                 new Button("exit")
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 viewManager.setView(ViewEnums.GAME);
                             }
                         })

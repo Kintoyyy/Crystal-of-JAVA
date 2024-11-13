@@ -1,6 +1,5 @@
 package Skills;
 
-
 import Characters.Stats.AttackPower;
 
 public class Basic extends Skill {

@@ -16,7 +16,7 @@ public class SelectCharacter extends View {
                 new Button("play")
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 viewManager.setView(ViewEnums.BATTLE);
                             }
                         })
@@ -25,7 +25,7 @@ public class SelectCharacter extends View {
                 new Button("Exit")
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 System.out.println("Exit clicked");
                             }
                         })

@@ -21,7 +21,7 @@ public class MenuView extends View {
                 new Button("Exit")
                         .setAction(new CallBackAction() {
                             @Override
-                            public void onClick() {
+                            public void onAction() {
                                 handler.getGame().stop();
                             }
                         })
