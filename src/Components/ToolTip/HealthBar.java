@@ -1,17 +1,14 @@
-package Components.Menu;
+package Components.ToolTip;
 
 import Characters.Character;
-import Components.Text.Text;
-import Game.Handler;
+import Components.Menu.Menu;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
-import enums.Alignment;
-import fonts.SuperPixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MiniHealthBar extends Menu {
+public class HealthBar extends Menu {
     private final Character player;
     private final SpriteSheet sheet;
     private final BufferedImage frame;
@@ -22,7 +19,7 @@ public class MiniHealthBar extends Menu {
     private double mana;
     private double defense;
 
-    public MiniHealthBar(Character player) {
+    public HealthBar(Character player) {
         super();
         this.width = 21;
         this.height = 10;

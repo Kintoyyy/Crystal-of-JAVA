@@ -1,6 +1,6 @@
-package Components.Frame;
+package Components.Button;
 
-import Components.Menu.EnemyMiniHealthBar;
+import Components.ToolTip.EnemyHealthBar;
 import Enemies.Enemy;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -9,11 +9,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public class EnemyFrame extends Frame {
+public class EnemyButton extends Button {
     private final Enemy enemy;
-    private final EnemyMiniHealthBar healthBar;
+    private final EnemyHealthBar healthBar;
 
-    public EnemyFrame(Enemy enemy) {
+    public EnemyButton(Enemy enemy) {
         super("Character Frame");
         hideText();
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
@@ -26,7 +26,7 @@ public class EnemyFrame extends Frame {
         scale(3);
         this.enemy = enemy;
 
-        this.healthBar = (EnemyMiniHealthBar) new EnemyMiniHealthBar(enemy)
+        this.healthBar = (EnemyHealthBar) new EnemyHealthBar(enemy)
                 .scale(3);
     }
 

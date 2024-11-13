@@ -2,9 +2,9 @@ package Views.Battle;
 
 import Components.Button.Button;
 import Components.Button.PauseButton;
-import Components.Frame.EnemyFrame;
+import Components.Button.EnemyButton;
 import Components.Layouts.CharacterLayout;
-import Components.Menu.BattleSkillMenu;
+import Components.Menu.SkillMenu;
 import Enemies.Kai;
 import Utils.CallBackAction;
 import Views.View;
@@ -24,7 +24,7 @@ public class BattleView extends View {
                         .setLocation(100, 300)
                         .scale(6),
 
-                new BattleSkillMenu(handler)
+                new SkillMenu(handler)
                         .setLocation(500, 650),
 
 //                new EnemyLayout(handler)
@@ -32,7 +32,7 @@ public class BattleView extends View {
 //                        .showBounds()
 //                        .scale(6),
 
-                new EnemyFrame(handler.getGameState().getEnemies().getFirst())
+                new EnemyButton(handler.getGameState().getEnemies().getFirst())
                         .setLocation(700, 300),
 
 

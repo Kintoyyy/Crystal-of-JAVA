@@ -2,7 +2,7 @@ package Components.Layouts;
 
 import Characters.Character;
 import Components.Component;
-import Components.Frame.CharacterFrame;
+import Components.Button.CharacterButton;
 import Game.Handler;
 
 import java.awt.*;
@@ -28,7 +28,7 @@ public class CharacterLayout extends Layout{
             // Define a final variable to capture the index for lambda usage
             final int index = i;
 
-            CharacterFrame frame = (CharacterFrame) new CharacterFrame(character)
+            CharacterButton frame = (CharacterButton) new CharacterButton(character)
                     .setAction(() -> {
                         currentCharacter = character;
                         System.out.println("Selected: " + currentCharacter.getName());
@@ -50,7 +50,7 @@ public class CharacterLayout extends Layout{
         int xOffset = (int) this.x;
 
         for (Component component : childComponents) {
-            if (component instanceof CharacterFrame frame) {
+            if (component instanceof CharacterButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 frame.isActive(player != null && player.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();

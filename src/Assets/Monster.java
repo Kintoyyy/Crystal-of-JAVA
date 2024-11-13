@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import Game.Handler;
 import States.BattleState;
-import States.GameStateOld;
 
 public class Monster {
 	
@@ -104,7 +103,7 @@ public class Monster {
 			}
 		} else if(deathState == 3) {
 			if(!f) {
-				GameStateOld.coins += money;
+//				GameStateOld.coins += money;
 				f = true;
 			}
 			rewardsText.render(g);
@@ -112,7 +111,7 @@ public class Monster {
 			//BattleState.switchGameStates = true;
 		} else if(deathState == 4) {
 			if(!f2) {
-				GameStateOld.xp += xp;
+//				GameStateOld.xp += xp;
 				f2 = true;
 			}
 			rewardsText2.render(g);

@@ -1,7 +1,5 @@
-package Components.Frame;
+package Components.Button;
 
-import Characters.Character;
-import Components.Menu.MiniHealthBar;
 import Skills.Skill;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -9,13 +7,11 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.PRESSED;
-
-public class SkillFrame extends Frame {
+public class SkillButton extends Button {
     private final BufferedImage skillImage;
     private final Skill Skill;
 
-    public SkillFrame(Skill Skill) {
+    public SkillButton(Skill Skill) {
         super("Skill Frame");
         hideText();
         this.Skill = Skill;

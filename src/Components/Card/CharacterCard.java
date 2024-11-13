@@ -1,17 +1,15 @@
-package Components.Menu;
+package Components.Card;
 
 import Characters.Character;
-import Components.Text.Text;
+import Components.Menu.Menu;
 import Game.Handler;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
-import enums.Alignment;
-import fonts.SuperPixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class StatsBarMenu extends Menu {
+public class CharacterCard extends Card {
     private Character player;
     private BufferedImage playerProfile;
     private final SpriteSheet sheet;
@@ -22,33 +20,16 @@ public class StatsBarMenu extends Menu {
     private double mana;
     private final Handler handler;
 
-    public StatsBarMenu(Handler handler) {
+    public CharacterCard(Handler handler) {
         super();
         this.handler = handler;
-        this.width = 94;
-        this.height = 53;
+
+        this.width = 48;
+        this.height = 19;
+
         // Initialize sprite sheet and UI components
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Game_UI.png"));
-        this.addChildren(
-                new Text("Player")
-                        .setFont(new SuperPixelFont(30))
-                        .setText(handler.getGameState().getPlayer().getName())
-                        .setAlignment(Alignment.LEFT)
-                        .setColor(new Color(184, 111, 80))
-                        .setParent(this)
-                        .setLocation(30, 15)
-                        .setDimensions(this.width, this.height),
-
-                new Text("lvl: nnn")
-                        .setFont(new SuperPixelFont(30))
-                        .setAlignment(Alignment.RIGHT)
-                        .setColor(new Color(184, 111, 80))
-                        .setParent(this)
-                        .setLocation(0, 15)
-                        .setDimensions(this.width, this.height)
-        );
-
-        frame = sheet.crop(0, 121, 94, 53);
+        frame = sheet.crop(155, 0, 48, 19);
         healthBar = sheet.crop(144, 0, 10, 5);
         manaBar = sheet.crop(144, 5, 10, 5);
     }
@@ -56,7 +37,7 @@ public class StatsBarMenu extends Menu {
     @Override
     public void tick() {
         super.tick();
-        this.tickChildren();
+
         player = handler.getGameState().getPlayer();
         if (player != null) {
             playerProfile = player.getProfile();
@@ -67,9 +48,14 @@ public class StatsBarMenu extends Menu {
 
     @Override
     public void render(Graphics g) {
-//         Background and profile image rendering
+        // Background and profile image rendering
         g.setColor(new Color(24, 20, 37));
-        g.fillRect(bounds.x + 10, bounds.y + 10, width - 20, height - 20);
+        g.fillRect(bounds.x + 10, bounds.y + 10, height - 20, height - 20);
+        g.fillRect(bounds.x + (20 * scale), bounds.y + (4 * scale), 162, 10 * scale);
+
+        if (playerProfile != null) {
+            g.drawImage(playerProfile, bounds.x + 1, bounds.y + 8, height + 4, height + 4, null);
+        }
 
         if (player != null) {
             renderHealthManaBars(g);
@@ -78,7 +64,7 @@ public class StatsBarMenu extends Menu {
         // Frame rendering
         g.drawImage(frame, bounds.x, bounds.y, width, height, null);
 
-        this.renderChildren(g);
+
     }
 
     private void renderHealthManaBars(Graphics g) {
@@ -86,12 +72,12 @@ public class StatsBarMenu extends Menu {
         double maxMana = player.getMana().getBaseMana();
 
         // Calculate the width for health and mana bars
-        int healthWidth = (int) ((health / maxHealth) * (61 * scale));
-        int manaWidth = (int) ((mana / maxMana) * (61 * scale));
+        int healthWidth = (int) ((health / maxHealth) * (27 * scale));
+        int manaWidth = (int) ((mana / maxMana) * (27 * scale));
 
         // Draw health and mana bars
-        g.drawImage(healthBar, bounds.x + (24 * scale), bounds.y + (20 * scale), healthWidth, 5 * scale, null);
-        g.drawImage(manaBar, bounds.x + (24 * scale), bounds.y + (29 * scale), manaWidth, 5 * scale, null);
+        g.drawImage(healthBar, bounds.x + (20 * scale), bounds.y + (4 * scale), healthWidth, 5 * scale, null);
+        g.drawImage(manaBar, bounds.x + (20 * scale), bounds.y + (9 * scale), manaWidth, 5 * scale, null);
     }
 
     @Override

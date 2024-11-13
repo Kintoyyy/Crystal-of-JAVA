@@ -1,7 +1,7 @@
 package Components.Layouts;
 
 import Components.Component;
-import Components.Frame.EnemyFrame;
+import Components.Button.EnemyButton;
 import Enemies.Enemy;
 import Game.Handler;
 
@@ -27,7 +27,7 @@ public class EnemyLayout extends Layout {
             Enemy enemy = enemies.get(i);
             final int index = i; // Capture index for lambda use
 
-            EnemyFrame frame = (EnemyFrame) new EnemyFrame(enemy)
+            EnemyButton frame = (EnemyButton) new EnemyButton(enemy)
                     .setAction(() -> handler.getGameState().setPlayerByIndex(index));
             childComponents.add(frame);
         }
@@ -51,7 +51,7 @@ public class EnemyLayout extends Layout {
         int xOffset = (int) this.x;
 
         for (Component component : childComponents) {
-            if (component instanceof EnemyFrame frame) {
+            if (component instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 xOffset += frame.getWidth();
             }
