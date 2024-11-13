@@ -9,6 +9,8 @@ import Enemies.SpecialSkill.ManaDrain;
 public class DarkSorcerer extends Enemy {
     // Low health, high attack, can cast curses that reduce player’s mana.
     public DarkSorcerer() {
-        super(new Health(50), new AttackPower(20), new Defense(4),  new ManaDrain());
+        super(new Health(400), new AttackPower(150), new Defense(10),  new ManaDrain());
+        name = "Dark Sorcerer";
+        description = "A generic enemy";
     }
 }

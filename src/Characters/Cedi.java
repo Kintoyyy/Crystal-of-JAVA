@@ -5,10 +5,7 @@ import Characters.Stats.Defense;
 import Characters.Stats.Health;
 import Characters.Stats.Mana;
 import Skills.*;
-import Skills.Mage.ArcaneShield;
-import Skills.Mage.Fireball;
-import Skills.Mage.FrostBolt;
-import Skills.Mage.Mage;
+import Skills.Mage.*;
 import Skills.Warrior.PowerStrike;
 import Skills.Warrior.ShieldBlock;
 import Utils.SpriteSheet;
@@ -23,7 +20,7 @@ public class Cedi extends Character {
 
         this.addSkill(new Mage(this));
         this.addSkill(new Fireball());
-        this.addSkill(new ShieldBlock());
+        this.addSkill(new ManaSurge());
         this.addSkill(new FrostBolt());
         this.addSkill(new ArcaneShield());
 
