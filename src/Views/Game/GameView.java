@@ -13,12 +13,12 @@ import World.World;
 import java.awt.*;
 
 public class GameView extends View {
-    private final World world;
+//    private final World world;
     private final Renderer renderer;
 
     public GameView(ViewManager viewManager) {
         super(viewManager);
-        world = handler.getWorld();
+//        world = handler.getWorld();
         renderer = new Renderer(handler);
 
         components.init(
@@ -54,13 +54,15 @@ public class GameView extends View {
     public void tick() {
         components.tick();
         renderer.tick();
-        world.tick();
+//        world.tick();
     }
 
     @Override
     public void render(Graphics g) {
 //        world.render(g);
+
         renderer.render(g);
+
         components.render(g);
     }
 }

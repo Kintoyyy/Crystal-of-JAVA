@@ -107,6 +107,7 @@
         "C:/Users/Kintoyyy/Desktop/mapRes/World1_stage3.tmx"
     ],
     "project": "world1.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "world_1.tmx",
         "C:/Users/Kintoyyy/Documents/GitHub/Crystal-of-JAVA-v1278365/res/ui/Grass_Tiles_3.tsx",

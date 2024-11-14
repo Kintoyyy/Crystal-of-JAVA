@@ -28,7 +28,7 @@ public class ViewManager {
         this.handler.setViewManager(this);
         initializeViews();
 
-        setView(ViewEnums.BATTLE);
+        setView(ViewEnums.GAME);
     }
 
     public World getWorld() {

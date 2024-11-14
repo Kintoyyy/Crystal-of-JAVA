@@ -1,9 +1,9 @@
 package Entities.Characters;
 
-import Entities.Characters.Stats.AttackPower;
-import Entities.Characters.Stats.Defense;
-import Entities.Characters.Stats.Health;
-import Entities.Characters.Stats.Mana;
+import Entities.Common.AttackPower;
+import Entities.Common.Defense;
+import Entities.Common.Health;
+import Entities.Common.Mana;
 import Skills.Healer.*;
 import Skills.Skill;
 import Utils.ImageUtils;

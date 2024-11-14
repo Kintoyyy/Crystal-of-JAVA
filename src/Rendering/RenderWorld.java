@@ -1,6 +1,7 @@
 package Rendering;
 
 import Entities.Characters.CharacterManager;
+import Entities.Characters.Movement;
 import Game.Handler;
 import Utils.DebugMode;
 import World.ParseTileTypes;
@@ -15,6 +16,17 @@ public class RenderWorld {
     private int[][][] TileLayers;
     private ParseTileTypes tileTypes;
     private CharacterManager characterManager;
+    private Movement movement;
+
+    public RenderWorld(Handler handler, ParseWorld worldParser, CharacterManager characterManager, Movement movement) {
+        this.movement = movement;
+        this.handler = handler;
+        this.width = worldParser.getWidth();
+        this.height = worldParser.getHeight();
+        this.TileLayers = worldParser.getLayers();
+        this.tileTypes = worldParser.getTileTypes();
+        this.characterManager = characterManager;
+    }
 
     public RenderWorld(Handler handler, ParseWorld worldParser, CharacterManager characterManager) {
         this.handler = handler;
@@ -51,7 +63,8 @@ public class RenderWorld {
             }
 
             if (layer == TileLayers.length - 1) {
-                characterManager.getPlayer().render(g);
+//                characterManager.render(g);
+                movement.render(g);
             }
         }
     }

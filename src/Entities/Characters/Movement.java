@@ -1,12 +1,9 @@
 package Entities.Characters;
 
 import Animations.PlayerAnimation;
-import Game.GameCamera;
+import CharacterMovement.Entity;
 import Game.Handler;
-import Inputs.InputKeyboardManager;
-import Utils.DebugMode;
 import World.Tile;
-
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,122 +11,71 @@ import java.awt.image.BufferedImage;
 import static Constants.PlayerAnimation.*;
 
 public class Movement {
+    protected Handler handler;
+    protected float x, y;
+    protected int width, height;
 
     public static final float DEFAULT_SPEED = 4.0f;
-    private static int SCALE = 2;
+    public static final int PLAYER_WIDTH = 128;
+    public static final int PLAYER_HEIGHT = 128;
 
     protected float speed;
     public static float xMove, yMove;
     public static float xPosition, yPosition;
     public static boolean collided = false;
 
-    protected float x, y;
-    protected int width, height;
-    protected Rectangle bounds;
-    protected PlayerAnimation animation;
+    private PlayerAnimation animation;
+    public static String dir = "down";
 
-    private static String dir = "down";
-
-    private GameCamera camera;
-    private InputKeyboardManager keyManager;
-
-    private Character character;
+    protected Rectangle bounds; // Character bounds
 
     public Movement(Handler handler) {
-        camera = handler.getGameCamera();
-        keyManager = handler.getKeymanager();
-        System.out.println(camera + " " + keyManager);
+        this.handler = handler;
+        this.x = 0;
+        this.y = 0;
+        this.width = 128;
+        this.height = 128;
+
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
 
-        setCharacter(new Kent());
+        bounds = new Rectangle(0, 0, width, height);
+
+        animation = new Kent().getAnimation();
+    }
+
+    public void setSpawn(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void tick() {
+        animation.tick();
         getInput();
-//        if (animation != null) {
-//            animation.tick();
-//        }
-//
-////        camera.centerOn(this);
-
-        if (xMove != 0 && !checkEntityCollisions(xMove, 0f)) {
-            moveX();
-        }
-        if (yMove != 0 && !checkEntityCollisions(0f, yMove)) {
-            moveY();
-        }
-    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
-        System.out.println("Setting character: " + character.getName());
-        this.x = character.getX();
-        this.y = character.getY();
-        this.width = character.getWidth();
-        this.height = character.getHeight();
-        this.bounds = character.getBounds();
-        this.animation = character.getAnimation();
+        move();
+        handler.getGameCamera().centerThis(this);
     }
 
     public void render(Graphics g) {
-//        System.out.println("Rendering : " + character.getName());
-//        System.out.println("Camera: " + camera + " KeyManager: " + keyManager);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
+                (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
-        System.out.println("X: " + (x - camera.getxOffset()) + " Y: " + (y - camera.getyOffset()) + " Width: " + width + " Height: " + height);
-
-//        g.setColor(Color.red);
-//        g.drawRect((int) (x - camera.getxOffset()), (int) (y - camera.getyOffset()), width * SCALE, height * SCALE);
-
-//        g.drawImage(getCurrentAnimationFrame(), (int) (x - camera.getxOffset()),
-//                (int) (y - camera.getyOffset()), width * SCALE, height * SCALE, null);
-    }
-
-    private long lastKeyPress = 0;
-    private static final long DEBOUNCE_TIME = 300; // milliseconds
-
-    private boolean debounceKeyPress(boolean isKeyPressed) {
-        long currentTime = System.currentTimeMillis();
-        if (isKeyPressed) {
-            if (currentTime - lastKeyPress > DEBOUNCE_TIME) {
-                lastKeyPress = currentTime; // Update last press time
-                return true; // Key press is valid and should trigger action
-            }
-        }
-        return false; // Key press is ignored due to debounce
+//        if (DebugMode.debugMode()) {
+        g.setColor(Color.red);
+        g.drawRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
+                (int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+//        }
     }
 
     private void getInput() {
         xMove = 0;
         yMove = 0;
 
-        if (debounceKeyPress(keyManager.f3)) {
-            DebugMode.SetDebugMode(!DebugMode.debugMode());
-        }
-
-        if (debounceKeyPress(keyManager.f9)) {
-            System.out.println("GAME VIEW");
-//            handler.getViewManager().setView(ViewEnums.GAME);
-        }
-
-        if (debounceKeyPress(keyManager.f10)) {
-            System.out.println("MENU VIEW");
-//            handler.getViewManager().setView(ViewEnums.MAIN_MENU);
-        }
-
-        if (debounceKeyPress(keyManager.f12)) {
-            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() + 1);
-        }
-
-        if (debounceKeyPress(keyManager.f11)) {
-            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() - 1);
-        }
-
-        boolean movingUp = keyManager.up || keyManager.Up;
-        boolean movingDown = keyManager.down || keyManager.Down;
-        boolean movingLeft = keyManager.left || keyManager.Left;
-        boolean movingRight = keyManager.right || keyManager.Right;
+        boolean movingUp = handler.getKeymanager().up || handler.getKeymanager().Up;
+        boolean movingDown = handler.getKeymanager().down || handler.getKeymanager().Down;
+        boolean movingLeft = handler.getKeymanager().left || handler.getKeymanager().Left;
+        boolean movingRight = handler.getKeymanager().right || handler.getKeymanager().Right;
 
         if ((movingUp || movingDown) && (movingLeft || movingRight)) {
             float diagonalSpeed = speed * 0.7071f;
@@ -182,18 +128,53 @@ public class Movement {
         }
     }
 
+    public void move() {
+        if (xMove != 0 && !checkEntityCollisions(xMove, 0f)) {
+            moveX();
+        }
+        if (yMove != 0 && !checkEntityCollisions(0f, yMove)) {
+            moveY();
+        }
+    }
 
-    public boolean checkEntityCollisions(float xOffset, float yOffset) {
-//        for(Entity e : handler.getWorld().getEntityManager().getEntities()) {
-//            if(e.equals(this)) {
-//                continue;
-//            }
-//            if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
-//                Creature.collided = true;
-//                return true;
-//            }
-//        }
-        return false;
+    private void moveX() {
+        collided = false;
+        int tx = (int) (x + xMove + bounds.x + (xMove > 0 ? bounds.width : 0)) / Tile.TILEWIDTH;
+
+        if (canMoveX(tx)) {
+            x += xMove;
+            xPosition += xMove;
+        } else {
+            x = xMove > 0
+                    ? tx * Tile.TILEWIDTH + bounds.x - bounds.width - 1
+                    : tx * Tile.TILEWIDTH + Tile.TILEWIDTH - bounds.x;
+        }
+    }
+
+    private void moveY() {
+        collided = false;
+        int ty = (int) (y + yMove + bounds.y + (yMove > 0 ? bounds.height : 0)) / Tile.TILEHEIGHT;
+
+        if (canMoveY(ty)) {
+            y += yMove;
+            yPosition += yMove;
+        } else {
+            y = yMove > 0
+                    ? ty * Tile.TILEHEIGHT - bounds.y - bounds.height - 1
+                    : ty * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.y;
+            collided = true;
+        }
+    }
+
+    private boolean canMoveX(int tx) {
+        return !collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) &&
+                !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILEHEIGHT);
+    }
+
+
+    private boolean canMoveY(int ty) {
+        return !collisionWithTile((int) (x + bounds.x) / Tile.TILEWIDTH, ty) &&
+                !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty);
     }
 
     protected boolean collisionWithTile(int x, int y) {
@@ -204,59 +185,21 @@ public class Movement {
         return false;
     }
 
+    public boolean checkEntityCollisions(float xOffset, float yOffset) {
+//        for (Entity e : handler.getWorld().getEntityManager().getEntities()) {
+//            if (e.equals(this)) {
+//                continue;
+//            }
+//            if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
+////				Creature.collided = true;
+//                return true;
+//            }
+//        }
+        return false;
+    }
+
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
         return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
-    }
-
-    public void moveX() {
-        if (xMove > 0) {
-            collided = false;
-            int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILEWIDTH;
-            if (!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) && !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                x += xMove;
-                xPosition += xMove;
-                //System.out.println("x added to xMove:" + x + " xPosition=" + xPosition);
-            } else {
-                x = tx * Tile.TILEWIDTH + bounds.x - bounds.width - 1;
-            }
-        } else if (xMove < 0) {
-            collided = false;
-            int tx = (int) (x + xMove + bounds.x) / Tile.TILEWIDTH;
-            if (!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) && !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILEHEIGHT)) {
-                x += xMove;
-                xPosition += xMove;
-                //System.out.println("x added to xMove:" + x + " xPosition=" + xPosition);
-            } else {
-                x = tx * Tile.TILEWIDTH + Tile.TILEWIDTH - bounds.x;
-            }
-        }
-    }
-
-    public void moveY() {
-        if (yMove < 0) {
-            collided = false;
-            int ty = (int) (y + yMove + bounds.y) / Tile.TILEHEIGHT;
-            if (!collisionWithTile((int) (x + bounds.x) / Tile.TILEWIDTH, ty) && !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                y += yMove;
-                yPosition += yMove;
-                //System.out.println("y added to yMove:" + y + " yPosition=" + yPosition);
-            } else {
-                collided = true;
-                y = ty * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.y;
-            }
-        } else if (yMove > 0) {
-            collided = false;
-            int ty = (int) (y + yMove + bounds.y + bounds.height) / Tile.TILEHEIGHT;
-            if (!collisionWithTile((int) (x + bounds.x) / Tile.TILEWIDTH, ty) && !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)) {
-                y += yMove;
-                yPosition += yMove;
-                //System.out.println("y added to yMove:" + y + " yPosition=" + yPosition);
-            } else {
-                y = ty * Tile.TILEHEIGHT - bounds.y - bounds.height - 1;
-                collided = true;
-            }
-
-        }
     }
 
 
@@ -264,15 +207,23 @@ public class Movement {
         return x;
     }
 
+    public void setX(float x) {
+        this.x = x;
+    }
+
     public float getY() {
         return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 
     public int getWidth() {
         return width;
     }
 
-    public Object getHeight() {
+    public int getHeight() {
         return height;
     }
 }

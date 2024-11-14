@@ -1,6 +1,6 @@
 package Entities.Characters;
 
-import Entities.Characters.Stats.*;
+import Entities.Common.*;
 import Skills.Warrior.*;
 import Utils.SpriteSheet;
 import Skills.*;

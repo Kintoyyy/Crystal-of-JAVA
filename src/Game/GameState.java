@@ -12,7 +12,7 @@ public class GameState {
 
     public GameState(Handler handler) {
         this.handler = handler;
-        this.characters = new CharacterManager(handler);
+        this.characters = new CharacterManager();
     }
 
     public void tick() {

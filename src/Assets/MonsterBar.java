@@ -106,7 +106,7 @@ public class MonsterBar {
 				redDamageText.setY(640 - i / 2);
 				if(!f) {
 					f = true;
-					Player.health -= 20;
+//					Player.health -= 20;
 				}
 			} else {
 				f = false;

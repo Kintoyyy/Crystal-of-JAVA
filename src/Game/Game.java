@@ -75,6 +75,8 @@ public class Game implements Runnable {
 
         handler = new Handler(this);
 
+        gameCamera = new GameCamera(handler, 0, 0);
+
         gameState = new GameState(handler);
 
         // set the debug mode
@@ -83,7 +85,7 @@ public class Game implements Runnable {
         // set the game state
         handler.setGameState(gameState);
 
-        gameCamera = new GameCamera(handler, 0, 0);
+
 
         viewManager = new ViewManager(handler);
     }

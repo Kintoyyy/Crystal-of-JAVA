@@ -17,16 +17,13 @@ public class World {
     private int spawnX, spawnY;
     private int[][][] tiles;
     private final EntityManager entityManager;
-    private Player player;
 
     private ParseTileTypes parseTileTypes;
 
     public World(Handler handler, String path) {
         this.handler = handler;
 
-        entityManager = new EntityManager(handler, new Player(handler, 0, 0));
-
-        player = new Player(handler, 0, 0);
+        entityManager = new EntityManager(handler, new Player(handler));
 
         loadWorld(path);
 
@@ -46,7 +43,6 @@ public class World {
     }
 
     public void tick() {
-        player.tick();
         entityManager.tick();
     }
 
@@ -76,7 +72,7 @@ public class World {
 
             if (layer == tiles.length - 1) {
 //                player.render(g);
-//                entityManager.render(g);
+                entityManager.render(g);
             }
         }
     }
@@ -152,14 +148,4 @@ public class World {
     public int getSpawnY() {
         return spawnY;
     }
-
-    public void setSpawnX(int spawnX) {
-        this.spawnX = spawnX;
-    }
-
-    public void setSpawnY(int spawnY) {
-        this.spawnY = spawnY;
-    }
-
-
 }

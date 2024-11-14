@@ -1,8 +1,8 @@
 package Entities.Enemies;
 
-import Entities.Characters.Stats.AttackPower;
-import Entities.Characters.Stats.Defense;
-import Entities.Characters.Stats.Health;
+import Entities.Common.AttackPower;
+import Entities.Common.Defense;
+import Entities.Common.Health;
 
 public class Kai extends Enemy {
     // Ultra-high health, ultra-high attack, has a special skill that can instantly kill the player.

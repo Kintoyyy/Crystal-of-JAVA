@@ -1,4 +1,4 @@
-package Entities.Characters.Stats;
+package Entities.Common;
 
 public enum AttackType {
     PHYSICAL,

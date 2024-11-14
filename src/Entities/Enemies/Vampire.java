@@ -1,8 +1,8 @@
 package Entities.Enemies;
 
-import Entities.Characters.Stats.AttackPower;
-import Entities.Characters.Stats.Defense;
-import Entities.Characters.Stats.Health;
+import Entities.Common.AttackPower;
+import Entities.Common.Defense;
+import Entities.Common.Health;
 import Entities.Enemies.SpecialSkill.LifeSteal;
 
 public class Vampire extends Enemy {

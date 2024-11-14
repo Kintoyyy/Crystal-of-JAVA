@@ -20,35 +20,23 @@ public class Player extends Creature {
 
     private PlayerAnimation animation;
     public static String dir = "down";
-    public static float xPosition;
-    public static float yPosition;
-    public static double health;
-    public static double baseHealth;
-    public static int level;
-    public static String name;
 
-    private static int SCALE = 2;
+//    private boolean flag3;
+//    private int a;
+//    private int b;
 
-    private boolean flag3;
-    private int a;
-    private int b;
+    public Player(Handler handler) {
+        super(handler, Creature.PLAYER_WIDTH, Creature.PLAYER_HEIGHT);
 
-    public Player(Handler handler, float x, float y) {
-        super(handler, x, y, Creature.PLAYER_WIDTH, Creature.PLAYER_HEIGHT);
-
-        bounds.x = 40;
-        bounds.height = 24;
-        bounds.y = 64;
-        bounds.width = 40;
+//        bounds.x = 40;
+//        bounds.height = 24;
+//        bounds.y = 64;
+//        bounds.width = 40;
 
         initializePlayer(handler.getGameState().getCharacterManger().getPlayer());
     }
 
     private void initializePlayer( Character player) {
-        health = player.getHealth().getHealth();
-        baseHealth = player.getHealth().getBaseHealth();
-        level = player.getLevel();
-        name = player.getName();
         animation = player.getAnimation();
     }
 
@@ -57,50 +45,52 @@ public class Player extends Creature {
         animation.tick();
         getInput();
         move();
-        checkEncounter();
+//        checkEncounter();
         handler.getGameCamera().centerOnEntity(this);
+//        System.out.println("x: " + handler.getGameCamera().getxOffset() + " y: " + handler.getGameCamera().getyOffset());
+//        System.out.println("x: " + x + " y: " + y);
     }
 
     // TODO: MOVE TO A SEPARATE CLASS
     private long lastKeyPress = 0;
     private static final long DEBOUNCE_TIME = 300; // milliseconds
 
-    private boolean debounceKeyPress(boolean isKeyPressed) {
-        long currentTime = System.currentTimeMillis();
-        if (isKeyPressed) {
-            if (currentTime - lastKeyPress > DEBOUNCE_TIME) {
-                lastKeyPress = currentTime; // Update last press time
-                return true; // Key press is valid and should trigger action
-            }
-        }
-        return false; // Key press is ignored due to debounce
-    }
+//    private boolean debounceKeyPress(boolean isKeyPressed) {
+//        long currentTime = System.currentTimeMillis();
+//        if (isKeyPressed) {
+//            if (currentTime - lastKeyPress > DEBOUNCE_TIME) {
+//                lastKeyPress = currentTime; // Update last press time
+//                return true; // Key press is valid and should trigger action
+//            }
+//        }
+//        return false; // Key press is ignored due to debounce
+//    }
 
     private void getInput() {
         xMove = 0;
         yMove = 0;
 
-        if (debounceKeyPress(handler.getKeymanager().f3)) {
-            DebugMode.SetDebugMode(!DebugMode.debugMode());
-        }
-
-        if (debounceKeyPress(handler.getKeymanager().f9)) {
-            System.out.println("GAME VIEW");
-            handler.getViewManager().setView(ViewEnums.GAME);
-        }
-
-        if (debounceKeyPress(handler.getKeymanager().f10)) {
-            System.out.println("MENU VIEW");
-//            handler.getViewManager().setView(ViewEnums.MAIN_MENU);
-        }
-
-        if (debounceKeyPress(handler.getKeymanager().f12)) {
-            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() + 1);
-        }
-
-        if (debounceKeyPress(handler.getKeymanager().f11)) {
-            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() - 1);
-        }
+//        if (debounceKeyPress(handler.getKeymanager().f3)) {
+//            DebugMode.SetDebugMode(!DebugMode.debugMode());
+//        }
+//
+//        if (debounceKeyPress(handler.getKeymanager().f9)) {
+//            System.out.println("GAME VIEW");
+//            handler.getViewManager().setView(ViewEnums.GAME);
+//        }
+//
+//        if (debounceKeyPress(handler.getKeymanager().f10)) {
+//            System.out.println("MENU VIEW");
+////            handler.getViewManager().setView(ViewEnums.MAIN_MENU);
+//        }
+//
+//        if (debounceKeyPress(handler.getKeymanager().f12)) {
+//            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() + 1);
+//        }
+//
+//        if (debounceKeyPress(handler.getKeymanager().f11)) {
+//            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() - 1);
+//        }
 
         boolean movingUp = handler.getKeymanager().up || handler.getKeymanager().Up;
         boolean movingDown = handler.getKeymanager().down || handler.getKeymanager().Down;
@@ -162,41 +152,40 @@ public class Player extends Creature {
     @Override
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
-                (int) (y - handler.getGameCamera().getyOffset()), width * SCALE, height * SCALE, null);
+                (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
 
 //        if (DebugMode.debugMode()) {
             g.setColor(Color.red);
             g.drawRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
                     (int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
 //        }
-
     }
 
-
-    private void checkEncounter() {
-        World w = handler.getWorld();
-//        System.out.println((w.getTile(w.getSpawnX() + ((int) Creature.xPosition) / 64,
-//                w.getSpawnY() + ((int) Creature.yPosition) / 64).getId() == 10));
-        Tile tile = w.getTile(w.getSpawnX() + ((int) Creature.xPosition) / 64, w.getSpawnY() + ((int) Creature.yPosition) / 64);
-        if(tile != null){
-            if ((tile.getId() == 10) && !BattleState.encounterFlag
-                    && Math.random() >= 0.99) {
-                a = w.getSpawnX() + ((int) Creature.xPosition) / 64;
-                b = w.getSpawnY() + ((int) Creature.yPosition) / 64;
-                System.out.println("a:" + a + "b:" + b);
-                if (!flag3) {
-                    flag3 = true;
-                    Game.flag = true;
-                }
-
-            } else if (BattleState.encounterFlag) {
-                if (a != w.getSpawnX() + ((int) Creature.xPosition) / 64
-                        || b != w.getSpawnY() + ((int) Creature.yPosition) / 64) {
-                    BattleState.encounterFlag = false;
-                    flag3 = false;
-                }
-            }
-        }
-
-    }
+//
+//    private void checkEncounter() {
+//        World w = handler.getWorld();
+////        System.out.println((w.getTile(w.getSpawnX() + ((int) Creature.xPosition) / 64,
+////                w.getSpawnY() + ((int) Creature.yPosition) / 64).getId() == 10));
+//        Tile tile = w.getTile(w.getSpawnX() + ((int) Creature.xPosition) / 64, w.getSpawnY() + ((int) Creature.yPosition) / 64);
+//        if(tile != null){
+//            if ((tile.getId() == 10) && !BattleState.encounterFlag
+//                    && Math.random() >= 0.99) {
+//                a = w.getSpawnX() + ((int) Creature.xPosition) / 64;
+//                b = w.getSpawnY() + ((int) Creature.yPosition) / 64;
+//                System.out.println("a:" + a + "b:" + b);
+////                if (!flag3) {
+////                    flag3 = true;
+////                    Game.flag = true;
+////                }
+//
+//            } else if (BattleState.encounterFlag) {
+//                if (a != w.getSpawnX() + ((int) Creature.xPosition) / 64
+//                        || b != w.getSpawnY() + ((int) Creature.yPosition) / 64) {
+//                    BattleState.encounterFlag = false;
+////                    flag3 = false;
+//                }
+//            }
+//        }
+//
+//    }
 }

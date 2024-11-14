@@ -1,7 +1,7 @@
 package Entities.Characters;
 
 import Animations.PlayerAnimation;
-import Entities.Characters.Stats.*;
+import Entities.Common.*;
 import Entities.Entity;
 import Utils.SpriteSheet;
 import Skills.Skill;
