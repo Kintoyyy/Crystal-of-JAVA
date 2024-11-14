@@ -40,7 +40,7 @@ public class SelectCharacter extends View {
 
     @Override
     public void render(Graphics g) {
-//        g.drawImage(Assets.background, 0, 0, handler.getWidth(), handler.getHeight(), null);
+//        g.drawImage(Assets.background, 0, 0, handler.getWidth(), handler.getWorldHeight(), null);
         components.render(g);
     }
 }

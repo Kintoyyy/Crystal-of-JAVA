@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import CharacterMovement.Player;
 import Game.Handler;
 import Animations.Animation;
 import States.BattleState;
@@ -280,7 +279,7 @@ public class AttackBarManager {
 	}
 	
 	private void move() {
-		if(canPress && (handler.getKeymanager().q || handler.getKeymanager().space)) {
+		if(canPress && (handler.getKeyManager().q || handler.getKeyManager().space)) {
 			pressed = true;
 		} else if(!canPress){
 			pressed = false;

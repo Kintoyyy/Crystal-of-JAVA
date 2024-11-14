@@ -1,7 +1,7 @@
 package Rendering;
 
 import Entities.Characters.CharacterManager;
-import Entities.Characters.Movement;
+import Entities.Characters.Movement.Movement;
 import Game.Handler;
 import Utils.DebugMode;
 import World.ParseTileTypes;
@@ -18,38 +18,37 @@ public class RenderWorld {
     private CharacterManager characterManager;
     private Movement movement;
 
-    public RenderWorld(Handler handler, ParseWorld worldParser, CharacterManager characterManager, Movement movement) {
-        this.movement = movement;
+    public RenderWorld(Handler handler, ParseWorld worldParser, CharacterManager characterManager) {
+
+        this.movement = new Movement(handler, worldParser);
+
+        this.movement.setSpawn(300, 300);
+
         this.handler = handler;
-        this.width = worldParser.getWidth();
-        this.height = worldParser.getHeight();
+        this.width = worldParser.getWorldWidth();
+        this.height = worldParser.getWorldHeight();
         this.TileLayers = worldParser.getLayers();
         this.tileTypes = worldParser.getTileTypes();
         this.characterManager = characterManager;
     }
 
-    public RenderWorld(Handler handler, ParseWorld worldParser, CharacterManager characterManager) {
-        this.handler = handler;
-        this.width = worldParser.getWidth();
-        this.height = worldParser.getHeight();
-        this.TileLayers = worldParser.getLayers();
-        this.tileTypes = worldParser.getTileTypes();
-        this.characterManager = characterManager;
+    public void tick() {
+        movement.tick();
     }
 
     public void render(Graphics g) {
         for (int layer = 0; layer < TileLayers.length; layer++) {
-            int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
-            int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
-            int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
-            int yEnd = (int) Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+            int xStart = (int) Math.max(0, handler.getGameCamera().getXOffset() / Tile.TILEWIDTH);
+            int xEnd = (int) Math.min(width, (handler.getGameCamera().getXOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
+            int yStart = (int) Math.max(0, handler.getGameCamera().getYOffset() / Tile.TILEHEIGHT);
+            int yEnd = (int) Math.min(height, (handler.getGameCamera().getYOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
 
             for (int i = yStart; i < yEnd; i++) {
                 for (int j = xStart; j < xEnd; j++) {
                     Tile tile = getTile(i, j, layer);
                     if (tile != null) {
-                        int tilePosX = (int) (j * Tile.TILEWIDTH - handler.getGameCamera().getxOffset());
-                        int tilePosY = (int) (i * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset());
+                        int tilePosX = (int) (j * Tile.TILEWIDTH - handler.getGameCamera().getXOffset());
+                        int tilePosY = (int) (i * Tile.TILEHEIGHT - handler.getGameCamera().getYOffset());
 
                         tile.render(g, tilePosX, tilePosY);
 
@@ -63,7 +62,6 @@ public class RenderWorld {
             }
 
             if (layer == TileLayers.length - 1) {
-//                characterManager.render(g);
                 movement.render(g);
             }
         }

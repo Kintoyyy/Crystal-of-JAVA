@@ -5,14 +5,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import Entities.Characters.Character;
-import Game.Game;
 import Game.Handler;
-import Utils.DebugMode;
-import World.World;
 import Animations.PlayerAnimation;
-import States.BattleState;
-import World.Tile;
-import enums.ViewEnums;
 
 import static Constants.PlayerAnimation.*;
 
@@ -46,8 +40,8 @@ public class Player extends Creature {
         getInput();
         move();
 //        checkEncounter();
-        handler.getGameCamera().centerOnEntity(this);
-//        System.out.println("x: " + handler.getGameCamera().getxOffset() + " y: " + handler.getGameCamera().getyOffset());
+//        handler.getGameCamera().centerOnEntity(this);
+//        System.out.println("x: " + handler.getGameCamera().getXOffset() + " y: " + handler.getGameCamera().getYOffset());
 //        System.out.println("x: " + x + " y: " + y);
     }
 
@@ -70,32 +64,32 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
-//        if (debounceKeyPress(handler.getKeymanager().f3)) {
+//        if (debounceKeyPress(handler.getKeyManager().f3)) {
 //            DebugMode.SetDebugMode(!DebugMode.debugMode());
 //        }
 //
-//        if (debounceKeyPress(handler.getKeymanager().f9)) {
+//        if (debounceKeyPress(handler.getKeyManager().f9)) {
 //            System.out.println("GAME VIEW");
 //            handler.getViewManager().setView(ViewEnums.GAME);
 //        }
 //
-//        if (debounceKeyPress(handler.getKeymanager().f10)) {
+//        if (debounceKeyPress(handler.getKeyManager().f10)) {
 //            System.out.println("MENU VIEW");
 ////            handler.getViewManager().setView(ViewEnums.MAIN_MENU);
 //        }
 //
-//        if (debounceKeyPress(handler.getKeymanager().f12)) {
+//        if (debounceKeyPress(handler.getKeyManager().f12)) {
 //            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() + 1);
 //        }
 //
-//        if (debounceKeyPress(handler.getKeymanager().f11)) {
+//        if (debounceKeyPress(handler.getKeyManager().f11)) {
 //            DebugMode.setRenderedLayerIndex(DebugMode.getRenderedLayerIndex() - 1);
 //        }
 
-        boolean movingUp = handler.getKeymanager().up || handler.getKeymanager().Up;
-        boolean movingDown = handler.getKeymanager().down || handler.getKeymanager().Down;
-        boolean movingLeft = handler.getKeymanager().left || handler.getKeymanager().Left;
-        boolean movingRight = handler.getKeymanager().right || handler.getKeymanager().Right;
+        boolean movingUp = handler.getKeyManager().up || handler.getKeyManager().Up;
+        boolean movingDown = handler.getKeyManager().down || handler.getKeyManager().Down;
+        boolean movingLeft = handler.getKeyManager().left || handler.getKeyManager().Left;
+        boolean movingRight = handler.getKeyManager().right || handler.getKeyManager().Right;
 
         if ((movingUp || movingDown) && (movingLeft || movingRight)) {
             float diagonalSpeed = speed * 0.7071f;
@@ -151,13 +145,13 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
-                (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getXOffset()),
+                (int) (y - handler.getGameCamera().getYOffset()), width, height, null);
 
 //        if (DebugMode.debugMode()) {
             g.setColor(Color.red);
-            g.drawRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-                    (int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+            g.drawRect((int) (x + bounds.x - handler.getGameCamera().getXOffset()),
+                    (int) (y + bounds.y - handler.getGameCamera().getYOffset()), bounds.width, bounds.height);
 //        }
     }
 

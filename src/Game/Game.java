@@ -8,6 +8,7 @@ import Assets.Assets;
 import Assets.Transition;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardManager;
+import Rendering.Camera;
 import Utils.DebugMode;
 import Views.ViewManager;
 
@@ -35,7 +36,7 @@ public class Game implements Runnable {
     //Input
     private InputKeyboardManager inputKeyboardManager;
 
-    private GameCamera gameCamera;
+    private Camera camera;
 
     private Handler handler;
     private Transition transition;
@@ -75,7 +76,7 @@ public class Game implements Runnable {
 
         handler = new Handler(this);
 
-        gameCamera = new GameCamera(handler, 0, 0);
+        camera = new Camera(handler, 0, 0);
 
         gameState = new GameState(handler);
 
@@ -192,8 +193,8 @@ public class Game implements Runnable {
         return inputMouseListener;
     }
 
-    public GameCamera getGameCamera() {
-        return gameCamera;
+    public Camera getGameCamera() {
+        return camera;
     }
 
     public int getWidth() {

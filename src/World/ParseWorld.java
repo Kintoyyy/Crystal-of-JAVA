@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
 public class ParseWorld {
-    private int width, height;
+    private int worldWidth, worldHeight;
     private int spawnX, spawnY;
     private int[][][] tilesLayer;
     private ParseTileTypes parseTileTypes;
@@ -33,13 +33,13 @@ public class ParseWorld {
                 parseTileTypes = new ParseTileTypes(tilesets);
 
                 // Retrieve map dimensions
-                this.width = Integer.parseInt(mapElement.getAttribute("width"));
-                this.height = Integer.parseInt(mapElement.getAttribute("height"));
+                this.worldWidth = Integer.parseInt(mapElement.getAttribute("width"));
+                this.worldHeight = Integer.parseInt(mapElement.getAttribute("height"));
 
                 // Initialize ParseWorldLayers with extracted dimensions
                 NodeList layers = mapElement.getElementsByTagName("layer");
 
-                tilesLayer = new ParseWorldLayers(layers, width, height).getTiles();
+                tilesLayer = new ParseWorldLayers(layers, worldWidth, worldHeight).getTiles();
 
                 spawnX = mapElement.hasAttribute("spawnX") ?
                         Integer.parseInt(mapElement.getAttribute("spawnX")) : 10;
@@ -54,23 +54,21 @@ public class ParseWorld {
             e.printStackTrace();
         }
     }
+
     public int[][][] getLayers() {
         return tilesLayer;
     }
+
     public ParseTileTypes getTileTypes() {
         return parseTileTypes;
     }
-    public int getWidth() {
-        return width;
+
+    public int getWorldWidth() {
+        return worldWidth;
     }
-    public int getHeight() {
-        return height;
-    }
-    public int getSpawnX() {
-        return spawnX;
-    }
-    public int getSpawnY() {
-        return spawnY;
+
+    public int getWorldHeight() {
+        return worldHeight;
     }
 }
 

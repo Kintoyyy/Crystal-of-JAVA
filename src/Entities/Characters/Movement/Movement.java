@@ -1,8 +1,9 @@
-package Entities.Characters;
+package Entities.Characters.Movement;
 
 import Animations.PlayerAnimation;
-import CharacterMovement.Entity;
+import Entities.Characters.Kent;
 import Game.Handler;
+import World.ParseWorld;
 import World.Tile;
 
 import java.awt.*;
@@ -16,8 +17,6 @@ public class Movement {
     protected int width, height;
 
     public static final float DEFAULT_SPEED = 4.0f;
-    public static final int PLAYER_WIDTH = 128;
-    public static final int PLAYER_HEIGHT = 128;
 
     protected float speed;
     public static float xMove, yMove;
@@ -28,8 +27,9 @@ public class Movement {
     public static String dir = "down";
 
     protected Rectangle bounds; // Character bounds
+    private ParseWorld world;
 
-    public Movement(Handler handler) {
+    public Movement(Handler handler, ParseWorld world) {
         this.handler = handler;
         this.x = 0;
         this.y = 0;
@@ -50,32 +50,22 @@ public class Movement {
         this.y = y;
     }
 
+
+
     public void tick() {
         animation.tick();
         getInput();
-        move();
-        handler.getGameCamera().centerThis(this);
-    }
-
-    public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getxOffset()),
-                (int) (y - handler.getGameCamera().getyOffset()), width, height, null);
-
-//        if (DebugMode.debugMode()) {
-        g.setColor(Color.red);
-        g.drawRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()),
-                (int) (y + bounds.y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
-//        }
+        handler.getGameCamera().centerOnEntity(this);
     }
 
     private void getInput() {
         xMove = 0;
         yMove = 0;
 
-        boolean movingUp = handler.getKeymanager().up || handler.getKeymanager().Up;
-        boolean movingDown = handler.getKeymanager().down || handler.getKeymanager().Down;
-        boolean movingLeft = handler.getKeymanager().left || handler.getKeymanager().Left;
-        boolean movingRight = handler.getKeymanager().right || handler.getKeymanager().Right;
+        boolean movingUp = handler.getKeyManager().up || handler.getKeyManager().Up;
+        boolean movingDown = handler.getKeyManager().down || handler.getKeyManager().Down;
+        boolean movingLeft = handler.getKeyManager().left || handler.getKeyManager().Left;
+        boolean movingRight = handler.getKeyManager().right || handler.getKeyManager().Right;
 
         if ((movingUp || movingDown) && (movingLeft || movingRight)) {
             float diagonalSpeed = speed * 0.7071f;
@@ -99,8 +89,18 @@ public class Movement {
         } else if (yMove > 0) {
             dir = DOWN;
         }
+        // Move the player based on the input
+        move();
     }
 
+    public void render(Graphics g) {
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getXOffset()),
+                (int) (y - handler.getGameCamera().getYOffset()), width, height, null);
+
+        g.setColor(Color.red);
+        g.drawRect((int) (x + bounds.x - handler.getGameCamera().getXOffset()),
+                (int) (y + bounds.y - handler.getGameCamera().getYOffset()), bounds.width, bounds.height);
+    }
 
     private BufferedImage getCurrentAnimationFrame() {
         // Diagonal movement frames are handled first
@@ -166,6 +166,7 @@ public class Movement {
         }
     }
 
+
     private boolean canMoveX(int tx) {
         return !collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) &&
                 !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILEHEIGHT);
@@ -202,21 +203,12 @@ public class Movement {
         return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
     }
 
-
     public float getX() {
         return x;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
     public float getY() {
         return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
     }
 
     public int getWidth() {

@@ -27,15 +27,15 @@ public abstract class Entity {
     public abstract void render(Graphics g);
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
-        for (Entity e : handler.getWorld().getEntityManager().getEntities()) {
-            if (e.equals(this)) {
-                continue;
-            }
-            if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
-//				Creature.collided = true;
-                return true;
-            }
-        }
+//        for (Entity e : handler.getWorld().getEntityManager().getEntities()) {
+//            if (e.equals(this)) {
+//                continue;
+//            }
+//            if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
+////				Creature.collided = true;
+//                return true;
+//            }
+//        }
         return false;
     }
 

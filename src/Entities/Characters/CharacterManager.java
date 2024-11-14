@@ -1,6 +1,7 @@
 
 package Entities.Characters;
 
+import Entities.Characters.Movement.Movement;
 import Game.Handler;
 import Skills.Skill;
 
@@ -8,15 +9,22 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CharacterManager {
-    private static ArrayList<Character> characters;
+    private static ArrayList<Character> characters = new ArrayList<>(4);
     private int currentCharacterIndex = 0;
 
     public CharacterManager() {
-        characters = new ArrayList<>(4);
         addCharacter(new Kent());
         addCharacter(new Cedi());
         addCharacter(new Nathan());
         addCharacter(new Zeith());
+    }
+
+    public void setPlayerByIndex(int index) {
+        if (index < 0 || index >= characters.size()) {
+            System.out.println("Invalid index");
+            return;
+        }
+        this.currentCharacterIndex = index;
     }
 
     private static void addCharacter(Character character) {
@@ -35,25 +43,12 @@ public class CharacterManager {
         return !characters.get(currentCharacterIndex).getHealth().isDead();
     }
 
-    public void setPlayerByIndex(int index) {
-        if (index < 0 || index >= characters.size()) {
-            System.out.println("Invalid index");
-            return;
-        }
-        this.currentCharacterIndex = index;
-    }
 
-    public int getCurrentCharacterIndex() {
-        return this.currentCharacterIndex;
-    }
 
     public void tick() {
         for (Character character : characters) {
             character.regenHealth();
             character.regenMana();
-            // temporary fix
-//            character.getMovement().setControllers(handler.getGameCamera(), handler.getKeymanager());
-//            System.out.println("Character: " + character.getMovement().getCamera() + " " + character.getMovement().getKeyManager());
         }
     }
 
