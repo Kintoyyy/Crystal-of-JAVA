@@ -6,3 +6,4 @@ public class Launcher{
 		game.start();
 	}
 }
+7
