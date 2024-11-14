@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import Entities.Player;
+import CharacterMovement.Player;
 import Game.Handler;
 import Animations.Animation;
 import States.BattleState;

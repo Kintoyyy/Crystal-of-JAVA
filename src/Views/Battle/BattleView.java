@@ -6,6 +6,7 @@ import Components.Layouts.*;
 import Components.Menu.SkillMenu;
 import Enemies.*;
 import Game.BattleManager;
+import Game.TurnState;
 import Utils.Timer;
 import Views.*;
 import enums.ViewEnums;
@@ -76,7 +77,7 @@ public class BattleView extends View {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 20));
         g.drawString(handler.getGameState().getCharacterManger().getPlayer().getSkills().toString(), 20, 50);
-        g.drawString(battleManager.getTurnState(), 500, 400);
+        g.drawString((battleManager.getTurnState() == TurnState.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
 //        g.drawString(handler.getGameState(), 20, 70);
     }
 

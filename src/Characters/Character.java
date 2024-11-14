@@ -28,8 +28,10 @@ public abstract class Character {
 
     protected ArrayList<Skill> skills;
     protected SpriteSheet spriteSheet;
+
     private PlayerAnimation animation;
-    private BufferedImage playerProfile;
+
+    protected BufferedImage playerProfile;
 
     private ArrayList<Effect> effects = new ArrayList<>();
 

@@ -1,9 +1,6 @@
 package Characters;
 
-import Characters.Stats.AttackPower;
-import Characters.Stats.Defense;
-import Characters.Stats.Health;
-import Characters.Stats.Mana;
+import Characters.Stats.*;
 import Skills.Warrior.*;
 import Utils.SpriteSheet;
 import Skills.*;
@@ -15,8 +12,7 @@ public class Kent extends Character {
 
     public Kent() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(150), new Defense(30), new ArrayList<>());
-
+        super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(150, AttackType.PHYSICAL), new Defense(30), new ArrayList<>());
 
         this.addSkill(new Warrior(this));
         this.addSkill(new PowerStrike());
@@ -25,6 +21,9 @@ public class Kent extends Character {
         this.addSkill(new Taunt());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
+
+        SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Kent/Profile.png"));
+        this.playerProfile = profile.crop(0, 0, 300, 300);
     }
 
     @Override

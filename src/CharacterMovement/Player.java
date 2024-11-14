@@ -1,17 +1,13 @@
-package Entities;
+package CharacterMovement;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import Assets.Assets;
-import Assets.Creature;
 import Characters.Character;
 import Game.Game;
 import Game.Handler;
 import Utils.DebugMode;
-import Utils.ImageUtils;
-import Utils.SpriteSheet;
 import World.World;
 import Animations.PlayerAnimation;
 import States.BattleState;
@@ -62,7 +58,7 @@ public class Player extends Creature {
         getInput();
         move();
         checkEncounter();
-
+        System.out.println(name);
         handler.getGameCamera().centerOnEntity(this);
     }
 

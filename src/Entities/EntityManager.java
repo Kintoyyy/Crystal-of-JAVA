@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import CharacterMovement.Entity;
+import CharacterMovement.Player;
 import Game.Handler;
 
 public class EntityManager {
@@ -53,9 +55,6 @@ public class EntityManager {
 	public void removeEntity(Entity e) {
 		entities.remove(e);
 	}
-	
-	
-	
 
 	public Handler getHandler() {
 		return handler;

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Nathan extends Character {
     public Nathan() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Nathan", 1, new Health( 900), new Mana(120),new AttackPower(140), new Defense(15), new ArrayList<>());
+        super("Nathan", 1, new Health(900), new Mana(120), new AttackPower(140), new Defense(15), new ArrayList<>());
 
         this.addSkill(new Archer(this));
         this.addSkill(new PrecisionShot());
@@ -24,7 +24,7 @@ public class Nathan extends Character {
         this.addSkill(new PoisonArrow());
         this.addSkill(new Evasion());
 
-        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
+        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Nathan/Character.png"));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package Game;
 
-import Entities.Entity;
+import CharacterMovement.Entity;
 import World.Tile;
 
 public class GameCamera {

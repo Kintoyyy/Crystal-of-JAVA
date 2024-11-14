@@ -1,6 +1,6 @@
 package Game;
 
-enum TurnState {
+public enum TurnState {
     PLAYER,
     ENEMY
 }

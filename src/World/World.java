@@ -1,9 +1,7 @@
 package World;
 
-import Assets.*;
-
 import Entities.EntityManager;
-import Entities.Player;
+import CharacterMovement.Player;
 import Utils.DebugMode;
 import Game.Handler;
 import org.w3c.dom.*;
@@ -29,15 +27,15 @@ public class World {
 
         loadWorld(path);
 
-        for (int[][] tile : tiles) {
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    if (tile[j][i] >= 96 && tile[j][i] < 100) {
-//                        entityManager.addEntity(new Tree(handler, (int) (j * Tile.TILEWIDTH), (int) (i * Tile.TILEWIDTH) - (int) (Tile.TILEWIDTH * 1.5), 99 - tile[j][i]));
-                    }
-                }
-            }
-        }
+//        for (int[][] tile : tiles) {
+//            for (int i = 0; i < width; i++) {
+//                for (int j = 0; j < height; j++) {
+//                    if (tile[j][i] >= 96 && tile[j][i] < 100) {
+////                        entityManager.addEntity(new Tree(handler, (int) (j * Tile.TILEWIDTH), (int) (i * Tile.TILEWIDTH) - (int) (Tile.TILEWIDTH * 1.5), 99 - tile[j][i]));
+//                    }
+//                }
+//            }
+//        }
     }
 
     public EntityManager getEntityManager() {
@@ -73,7 +71,7 @@ public class World {
             }
 
             if (layer == tiles.length - 1) {
-                entityManager.render(g);
+//                entityManager.render(g);
             }
         }
     }
@@ -123,6 +121,7 @@ public class World {
                         Integer.parseInt(mapElement.getAttribute("spawnX")) : 10;
                 spawnY = mapElement.hasAttribute("spawnY") ?
                         Integer.parseInt(mapElement.getAttribute("spawnY")) : 10;
+
                 entityManager.getPlayer().setX(spawnX * Tile.TILEWIDTH);
                 entityManager.getPlayer().setY(spawnY * Tile.TILEWIDTH);
             }

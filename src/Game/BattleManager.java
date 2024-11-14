@@ -55,9 +55,8 @@ public class BattleManager {
         }
         characterManager.updateTurns();
     }
-
-    public String getTurnState() {
-        return turnState == TurnState.PLAYER ? "Player" : "Enemy";
+    public TurnState getTurnState() {
+        return turnState;
     }
 
     public void tick() {
