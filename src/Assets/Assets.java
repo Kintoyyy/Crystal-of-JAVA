@@ -10,43 +10,21 @@ public class Assets {
     private static final int width = 32; //Size of each tile in sprite sheet
     private static final int height = 32;
 
-    private static final int pWidth = 32;
-    private static final int pHeight = 32;
-
-    public static BufferedImage[][] player_animation, grass_tiles;
     public static BufferedImage[] ui_frame = new BufferedImage[2];
     public static BufferedImage background;
-    public static SpriteSheet playerSheet;
 
-    public static BufferedImage grass, rock, ledgeMiddleLeft, tree, bush, leftCornerLedge, ledge, bottomMiddleLedge, bottomRightLedge,
-            ledgeMiddleRight, ledgeTopLeft, ledgeTopMiddle, ledgeTopRight, ledgeMiddleMiddle, grassLedge, ledgeCornerTopRight, ledgeCornerTopLeft, bar,
+    public static BufferedImage  bush,bar,
             critBar, barGrass, grassPlatform, enemyDescription, enemyHealthBar, slash, monsterLevel, monsterBar, playerDescription,
-            greySquare, barOutline, coin, xp; //images from sprite sheet
+            greySquare, coin, xp;
 
     public static BufferedImage[] buttonStart, trees, attackButton, escapeButton, alphabet, numbers, slashAnimation, attackBar, damageNumbers,
             miniAlphabet, statsButton, redNumbers, arrow, moneyNumbers, xpNumbers, monsters;
-
-    private static BufferedImage[][] loadAnimations(SpriteSheet spriteSheet) {
-        BufferedImage[][] animationFrames = new BufferedImage[13][8];
-        for (int i = 0; i < animationFrames.length; i++) {
-            for (int j = 0; j < animationFrames[i].length; j++) {
-                animationFrames[i][j] = spriteSheet.crop(j * pWidth, i * pHeight, pWidth, pHeight);
-            }
-        }
-
-        return animationFrames;
-    }
 
     public static void init() {
 
 
         SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/textures/Tiles.png"));
 
-        SpriteSheet playerSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
-//        player_animation = loadAnimations(playerSheet);
-
-
-        SpriteSheet ledgeSheet = new SpriteSheet(ImageUtils.loadImage("/textures/LedgeTiles2.png"));
         SpriteSheet treeSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Trees.png"));
         SpriteSheet barSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Bar.png"));
         SpriteSheet monsterSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Monsters.png"));
@@ -165,8 +143,6 @@ public class Assets {
         bar = barSheet.crop(105, 165, 150, 13);
         coin = barSheet.crop(204, 98, 8, 8);
         xp = barSheet.crop(212, 98, 10, 8);
-
-
     }
 
 }

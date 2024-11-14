@@ -1,6 +1,7 @@
 package Characters;
 
 import Animations.PlayerAnimation;
+import Characters.Effects.Effect;
 import Characters.Stats.*;
 import Skills.Basic;
 import Utils.SpriteSheet;
@@ -19,15 +20,18 @@ public abstract class Character {
     protected Mana mana;
     protected Energy energy;
     protected int experience;
+    protected double dodgeRate = 0.0;
 
     protected Defense defense;
     protected AttackPower attackPower;
     protected double dodgeChance = 0.0;
 
-    protected ArrayList<Skill> skills = new ArrayList<>(4);
+    protected ArrayList<Skill> skills;
     protected SpriteSheet spriteSheet;
     private PlayerAnimation animation;
     private BufferedImage playerProfile;
+
+    private ArrayList<Effect> effects = new ArrayList<>();
 
     public Character(String name, int level, Health health, Mana mana, AttackPower attackPower, Defense defense, ArrayList<Skill> skills) {
         this.name = name;
@@ -42,8 +46,6 @@ public abstract class Character {
         this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         this.experience = 0;
-
-        this.addSkill(new Basic(this.attackPower));
     }
 
     public void addSkill(Skill skill) {
@@ -51,6 +53,14 @@ public abstract class Character {
         if( skill == null || skills.contains(skill)) return;
         skill.setCharacter(this);
         skills.add(skill);
+    }
+
+    public double getDodgeRate() {
+        return dodgeRate;
+    }
+
+    public void setDodgeRate(double dodgeRate) {
+        this.dodgeRate = dodgeRate;
     }
 
     public Defense getDefense() {

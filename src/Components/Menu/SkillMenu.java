@@ -1,37 +1,36 @@
 package Components.Menu;
 
-import Components.Button.RoundedButton;
+import Characters.Character;
 import Components.Component;
+import Components.Button.SkillButton;
+import Game.BattleManager;
 import Game.Handler;
 import Skills.Skill;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SkillMenu extends Menu {
-    private Skill currentSkill;
-    private List<Skill> skills;
-    private static final int BUTTON_SPACING = 10; // Spacing between buttons
-    private final Handler handler;
+    private ArrayList<Skill> skills;
+    private final BattleManager battleManager;
 
-    public SkillMenu(Handler handler) {
+    public SkillMenu(BattleManager battleManager) {
         super();
-        this.handler = handler;
-        this.skills = new ArrayList<>(handler.getGameState().getPlayer().getSkills());
-        initSkillFrames();
+        this.battleManager = battleManager;
+        this.skills = new ArrayList<>();
+        scale(6);
+        initCharacterFrames();
     }
 
-    private void initSkillFrames() {
-        childComponents.clear(); // Clear existing components before re-adding
+    private void initCharacterFrames() {
+        // Remove previous skill frames if any
+        childComponents.clear();
 
+        // Create a new SkillButton for each skill in the updated list
         for (Skill skill : skills) {
-
-            RoundedButton frame = (RoundedButton) new RoundedButton(skill.getName())
-                    .hideText()
+            SkillButton frame = (SkillButton) new SkillButton(skill)
                     .setAction(() -> {
-                        currentSkill = skill;
-                        System.out.println("Selected Skill: " + currentSkill.getName());
+                        skill.attack(battleManager);
                     });
             childComponents.add(frame);
         }
@@ -39,26 +38,30 @@ public class SkillMenu extends Menu {
 
     @Override
     public void tick() {
-        // Only update skills if they have changed
-        List<Skill> newSkills = handler.getGameState().getPlayer().getSkills();
+        // Get the updated list of skills
+        ArrayList<Skill> updatedSkills = battleManager.getPlayer().getSkills();
 
-        if (!newSkills.equals(this.skills)) {
-            this.skills = new ArrayList<>(newSkills);
-            initSkillFrames();
+        // Check if skills have changed
+        if (!skills.equals(updatedSkills)) {
+            // If they have, update the list and recreate the skill frames
+            skills = updatedSkills;
+            initCharacterFrames();  // Reinitialize skill frames
         }
-        // Tick each component
+
+        // Update child components
         childComponents.forEach(Component::tick);
     }
 
     @Override
     public void render(Graphics g) {
+        Character player = battleManager.getPlayer();
         int xOffset = (int) this.x;
 
-        // Default to a single row layout
+        // Render the skill frames
         for (Component component : childComponents) {
-            if (component instanceof RoundedButton frame) {
+            if (component instanceof SkillButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
-                xOffset += frame.getWidth() + BUTTON_SPACING;
+                xOffset += frame.getWidth();
             }
             component.render(g);
         }

@@ -1,6 +1,7 @@
 package Skills.Mage;
 
 import Skills.Skill;
+import Skills.SkillType;
 
 public class Fireball extends Skill {
 
@@ -8,10 +9,11 @@ public class Fireball extends Skill {
     private static final int cost = 10;
     private static final int damage = 20;
     private static final String description = "Moderate AoE damage";
-    private static final String type = "Basic";
+    private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
 
     public Fireball() {
-        super(name, description, cost, damage, type);
+        super(name, description, cost, damage, SKILL_TYPE);
+        skillImage = sheet.crop(18,18, 18, 18);
     }
 
     @Override

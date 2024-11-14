@@ -2,35 +2,60 @@ package Skills;
 
 import Characters.Character;
 import Enemies.Enemy;
+import Game.BattleManager;
+import Utils.ImageUtils;
+import Utils.SpriteSheet;
+
+import java.awt.image.BufferedImage;
 
 public abstract class Skill {
     private final String name;
-    private final String type;
+    private final SkillType skillType;
     protected final double damage;
     private final int cost;
-    protected Character player;
+
     private String description;
-    protected String imagePath;
-    protected int cooldownTurns = 0;
-    protected int effectDurationTurns = 0;
+
+    private int cooldownTurns = 0;
+    private int baseCooldownTurns = 0;
+    private int effectDurationTurns = 0;
+    private int baseEffectDurationTurns = 0;
+
+    protected SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Skills.png"));
+    protected BufferedImage skillImage;
+
+    protected BattleManager battleManager;
 
     protected Enemy enemy;
+    protected Character player;
 
-    public Skill(String name,String description, int cost, double damage, String type) {
-        this(name, description, cost, damage, type, 0, 0);
+    public Skill(String name, String description, int cost, double damage, SkillType skillType) {
+        this(name, description, cost, damage, skillType, 0, 0);
     }
 
-    public Skill(String name,String description, int cost, double damage, String type, int cooldownTurns, int effectDurationTurns) {
+    public Skill(String name, String description, int cost, double damage, SkillType skillType, int cooldownTurns, int effectDurationTurns) {
         this.name = name;
         this.cost = cost;
         this.damage = damage;
-        this.type = type;
-        this.cooldownTurns = cooldownTurns;
-        this.effectDurationTurns = effectDurationTurns;
+        this.skillType = skillType;
+        this.baseCooldownTurns = cooldownTurns;
+        this.baseEffectDurationTurns = effectDurationTurns;
+    }
+
+    public BufferedImage getSkillImage() {
+        return skillImage;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getCooldownTurns() {
+        return cooldownTurns;
+    }
+
+    public int getEffectDurationTurns() {
+        return effectDurationTurns;
     }
 
     public void setCharacter(Character player) {
@@ -45,27 +70,47 @@ public abstract class Skill {
         return damage;
     }
 
-    public String getType() {
-        return type;
+    public SkillType getType() {
+        return skillType;
     }
 
-
+    // battleManager.getLastEnemy()
+    // battleManager.attackLowest()
+    // battleManager.attackAll()
+    // etc
     public abstract void useSkill();
 
-    public void attack(Enemy enemy) {
-        this.enemy = enemy;
+    public void attack(BattleManager battleManager) {
+        this.enemy = battleManager.getCurrentEnemy();
 
-        if(checkIfSkillIsAvailable()) {
-            useSkill();
+        if(!battleManager.getCharacterManager().isPlayerAlive()){
+            System.out.println("Player is dead");
+            return;
         }
+
+        if(!battleManager.isPlayersTurn()){
+            System.out.println("Not players turn");
+            return;
+        }
+
+        if (checkIfSkillIsAvailable()) {
+            useSkill();
+            battleManager.updateTurnState();
+            setBaseTurns();
+        }
+    }
+
+    private void setBaseTurns() {
+        cooldownTurns = baseCooldownTurns;
+        effectDurationTurns = baseEffectDurationTurns;
     }
 
     private boolean checkIfSkillIsAvailable() {
-        if(cooldownTurns > 0) {
+        if (cooldownTurns > 0) {
             System.out.println("Skill is on cooldown");
             return false;
         }
-        if(!player.getMana().hasEnoughMana(cost)) {
+        if (!player.getMana().hasEnoughMana(cost)) {
             System.out.println("Not enough mana");
             return false;
         }
@@ -74,10 +119,10 @@ public abstract class Skill {
     }
 
     public void updateTurns() {
-        if(cooldownTurns > 0) {
+        if (cooldownTurns > 0) {
             cooldownTurns--;
         }
-        if(effectDurationTurns > 0) {
+        if (effectDurationTurns > 0) {
             effectDurationTurns--;
         }
     }

@@ -1,6 +1,6 @@
-package Components.Frame;
+package Components.Button;
 
-import Components.Menu.EnemyMiniHealthBar;
+import Components.ToolTip.EnemyHealthBar;
 import Enemies.Enemy;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -8,25 +8,27 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import static enums.ComponentStateEnums.PRESSED;
 
-public class EnemyFrame extends Frame {
+
+public class EnemyButton extends Button {
     private final Enemy enemy;
-    private final EnemyMiniHealthBar healthBar;
+    private final EnemyHealthBar healthBar;
 
-    public EnemyFrame(Enemy enemy) {
+    public EnemyButton(Enemy enemy) {
         super("Character Frame");
         hideText();
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
 
-        buttonSheet[0] = sheet.crop(106, 0, 1, 1); // Default
-        buttonSheet[1] = sheet.crop(106, 0, 1, 1); // Hovered
-        buttonSheet[2] = sheet.crop(106, 0, 28, 28);  // Pressed
+        buttonSheet[0] = sheet.crop(135, 0, 1, 1); // Default
+        buttonSheet[1] = sheet.crop(135, 0, 1, 1); // Hovered
+        buttonSheet[2] = sheet.crop(135, 0, 28, 28);  // Pressed
 
         setDimensions(28, 28);
         scale(3);
         this.enemy = enemy;
 
-        this.healthBar = (EnemyMiniHealthBar) new EnemyMiniHealthBar(enemy)
+        this.healthBar = (EnemyHealthBar) new EnemyHealthBar(enemy)
                 .scale(3);
     }
 
@@ -64,5 +66,9 @@ public class EnemyFrame extends Frame {
 
     public Enemy getEnemy() {
         return enemy;
+    }
+
+    public void isActive(boolean b) {
+        state = b ? PRESSED : state;
     }
 }

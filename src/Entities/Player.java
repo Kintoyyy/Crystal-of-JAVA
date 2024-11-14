@@ -45,7 +45,7 @@ public class Player extends Creature {
         bounds.y = 64;
         bounds.width = 40;
 
-        initializePlayer(handler.getGameState().getPlayer());
+        initializePlayer(handler.getGameState().getCharacterManger().getPlayer());
     }
 
     private void initializePlayer( Character player) {

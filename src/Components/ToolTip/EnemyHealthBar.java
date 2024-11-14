@@ -1,6 +1,6 @@
-package Components.Menu;
+package Components.ToolTip;
 
-import Characters.Character;
+import Components.Menu.Menu;
 import Enemies.Enemy;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -8,7 +8,7 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class EnemyMiniHealthBar extends Menu {
+public class EnemyHealthBar extends Menu {
     private final Enemy enemy;
     private final SpriteSheet sheet;
     private final BufferedImage frame;
@@ -18,7 +18,7 @@ public class EnemyMiniHealthBar extends Menu {
     private double mana;
     private double defense;
 
-    public EnemyMiniHealthBar(Enemy enemy) {
+    public EnemyHealthBar(Enemy enemy) {
         super();
         this.width = 21;
         this.height = 7;

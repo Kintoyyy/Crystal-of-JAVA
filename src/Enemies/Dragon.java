@@ -9,6 +9,9 @@ import Enemies.SpecialSkill.FireBreath;
 public class Dragon extends Enemy {
     // High health, high attack, has Fire Breath skill.
     public Dragon() {
-        super(new Health(200), new AttackPower(25), new Defense(12), new FireBreath());
+        super(new Health(2500), new AttackPower(150, 200), new Defense(20), new FireBreath());
+
+        name = "Dragon";
+        description = "A generic enemy";
     }
 }

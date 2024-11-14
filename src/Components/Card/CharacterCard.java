@@ -1,6 +1,7 @@
-package Components.Menu;
+package Components.Card;
 
 import Characters.Character;
+import Components.Menu.Menu;
 import Game.Handler;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -8,7 +9,7 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class CharacterTopLeftMenu extends Menu {
+public class CharacterCard extends Card {
     private Character player;
     private BufferedImage playerProfile;
     private final SpriteSheet sheet;
@@ -19,7 +20,7 @@ public class CharacterTopLeftMenu extends Menu {
     private double mana;
     private final Handler handler;
 
-    public CharacterTopLeftMenu(Handler handler) {
+    public CharacterCard(Handler handler) {
         super();
         this.handler = handler;
 
@@ -37,7 +38,7 @@ public class CharacterTopLeftMenu extends Menu {
     public void tick() {
         super.tick();
 
-        player = handler.getGameState().getPlayer();
+        player = handler.getGameState().getCharacterManger().getPlayer();
         if (player != null) {
             playerProfile = player.getProfile();
             health = player.getHealth().getHealth();

@@ -1,5 +1,6 @@
 package Skills.Warrior;
 
+import Skills.SkillType;
 import Skills.Skill;
 
 public class WarCry extends Skill {
@@ -8,10 +9,11 @@ public class WarCry extends Skill {
     private static final int cost = 10;
     private static final int damage = 20;
     private static final String description = "Increases team’s attack power temporarily";
-    private static final String type = "warrior";
+    private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
 
     public WarCry() {
-        super(name, description, cost, damage, type);
+        super(name, description, cost, damage, SKILL_TYPE,3,1);
+        skillImage = sheet.crop(54, 0, 18, 18);
     }
 
     @Override

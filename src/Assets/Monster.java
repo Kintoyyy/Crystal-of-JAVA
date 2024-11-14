@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import Game.Handler;
 import States.BattleState;
-import States.GameStateOld;
 
 public class Monster {
 	
@@ -25,7 +24,7 @@ public class Monster {
 	private Text text;
 	private Text rewardsText;
 	private Text rewardsText2;
-	private Description monsterDescription;
+//	private Description monsterDescription;
 	private ArrayList<CoinAndXP> coinAndXP;
 	
 	private int x;
@@ -44,7 +43,7 @@ public class Monster {
 		this.y = y;
 		lastTime = System.currentTimeMillis();
 		coinAndXP = new ArrayList<>();
-		monsterDescription = new Description(0, name, health, baseHealth, level, 8, 10, handler);
+//		monsterDescription = new Description(0, name, health, baseHealth, level, 8, 10, handler);
 		text = new Text("You encounter a " + name + "!", 68, 604, 4, 0);
 		defeatText = new Text("You defeated the " + name + "!", 56, 654, 4, 0);
 		rewardsText = new Text("You gain " + money + " coins!", 0, 654, 4, 0);
@@ -57,7 +56,7 @@ public class Monster {
 	public void tick() {
 		timer += System.currentTimeMillis() - lastTime;
 		lastTime = System.currentTimeMillis();
-		monsterDescription.tick();
+//		monsterDescription.tick();
 		if(deathState == 1 && time > 10) {
 			for(int i = 0; i < coinAndXP.size(); i++) {
 				coinAndXP.get(i).tick();
@@ -104,7 +103,7 @@ public class Monster {
 			}
 		} else if(deathState == 3) {
 			if(!f) {
-				GameStateOld.coins += money;
+//				GameStateOld.coins += money;
 				f = true;
 			}
 			rewardsText.render(g);
@@ -112,7 +111,7 @@ public class Monster {
 			//BattleState.switchGameStates = true;
 		} else if(deathState == 4) {
 			if(!f2) {
-				GameStateOld.xp += xp;
+//				GameStateOld.xp += xp;
 				f2 = true;
 			}
 			rewardsText2.render(g);
@@ -121,7 +120,7 @@ public class Monster {
 		
 		g.drawImage(img, x, y, width, height, null);
 		g2d.setComposite(ogComposite);
-		monsterDescription.render(g);
+//		monsterDescription.render(g);
 		
 	}
 	

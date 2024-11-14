@@ -1,58 +1,51 @@
 package Components.Layouts;
 
 import Components.Component;
-import Components.Frame.EnemyFrame;
-import Enemies.Enemy;
-import Game.Handler;
+import Components.Button.EnemyButton;
+import Enemies.*;
+import Game.BattleManager;
 
 import java.awt.*;
-import java.util.ArrayList;
+
 
 public class EnemyLayout extends Layout {
-    private ArrayList<Enemy> enemies;
-    private final Handler handler;
+    private final EnemyManager enemyManager;
 
-    public EnemyLayout(Handler handler) {
+    public EnemyLayout(BattleManager battleManager) {
         super();
-        this.handler = handler;
-        this.enemies = new ArrayList<>(handler.getGameState().getEnemies()); // Initialize with a copy
-
+        this.enemyManager = battleManager.getEnemyManager();
         initEnemyFrames();
     }
 
     private void initEnemyFrames() {
-        childComponents.clear(); // Clear existing components
-
-        for (int i = 0; i < enemies.size(); i++) {
-            Enemy enemy = enemies.get(i);
+        childComponents.clear();
+        for (int i = 0; i < enemyManager.getSize(); i++) {
+            Enemy enemy = enemyManager.getEnemyByIndex(i);
             final int index = i; // Capture index for lambda use
 
-            EnemyFrame frame = (EnemyFrame) new EnemyFrame(enemy)
-                    .setAction(() -> handler.getGameState().setPlayerByIndex(index));
+            EnemyButton frame = (EnemyButton) new EnemyButton(enemy)
+                    .setAction(() -> {
+                        System.out.println("Enemy " + enemy.getName() + " clicked");
+                        enemyManager.setAutoSelectEnemy(false);
+                        enemyManager.setCurrentEnemy(index);
+                    });
             childComponents.add(frame);
         }
     }
 
     @Override
     public void tick() {
-        ArrayList<Enemy> currentEnemies = handler.getGameState().getEnemies();
-
-        // Check if enemies have changed
-        if (!enemies.equals(currentEnemies)) {
-            enemies = new ArrayList<>(currentEnemies); // Update enemy list
-            initEnemyFrames(); // Reinitialize frames if enemies have changed
-        }
-
         childComponents.forEach(Component::tick);
     }
 
     @Override
     public void render(Graphics g) {
         int xOffset = (int) this.x;
-
+        Enemy enemy = enemyManager.getCurrentEnemy();
         for (Component component : childComponents) {
-            if (component instanceof EnemyFrame frame) {
+            if (component instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
+                frame.isActive(enemy != null && enemy.equals(frame.getEnemy()));
                 xOffset += frame.getWidth();
             }
             component.render(g);

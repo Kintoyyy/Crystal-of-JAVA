@@ -33,7 +33,7 @@ public class World {
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < height; j++) {
                     if (tile[j][i] >= 96 && tile[j][i] < 100) {
-                        entityManager.addEntity(new Tree(handler, (int) (j * Tile.TILEWIDTH), (int) (i * Tile.TILEWIDTH) - (int) (Tile.TILEWIDTH * 1.5), 99 - tile[j][i]));
+//                        entityManager.addEntity(new Tree(handler, (int) (j * Tile.TILEWIDTH), (int) (i * Tile.TILEWIDTH) - (int) (Tile.TILEWIDTH * 1.5), 99 - tile[j][i]));
                     }
                 }
             }

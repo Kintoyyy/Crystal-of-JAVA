@@ -4,10 +4,7 @@ import Characters.Stats.AttackPower;
 import Characters.Stats.Defense;
 import Characters.Stats.Health;
 import Characters.Stats.Mana;
-import Skills.Warrior.PowerStrike;
-import Skills.Warrior.ShieldBlock;
-import Skills.Warrior.Taunt;
-import Skills.Warrior.WarCry;
+import Skills.Warrior.*;
 import Utils.SpriteSheet;
 import Skills.*;
 import Utils.ImageUtils;
@@ -21,7 +18,7 @@ public class Kent extends Character {
         super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(150), new Defense(30), new ArrayList<>());
 
 
-
+        this.addSkill(new Warrior(this));
         this.addSkill(new PowerStrike());
         this.addSkill(new ShieldBlock());
         this.addSkill(new WarCry());

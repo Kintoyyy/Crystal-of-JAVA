@@ -2,16 +2,14 @@ package Views.Game;
 
 import Components.Button.Button;
 import Components.Button.PauseButton;
-import Components.Menu.CharacterTopLeftMenu;
-import Game.CallBackAction;
-import Skills.Skill;
+import Components.Card.CharacterCard;
+import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
 import enums.ViewEnums;
 import World.World;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class GameView extends View {
     private final World world;
@@ -43,7 +41,7 @@ public class GameView extends View {
                         .setLocation(350, 700)
                         .scale(6),
 
-                new CharacterTopLeftMenu(handler)
+                new CharacterCard(handler)
                         .setLocation(12, 12)
                         .scale(6)
         );

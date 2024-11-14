@@ -2,7 +2,7 @@ package Components.Button;
 
 import Components.Component;
 import Components.Text.Text;
-import Game.CallBackAction;
+import Utils.CallBackAction;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import enums.Alignment;

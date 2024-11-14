@@ -1,7 +1,5 @@
-package Components.Frame;
+package Components.Button;
 
-import Characters.Character;
-import Components.Menu.MiniHealthBar;
 import Skills.Skill;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -9,13 +7,10 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.PRESSED;
-
-public class SkillFrame extends Frame {
-    private final BufferedImage skillImage;
+public class SkillButton extends Button {
     private final Skill Skill;
 
-    public SkillFrame(Skill Skill) {
+    public SkillButton(Skill Skill) {
         super("Skill Frame");
         hideText();
         this.Skill = Skill;
@@ -24,7 +19,6 @@ public class SkillFrame extends Frame {
         buttonSheet[0] = sheet.crop(56, 0, 28, 28); // default
         buttonSheet[1] = sheet.crop(28, 0, 28, 28); // hovered
         buttonSheet[2] = sheet.crop(0, 0, 28, 28);  // pressed
-        skillImage = sheet.crop(135, 0, 18, 18);
 
         setDimensions(28, 28);
         scale(3);
@@ -43,12 +37,18 @@ public class SkillFrame extends Frame {
             default -> buttonSheet[0];
         };
 //
+        g.setColor(new Color(232, 210, 169));
+        g.fillRect(bounds.x + (5 * scale), bounds.y + (5 * scale), width - (10 * scale), height - (10 * scale));
+
+        g.drawImage(Skill.getSkillImage(), bounds.x + (5 * scale), bounds.y + (5 * scale), width - (10 * scale), height - (10 * scale), null);
+
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
 
-        g.drawImage(skillImage, bounds.x + (5 * scale), bounds.y + (5 * scale), width - (10 * scale), height - (10 * scale), null);
-
+        g.setColor(Color.BLACK);
         g.drawString(Skill.getName(), bounds.x, bounds.y + height + 10);
         g.drawString("Cost: " + Skill.getCost(), bounds.x, bounds.y + height + 20);
         g.drawString("Damage: " + Skill.getDamage(), bounds.x, bounds.y + height + 30);
+        g.drawString("cd: " + Skill.getCooldownTurns(), bounds.x, bounds.y + height + 40);
+        g.drawString("eff dur: " + Skill.getEffectDurationTurns(), bounds.x, bounds.y + height + 50);
     }
 }
