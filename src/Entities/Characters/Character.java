@@ -11,8 +11,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class Character extends Entity {
-
-    private final Movement movement;
     // Character only attributes
     protected Mana mana;
     protected Energy energy;
@@ -27,8 +25,6 @@ public abstract class Character extends Entity {
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
         this.animation = new PlayerAnimation(120, this.spriteSheet);
-
-        this.movement = new Movement(this);
         this.description = "A generic enemy";
 
         this.name = name;
@@ -54,16 +50,12 @@ public abstract class Character extends Entity {
 
     @Override
     public void tick() {
-        movement.tick();
+
     }
 
     @Override
     public void render(Graphics g) {
-        movement.render(g);
-    }
 
-    public Movement getMovement() {
-        return movement;
     }
 
     public double getDodgeRate() {

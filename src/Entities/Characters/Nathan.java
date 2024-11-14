@@ -23,6 +23,9 @@ public class Nathan extends Character {
         this.addSkill(new Evasion());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Nathan/Character.png"));
+
+        SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Nathan/Profile.png"));
+        this.profileImage = profile.crop(0, 0, 300, 300);
     }
 
     @Override

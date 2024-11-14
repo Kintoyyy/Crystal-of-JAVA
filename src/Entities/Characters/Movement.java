@@ -2,6 +2,7 @@ package Entities.Characters;
 
 import Animations.PlayerAnimation;
 import Game.GameCamera;
+import Game.Handler;
 import Inputs.InputKeyboardManager;
 import Utils.DebugMode;
 import World.Tile;
@@ -34,18 +35,55 @@ public class Movement {
 
     private Character character;
 
-    public Movement(Character character) {
+    public Movement(Handler handler) {
+        camera = handler.getGameCamera();
+        keyManager = handler.getKeymanager();
+        System.out.println(camera + " " + keyManager);
+        speed = DEFAULT_SPEED;
+        xMove = 0;
+        yMove = 0;
+
+        setCharacter(new Kent());
+    }
+
+    public void tick() {
+        getInput();
+//        if (animation != null) {
+//            animation.tick();
+//        }
+//
+////        camera.centerOn(this);
+
+        if (xMove != 0 && !checkEntityCollisions(xMove, 0f)) {
+            moveX();
+        }
+        if (yMove != 0 && !checkEntityCollisions(0f, yMove)) {
+            moveY();
+        }
+    }
+
+    public void setCharacter(Character character) {
         this.character = character;
+        System.out.println("Setting character: " + character.getName());
         this.x = character.getX();
         this.y = character.getY();
         this.width = character.getWidth();
         this.height = character.getHeight();
         this.bounds = character.getBounds();
         this.animation = character.getAnimation();
+    }
 
-        speed = DEFAULT_SPEED;
-        xMove = 0;
-        yMove = 0;
+    public void render(Graphics g) {
+//        System.out.println("Rendering : " + character.getName());
+//        System.out.println("Camera: " + camera + " KeyManager: " + keyManager);
+
+        System.out.println("X: " + (x - camera.getxOffset()) + " Y: " + (y - camera.getyOffset()) + " Width: " + width + " Height: " + height);
+
+//        g.setColor(Color.red);
+//        g.drawRect((int) (x - camera.getxOffset()), (int) (y - camera.getyOffset()), width * SCALE, height * SCALE);
+
+//        g.drawImage(getCurrentAnimationFrame(), (int) (x - camera.getxOffset()),
+//                (int) (y - camera.getyOffset()), width * SCALE, height * SCALE, null);
     }
 
     private long lastKeyPress = 0;
@@ -170,20 +208,6 @@ public class Movement {
         return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
     }
 
-    public void tick() {
-
-        getInput();
-        animation.tick();
-        camera.centerOn(this);
-
-        if (xMove != 0 && !checkEntityCollisions(xMove, 0f)) {
-            moveX();
-        }
-        if (yMove != 0 && !checkEntityCollisions(0f, yMove)) {
-            moveY();
-        }
-    }
-
     public void moveX() {
         if (xMove > 0) {
             collided = false;
@@ -235,32 +259,6 @@ public class Movement {
         }
     }
 
-    public void render(Graphics g) {
-//        System.out.println("Rendering : " + character.getName());
-//        System.out.println("Camera: " + camera + " KeyManager: " + keyManager);
-
-//        System.out.println("X: " + (x - camera.getxOffset()) + " Y: " + (y - camera.getyOffset()) + " Width: " + width + " Height: " + height);
-
-        g.setColor(Color.red);
-        g.drawRect((int) (x - camera.getxOffset()), (int) (y - camera.getyOffset()), width * SCALE, height * SCALE);
-
-//        g.drawImage(getCurrentAnimationFrame(), (int) (x - camera.getxOffset()),
-//                (int) (y - camera.getyOffset()), width * SCALE, height * SCALE, null);
-    }
-
-    public void setControllers(GameCamera camera, InputKeyboardManager keyManager) {
-        this.camera = camera;
-        this.keyManager = keyManager;
-//        System.out.println("Camera: " + camera + " KeyManager: " + keyManager);
-    }
-
-    public GameCamera getCamera() {
-        return camera;
-    }
-
-    public InputKeyboardManager getKeyManager() {
-        return keyManager;
-    }
 
     public float getX() {
         return x;

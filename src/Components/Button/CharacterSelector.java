@@ -61,7 +61,7 @@ public class CharacterSelector extends Button {
         g.fillRect(bounds.x + 10, bounds.y + 10, width - 20, height - 20);
 
         if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x + 1, bounds.y + 8, width, height, null);
+            g.drawImage(playerProfile, bounds.x + 15, bounds.y + 15, width - 30, height - 30, null);
         }
 
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);

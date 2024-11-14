@@ -55,7 +55,7 @@ public class CharacterButton extends Button {
         };
 
         if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x - 4, bounds.y + 2, width + 12, height + 12, null);
+            g.drawImage(playerProfile, bounds.x - 4, bounds.y + 2, width, height + 12, null);
         }
 
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);

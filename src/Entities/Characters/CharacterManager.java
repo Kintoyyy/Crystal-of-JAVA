@@ -4,16 +4,15 @@ package Entities.Characters;
 import Game.Handler;
 import Skills.Skill;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class CharacterManager {
     private static ArrayList<Character> characters;
     private int currentCharacterIndex = 0;
-    private static Handler handler;
 
-    public CharacterManager(Handler handler) {
+    public CharacterManager() {
         characters = new ArrayList<>(4);
-        CharacterManager.handler = handler;
         addCharacter(new Kent());
         addCharacter(new Cedi());
         addCharacter(new Nathan());
@@ -21,12 +20,8 @@ public class CharacterManager {
     }
 
     private static void addCharacter(Character character) {
-//        character.getMovement().setCamera(handler.getGameCamera());
-//        character.getMovement().setKeyManager(handler.getKeymanager());
-        character.getMovement().setControllers(handler.getGameCamera(), handler.getKeymanager());
         characters.add(character);
     }
-
 
     public ArrayList<Character> getCharacters() {
         return characters;
@@ -57,7 +52,7 @@ public class CharacterManager {
             character.regenHealth();
             character.regenMana();
             // temporary fix
-            character.getMovement().setControllers(handler.getGameCamera(), handler.getKeymanager());
+//            character.getMovement().setControllers(handler.getGameCamera(), handler.getKeymanager());
 //            System.out.println("Character: " + character.getMovement().getCamera() + " " + character.getMovement().getKeyManager());
         }
     }
