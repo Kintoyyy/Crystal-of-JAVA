@@ -1,7 +1,7 @@
 package Skills;
 
-import Characters.Character;
-import Enemies.Enemy;
+import Entities.Characters.Character;
+import Entities.Enemies.Enemy;
 import Game.BattleManager;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;

@@ -1,9 +1,9 @@
 package Game;
 
-import Characters.Character;
-import Characters.CharacterManager;
-import Enemies.Enemy;
-import Enemies.EnemyManager;
+import Entities.Characters.Character;
+import Entities.Characters.CharacterManager;
+import Entities.Enemies.Enemy;
+import Entities.Enemies.EnemyManager;
 import Utils.Timer;
 import enums.ViewEnums;
 

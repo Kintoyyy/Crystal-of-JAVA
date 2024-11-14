@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Tile {
-
     protected BufferedImage image;
     protected String path;
     protected String name;

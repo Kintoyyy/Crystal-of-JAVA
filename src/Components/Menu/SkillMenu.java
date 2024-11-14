@@ -1,10 +1,9 @@
 package Components.Menu;
 
-import Characters.Character;
+import Entities.Characters.Character;
 import Components.Component;
 import Components.Button.SkillButton;
 import Game.BattleManager;
-import Game.Handler;
 import Skills.Skill;
 
 import java.awt.*;

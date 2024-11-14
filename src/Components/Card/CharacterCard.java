@@ -1,7 +1,6 @@
 package Components.Card;
 
-import Characters.Character;
-import Components.Menu.Menu;
+import Entities.Characters.Character;
 import Game.Handler;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;

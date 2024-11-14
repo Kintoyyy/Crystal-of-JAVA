@@ -1,6 +1,6 @@
 package Skills;
 
-import Characters.Stats.AttackPower;
+import Entities.Characters.Stats.AttackPower;
 
 public class Basic extends Skill {
 

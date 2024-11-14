@@ -17,13 +17,16 @@ public class World {
     private int spawnX, spawnY;
     private int[][][] tiles;
     private final EntityManager entityManager;
+    private Player player;
 
-    private TileSet tileSet;
+    private ParseTileTypes parseTileTypes;
 
     public World(Handler handler, String path) {
         this.handler = handler;
 
         entityManager = new EntityManager(handler, new Player(handler, 0, 0));
+
+        player = new Player(handler, 0, 0);
 
         loadWorld(path);
 
@@ -43,6 +46,7 @@ public class World {
     }
 
     public void tick() {
+        player.tick();
         entityManager.tick();
     }
 
@@ -71,6 +75,7 @@ public class World {
             }
 
             if (layer == tiles.length - 1) {
+                player.render(g);
 //                entityManager.render(g);
             }
         }
@@ -81,7 +86,7 @@ public class World {
             return Tile.defaultTile;
         }
 
-        Tile t = tileSet.getTile(tiles[layer][x][y]);
+        Tile t = parseTileTypes.getTile(tiles[layer][x][y]);
 
         if (t == null) {
             return Tile.transparentTile;
@@ -105,17 +110,17 @@ public class World {
             NodeList map = doc.getElementsByTagName("map");
             if (map.getLength() > 0) {
                 Element mapElement = (Element) map.item(0);
-                // Initialize TileSet
+                // Initialize ParseTileTypes
                 NodeList tilesets = mapElement.getElementsByTagName("tileset");
-                tileSet = new TileSet(tilesets);
+                parseTileTypes = new ParseTileTypes(tilesets);
 
                 // Retrieve map dimensions
                 this.width = Integer.parseInt(mapElement.getAttribute("width"));
                 this.height = Integer.parseInt(mapElement.getAttribute("height"));
 
-                // Initialize TileArraySet with extracted dimensions
+                // Initialize ParseWorldLayers with extracted dimensions
                 NodeList layers = mapElement.getElementsByTagName("layer");
-                tiles = new TileArraySet(layers, width, height).getTiles();
+                tiles = new ParseWorldLayers(layers, width, height).getTiles();
 
                 spawnX = mapElement.hasAttribute("spawnX") ?
                         Integer.parseInt(mapElement.getAttribute("spawnX")) : 10;

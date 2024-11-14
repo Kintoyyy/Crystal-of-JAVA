@@ -1,6 +1,6 @@
 package Game;
 
-import Characters.Character;
+import Entities.Characters.Character;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardManager;
 import Utils.DebugMode;

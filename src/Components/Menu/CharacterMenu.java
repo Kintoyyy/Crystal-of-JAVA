@@ -1,13 +1,12 @@
 package Components.Menu;
 
-import Characters.CharacterManager;
+import Entities.Characters.CharacterManager;
 import Components.Component;
 import Components.Button.CharacterSelector;
-import Characters.Character;
+import Entities.Characters.Character;
 import Game.Handler;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CharacterMenu extends Menu {
     private final CharacterManager characterManager;

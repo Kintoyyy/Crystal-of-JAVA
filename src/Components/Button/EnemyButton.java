@@ -1,7 +1,7 @@
 package Components.Button;
 
 import Components.ToolTip.EnemyHealthBar;
-import Enemies.Enemy;
+import Entities.Enemies.Enemy;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 

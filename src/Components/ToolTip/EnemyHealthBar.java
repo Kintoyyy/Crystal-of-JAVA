@@ -1,7 +1,7 @@
 package Components.ToolTip;
 
 import Components.Menu.Menu;
-import Enemies.Enemy;
+import Entities.Enemies.Enemy;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 

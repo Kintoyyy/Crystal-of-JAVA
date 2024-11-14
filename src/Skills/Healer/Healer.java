@@ -1,6 +1,6 @@
 package Skills.Healer;
 
-import Characters.Zeith;
+import Entities.Characters.Zeith;
 import Skills.Skill;
 import Skills.SkillType;
 

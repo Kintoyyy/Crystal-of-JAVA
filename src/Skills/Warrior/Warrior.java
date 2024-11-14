@@ -1,6 +1,6 @@
 package Skills.Warrior;
 
-import Characters.Kent;
+import Entities.Characters.Kent;
 import Skills.Skill;
 import Skills.SkillType;
 

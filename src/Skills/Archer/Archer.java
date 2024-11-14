@@ -1,6 +1,6 @@
 package Skills.Archer;
 
-import Characters.Nathan;
+import Entities.Characters.Nathan;
 import Skills.Skill;
 import Skills.SkillType;
 

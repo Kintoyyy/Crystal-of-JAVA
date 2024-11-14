@@ -4,7 +4,7 @@ import Components.Button.*;
 import Components.Button.Button;
 import Components.Layouts.*;
 import Components.Menu.SkillMenu;
-import Enemies.*;
+import Entities.Enemies.*;
 import Game.BattleManager;
 import Game.TurnState;
 import Utils.Timer;
@@ -12,7 +12,6 @@ import Views.*;
 import enums.ViewEnums;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class BattleView extends View {
     private final BattleManager battleManager;

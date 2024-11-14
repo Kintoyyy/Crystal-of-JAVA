@@ -1,7 +1,7 @@
 package Components.Layouts;
 
-import Characters.Character;
-import Characters.CharacterManager;
+import Entities.Characters.Character;
+import Entities.Characters.CharacterManager;
 import Components.Component;
 import Components.Button.CharacterButton;
 import Game.BattleManager;

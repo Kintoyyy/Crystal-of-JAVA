@@ -1,6 +1,6 @@
 package Components.Button;
 
-import Characters.Character;
+import Entities.Characters.Character;
 import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;

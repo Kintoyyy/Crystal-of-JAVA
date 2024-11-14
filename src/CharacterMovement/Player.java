@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import Characters.Character;
+import Entities.Characters.Character;
 import Game.Game;
 import Game.Handler;
 import Utils.DebugMode;
