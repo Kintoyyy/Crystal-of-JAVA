@@ -3,6 +3,7 @@ package Views.Game;
 import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
+import Rendering.Renderer;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
@@ -13,10 +14,12 @@ import java.awt.*;
 
 public class GameView extends View {
     private final World world;
+    private final Renderer renderer;
 
     public GameView(ViewManager viewManager) {
         super(viewManager);
         world = handler.getWorld();
+        renderer = new Renderer(handler);
 
         components.init(
                 new PauseButton()
@@ -50,12 +53,14 @@ public class GameView extends View {
     @Override
     public void tick() {
         components.tick();
+        renderer.tick();
         world.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        world.render(g);
+//        world.render(g);
+        renderer.render(g);
         components.render(g);
     }
 }

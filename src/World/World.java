@@ -75,7 +75,7 @@ public class World {
             }
 
             if (layer == tiles.length - 1) {
-                player.render(g);
+//                player.render(g);
 //                entityManager.render(g);
             }
         }

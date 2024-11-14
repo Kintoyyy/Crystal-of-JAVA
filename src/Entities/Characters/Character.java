@@ -1,41 +1,36 @@
 package Entities.Characters;
 
 import Animations.PlayerAnimation;
-import Entities.Characters.Effects.Effect;
 import Entities.Characters.Stats.*;
 import Entities.Entity;
 import Utils.SpriteSheet;
 import Skills.Skill;
 import Utils.ImageUtils;
 
-import java.awt.image.BufferedImage;
+import java.awt.*;
 import java.util.ArrayList;
 
-public abstract class Character implements Entity {
+public abstract class Character extends Entity {
 
-    protected String name;
-    protected String description = "";
-    protected int level;
-    protected Health health;
+    private final Movement movement;
+    // Character only attributes
     protected Mana mana;
     protected Energy energy;
+    protected ArrayList<Skill> skills;
+    protected int level;
     protected int experience;
     protected double dodgeRate = 0.0;
-
-    protected Defense defense;
-    protected AttackPower attackPower;
     protected double dodgeChance = 0.0;
 
-    protected ArrayList<Skill> skills;
-    protected SpriteSheet spriteSheet;
-
-    private PlayerAnimation animation;
-
-    protected BufferedImage playerProfile;
-
-    private ArrayList<Effect> effects = new ArrayList<>();
-
     public Character(String name, int level, Health health, Mana mana, AttackPower attackPower, Defense defense, ArrayList<Skill> skills) {
+        super(0, 0, 32, 32);
+
+        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
+        this.animation = new PlayerAnimation(120, this.spriteSheet);
+
+        this.movement = new Movement(this);
+        this.description = "A generic enemy";
+
         this.name = name;
         this.level = level;
         this.health = health;
@@ -44,17 +39,31 @@ public abstract class Character implements Entity {
         this.defense = defense;
         this.energy = new Energy(100, 100);
         this.skills = skills;
-        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
-        this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
-        this.animation = new PlayerAnimation(120, this.spriteSheet);
+
+        this.profileImage = spriteSheet.crop(0, 0, 32, 32);
+
         this.experience = 0;
     }
 
     public void addSkill(Skill skill) {
         // TODO: need to check if skill is compatible with the character
-        if( skill == null || skills.contains(skill)) return;
+        if (skill == null || skills.contains(skill)) return;
         skill.setCharacter(this);
         skills.add(skill);
+    }
+
+    @Override
+    public void tick() {
+        movement.tick();
+    }
+
+    @Override
+    public void render(Graphics g) {
+        movement.render(g);
+    }
+
+    public Movement getMovement() {
+        return movement;
     }
 
     public double getDodgeRate() {
@@ -65,20 +74,8 @@ public abstract class Character implements Entity {
         this.dodgeRate = dodgeRate;
     }
 
-    public Defense getDefense() {
-        return defense;
-    }
-
     public double getDodge() {
         return dodgeChance;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public int getLevel() {
@@ -97,28 +94,16 @@ public abstract class Character implements Entity {
 
     public abstract void useSkill(Skill skill);
 
-    public PlayerAnimation getAnimation() {
-        return animation;
-    }
-
-    public BufferedImage getProfile() {
-        return playerProfile;
-    }
-
-    public Health getHealth() {
-        return health;
-    }
-
-    public void setHealth(Health health) {
-        this.health = health;
-    }
-
     public Mana getMana() {
         return mana;
     }
 
     public void setMana(Mana mana) {
         this.mana = mana;
+    }
+
+    public void setHealth(Health health) {
+        this.health = health;
     }
 
     public void regenHealth() {

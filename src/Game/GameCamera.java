@@ -1,6 +1,7 @@
 package Game;
 
 import CharacterMovement.Entity;
+import Entities.Characters.Movement;
 import World.Tile;
 
 public class GameCamera {
@@ -29,6 +30,12 @@ public class GameCamera {
 	} 
 	
 	public void centerOnEntity(Entity e) {
+		xOffset = e.getX() - (float) handler.getWidth() / 2 + (float) e.getWidth() / 2;
+		yOffset = e.getY() - (float) handler.getHeight() / 2 + (float) e.getHeight() / 2;
+		checkBlankSpace();
+	}
+
+	public void centerOn(Movement e) {
 		xOffset = e.getX() - (float) handler.getWidth() / 2 + (float) e.getWidth() / 2;
 		yOffset = e.getY() - (float) handler.getHeight() / 2 + (float) e.getHeight() / 2;
 		checkBlankSpace();

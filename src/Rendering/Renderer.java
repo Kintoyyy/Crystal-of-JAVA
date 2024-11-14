@@ -17,13 +17,12 @@ public class Renderer {
 
         this.characterManager = handler.getGameState().getCharacterManger();
 
-        this.worldParser = new ParseWorld("path/to/world.xml");
+        this.worldParser = new ParseWorld("res/worlds/world_1.tmx");
 
         this.world = new RenderWorld(handler, worldParser, characterManager);
     }
 
     public void render(Graphics g) {
-
         world.render(g);
     }
 

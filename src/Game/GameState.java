@@ -4,7 +4,7 @@ import Entities.Characters.*;
 import World.World;
 
 public class GameState {
-    private final CharacterManager characters = new CharacterManager();
+    private final CharacterManager characters;
     private World world;
 
     private Handler handler;
@@ -12,6 +12,7 @@ public class GameState {
 
     public GameState(Handler handler) {
         this.handler = handler;
+        this.characters = new CharacterManager(handler);
     }
 
     public void tick() {

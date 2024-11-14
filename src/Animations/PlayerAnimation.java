@@ -3,6 +3,7 @@ package Animations;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import static Constants.PlayerAnimation.*;

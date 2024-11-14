@@ -9,44 +9,48 @@ import Entities.Entity;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public abstract class Enemy implements Entity {
+public abstract class Enemy extends Entity {
 
-    protected String name = "Enemy";
-    protected String description = "A generic enemy";
-
-    protected SpriteSheet spriteSheet;
-    private BufferedImage playerProfile;
-
-    protected Health health;
-    protected AttackPower attackPower;
-    protected Defense defence;
     protected SpecialSkill specialSkill;
+
     protected double specialSkillChance = 0.05; // Base chance of 5% for special attack
     protected double minDamage = 0.5;
     protected double maxDamage = 1.5;
     protected double lowHealthThreshold = 0.3; // Threshold to consider health as "low" (30%)
     protected double dodge = 0.05;
 
-
     Enemy(Health health, AttackPower attackPower, Defense defence, SpecialSkill specialSkill) {
         this(health, attackPower, defence);
+        this.name = "Enemy";
+        this.description = "A generic enemy";
         this.specialSkill = specialSkill;
     }
 
     Enemy(Health health, AttackPower attackPower, Defense defence) {
-
+        super(0, 0, 32, 32);
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
-        this.playerProfile = spriteSheet.crop(0, 0, 32, 32);
+        this.profileImage = spriteSheet.crop(0, 0, 32, 32);
 
         this.health = health;
         this.attackPower = attackPower;
-        this.defence = defence;
+        this.defense = defence;
     }
 
     protected double calculateDamage() {
         return attackPower.getAttackPower() * (Math.random() * (maxDamage - minDamage) + minDamage);
+    }
+
+    @Override
+    public void tick() {
+//        animation.tick();
+    }
+
+    @Override
+    public void render(Graphics g) {
+//        animation.render();
     }
 
     public String getName() {
@@ -104,7 +108,7 @@ public abstract class Enemy implements Entity {
     }
 
     public Defense getDefense() {
-        return defence;
+        return defense;
     }
 
     public Health getHealth() {

@@ -12,7 +12,6 @@ public abstract class Entity {
 	protected int width, height;
 	protected Rectangle bounds;
 	
-	
 	public Entity(Handler handler, float x, float y, int width, int height) {
 		this.handler = handler;
 		this.x = x;

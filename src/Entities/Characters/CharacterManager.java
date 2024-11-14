@@ -1,22 +1,32 @@
 
 package Entities.Characters;
 
+import Game.Handler;
 import Skills.Skill;
 
 import java.util.ArrayList;
 
 public class CharacterManager {
-    private ArrayList<Character> characters;
+    private static ArrayList<Character> characters;
     private int currentCharacterIndex = 0;
+    private static Handler handler;
 
-    public CharacterManager() {
-        this.characters = new ArrayList<>(4);
-
-        this.characters.add(new Kent());
-        this.characters.add(new Cedi());
-        this.characters.add(new Nathan());
-        this.characters.add(new Zeith());
+    public CharacterManager(Handler handler) {
+        characters = new ArrayList<>(4);
+        CharacterManager.handler = handler;
+        addCharacter(new Kent());
+        addCharacter(new Cedi());
+        addCharacter(new Nathan());
+        addCharacter(new Zeith());
     }
+
+    private static void addCharacter(Character character) {
+//        character.getMovement().setCamera(handler.getGameCamera());
+//        character.getMovement().setKeyManager(handler.getKeymanager());
+        character.getMovement().setControllers(handler.getGameCamera(), handler.getKeymanager());
+        characters.add(character);
+    }
+
 
     public ArrayList<Character> getCharacters() {
         return characters;
@@ -46,11 +56,10 @@ public class CharacterManager {
         for (Character character : characters) {
             character.regenHealth();
             character.regenMana();
+            // temporary fix
+            character.getMovement().setControllers(handler.getGameCamera(), handler.getKeymanager());
+//            System.out.println("Character: " + character.getMovement().getCamera() + " " + character.getMovement().getKeyManager());
         }
-    }
-
-    public void addCharacter(Character character) {
-        characters.add(character);
     }
 
     public void removeCharacter(Character character) {
@@ -79,7 +88,7 @@ public class CharacterManager {
 
     public void updateTurns() {
         for (Character character : characters) {
-            for(Skill skill : character.getSkills()) {
+            for (Skill skill : character.getSkills()) {
                 skill.updateTurns();
             }
         }

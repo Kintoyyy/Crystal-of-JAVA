@@ -51,7 +51,7 @@ public class RenderWorld {
             }
 
             if (layer == TileLayers.length - 1) {
-//                entityManager.render(g);
+                characterManager.getPlayer().render(g);
             }
         }
     }
