@@ -1,12 +1,12 @@
-package World;
+package World.Tile;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class ParseWorldLayers {
+public class TileLayers {
     private int[][][] tiles;
 
-    public ParseWorldLayers(NodeList layers, int width, int height) {
+    public TileLayers(NodeList layers, int width, int height) {
         if (layers != null) {
             tiles = new int[layers.getLength()][height][width]; // Initialize 3D array
             for (int l = 0; l < layers.getLength(); l++) {

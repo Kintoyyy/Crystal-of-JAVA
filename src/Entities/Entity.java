@@ -1,7 +1,7 @@
 package Entities;
 
 import Animations.PlayerAnimation;
-import Entities.Characters.Effects.Effect;
+import Entities.Common.Effects.Effect;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;

@@ -3,23 +3,47 @@ package Views.Game;
 import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
-import Rendering.GameRenderer;
+import Entities.Characters.CharacterManager;
+import Entities.Characters.Movement.Movement;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
+import World.ParseWorld;
+import World.RenderWorld;
 import enums.ViewEnums;
 
 import java.awt.*;
 
 public class GameView extends View {
-//    private final World world;
-    private final GameRenderer gameRenderer;
+    private final RenderWorld renderWorld;
 
     public GameView(ViewManager viewManager) {
         super(viewManager);
-//        world = handler.getWorld();
-        gameRenderer = new GameRenderer(handler);
 
+        ParseWorld world = new ParseWorld("res/worlds/world_1.tmx");
+
+        CharacterManager characterManager = handler.getGameState().getCharacterManger();
+
+        Movement movement = new Movement(handler, world, characterManager);
+
+        this.renderWorld = new RenderWorld(world, movement);
+
+        initComponent();
+    }
+
+    @Override
+    public void tick() {
+        components.tick();
+        renderWorld.tick();
+    }
+
+    @Override
+    public void render(Graphics g) {
+        renderWorld.render(g);
+        components.render(g);
+    }
+
+    public void initComponent() {
         components.init(
                 new PauseButton()
                         .setAction(new CallBackAction() {
@@ -47,21 +71,5 @@ public class GameView extends View {
                         .setLocation(12, 12)
                         .scale(6)
         );
-    }
-
-    @Override
-    public void tick() {
-        components.tick();
-        gameRenderer.tick();
-//        world.tick();
-    }
-
-    @Override
-    public void render(Graphics g) {
-//        world.render(g);
-
-        gameRenderer.render(g);
-
-        components.render(g);
     }
 }

@@ -4,9 +4,9 @@ import Animations.PlayerAnimation;
 import Entities.Characters.CharacterManager;
 import Entities.Characters.Kent;
 import Game.Handler;
-import Rendering.Camera;
+import World.Camera;
 import World.ParseWorld;
-import World.Tile;
+import World.Tile.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -68,7 +68,6 @@ public class Movement {
         this.x = x;
         this.y = y;
     }
-
 
     public void tick() {
 

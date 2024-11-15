@@ -1,4 +1,4 @@
-package Entities.Characters.Effects;
+package Entities.Common.Effects;
 
 public abstract class Effect {
     private final String name;

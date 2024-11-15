@@ -1,16 +1,17 @@
-package Rendering;
+package World;
 
 import Entities.Characters.Movement.Movement;
 import Game.Handler;
 import Utils.DebugMode;
-import World.*;
+import World.Tile.Tile;
+import World.Tile.TileTypes;
 
 import java.awt.*;
 
 public class RenderWorld {
     private int width, height;
     private int[][][] TileLayers;
-    private ParseTileTypes tileTypes;
+    private TileTypes tileTypes;
     private final Movement movement;
 
 

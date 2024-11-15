@@ -1,4 +1,4 @@
-package World;
+package World.Tile;
 
 import Utils.SpriteSheet;
 import Utils.ImageUtils;
@@ -8,10 +8,10 @@ import org.w3c.dom.NodeList;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-public class ParseTileTypes {
+public class TileTypes {
     private final HashMap<Integer, Tile> tiles;
 
-    public ParseTileTypes(NodeList filesets) {
+    public TileTypes(NodeList filesets) {
         tiles = new HashMap<>();
         for (int i = 0; i < filesets.getLength(); i++) {
             Element tileSet = (Element) filesets.item(i);

@@ -4,11 +4,9 @@ import java.awt.Graphics;
 
 import java.awt.image.BufferStrategy;
 
-import Assets.Assets;
 import Assets.Transition;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardManager;
-import Rendering.Camera;
 import Utils.DebugMode;
 import Views.ViewManager;
 

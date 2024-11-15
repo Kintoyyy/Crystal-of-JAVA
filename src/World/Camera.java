@@ -1,9 +1,8 @@
-package Rendering;
+package World;
 
 import Entities.Characters.Movement.Movement;
 import Game.Handler;
-import World.ParseWorld;
-import World.Tile;
+import World.Tile.Tile;
 
 public class Camera {
 
