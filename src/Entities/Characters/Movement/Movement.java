@@ -1,8 +1,10 @@
 package Entities.Characters.Movement;
 
 import Animations.PlayerAnimation;
+import Entities.Characters.CharacterManager;
 import Entities.Characters.Kent;
 import Game.Handler;
+import Rendering.Camera;
 import World.ParseWorld;
 import World.Tile;
 
@@ -27,10 +29,19 @@ public class Movement {
     public static String dir = "down";
 
     protected Rectangle bounds; // Character bounds
-    private ParseWorld world;
 
-    public Movement(Handler handler, ParseWorld world) {
+    private ParseWorld world;
+    private final Camera camera;
+    private final CharacterManager characterManager;
+
+    public Movement(Handler handler, ParseWorld world, CharacterManager characterManager) {
+        this.world = world;
         this.handler = handler;
+
+        camera = new Camera(this, 0, 0);
+
+        this.characterManager = characterManager;
+
         this.x = 0;
         this.y = 0;
         this.width = 128;
@@ -45,17 +56,25 @@ public class Movement {
         animation = new Kent().getAnimation();
     }
 
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public ParseWorld getWorld() {
+        return world;
+    }
+
     public void setSpawn(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
 
-
     public void tick() {
+
         animation.tick();
         getInput();
-        handler.getGameCamera().centerOnEntity(this);
+        camera.centerOnEntity(this, world);
     }
 
     private void getInput() {
@@ -94,12 +113,12 @@ public class Movement {
     }
 
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getGameCamera().getXOffset()),
-                (int) (y - handler.getGameCamera().getYOffset()), width, height, null);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - camera.getXOffset()),
+                (int) (y - camera.getYOffset()), width, height, null);
 
         g.setColor(Color.red);
-        g.drawRect((int) (x + bounds.x - handler.getGameCamera().getXOffset()),
-                (int) (y + bounds.y - handler.getGameCamera().getYOffset()), bounds.width, bounds.height);
+        g.drawRect((int) (x + bounds.x - camera.getXOffset()),
+                (int) (y + bounds.y - camera.getYOffset()), bounds.width, bounds.height);
     }
 
     private BufferedImage getCurrentAnimationFrame() {
@@ -217,5 +236,9 @@ public class Movement {
 
     public int getHeight() {
         return height;
+    }
+
+    public Camera getCamera() {
+        return camera;
     }
 }

@@ -9,17 +9,12 @@ import World.World;
 
 public class Handler {
     private Game game;
-    private World world;
     private DebugMode debugMode;
     private ViewManager viewManager;
     private GameState gameState;
 
     public Handler(Game game) {
         this.game = game;
-    }
-
-    public Camera getGameCamera() {
-        return game.getGameCamera();
     }
 
     public InputKeyboardManager getKeyManager() {
@@ -44,18 +39,6 @@ public class Handler {
 
     public Game getGame() {
         return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public World getWorld() {
-        return world;
-    }
-
-    public void setWorld(World world) {
-        this.world = world;
     }
 
     public ViewManager getViewManager() {

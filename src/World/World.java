@@ -25,7 +25,7 @@ public class World {
 
 //        entityManager = new EntityManager(handler, new Player(handler));
 
-        loadWorld(path);
+//        loadWorld(path);
 
 //        for (int[][] tile : tiles) {
 //            for (int i = 0; i < width; i++) {
@@ -47,34 +47,34 @@ public class World {
     }
 
     public void render(Graphics g) {
-        for (int layer = 0; layer < tiles.length; layer++) {
-            int xStart = (int) Math.max(0, handler.getGameCamera().getXOffset() / Tile.TILEWIDTH);
-            int xEnd = (int) Math.min(width, (handler.getGameCamera().getXOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
-            int yStart = (int) Math.max(0, handler.getGameCamera().getYOffset() / Tile.TILEHEIGHT);
-            int yEnd = (int) Math.min(height, (handler.getGameCamera().getYOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
-
-            for (int i = yStart; i < yEnd; i++) {
-                for (int j = xStart; j < xEnd; j++) {
-                    Tile tile = getTile(i, j, layer);
-                    if (tile != null) {
-                        int tilePosX = (int) (j * Tile.TILEWIDTH - handler.getGameCamera().getXOffset());
-                        int tilePosY = (int) (i * Tile.TILEHEIGHT - handler.getGameCamera().getYOffset());
-                        tile.render(g, tilePosX, tilePosY);
-
-                        if (DebugMode.debugMode()) {
-                            if (layer == DebugMode.getRenderedLayerIndex()) {
-                                g.drawRect(tilePosX, tilePosY, Tile.TILEWIDTH, Tile.TILEHEIGHT);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (layer == tiles.length - 1) {
-//                player.render(g);
-//                entityManager.render(g);
-            }
-        }
+//        for (int layer = 0; layer < tiles.length; layer++) {
+//            int xStart = (int) Math.max(0, handler.getGameCamera().getXOffset() / Tile.TILEWIDTH);
+//            int xEnd = (int) Math.min(width, (handler.getGameCamera().getXOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
+//            int yStart = (int) Math.max(0, handler.getGameCamera().getYOffset() / Tile.TILEHEIGHT);
+//            int yEnd = (int) Math.min(height, (handler.getGameCamera().getYOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+//
+//            for (int i = yStart; i < yEnd; i++) {
+//                for (int j = xStart; j < xEnd; j++) {
+//                    Tile tile = getTile(i, j, layer);
+//                    if (tile != null) {
+//                        int tilePosX = (int) (j * Tile.TILEWIDTH - handler.getGameCamera().getXOffset());
+//                        int tilePosY = (int) (i * Tile.TILEHEIGHT - handler.getGameCamera().getYOffset());
+//                        tile.render(g, tilePosX, tilePosY);
+//
+//                        if (DebugMode.debugMode()) {
+//                            if (layer == DebugMode.getRenderedLayerIndex()) {
+//                                g.drawRect(tilePosX, tilePosY, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            if (layer == tiles.length - 1) {
+////                player.render(g);
+////                entityManager.render(g);
+//            }
+//        }
     }
 
     public Tile getTile(int x, int y, int layer) {

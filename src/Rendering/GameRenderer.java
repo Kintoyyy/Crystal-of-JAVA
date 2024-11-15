@@ -8,30 +8,28 @@ import World.ParseWorld;
 import java.awt.*;
 
 public class GameRenderer {
-    private final RenderWorld world;
+    private final RenderWorld renderWorld;
     private final CharacterManager characterManager;
-    private Camera camera;
+
+    private Movement movement;
+    protected Handler handler;
 
     public GameRenderer(Handler handler) {
-
+        this.handler = handler;
         ParseWorld world = new ParseWorld("res/worlds/world_1.tmx");
 
-        camera = new Camera(handler, 0, 0);
-
         this.characterManager = handler.getGameState().getCharacterManger();
+        System.out.println("World " + world);
+        movement = new Movement(handler, world, characterManager);
 
-        this.world = new RenderWorld(handler, world, characterManager);
-    }
-
-    public Camera getCamera() {
-        return camera;
+        this.renderWorld = new RenderWorld(world, movement);
     }
 
     public void render(Graphics g) {
-        world.render(g);
+        renderWorld.render(g);
     }
 
     public void tick() {
-        world.tick();
+        renderWorld.tick();
     }
 }

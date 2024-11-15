@@ -5,7 +5,6 @@ import World.World;
 
 public class GameState {
     private final CharacterManager characters;
-    private World world;
 
     private Handler handler;
 

@@ -1,8 +1,7 @@
 
 package Entities.Characters;
 
-import Entities.Characters.Movement.Movement;
-import Game.Handler;
+
 import Skills.Skill;
 
 import java.awt.*;

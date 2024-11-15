@@ -7,33 +7,36 @@ import World.Tile;
 
 public class Camera {
 
-    private final Handler handler;
     private float xOffset, yOffset;
-    private int width, height;
+    private final int screenWidth, screenHeight;
+    private final ParseWorld world;
 
-    public Camera(Handler handler, float xOffset, float yOffset) {
-        this.handler = handler;
+    public Camera(Movement movement, float xOffset, float yOffset) {
+        Handler handler = movement.getHandler();
+        this.world = movement.getWorld();
+        this.screenWidth = handler.getWidth();
+        this.screenHeight = handler.getHeight();
         this.xOffset = xOffset;
         this.yOffset = yOffset;
     }
 
-    public void centerOnEntity(Movement e) {
-        xOffset = e.getX() - (float) handler.getWidth() / 2 + (float) e.getWidth() / 2;
-        yOffset = e.getY() - (float) handler.getHeight() / 2 + (float) e.getHeight() / 2;
+    public void centerOnEntity(Movement e, ParseWorld world) {
+        xOffset = e.getX() - (float) screenWidth / 2 + (float) e.getWidth() / 2;
+        yOffset = e.getY() - (float) screenHeight / 2 + (float) e.getHeight() / 2;
         checkBlankSpace();
     }
 
     public void checkBlankSpace() {
         if (xOffset < 0) {
             xOffset = 0;
-        } else if (xOffset > handler.getWorld().getWidth() * Tile.TILEWIDTH - handler.getWidth()) {
-            xOffset = handler.getWorld().getWidth() * Tile.TILEWIDTH - handler.getWidth();
+        } else if (xOffset > world.getWorldWidth() * Tile.TILEWIDTH - screenWidth) {
+            xOffset = world.getWorldWidth() * Tile.TILEWIDTH - screenWidth;
         }
 
         if (yOffset < 0) {
             yOffset = 0;
-        } else if (yOffset > handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) {
-            yOffset = handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
+        } else if (yOffset > world.getWorldHeight() * Tile.TILEHEIGHT - screenHeight) {
+            yOffset = world.getWorldHeight() * Tile.TILEHEIGHT - screenHeight;
         }
     }
 

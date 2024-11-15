@@ -36,7 +36,7 @@ public class Game implements Runnable {
     //Input
     private InputKeyboardManager inputKeyboardManager;
 
-    private Camera camera;
+//    private Camera camera;
 
     private Handler handler;
     private Transition transition;
@@ -72,11 +72,8 @@ public class Game implements Runnable {
         display.getFrame().addMouseMotionListener(inputMouseListener);
         display.getCanvas().addMouseListener(inputMouseListener);
         display.getCanvas().addMouseMotionListener(inputMouseListener);
-        Assets.init();
 
         handler = new Handler(this);
-
-        camera = new Camera(handler, 0, 0);
 
         gameState = new GameState(handler);
 
@@ -85,8 +82,6 @@ public class Game implements Runnable {
 
         // set the game state
         handler.setGameState(gameState);
-
-
 
         viewManager = new ViewManager(handler);
     }
@@ -193,9 +188,9 @@ public class Game implements Runnable {
         return inputMouseListener;
     }
 
-    public Camera getGameCamera() {
-        return camera;
-    }
+//    public Camera getGameCamera() {
+//        return camera;
+//    }
 
     public int getWidth() {
         return width;

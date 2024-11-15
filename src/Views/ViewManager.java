@@ -16,23 +16,16 @@ public class ViewManager {
     private final EnumMap<ViewEnums, View> views = new EnumMap<>(ViewEnums.class);
     private final ArrayList<View> layers = new ArrayList<>();
     private final Handler handler;
-    private final World world;
+//    private final World world;
 
     private static final Color OVERLAY_COLOR = new Color(0, 0, 0, 128);
 
     public ViewManager(Handler handler) {
         this.handler = handler;
-        world = new World(handler, "res/worlds/world_1.tmx");
-
-        handler.setWorld(world);
         this.handler.setViewManager(this);
         initializeViews();
 
         setView(ViewEnums.GAME);
-    }
-
-    public World getWorld() {
-        return world;
     }
 
     private void initializeViews() {
