@@ -7,12 +7,15 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.ArrayList;
 
 public class ParseWorld {
     private int worldWidth, worldHeight;
     private int spawnX, spawnY;
     private int[][][] tilesLayer;
     private ParseTileTypes parseTileTypes;
+
+    private ArrayList<TriggerArea> triggerAreas = new ArrayList<>(); // move to a separate class
 
     /**
      * @param worldPath Path to the .tmx world file
@@ -70,5 +73,21 @@ public class ParseWorld {
     public int getWorldHeight() {
         return worldHeight;
     }
+}
+
+
+abstract class TriggerArea {
+    protected int x, y, width, height;
+    protected String name;
+    protected boolean triggered = false;
+
+    public TriggerArea(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
+    public abstract void trigger();
 }
 

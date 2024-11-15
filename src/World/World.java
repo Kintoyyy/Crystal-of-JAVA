@@ -16,14 +16,14 @@ public class World {
     private int width, height;
     private int spawnX, spawnY;
     private int[][][] tiles;
-    private final EntityManager entityManager;
+//    private final EntityManager entityManager;
 
     private ParseTileTypes parseTileTypes;
 
     public World(Handler handler, String path) {
         this.handler = handler;
 
-        entityManager = new EntityManager(handler, new Player(handler));
+//        entityManager = new EntityManager(handler, new Player(handler));
 
         loadWorld(path);
 
@@ -38,12 +38,12 @@ public class World {
 //        }
     }
 
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
+//    public EntityManager getEntityManager() {
+//        return entityManager;
+//    }
 
     public void tick() {
-        entityManager.tick();
+//        entityManager.tick();
     }
 
     public void render(Graphics g) {
@@ -72,7 +72,7 @@ public class World {
 
             if (layer == tiles.length - 1) {
 //                player.render(g);
-                entityManager.render(g);
+//                entityManager.render(g);
             }
         }
     }
@@ -123,8 +123,8 @@ public class World {
                 spawnY = mapElement.hasAttribute("spawnY") ?
                         Integer.parseInt(mapElement.getAttribute("spawnY")) : 10;
 
-                entityManager.getPlayer().setX(spawnX * Tile.TILEWIDTH);
-                entityManager.getPlayer().setY(spawnY * Tile.TILEWIDTH);
+//                entityManager.getPlayer().setX(spawnX * Tile.TILEWIDTH);
+//                entityManager.getPlayer().setY(spawnY * Tile.TILEWIDTH);
             }
 
         } catch (Exception e) {
