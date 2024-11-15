@@ -16,15 +16,15 @@ public class PlayerAnimation {
     private int action;
     ImageUtils img = new ImageUtils();
 
-    private static final int width = 32; //Size of each tile in sprite sheet
-    private static final int height = 32;
+    private static int width = 32; //Size of each tile in sprite sheet
+    private static int height = 32;
 
     private static final int pWidth = 32;
     private static final int pHeight = 32;
 
     public PlayerAnimation(int speed, SpriteSheet sheet) {
         this.speed = speed;
-        this.frames = loadAnimations(sheet);;
+        this.frames = loadAnimations(sheet);
         index = 0;
         lastTime = System.currentTimeMillis();
     }

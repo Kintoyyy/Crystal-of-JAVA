@@ -38,6 +38,7 @@ public final class PlayerAnimation {
         };
     }
 
+    // ugly as hell but it works
     public static int getFrameSet(int action, String direction) {
         return switch (action) {
             case ATTACK -> switch (direction) {

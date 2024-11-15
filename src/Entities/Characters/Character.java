@@ -1,5 +1,6 @@
 package Entities.Characters;
 
+import Animations.Entities.CharacterAnimation;
 import Animations.PlayerAnimation;
 import Entities.Common.*;
 import Entities.Entity;
@@ -19,6 +20,9 @@ public abstract class Character extends Entity {
     protected int experience;
     protected double dodgeRate = 0.0;
     protected double dodgeChance = 0.0;
+
+    CharacterAnimation characterAnimation;
+
 
     public Character(String name, int level, Health health, Mana mana, AttackPower attackPower, Defense defense, ArrayList<Skill> skills) {
         super(0, 0, 32, 32);
@@ -108,6 +112,10 @@ public abstract class Character extends Entity {
 
     public double getAttackPower() {
         return attackPower.getAttackPower();
+    }
+
+    public CharacterAnimation getCharacterAnimation() {
+        return characterAnimation;
     }
 }
 

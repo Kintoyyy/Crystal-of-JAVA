@@ -1,5 +1,6 @@
 package Entities.Characters;
 
+import Animations.Entities.CharacterAnimation;
 import Animations.PlayerAnimation;
 import Entities.Common.*;
 import Skills.Warrior.*;
@@ -10,7 +11,6 @@ import Utils.ImageUtils;
 import java.util.ArrayList;
 
 public class Kent extends Character {
-
     public Kent() {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(150, AttackType.PHYSICAL), new Defense(30), new ArrayList<>());
@@ -25,6 +25,9 @@ public class Kent extends Character {
         this.animation = new PlayerAnimation(120, this.spriteSheet);
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Kent/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);
+
+
+        characterAnimation = new CharacterAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
     }
 
     @Override
