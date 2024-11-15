@@ -1,7 +1,6 @@
 package Game;
 
 import Entities.Characters.*;
-import World.World;
 
 public class GameState {
     private final CharacterManager characters;

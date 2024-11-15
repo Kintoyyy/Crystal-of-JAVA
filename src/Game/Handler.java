@@ -2,10 +2,8 @@ package Game;
 
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardManager;
-import Rendering.Camera;
 import Utils.DebugMode;
 import Views.ViewManager;
-import World.World;
 
 public class Handler {
     private Game game;

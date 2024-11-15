@@ -33,10 +33,7 @@ public class Game implements Runnable {
 
     private GameState gameState;
 
-    //Input
     private InputKeyboardManager inputKeyboardManager;
-
-//    private Camera camera;
 
     private Handler handler;
     private Transition transition;
