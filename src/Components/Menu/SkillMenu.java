@@ -3,7 +3,7 @@ package Components.Menu;
 import Entities.Characters.Character;
 import Components.Component;
 import Components.Button.SkillButton;
-import Game.BattleManager;
+import Views.Battle.BattleManager;
 import Skills.Skill;
 
 import java.awt.*;
