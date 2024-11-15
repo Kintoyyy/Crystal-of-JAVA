@@ -53,7 +53,7 @@ public class Movement {
 
         bounds = new Rectangle(0, 0, width, height);
 
-        animation = new Kent().getAnimation();
+        animation = characterManager.getPlayer().getAnimation();
     }
 
     public Handler getHandler() {
@@ -70,7 +70,7 @@ public class Movement {
     }
 
     public void tick() {
-
+        animation = characterManager.getPlayer().getAnimation();
         animation.tick();
         getInput();
         camera.centerOnEntity(this, world);

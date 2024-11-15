@@ -28,8 +28,6 @@ public class BattleManager {
         characterManager = handler.getGameState().getCharacterManger();
 
         timer = new Timer();
-
-
     }
 
     public void newBattle(EnemyManager enemyManager) {

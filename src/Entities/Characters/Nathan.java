@@ -1,5 +1,6 @@
 package Entities.Characters;
 
+import Animations.PlayerAnimation;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
@@ -23,6 +24,7 @@ public class Nathan extends Character {
         this.addSkill(new Evasion());
 
         this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Nathan/Character.png"));
+        this.animation = new PlayerAnimation(120, this.spriteSheet);
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Nathan/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);
