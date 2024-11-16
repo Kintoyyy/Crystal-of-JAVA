@@ -8,7 +8,7 @@ import Entities.Enemies.*;
 import Game.TurnState;
 import Utils.Timer;
 import Views.*;
-import enums.ViewEnums;
+import Views.enums.Views;
 
 import java.awt.*;
 
@@ -46,11 +46,11 @@ public class BattleView extends View {
                         .scale(6),
 
                 new PauseButton()
-                        .setAction(() -> viewManager.setView(ViewEnums.PAUSE))
+                        .setAction(() -> viewManager.setView(Views.PAUSE))
                         .setLocation(900, 20),
 
                 new Button("exit")
-                        .setAction(() -> viewManager.setView(ViewEnums.GAME))
+                        .setAction(() -> viewManager.setView(Views.GAME))
                         .setLocation(680, 20)
         );
     }
@@ -59,7 +59,7 @@ public class BattleView extends View {
     public void tick() {
         battleManager.tick();
 //        if (handler.getGameState().getEnemies().isEmpty()) {
-//            viewManager.setView(ViewEnums.GAME);
+//            viewManager.setView(Views.GAME);
 //        }
 
         components.tick();

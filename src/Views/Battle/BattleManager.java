@@ -7,7 +7,7 @@ import Entities.Enemies.EnemyManager;
 import Game.Handler;
 import Game.TurnState;
 import Utils.Timer;
-import enums.ViewEnums;
+import Views.enums.Views;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class BattleManager {
 
     public void newBattle(EnemyManager enemyManager) {
         this.enemyManager = enemyManager;
-        handler.getViewManager().setView(ViewEnums.BATTLE);
+        handler.getViewManager().setView(Views.BATTLE);
         isBattleActive = true;
     }
 

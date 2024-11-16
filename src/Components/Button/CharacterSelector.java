@@ -4,13 +4,13 @@ import Entities.Characters.Character;
 import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
-import enums.Alignment;
+import Components.enums.Alignment;
 import fonts.SuperPixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.*;
+import static Components.enums.States.*;
 
 public class CharacterSelector extends Button {
     private final BufferedImage playerProfile;

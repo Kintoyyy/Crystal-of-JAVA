@@ -5,11 +5,11 @@ import Components.Button.Button;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
-import enums.ViewEnums;
+import Views.enums.Views;
 
 import java.awt.*;
 
-import static enums.ViewEnums.*;
+import static Views.enums.Views.*;
 
 public class MenuView extends View {
 
@@ -29,7 +29,7 @@ public class MenuView extends View {
         );
     }
 
-    private Button createChangeViewButton(String label, int yPosition, ViewEnums targetView) {
+    private Button createChangeViewButton(String label, int yPosition, Views targetView) {
         return (Button) new Button(label)
                 .setAction(() -> viewManager.setView(targetView))
                 .setLocation(400, yPosition);

@@ -9,10 +9,10 @@ import Views.Battle.BattleView;
 import Views.Game.GameView;
 import Views.Menu.MenuView;
 import Views.Overlay.Pause;
-import enums.ViewEnums;
+import Views.enums.Views;
 
 public class ViewManager {
-    private final EnumMap<ViewEnums, View> views = new EnumMap<>(ViewEnums.class);
+    private final EnumMap<Views, View> views = new EnumMap<>(Views.class);
     private final ArrayList<View> layers = new ArrayList<>();
     private final Handler handler;
     private static final Color OVERLAY_COLOR = new Color(0, 0, 0, 128);
@@ -22,19 +22,19 @@ public class ViewManager {
         this.handler.setViewManager(this);
         initializeViews();
 
-        setView(ViewEnums.BATTLE);
+        setView(Views.BATTLE);
     }
 
     private void initializeViews() {
-        views.put(ViewEnums.BATTLE, new BattleView(this));
-        views.put(ViewEnums.GAME, new GameView(this));
-        views.put(ViewEnums.MENU, new MenuView(this));
-        views.put(ViewEnums.SETTINGS, new MenuView(this));
-        views.put(ViewEnums.SELECT_CHARACTER, new MenuView(this));
-        views.put(ViewEnums.PAUSE, new Pause(this));
+        views.put(Views.BATTLE, new BattleView(this));
+        views.put(Views.GAME, new GameView(this));
+        views.put(Views.MENU, new MenuView(this));
+        views.put(Views.SETTINGS, new MenuView(this));
+        views.put(Views.SELECT_CHARACTER, new MenuView(this));
+        views.put(Views.PAUSE, new Pause(this));
     }
 
-    public void setView(ViewEnums viewEnum) {
+    public void setView(Views viewEnum) {
         View selectedView = views.get(viewEnum);
 
         if (selectedView == null) return;
@@ -53,7 +53,7 @@ public class ViewManager {
         handler.getInputMouseListener().setComponentManager(topLayer.getComponentManager());
     }
 
-    public void removeView(ViewEnums viewEnum) {
+    public void removeView(Views viewEnum) {
         View selectedView = views.get(viewEnum);
         if (selectedView == null) return;
 
@@ -102,6 +102,6 @@ public class ViewManager {
     }
 
     public boolean isInGame() {
-        return layers.contains(views.get(ViewEnums.GAME));
+        return layers.contains(views.get(Views.GAME));
     }
 }

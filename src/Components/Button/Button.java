@@ -5,7 +5,7 @@ import Components.Text.Text;
 import Utils.CallBackAction;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
-import enums.Alignment;
+import Components.enums.Alignment;
 import fonts.SuperPixelFont;
 
 import java.awt.*;

@@ -1,7 +1,7 @@
 package Components.Text;
 
 import Components.Component;
-import enums.Alignment;
+import Components.enums.Alignment;
 
 import java.awt.*;
 import java.util.ArrayList;

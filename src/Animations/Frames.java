@@ -59,7 +59,6 @@ public class Frames {
 
         int totalFrames = (rowEnd - rowStart) * (colEnd - colStart);
         BufferedImage[] animationFrames = new BufferedImage[totalFrames];
-        System.out.println(totalFrames);
         int index = 0;
         for (int row = rowStart; row < rowEnd; row++) {
             for (int col = colStart; col < colEnd; col++) {

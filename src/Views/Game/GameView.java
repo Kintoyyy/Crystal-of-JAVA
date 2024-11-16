@@ -10,7 +10,7 @@ import Views.View;
 import Views.ViewManager;
 import World.ParseWorld;
 import World.RenderWorld;
-import enums.ViewEnums;
+import Views.enums.Views;
 
 import java.awt.*;
 
@@ -49,7 +49,7 @@ public class GameView extends View {
                         .setAction(new CallBackAction() {
                             @Override
                             public void onAction() {
-                                viewManager.setView(ViewEnums.PAUSE);
+                                viewManager.setView(Views.PAUSE);
                             }
                         })
                         .setLocation(900, 20),
@@ -58,7 +58,7 @@ public class GameView extends View {
                         .setAction(new CallBackAction() {
                             @Override
                             public void onAction() {
-                                viewManager.setView(ViewEnums.BATTLE);
+                                viewManager.setView(Views.BATTLE);
                             }
                         })
                         .setLocation(680, 20),

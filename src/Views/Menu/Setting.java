@@ -4,7 +4,7 @@ import Components.Button.Button;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
-import enums.ViewEnums;
+import Views.enums.Views;
 
 import java.awt.*;
 
@@ -17,7 +17,7 @@ public class Setting extends View {
                         .setAction(new CallBackAction() {
                             @Override
                             public void onAction() {
-                                viewManager.setView(ViewEnums.BATTLE);
+                                viewManager.setView(Views.BATTLE);
                             }
                         })
                         .setLocation(400, 400),

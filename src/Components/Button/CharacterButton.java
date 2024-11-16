@@ -1,7 +1,6 @@
 package Components.Button;
 
 import Animations.Animation;
-import Animations.Entities.CharacterAnimation;
 import Animations.enums.DIRECTION;
 import Animations.enums.TYPE;
 import Entities.Characters.Character;
@@ -12,7 +11,7 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.PRESSED;
+import static Components.enums.States.PRESSED;
 
 @SuppressWarnings("SingleStatementInBlock")
 public class CharacterButton extends Button {
