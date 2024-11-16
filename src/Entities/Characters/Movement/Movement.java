@@ -6,11 +6,13 @@ import Animations.enums.DIRECTION;
 import Animations.enums.TYPE;
 import Entities.Characters.CharacterManager;
 import Game.Handler;
+import Inputs.InputKeyboardListener;
 import World.Camera;
 import World.ParseWorld;
 import World.Tile.Tile;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class Movement {
@@ -34,10 +36,12 @@ public class Movement {
     private ParseWorld world;
     private final Camera camera;
     private final CharacterManager characterManager;
+    private final InputKeyboardListener keyboard;
 
     public Movement(Handler handler, ParseWorld world, CharacterManager characterManager) {
         this.world = world;
         this.handler = handler;
+        this.keyboard = handler.getKeyManager();
 
         camera = new Camera(this, 0, 0);
 
@@ -81,10 +85,10 @@ public class Movement {
         xMove = 0;
         yMove = 0;
 
-        boolean movingUp = handler.getKeyManager().up || handler.getKeyManager().Up;
-        boolean movingDown = handler.getKeyManager().down || handler.getKeyManager().Down;
-        boolean movingLeft = handler.getKeyManager().left || handler.getKeyManager().Left;
-        boolean movingRight = handler.getKeyManager().right || handler.getKeyManager().Right;
+        boolean movingUp = keyboard.isKeyPressed("w").ignoreCaps() || keyboard.isKeyPressed(KeyEvent.VK_UP).exactMatch();
+        boolean movingDown = keyboard.isKeyPressed("s").ignoreCaps() || keyboard.isKeyPressed(KeyEvent.VK_DOWN).exactMatch();
+        boolean movingLeft = keyboard.isKeyPressed("a").ignoreCaps() || keyboard.isKeyPressed(KeyEvent.VK_LEFT).exactMatch();
+        boolean movingRight = keyboard.isKeyPressed("d").ignoreCaps() || keyboard.isKeyPressed(KeyEvent.VK_RIGHT).exactMatch();
 
         if ((movingUp || movingDown) && (movingLeft || movingRight)) {
             float diagonalSpeed = speed * 0.7071f;

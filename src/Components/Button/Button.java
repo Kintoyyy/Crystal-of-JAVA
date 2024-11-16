@@ -11,6 +11,8 @@ import fonts.SuperPixelFont;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import static Components.enums.States.PRESSED;
+
 public class Button extends Component {
     protected BufferedImage[] buttonSheet = new BufferedImage[3];
     protected SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Menu_UI.png"));
@@ -49,6 +51,10 @@ public class Button extends Component {
     public Button hideText() {
         this.hideText = true;
         return this;
+    }
+
+    public void setActive(boolean isActive) {
+        this.state = isActive ? PRESSED : this.state;
     }
 
     @Override

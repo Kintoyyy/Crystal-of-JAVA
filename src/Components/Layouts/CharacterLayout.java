@@ -4,15 +4,17 @@ import Entities.Characters.Character;
 import Entities.Characters.CharacterManager;
 import Components.Component;
 import Components.Button.CharacterButton;
+import Game.Handler;
 import Views.Battle.BattleManager;
 
 import java.awt.*;
 
 public class CharacterLayout extends Layout {
     private final CharacterManager characters;
-
+    private final Handler handler;
     public CharacterLayout(BattleManager battleManager) {
         super();
+        this.handler = battleManager.getHandler();
         characters = battleManager.getCharacterManager();
         initCharacterFrames();
     }
@@ -34,6 +36,14 @@ public class CharacterLayout extends Layout {
     @Override
     public void tick() {
         childComponents.forEach(Component::tick);
+
+        for (int i = 0; i < characters.getCharacters().size(); i++) {
+            if (handler.getKeyManager().isKeyPressed(String.valueOf(i + 1)).ignoreCaps()) {
+                characters.setPlayer(i);
+                // need to rerender the character layout
+                break; // Only one character can be selected per tick
+            }
+        }
     }
 
     @Override

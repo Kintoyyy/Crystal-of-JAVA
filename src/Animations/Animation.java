@@ -38,13 +38,30 @@ public abstract class Animation {
 
     public final BufferedImage getFrame(TYPE type) {
         key = type.name();
-        return getFramesForKey(key)[index];
+        try {
+            return getFramesForKey(key)[index];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Error: Index out of bounds for key '" + key + "'. Returning null.");
+            return null; // Return a default or placeholder frame if needed
+        } catch (NullPointerException e) {
+            System.err.println("Error: No frames found for key '" + key + "'. Returning null.");
+            return null; // Handle cases where getFramesForKey(key) returns null
+        }
     }
 
     public final BufferedImage getFrame(TYPE type, DIRECTION direction) {
         key = type.name() + "_" + direction.name();
-        return getFramesForKey(key)[index];
+        try {
+            return getFramesForKey(key)[index];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("Error: Index out of bounds for key '" + key + "'. Returning null.");
+            return null; // Return a default or placeholder frame if needed
+        } catch (NullPointerException e) {
+            System.err.println("Error: No frames found for key '" + key + "'. Returning null.");
+            return null; // Handle cases where getFramesForKey(key) returns null
+        }
     }
+
 
     public final void addAnimation(TYPE type, BufferedImage[] frames) {
         animations.put(type.name(), frames);

@@ -66,13 +66,11 @@ public class Game implements Runnable {
     }
 
     private void tick() { //updates all variables
-        inputKeyboardListener.tick();
-
-        gameState.tick();
-
         if (viewManager.hasLayers()) {
             viewManager.tick();
         }
+
+        gameState.tick();
     }
 
 

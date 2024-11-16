@@ -2,51 +2,92 @@ package Inputs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * A keyboard listener for dynamically tracking key states with fluent API.
+ */
 public class InputKeyboardListener implements KeyListener {
-    public boolean f9,f10, f11, f12;
-    private boolean[] keys;
-    public boolean up, down, left, right;
-    public boolean Up, Down, Left, Right;
-    public boolean q, space, f3;
-    public static boolean isMoving = false;
+
+    // Map to dynamically track the state of keys
+    private final Map<Integer, Boolean> keyStates;
+
+    // Temporary variable to store the key code being queried
+    private int queriedKeyCode;
 
     public InputKeyboardListener() {
-        keys = new boolean[256];
+        keyStates = new HashMap<>();
     }
 
-    public void tick() {
-        up = keys[KeyEvent.VK_W] || keys[KeyEvent.VK_UP];
-        down = keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN];
-        left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
-        right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
-        q = keys[KeyEvent.VK_Q];
-        f3 = keys[KeyEvent.VK_F3];
-        f11 = keys[KeyEvent.VK_F11];
-        f12 = keys[KeyEvent.VK_F12];
-        f9 = keys[KeyEvent.VK_F9];
-        f10 = keys[KeyEvent.VK_F10];
-        space = keys[KeyEvent.VK_SPACE];
-    }
-
+    /**
+     * Updates the state of a key in the map when it's pressed.
+     *
+     * @param e KeyEvent
+     */
     @Override
     public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        if (keyCode < keys.length) {
-            keys[keyCode] = true;
-        }
+        keyStates.put(e.getKeyCode(), true);
     }
 
+    /**
+     * Updates the state of a key in the map when it's released.
+     *
+     * @param e KeyEvent
+     */
     @Override
     public void keyReleased(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        if (keyCode < keys.length) {
-            keys[keyCode] = false;
-        }
+        keyStates.put(e.getKeyCode(), false);
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // Not used, but must be implemented
+        // Not used
+    }
+
+    /**
+     * Initiates a query for the state of a specific key by its character.
+     *
+     * @param keyChar the key character to query (e.g., 'w' or 'W')
+     * @return this instance for chaining
+     */
+    public InputKeyboardListener isKeyPressed(String keyChar) {
+        char key = keyChar.length() == 1 ? keyChar.charAt(0) : '\0';
+        queriedKeyCode = KeyEvent.getExtendedKeyCodeForChar(key);
+        return this;
+    }
+
+    /**
+     * Initiates a query for the state of a specific key by its key code.
+     *
+     * @param keyCode the KeyEvent key code (e.g., KeyEvent.VK_UP)
+     * @return this instance for chaining
+     */
+    public InputKeyboardListener isKeyPressed(int keyCode) {
+        queriedKeyCode = keyCode;
+        return this;
+    }
+
+    /**
+     * Checks the state of the queried key, ignoring case sensitivity if applicable.
+     *
+     * @return true if the key is pressed, false otherwise
+     */
+    public boolean ignoreCaps() {
+        if (Character.isLetter(queriedKeyCode)) {
+            int lowerKeyCode = KeyEvent.getExtendedKeyCodeForChar(Character.toLowerCase(queriedKeyCode));
+            int upperKeyCode = KeyEvent.getExtendedKeyCodeForChar(Character.toUpperCase(queriedKeyCode));
+            return keyStates.getOrDefault(lowerKeyCode, false) || keyStates.getOrDefault(upperKeyCode, false);
+        }
+        return keyStates.getOrDefault(queriedKeyCode, false);
+    }
+
+    /**
+     * Directly checks the state of the queried key without any additional logic.
+     *
+     * @return true if the key is pressed, false otherwise
+     */
+    public boolean exactMatch() {
+        return keyStates.getOrDefault(queriedKeyCode, false);
     }
 }

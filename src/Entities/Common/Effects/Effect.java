@@ -25,6 +25,4 @@ public abstract class Effect {
     public String getDescription() {
         return description;
     }
-
-
 }

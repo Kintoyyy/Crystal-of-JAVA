@@ -13,21 +13,16 @@ import java.util.ArrayList;
 
 public class BattleManager {
     private final CharacterManager characterManager;
-    private EnemyManager enemyManager;
+    private final Timer timer = new Timer();
+    private final Handler handler;
 
     private boolean isBattleActive = true;
     private Turn turn = Turn.PLAYER;
-
-    private Handler handler;
-
-    private int seconds = 0;
-    private Timer timer = new Timer();
+    private EnemyManager enemyManager;
 
     public BattleManager(Handler handler) {
         this.handler = handler;
         characterManager = handler.getGameState().getCharacterManger();
-
-        timer = new Timer();
     }
 
     public void newBattle(EnemyManager enemyManager) {
@@ -42,11 +37,10 @@ public class BattleManager {
         } else {
             turn = Turn.PLAYER;
         }
-        System.out.println("Turn State: " + turn);
         enemyManager.setAutoSelectEnemy(true);
 
-        if(turn == Turn.ENEMY) {
-            timer.start().setDelay(1).setAction(() -> {
+        if (turn == Turn.ENEMY) {
+            timer.start().setDelay(2).setAction(() -> {
                 enemyManager.getCurrentEnemy().attack(characterManager.getPlayer());
                 System.out.println("Timer 1 Action");
                 turn = Turn.PLAYER;
@@ -55,12 +49,13 @@ public class BattleManager {
         }
         characterManager.updateTurns();
     }
+
     public Turn getTurnState() {
         return turn;
     }
 
     public void tick() {
-
+//        System.out.println("Turn State: " + turn + " " + timer.getTime());
         timer.update();
 //        if (turn == Turn.PLAYER) {
 //
@@ -103,6 +98,10 @@ public class BattleManager {
 
     public EnemyManager getEnemyManager() {
         return enemyManager;
+    }
+
+    public Handler getHandler() {
+        return handler;
     }
 
     public Enemy getCurrentEnemy() {

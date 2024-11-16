@@ -3,6 +3,7 @@ package Components.Menu;
 import Entities.Characters.Character;
 import Components.Component;
 import Components.Button.SkillButton;
+import Game.Handler;
 import Views.Battle.BattleManager;
 import Skills.Skill;
 
@@ -12,10 +13,12 @@ import java.util.ArrayList;
 public class SkillMenu extends Menu {
     private ArrayList<Skill> skills;
     private final BattleManager battleManager;
+    private final Handler handler;
 
     public SkillMenu(BattleManager battleManager) {
         super();
         this.battleManager = battleManager;
+        this.handler = battleManager.getHandler();
         this.skills = new ArrayList<>();
         scale(6);
         initCharacterFrames();
@@ -39,6 +42,17 @@ public class SkillMenu extends Menu {
     public void tick() {
         // Get the updated list of skills
         ArrayList<Skill> updatedSkills = battleManager.getPlayer().getSkills();
+
+        char[] skillKeys = {'q', 'w', 'e', 'r', 't'};
+
+        for (int i = 0; i < updatedSkills.size(); i++) {
+            if (handler.getKeyManager().isKeyPressed(String.valueOf(skillKeys[i])).ignoreCaps()) {
+                SkillButton button = (SkillButton) childComponents.get(i);
+                button.setActive(true);
+                updatedSkills.get(i).attack(battleManager);
+                break; // Only one character can be selected per tick
+            }
+        }
 
         // Check if skills have changed
         if (!skills.equals(updatedSkills)) {
