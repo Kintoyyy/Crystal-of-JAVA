@@ -1,18 +1,16 @@
 package Entities;
 
-import Animations.PlayerAnimation;
+import Animations.Animation;
 import Entities.Common.Effects.Effect;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
-import Utils.SpriteSheet;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public abstract class Entity {
-
     protected String name;
     protected String description = "";
     protected Health health;
@@ -20,9 +18,8 @@ public abstract class Entity {
     protected Defense defense;
     protected ArrayList<Effect> effects = new ArrayList<>();
 
-    protected SpriteSheet spriteSheet;
     protected BufferedImage profileImage;
-    protected PlayerAnimation animation;
+    protected Animation animation;
 
     protected float x, y;
     protected int width, height;
@@ -60,10 +57,6 @@ public abstract class Entity {
         return bounds;
     }
 
-    public PlayerAnimation getAnimation() {
-        return animation;
-    }
-
     public String getName() {
         return name;
     }
@@ -86,5 +79,9 @@ public abstract class Entity {
 
     public ArrayList<Effect> getEffects() {
         return effects;
+    }
+
+    public Animation getAnimation() {
+        return animation;
     }
 }

@@ -1,7 +1,6 @@
 package Entities.Characters;
 
 import Animations.Entities.CharacterAnimation;
-import Animations.PlayerAnimation;
 import Entities.Common.*;
 import Skills.Warrior.*;
 import Utils.SpriteSheet;
@@ -21,13 +20,11 @@ public class Kent extends Character {
         this.addSkill(new WarCry());
         this.addSkill(new Taunt());
 
-        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Kent/Character.png"));
-        this.animation = new PlayerAnimation(120, this.spriteSheet);
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Kent/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);
 
 
-        characterAnimation = new CharacterAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
+        animation = new CharacterAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
     }
 
     @Override

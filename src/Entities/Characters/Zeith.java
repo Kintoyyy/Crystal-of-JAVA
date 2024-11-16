@@ -1,5 +1,6 @@
 package Entities.Characters;
 
+import Animations.Entities.CharacterAnimation;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
@@ -22,8 +23,6 @@ public class Zeith extends Character {
         this.addSkill(new DivineShield());
         this.addSkill(new Revive());
         this.addSkill(new Blessing());
-
-        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/textures/Player_Idle_Run_Death_Anim.png"));
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Zeith/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);

@@ -1,7 +1,7 @@
 package Components.Button;
 
+import Animations.Animation;
 import Animations.Entities.CharacterAnimation;
-import Animations.PlayerAnimation;
 import Animations.enums.DIRECTION;
 import Animations.enums.TYPE;
 import Entities.Characters.Character;
@@ -14,13 +14,12 @@ import java.awt.image.BufferedImage;
 
 import static enums.ComponentStateEnums.PRESSED;
 
+@SuppressWarnings("SingleStatementInBlock")
 public class CharacterButton extends Button {
-    private final PlayerAnimation playerAnimation;
-    //    private final Text tooltip;
     private final HealthBar healthBar;
     private final Character player;
 
-    CharacterAnimation characterAnimation;
+    Animation characterAnimation;
 
     public CharacterButton(Character player) {
         super("Character Frame");
@@ -36,10 +35,7 @@ public class CharacterButton extends Button {
 
         this.player = player;
         assert player != null;
-        playerAnimation = player.getAnimation();
-
-        characterAnimation = player.getCharacterAnimation();
-
+        characterAnimation = player.getAnimation();
 
         healthBar = (HealthBar) new HealthBar(player)
                 .scale(3);
@@ -53,8 +49,7 @@ public class CharacterButton extends Button {
     public void tick() {
         super.tick();
         healthBar.tick();
-        playerAnimation.tick();
-        if(characterAnimation != null){
+        if (characterAnimation != null) {
             characterAnimation.tick();
         }
     }
@@ -67,14 +62,8 @@ public class CharacterButton extends Button {
             default -> buttonSheet[0];
         };
 
-
-
-        if (playerAnimation != null) {
-            // TODO: fix player sizing DONT HARD CODE PLEASE
-//            g.drawImage(playerAnimation.getCurrentFrame("down", 1), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
-            if(characterAnimation != null){
-                g.drawImage(characterAnimation.getFrame(TYPE.GHOST, DIRECTION.DOWN), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
-            }
+        if (characterAnimation != null) {
+            g.drawImage(player.getHealth().isDead() ? characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT) : characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
         }
 
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);

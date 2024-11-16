@@ -1,8 +1,10 @@
 package Entities.Characters.Movement;
 
-import Animations.PlayerAnimation;
+import Animations.Animation;
+import Animations.Entities.CharacterAnimation;
+import Animations.enums.DIRECTION;
+import Animations.enums.TYPE;
 import Entities.Characters.CharacterManager;
-import Entities.Characters.Kent;
 import Game.Handler;
 import World.Camera;
 import World.ParseWorld;
@@ -10,8 +12,6 @@ import World.Tile.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
-import static Constants.PlayerAnimation.*;
 
 public class Movement {
     protected Handler handler;
@@ -25,8 +25,9 @@ public class Movement {
     public static float xPosition, yPosition;
     public static boolean collided = false;
 
-    private PlayerAnimation animation;
-    public static String dir = "down";
+    private Animation animation;
+
+    private DIRECTION direction = DIRECTION.DOWN;
 
     protected Rectangle bounds; // Character bounds
 
@@ -99,13 +100,13 @@ public class Movement {
         }
 
         if (xMove > 0) {
-            dir = RIGHT;
+            direction = DIRECTION.RIGHT;
         } else if (xMove < 0) {
-            dir = LEFT;
+            direction = DIRECTION.LEFT;
         } else if (yMove < 0) {
-            dir = UP;
+            direction = DIRECTION.UP;
         } else if (yMove > 0) {
-            dir = DOWN;
+            direction = DIRECTION.DOWN;
         }
         // Move the player based on the input
         move();
@@ -123,26 +124,26 @@ public class Movement {
     private BufferedImage getCurrentAnimationFrame() {
         // Diagonal movement frames are handled first
         if (xMove < 0 && yMove < 0) {
-            return animation.getCurrentFrame(LEFT, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.LEFT);
         } else if (xMove > 0 && yMove < 0) {
-            return animation.getCurrentFrame(RIGHT, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.RIGHT);
         } else if (xMove < 0 && yMove > 0) {
-            return animation.getCurrentFrame(LEFT, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.LEFT);
         } else if (xMove > 0 && yMove > 0) {
-            return animation.getCurrentFrame(RIGHT, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.RIGHT);
         }
 
         // Single direction movement frames
         if (xMove < 0) {
-            return animation.getCurrentFrame(LEFT, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.LEFT);
         } else if (xMove > 0) {
-            return animation.getCurrentFrame(RIGHT, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.RIGHT);
         } else if (yMove < 0) {
-            return animation.getCurrentFrame(UP, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.UP);
         } else if (yMove > 0) {
-            return animation.getCurrentFrame(DOWN, RUNNING);
+            return animation.getFrame(TYPE.WALK, DIRECTION.DOWN);
         } else {
-            return animation.getCurrentFrame(dir, IDLE);
+            return animation.getFrame(TYPE.IDLE, direction);
         }
     }
 
@@ -186,14 +187,14 @@ public class Movement {
 
 
     private boolean canMoveX(int tx) {
-        return !collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) &&
-                !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILEHEIGHT);
+        return collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) &&
+                collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILEHEIGHT);
     }
 
 
     private boolean canMoveY(int ty) {
-        return !collisionWithTile((int) (x + bounds.x) / Tile.TILEWIDTH, ty) &&
-                !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty);
+        return collisionWithTile((int) (x + bounds.x) / Tile.TILEWIDTH, ty) &&
+                collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty);
     }
 
     protected boolean collisionWithTile(int x, int y) {
@@ -201,7 +202,7 @@ public class Movement {
 //			collided = true;
 //		}
 //		return handler.getWorld().getTile(x, y).isSolid();
-        return false;
+        return true;
     }
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {

@@ -30,9 +30,6 @@ public abstract class Enemy extends Entity {
 
     Enemy(Health health, AttackPower attackPower, Defense defence) {
         super(0, 0, 32, 32);
-        this.spriteSheet = new SpriteSheet(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
-        this.profileImage = spriteSheet.crop(0, 0, 32, 32);
-
         this.health = health;
         this.attackPower = attackPower;
         this.defense = defence;
