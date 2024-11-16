@@ -1,12 +1,12 @@
 package Game;
 
 import Inputs.InputMouseListener;
-import Inputs.InputKeyboardManager;
+import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
 import Views.ViewManager;
 
 public class Handler {
-    private Game game;
+    private final Game game;
     private DebugMode debugMode;
     private ViewManager viewManager;
     private GameState gameState;
@@ -15,7 +15,7 @@ public class Handler {
         this.game = game;
     }
 
-    public InputKeyboardManager getKeyManager() {
+    public InputKeyboardListener getKeyManager() {
         return game.getKeyManager();
     }
 

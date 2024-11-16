@@ -5,20 +5,20 @@ import Components.Button.Button;
 import Components.Layouts.*;
 import Components.Menu.SkillMenu;
 import Entities.Enemies.*;
-import Game.TurnState;
 import Utils.Timer;
 import Views.*;
+import Views.enums.Turn;
 import Views.enums.Views;
 
 import java.awt.*;
 
-public class BattleView extends View {
+public class Battle extends View {
     private final BattleManager battleManager;
 
     private int seconds = 0;
     private Timer timer = new Timer();
 
-    public BattleView(ViewManager viewManager) {
+    public Battle(ViewManager viewManager) {
         super(viewManager);
 
         EnemyManager enemies = new EnemyManager();
@@ -75,7 +75,7 @@ public class BattleView extends View {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 20));
         g.drawString(handler.getGameState().getCharacterManger().getPlayer().getSkills().toString(), 20, 50);
-        g.drawString((battleManager.getTurnState() == TurnState.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
+        g.drawString((battleManager.getTurnState() == Turn.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
 //        g.drawString(handler.getGameState(), 20, 70);
     }
 

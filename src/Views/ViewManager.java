@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 import Game.Handler;
-import Views.Battle.BattleView;
-import Views.Game.GameView;
-import Views.Menu.MenuView;
+import Views.Battle.Battle;
+import Views.Game.Game;
+import Views.Menu.Menu;
 import Views.Overlay.Pause;
 import Views.enums.Views;
 
@@ -26,11 +26,11 @@ public class ViewManager {
     }
 
     private void initializeViews() {
-        views.put(Views.BATTLE, new BattleView(this));
-        views.put(Views.GAME, new GameView(this));
-        views.put(Views.MENU, new MenuView(this));
-        views.put(Views.SETTINGS, new MenuView(this));
-        views.put(Views.SELECT_CHARACTER, new MenuView(this));
+        views.put(Views.BATTLE, new Battle(this));
+        views.put(Views.GAME, new Game(this));
+        views.put(Views.MENU, new Menu(this));
+        views.put(Views.SETTINGS, new Menu(this));
+        views.put(Views.SELECT_CHARACTER, new Menu(this));
         views.put(Views.PAUSE, new Pause(this));
     }
 

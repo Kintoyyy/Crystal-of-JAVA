@@ -5,8 +5,8 @@ import Entities.Characters.CharacterManager;
 import Entities.Enemies.Enemy;
 import Entities.Enemies.EnemyManager;
 import Game.Handler;
-import Game.TurnState;
 import Utils.Timer;
+import Views.enums.Turn;
 import Views.enums.Views;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class BattleManager {
     private EnemyManager enemyManager;
 
     private boolean isBattleActive = true;
-    private TurnState turnState = TurnState.PLAYER;
+    private Turn turn = Turn.PLAYER;
 
     private Handler handler;
 
@@ -37,32 +37,32 @@ public class BattleManager {
     }
 
     public void updateTurnState() {
-        if (turnState == TurnState.PLAYER) {
-            turnState = TurnState.ENEMY;
+        if (turn == Turn.PLAYER) {
+            turn = Turn.ENEMY;
         } else {
-            turnState = TurnState.PLAYER;
+            turn = Turn.PLAYER;
         }
-        System.out.println("Turn State: " + turnState);
+        System.out.println("Turn State: " + turn);
         enemyManager.setAutoSelectEnemy(true);
 
-        if(turnState == TurnState.ENEMY) {
+        if(turn == Turn.ENEMY) {
             timer.start().setDelay(1).setAction(() -> {
                 enemyManager.getCurrentEnemy().attack(characterManager.getPlayer());
                 System.out.println("Timer 1 Action");
-                turnState = TurnState.PLAYER;
+                turn = Turn.PLAYER;
                 timer.reset();
             });
         }
         characterManager.updateTurns();
     }
-    public TurnState getTurnState() {
-        return turnState;
+    public Turn getTurnState() {
+        return turn;
     }
 
     public void tick() {
 
         timer.update();
-//        if (turnState == TurnState.PLAYER) {
+//        if (turn == Turn.PLAYER) {
 //
 //        } else {
 //            timer.update();
@@ -94,7 +94,7 @@ public class BattleManager {
     }
 
     public boolean isPlayersTurn() {
-        return turnState == TurnState.PLAYER;
+        return turn == Turn.PLAYER;
     }
 
     public CharacterManager getCharacterManager() {

@@ -14,10 +14,10 @@ import Views.enums.Views;
 
 import java.awt.*;
 
-public class GameView extends View {
+public class Game extends View {
     private final RenderWorld renderWorld;
 
-    public GameView(ViewManager viewManager) {
+    public Game(ViewManager viewManager) {
         super(viewManager);
 
         ParseWorld world = new ParseWorld("res/worlds/world_1.tmx");

@@ -11,9 +11,9 @@ import java.awt.*;
 
 import static Views.enums.Views.*;
 
-public class MenuView extends View {
+public class Menu extends View {
 
-    public MenuView(ViewManager viewManager) {
+    public Menu(ViewManager viewManager) {
         super(viewManager);
         components.init(
                 createChangeViewButton("play", 330, GAME),
