@@ -25,10 +25,10 @@ public abstract class Entity {
 
     protected BufferedImage profileImage; // Profile image for the entity
     protected Animation animation; // Animation for the entity
+    protected Rectangle bounds; // Bounding box for collision detection
 
     protected float x, y; // Position of the entity
     protected int width, height; // Dimensions of the entity
-    protected Rectangle bounds; // Bounding box for collision detection
 
     /**
      * Constructs an entity at the specified position and size.
@@ -43,7 +43,6 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
-        bounds = new Rectangle(0, 0, width, height);
     }
 
     /**

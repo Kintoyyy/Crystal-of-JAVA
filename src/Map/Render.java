@@ -1,7 +1,9 @@
 package Map;
 
-import Entities.Characters.Movement.Movement;
+import Map.Movement.Movement;
 import Game.Handler;
+import Map.Object.Object;
+import Map.Object.ObjectGroup;
 import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
@@ -14,34 +16,47 @@ import java.awt.*;
  */
 public class Render {
 
-    /** Width of the world in tiles. */
+    /**
+     * Width of the world in tiles.
+     */
     private final int width;
 
-    /** Height of the world in tiles. */
+    /**
+     * Height of the world in tiles.
+     */
     private final int height;
 
-    /** 3D array representing the tile layers in the world. */
+    /**
+     * 3D array representing the tile layers in the world.
+     */
     private final int[][][] TileLayers;
 
-    /** TileTypes instance for retrieving tile information. */
+    /**
+     * TileTypes instance for retrieving tile information.
+     */
     private final TileTypes tileTypes;
 
-    /** Movement object to handle character movement and camera. */
+    /**
+     * Movement object to handle character movement and camera.
+     */
     private final Movement movement;
+
+    private final ObjectGroup objectGroup;
 
     /**
      * Constructs a Render object using parsed world data and a movement handler.
      *
-     * @param parse    The Parse object containing world data such as layers and dimensions.
+     * @param map      The Map object containing world data such as layers and dimensions.
      * @param movement The Movement instance for managing character movement.
      */
-    public Render(Parse parse, Movement movement) {
+    public Render(Map map, Movement movement) {
         this.movement = movement;
-        movement.setSpawn(parse.getSpawnX(), parse.getSpawnY());
-        this.width = parse.getWorldWidth();
-        this.height = parse.getWorldHeight();
-        this.TileLayers = parse.getLayers();
-        this.tileTypes = parse.getTileTypes();
+        movement.setSpawn(map.getSpawnX(), map.getSpawnY());
+        this.width = map.getWorldWidth();
+        this.height = map.getWorldHeight();
+        this.TileLayers = map.getLayers();
+        this.tileTypes = map.getTileTypes();
+        this.objectGroup = map.getObjectGroup();
     }
 
     /**
@@ -78,6 +93,7 @@ public class Render {
 
                         if (DebugMode.debugMode()) {
                             if (layer == DebugMode.getRenderedLayerIndex()) {
+                                System.out.println(Tile.height + " " + Tile.width);
                                 g.drawRect(tilePosX, tilePosY, Tile.width, Tile.height);
                             }
                         }
@@ -85,9 +101,19 @@ public class Render {
                 }
             }
 
+
             if (layer == TileLayers.length - 1) {
                 movement.render(g);
             }
+        }
+
+        for (int i = 0; i < objectGroup.getObjects().size(); i++) {
+            Object object = objectGroup.getObjects().get(i);
+            int width = object.getWidth();
+            int height = object.getHeight();
+            int x = object.getX();
+            int y = object.getY();
+            g.drawRect((int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()), width, height);
         }
     }
 

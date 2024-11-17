@@ -4,11 +4,11 @@ import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
 import Entities.Characters.CharacterManager;
-import Entities.Characters.Movement.Movement;
+import Map.Movement.Movement;
+import Map.Map;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
-import Map.Parse;
 import Map.Render;
 import Views.enums.Views;
 
@@ -20,7 +20,9 @@ public class Game extends View {
     public Game(ViewManager viewManager) {
         super(viewManager);
 
-        Parse world = new Parse("res/Maps/world_1.tmx");
+        Map world = new Map("res/Maps/world_1.tmx");
+
+
 
         CharacterManager characterManager = handler.getGameState().getCharacterManger();
 

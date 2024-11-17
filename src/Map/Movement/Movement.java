@@ -1,4 +1,4 @@
-package Entities.Characters.Movement;
+package Map.Movement;
 
 import Animations.Animation;
 import Animations.enums.DIRECTION;
@@ -6,13 +6,13 @@ import Animations.enums.TYPE;
 import Entities.Characters.CharacterManager;
 import Game.Handler;
 import Inputs.InputKeyboardListener;
-import Map.Camera;
-import Map.Parse;
+import Map.Map;
 import Map.Tile.Tile;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
 /**
  * The Movement class handles the movement mechanics of a character in the game.
  * It includes logic for handling input, managing animations, checking for collisions, and moving the character
@@ -37,46 +37,46 @@ import java.awt.image.BufferedImage;
  * </p>
  *
  * @see Handler
- * @see Parse
+ * @see Map
  * @see CharacterManager
  * @see Camera
  * @see Tile
  * @see Animation
  */
 public class Movement {
-    protected Handler handler; // The game handler for managing the game state
-    protected float x, y; // The current position of the character on the screen
-    protected int width, height; // Dimensions of the character
+    private final Handler handler; // The game handler for managing the game state
+    private final int width, height; // Dimensions of the character
+    private float x, y; // The current position of the character on the screen
 
     public static final float DEFAULT_SPEED = 4.0f; // Default movement speed
 
     protected float speed; // Speed at which the character moves
-    public static float xMove, yMove; // Movement offsets for the character
-    public static float xPosition, yPosition; // Current world position of the character
-    public static boolean collided = false; // Flag to check if the character collided with something
+    private static float xMove, yMove; // Movement offsets for the character
 
     private Animation animation; // Animation object to handle character's movements
 
     private DIRECTION direction = DIRECTION.DOWN; // Current movement direction of the character
 
-    protected Rectangle bounds; // The bounding rectangle of the character used for collision detection
+    private Rectangle bounds; // The bounding rectangle of the character used for collision detection
 
-    private final Parse world; // The game world instance
+    private final Map world; // The game world instance
     private final Camera camera; // The camera for controlling the viewport
     private final CharacterManager characterManager; // Manages the character-related logic
     private final InputKeyboardListener keyboard; // Listens for keyboard input
+    private final Collision collision;
 
     /**
      * Constructor for initializing the Movement class.
      *
-     * @param handler The game handler.
-     * @param world The game world.
+     * @param handler          The game handler.
+     * @param world            The game world.
      * @param characterManager The manager handling the character's logic.
      */
-    public Movement(Handler handler, Parse world, CharacterManager characterManager) {
+    public Movement(Handler handler, Map world, CharacterManager characterManager) {
         this.world = world;
         this.handler = handler;
         this.keyboard = handler.getKeyManager();
+        this.collision = new Collision(handler, this);
 
         camera = new Camera(this, 0, 0);
 
@@ -90,10 +90,6 @@ public class Movement {
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
-
-        bounds = new Rectangle(0, 0, width, height);
-
-        animation = characterManager.getPlayer().getAnimation();
     }
 
     /**
@@ -101,6 +97,8 @@ public class Movement {
      */
     public void tick() {
         animation = characterManager.getPlayer().getAnimation();
+        bounds = characterManager.getPlayer().getBounds();
+
         animation.tick();
         getInput();
         camera.centerOnEntity(this);
@@ -194,21 +192,19 @@ public class Movement {
      * Moves the character based on input and handles collisions.
      */
     public void move() {
-        if (xMove != 0 && !checkEntityCollisions(xMove, 0f)) {
+        if (xMove != 0 && collision.objectCollisions(xMove, 0f)) {
             moveX();
         }
-        if (yMove != 0 && !checkEntityCollisions(0f, yMove)) {
+        if (yMove != 0 && collision.objectCollisions(0f, yMove)) {
             moveY();
         }
     }
 
     private void moveX() {
-        collided = false;
         int tx = (int) (x + xMove + bounds.x + (xMove > 0 ? bounds.width : 0)) / Tile.width;
 
         if (canMoveX(tx)) {
             x += xMove;
-            xPosition += xMove;
         } else {
             x = xMove > 0
                     ? tx * Tile.width + bounds.x - bounds.width - 1
@@ -217,51 +213,26 @@ public class Movement {
     }
 
     private void moveY() {
-        collided = false;
         int ty = (int) (y + yMove + bounds.y + (yMove > 0 ? bounds.height : 0)) / Tile.height;
 
         if (canMoveY(ty)) {
             y += yMove;
-            yPosition += yMove;
         } else {
             y = yMove > 0
                     ? ty * Tile.height - bounds.y - bounds.height - 1
                     : ty * Tile.height + Tile.height - bounds.y;
-            collided = true;
         }
     }
 
-
     private boolean canMoveX(int tx) {
-        return collisionWithTile(tx, (int) (y + bounds.y) / Tile.height) &&
-                collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.height);
+        return collision.tileCollisions(tx, (int) (y + bounds.y) / Tile.height) &&
+                collision.tileCollisions(tx, (int) (y + bounds.y + bounds.height) / Tile.height);
     }
 
 
     private boolean canMoveY(int ty) {
-        return collisionWithTile((int) (x + bounds.x) / Tile.width, ty) &&
-                collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.width, ty);
-    }
-
-    protected boolean collisionWithTile(int x, int y) {
-//		if(handler.getWorld().getTile(x, y).isSolid()) {
-//			collided = true;
-//		}
-//		return handler.getWorld().getTile(x, y).isSolid();
-        return true;
-    }
-
-    public boolean checkEntityCollisions(float xOffset, float yOffset) {
-//        for (Entity e : handler.getWorld().getEntityManager().getEntities()) {
-//            if (e.equals(this)) {
-//                continue;
-//            }
-//            if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset))) {
-////				Creature.collided = true;
-//                return true;
-//            }
-//        }
-        return false;
+        return collision.tileCollisions((int) (x + bounds.x) / Tile.width, ty) &&
+                collision.tileCollisions((int) (x + bounds.x + bounds.width) / Tile.width, ty);
     }
 
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
@@ -288,7 +259,7 @@ public class Movement {
         return camera;
     }
 
-    public Parse getWorld() {
+    public Map getWorld() {
         return world;
     }
 

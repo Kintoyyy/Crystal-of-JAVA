@@ -65,6 +65,8 @@ public abstract class Character extends Entity {
         this.energy = new Energy(100, 100);
         this.skills = skills;
         this.experience = 0;
+        // Set the default bounds for the character
+        this.bounds = new Rectangle(46, 64, 34, 26);
     }
 
     /**

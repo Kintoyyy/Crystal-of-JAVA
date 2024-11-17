@@ -2,6 +2,7 @@ package Map;
 
 import Map.Tile.TileLayers;
 import Map.Tile.TileTypes;
+import Map.Object.ObjectGroup;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -9,41 +10,54 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.ArrayList;
 
 /**
- * The Parse class is responsible for parsing a .tmx map file to extract world data such as dimensions,
+ * The Map class is responsible for parsing a .tmx map file to extract world data such as dimensions,
  * spawn positions, tile layers, and tile types.
  */
-public class Parse {
-
-    /** Width of the world in tiles. */
-    private int worldWidth;
-
-    /** Height of the world in tiles. */
-    private int worldHeight;
-
-    /** X-coordinate of the spawn point. */
-    private int spawnX;
-
-    /** Y-coordinate of the spawn point. */
-    private int spawnY;
-
-    /** 3D array representing the tile layers in the world. */
-    private int[][][] tilesLayer;
-
-    /** TileTypes object for managing the tileset data. */
-    private TileTypes tileTypes;
-
-    /** List of trigger areas in the map. Should be moved to a separate class for better design. */
-    private ArrayList<TriggerArea> triggerAreas = new ArrayList<>();
+public class Map {
 
     /**
-     * Constructs a Parse object by parsing a .tmx map file.
+     * Width of the world in tiles.
+     */
+    private int worldWidth;
+
+    /**
+     * Height of the world in tiles.
+     */
+    private int worldHeight;
+
+    /**
+     * X-coordinate of the spawn point.
+     */
+    private int spawnX;
+
+    /**
+     * Y-coordinate of the spawn point.
+     */
+    private int spawnY;
+
+    /**
+     * 3D array representing the tile layers in the world.
+     */
+    private int[][][] tilesLayer;
+
+    /**
+     * TileTypes object for managing the tileset data.
+     */
+    private TileTypes tileTypes;
+
+    /**
+     * ObjectGroup object for managing trigger data.
+     */
+    private ObjectGroup objectGroup;
+
+    /**
+     * Constructs a Map object by parsing a .tmx map file.
      *
      * @param worldPath Path to the .tmx map file to parse.
      */
-    public Parse(String worldPath) {
+    public Map(String worldPath) {
         try {
             // Load the .tmx map file
             File inputFile = new File(worldPath);
@@ -64,9 +78,13 @@ public class Parse {
                 this.worldWidth = Integer.parseInt(mapElement.getAttribute("width"));
                 this.worldHeight = Integer.parseInt(mapElement.getAttribute("height"));
 
-                // Parse tile layers
+                // Map tile layers
                 NodeList layers = mapElement.getElementsByTagName("layer");
                 tilesLayer = new TileLayers(layers, worldWidth, worldHeight).getTiles();
+
+                // Map triggers
+                NodeList objectGroups = mapElement.getElementsByTagName("objectgroup");
+                objectGroup = new ObjectGroup(objectGroups);
 
                 // Retrieve spawn coordinates, with default values if not specified
                 spawnX = mapElement.hasAttribute("spawnX") ?
@@ -95,6 +113,15 @@ public class Parse {
      */
     public TileTypes getTileTypes() {
         return tileTypes;
+    }
+
+    /**
+     * Retrieves the ObjectGroup object containing trigger data.
+     *
+     * @return The ObjectGroup object.
+     */
+    public ObjectGroup getObjectGroup() {
+        return objectGroup;
     }
 
     /**

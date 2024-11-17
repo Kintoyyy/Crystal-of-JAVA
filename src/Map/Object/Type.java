@@ -1,0 +1,5 @@
+package Map.Object;
+
+public enum Type {
+    BATTLE, DIALOGUE, SHOP, HEAL, SAVE, TELEPORT, QUEST, PUZZLE, CUTSCENE, EVENT, NONE, COLLISION
+}

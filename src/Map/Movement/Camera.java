@@ -1,6 +1,6 @@
-package Map;
+package Map.Movement;
 
-import Entities.Characters.Movement.Movement;
+import Map.Map;
 import Game.Handler;
 import Map.Tile.Tile;
 
@@ -23,7 +23,7 @@ public class Camera {
     private final int screenHeight;
 
     /** Reference to the parsed world, used for world dimensions. */
-    private final Parse world;
+    private final Map world;
 
     /**
      * Constructs a Camera object.
