@@ -28,12 +28,12 @@ public class ObjectGroup {
      *
      * @param objectGroups a {@link NodeList} containing the object groups as XML elements
      *
-     * <p>Each object group should have a "name" attribute and contain "object" elements.
-     * Each "object" element should have attributes such as "name", "type", "x", "y",
-     * "width", and "height".</p>
+     *                     <p>Each object group should have a "name" attribute and contain "object" elements.
+     *                     Each "object" element should have attributes such as "name", "type", "x", "y",
+     *                     "width", and "height".</p>
      *
-     * <p>The width, height, x, and y values are scaled by a fixed multiplier (magic number)
-     * during the parsing process.</p>
+     *                     <p>The width, height, x, and y values are scaled by a fixed multiplier (magic number)
+     *                     during the parsing process.</p>
      */
     public ObjectGroup(NodeList objectGroups) {
         for (int i = 0; i < objectGroups.getLength(); i++) {
@@ -53,8 +53,12 @@ public class ObjectGroup {
 
                 // Scale factor applied to the object's dimensions and position
                 int magicNumber = 4;
-                int width = (int) Float.parseFloat(objectElement.getAttribute("width")) * magicNumber;
-                int height = (int) Float.parseFloat(objectElement.getAttribute("height")) * magicNumber;
+
+                int width = objectElement.hasAttribute("width") ?
+                        Integer.parseInt(objectElement.getAttribute("width")) * magicNumber : 0;
+
+                int height = objectElement.hasAttribute("height") ?
+                        Integer.parseInt(objectElement.getAttribute("height")) * magicNumber : 0;
 
                 int x = (int) Float.parseFloat(objectElement.getAttribute("x")) * magicNumber;
                 int y = (int) Float.parseFloat(objectElement.getAttribute("y")) * magicNumber;
