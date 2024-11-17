@@ -6,7 +6,7 @@ import Entities.Enemies.Enemy;
 import Entities.Enemies.EnemyManager;
 import Game.Handler;
 import Utils.Timer;
-import Views.enums.Turn;
+import Battles.Enums.Turn;
 import Views.enums.Views;
 
 import java.util.ArrayList;

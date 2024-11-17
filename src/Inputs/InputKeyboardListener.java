@@ -6,24 +6,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A keyboard listener for dynamically tracking key states with fluent API.
+ * A keyboard listener class for dynamically tracking the state of keys.
+ * It supports querying key states using a fluent API for flexibility.
  */
 public class InputKeyboardListener implements KeyListener {
 
-    // World to dynamically track the state of keys
+    // Map to track the pressed/released state of keys using their key codes.
     private final Map<Integer, Boolean> keyStates;
 
-    // Temporary variable to store the key code being queried
+    // Temporary variable to store the key code being queried.
     private int queriedKeyCode;
 
+    /**
+     * Constructs an InputKeyboardListener with an internal state map for tracking key states.
+     */
     public InputKeyboardListener() {
         keyStates = new HashMap<>();
     }
 
     /**
-     * Updates the state of a key in the map when it's pressed.
+     * Records the state of a key as pressed.
      *
-     * @param e KeyEvent
+     * @param e the KeyEvent triggered when a key is pressed.
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -31,25 +35,30 @@ public class InputKeyboardListener implements KeyListener {
     }
 
     /**
-     * Updates the state of a key in the map when it's released.
+     * Records the state of a key as released.
      *
-     * @param e KeyEvent
+     * @param e the KeyEvent triggered when a key is released.
      */
     @Override
     public void keyReleased(KeyEvent e) {
         keyStates.put(e.getKeyCode(), false);
     }
 
+    /**
+     * Currently unused method for handling key typed events.
+     *
+     * @param e the KeyEvent triggered when a key is typed.
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         // Not used
     }
 
     /**
-     * Initiates a query for the state of a specific key by its character.
+     * Begins a query for the state of a specific key using its character representation.
      *
-     * @param keyChar the key character to query (e.g., 'w' or 'W')
-     * @return this instance for chaining
+     * @param keyChar the character of the key to query (e.g., 'a', 'W').
+     * @return this InputKeyboardListener instance for chaining.
      */
     public InputKeyboardListener isKeyPressed(String keyChar) {
         char key = keyChar.length() == 1 ? keyChar.charAt(0) : '\0';
@@ -58,10 +67,10 @@ public class InputKeyboardListener implements KeyListener {
     }
 
     /**
-     * Initiates a query for the state of a specific key by its key code.
+     * Begins a query for the state of a specific key using its key code.
      *
-     * @param keyCode the KeyEvent key code (e.g., KeyEvent.VK_UP)
-     * @return this instance for chaining
+     * @param keyCode the key code of the key to query (e.g., KeyEvent.VK_UP).
+     * @return this InputKeyboardListener instance for chaining.
      */
     public InputKeyboardListener isKeyPressed(int keyCode) {
         queriedKeyCode = keyCode;
@@ -69,9 +78,9 @@ public class InputKeyboardListener implements KeyListener {
     }
 
     /**
-     * Checks the state of the queried key, ignoring case sensitivity if applicable.
+     * Checks if the queried key is pressed, ignoring case sensitivity for letters.
      *
-     * @return true if the key is pressed, false otherwise
+     * @return true if the key is pressed, false otherwise.
      */
     public boolean ignoreCaps() {
         if (Character.isLetter(queriedKeyCode)) {
@@ -83,9 +92,9 @@ public class InputKeyboardListener implements KeyListener {
     }
 
     /**
-     * Directly checks the state of the queried key without any additional logic.
+     * Checks if the queried key is pressed without any additional logic.
      *
-     * @return true if the key is pressed, false otherwise
+     * @return true if the key is pressed, false otherwise.
      */
     public boolean exactMatch() {
         return keyStates.getOrDefault(queriedKeyCode, false);

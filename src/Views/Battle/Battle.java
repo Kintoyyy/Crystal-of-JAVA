@@ -8,7 +8,7 @@ import Components.Menu.SkillMenu;
 import Entities.Enemies.*;
 import Utils.Timer;
 import Views.*;
-import Views.enums.Turn;
+import Battles.Enums.Turn;
 import Views.enums.Views;
 
 import java.awt.*;

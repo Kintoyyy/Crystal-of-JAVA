@@ -1,4 +1,4 @@
-package Views.enums;
+package Battles.Enums;
 
 public enum Turn {
     PLAYER,

@@ -10,21 +10,34 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * Abstract base class representing an entity in the game.
+ * Entities can have health, attack power, defense, and a set of effects.
+ * Provides methods for updating and rendering the entity on the screen.
+ */
 public abstract class Entity {
-    protected String name;
-    protected String description = "";
-    protected Health health;
-    protected AttackPower attackPower;
-    protected Defense defense;
-    protected ArrayList<Effect> effects = new ArrayList<>();
+    protected String name; // Name of the entity
+    protected String description = ""; // Description of the entity
+    protected Health health; // Health of the entity
+    protected AttackPower attackPower; // Attack power of the entity
+    protected Defense defense; // Defense of the entity
+    protected ArrayList<Effect> effects = new ArrayList<>(); // Effects applied to the entity
 
-    protected BufferedImage profileImage;
-    protected Animation animation;
+    protected BufferedImage profileImage; // Profile image for the entity
+    protected Animation animation; // Animation for the entity
 
-    protected float x, y;
-    protected int width, height;
-    protected Rectangle bounds;
+    protected float x, y; // Position of the entity
+    protected int width, height; // Dimensions of the entity
+    protected Rectangle bounds; // Bounding box for collision detection
 
+    /**
+     * Constructs an entity at the specified position and size.
+     *
+     * @param x      X-coordinate of the entity.
+     * @param y      Y-coordinate of the entity.
+     * @param width  Width of the entity.
+     * @param height Height of the entity.
+     */
     public Entity(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -33,8 +46,18 @@ public abstract class Entity {
         bounds = new Rectangle(0, 0, width, height);
     }
 
+    /**
+     * Updates the state of the entity.
+     * To be implemented by subclasses to define entity behavior each tick.
+     */
     public abstract void tick();
 
+    /**
+     * Renders the entity on the screen.
+     * To be implemented by subclasses to draw the entity on the graphics context.
+     *
+     * @param g The graphics context used for rendering.
+     */
     public abstract void render(Graphics g);
 
     public float getX() {
