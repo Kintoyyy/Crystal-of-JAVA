@@ -4,8 +4,8 @@ import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
 import Entities.Common.Mana;
-import Skills.*;
-import Skills.Archer.*;
+import Entities.Characters.Skills.*;
+import Entities.Characters.Skills.Archer.*;
 import Utils.SpriteSheet;
 import Utils.ImageUtils;
 
