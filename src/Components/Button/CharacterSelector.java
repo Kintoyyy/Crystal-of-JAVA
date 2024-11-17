@@ -1,16 +1,16 @@
 package Components.Button;
 
-import Characters.Character;
+import Entities.Characters.Character;
 import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
-import enums.Alignment;
+import Components.enums.Alignment;
 import fonts.SuperPixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.*;
+import static Components.enums.States.*;
 
 public class CharacterSelector extends Button {
     private final BufferedImage playerProfile;
@@ -61,7 +61,7 @@ public class CharacterSelector extends Button {
         g.fillRect(bounds.x + 10, bounds.y + 10, width - 20, height - 20);
 
         if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x + 1, bounds.y + 8, width, height, null);
+            g.drawImage(playerProfile, bounds.x + 15, bounds.y + 15, width - 30, height - 30, null);
         }
 
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);

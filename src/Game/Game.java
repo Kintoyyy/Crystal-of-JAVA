@@ -4,16 +4,21 @@ import java.awt.Graphics;
 
 import java.awt.image.BufferStrategy;
 
-import Assets.Assets;
-import Assets.Transition;
 import Inputs.InputMouseListener;
-import Inputs.InputKeyboardManager;
+import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
 import Views.ViewManager;
 
 public class Game implements Runnable {
 
+    private Thread thread;
     private Display display;
+    private final InputMouseListener inputMouseListener;
+    private final InputKeyboardListener inputKeyboardListener;
+    private ViewManager viewManager;
+
+    // might need to change this to a state manager
+    private GameState gameState;
 
     private final int width;
     private final int height;
@@ -21,32 +26,8 @@ public class Game implements Runnable {
 
     private boolean running = false;
 
-    public static boolean flag = false;
-    public static boolean flag2 = false;
-    public static boolean battling = false;
 
-    private Thread thread; //own separate game loop
-
-    private BufferStrategy bs;
-    private Graphics g;
-
-    private GameState gameState;
-
-    //Input
-    private InputKeyboardManager inputKeyboardManager;
-
-    private GameCamera gameCamera;
-
-    private Handler handler;
-    private Transition transition;
-
-    private DebugMode debugMode;
-    private ViewManager viewManager;
-    private InputMouseListener inputMouseListener;
-
-
-    private int fps;
-    private double timePerTick;
+    private DebugMode debugStats;
 
     //timing variables
     double delta;
@@ -59,102 +40,67 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         this.title = title;
-        inputKeyboardManager = new InputKeyboardManager();
+        inputKeyboardListener = new InputKeyboardListener();
         inputMouseListener = new InputMouseListener();
     }
 
     private void init() {
         display = new Display(title, width, height);
-        display.getFrame().addKeyListener(inputKeyboardManager);
-
+        display.getFrame().addKeyListener(inputKeyboardListener);
         display.getFrame().addMouseListener(inputMouseListener);
         display.getFrame().addMouseMotionListener(inputMouseListener);
         display.getCanvas().addMouseListener(inputMouseListener);
         display.getCanvas().addMouseMotionListener(inputMouseListener);
-        Assets.init();
 
-        handler = new Handler(this);
+        Handler handler = new Handler(this);
 
         gameState = new GameState(handler);
 
         // set the debug mode
-        debugMode = new DebugMode(handler);
+        debugStats = new DebugMode(handler);
 
         // set the game state
         handler.setGameState(gameState);
-
-        gameCamera = new GameCamera(handler, 0, 0);
 
         viewManager = new ViewManager(handler);
     }
 
     private void tick() { //updates all variables
-        inputKeyboardManager.tick();
-
         if (viewManager.hasLayers()) {
             viewManager.tick();
         }
 
         gameState.tick();
-
-//		if(State.getState() != null) {
-//			State.getState().tick();
-//		}
-
-//        if (flag) {
-//            flag = false;
-//            transition = new Transition();
-//            flag2 = true;
-//        }
-//        if (Transition.canStart) {
-//            Transition.canStart = false;
-//            battling = true;
-//            battleState = new BattleState(handler);
-////				State.setState(handler.getGame().battleState);
-//        }
     }
 
 
     private void render() { //renders all objects
-        bs = display.getCanvas().getBufferStrategy();
+        BufferStrategy bufferStrategy = display.getCanvas().getBufferStrategy();
 
-        if (bs == null) {
+        if (bufferStrategy == null) {
             display.getCanvas().createBufferStrategy(3);
             return;
         }
 
-        g = bs.getDrawGraphics();
+        Graphics graphics = bufferStrategy.getDrawGraphics();
 
         //Clears certain portion of screen (in this case the whole screen)
-        g.clearRect(0, 0, width, height);
+        graphics.clearRect(0, 0, width, height);
 
-        //Draws stuff in the screen-
-
+        // Draw here
         if (viewManager.hasLayers()) {
-            viewManager.render(g);
+            viewManager.render(graphics);
         }
 
-//		if(State.getState() != null) {
-//			State.getState().render(g);
-//		}
-
-//        if (flag2) {
-//            transition.render(g);
-//        }
-
-        g.drawString("FPS: " + ticks, 10, 10);
-
-        //End drawings-
-        bs.show();
-        g.dispose();
+        bufferStrategy.show();
+        graphics.dispose();
     }
-
 
     //starting the thread runs this method
     public void run() {
         init();
-        fps = 60;
-        timePerTick = 1000000000 / fps; //1 billion bcus 1 billion nanoseconds in one second
+        int fps = 60;
+        double timePerTick = (double) 1000000000 / fps; //1 billion bcus 1 billion nanoseconds in one second
         delta = 0;
         lastTime = System.nanoTime();
         timer = 0;
@@ -178,20 +124,15 @@ public class Game implements Runnable {
                 timer = 0;
             }
         }
-
         stop();
     }
 
-    public InputKeyboardManager getKeyManager() {
-        return inputKeyboardManager;
+    public InputKeyboardListener getKeyManager() {
+        return inputKeyboardListener;
     }
 
     public InputMouseListener getInputMouseListener() {
         return inputMouseListener;
-    }
-
-    public GameCamera getGameCamera() {
-        return gameCamera;
     }
 
     public int getWidth() {
@@ -221,6 +162,7 @@ public class Game implements Runnable {
     }
 
     public synchronized void stop() {
+        // Kills the game Quickly
         System.out.println("Exiting the game...");
         System.exit(0);
 

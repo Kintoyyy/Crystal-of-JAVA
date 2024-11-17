@@ -1,6 +1,9 @@
 package Components.Button;
 
-import Characters.Character;
+import Animations.Animation;
+import Animations.enums.DIRECTION;
+import Animations.enums.TYPE;
+import Entities.Characters.Character;
 import Components.ToolTip.HealthBar;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -8,13 +11,14 @@ import Utils.SpriteSheet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.PRESSED;
+import static Components.enums.States.PRESSED;
 
+@SuppressWarnings("SingleStatementInBlock")
 public class CharacterButton extends Button {
-    private final BufferedImage playerProfile;
-//    private final Text tooltip;
     private final HealthBar healthBar;
     private final Character player;
+
+    Animation characterAnimation;
 
     public CharacterButton(Character player) {
         super("Character Frame");
@@ -25,12 +29,12 @@ public class CharacterButton extends Button {
         buttonSheet[1] = sheet.crop(106, 0, 1, 1); // hovered
         buttonSheet[2] = sheet.crop(106, 0, 28, 28);  // pressed
 
-        setDimensions(28, 28);
+        setDimensions(32, 32);
         scale(3);
 
         this.player = player;
-        this.playerProfile = player != null ? player.getProfile() : null;
-
+        assert player != null;
+        characterAnimation = player.getAnimation();
 
         healthBar = (HealthBar) new HealthBar(player)
                 .scale(3);
@@ -44,6 +48,9 @@ public class CharacterButton extends Button {
     public void tick() {
         super.tick();
         healthBar.tick();
+        if (characterAnimation != null) {
+            characterAnimation.tick();
+        }
     }
 
     @Override
@@ -54,8 +61,8 @@ public class CharacterButton extends Button {
             default -> buttonSheet[0];
         };
 
-        if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x - 4, bounds.y + 2, width + 12, height + 12, null);
+        if (characterAnimation != null) {
+            g.drawImage(player.getHealth().isDead() ? characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT) : characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
         }
 
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);

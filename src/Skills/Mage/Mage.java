@@ -1,6 +1,6 @@
 package Skills.Mage;
 
-import Characters.Cedi;
+import Entities.Characters.Cedi;
 import Skills.Skill;
 import Skills.SkillType;
 

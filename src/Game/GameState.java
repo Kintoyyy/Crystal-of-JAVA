@@ -1,24 +1,16 @@
 package Game;
 
-import Characters.*;
-import Characters.Character;
-import Enemies.Enemy;
-import Utils.Timer;
-import World.World;
-import Item.Item;
-import enums.ViewEnums;
-
-import java.util.ArrayList;
+import Entities.Characters.*;
 
 public class GameState {
-    private final CharacterManager characters = new CharacterManager();
-    private World world;
+    private final CharacterManager characters;
 
     private Handler handler;
 
 
     public GameState(Handler handler) {
         this.handler = handler;
+        this.characters = new CharacterManager();
     }
 
     public void tick() {

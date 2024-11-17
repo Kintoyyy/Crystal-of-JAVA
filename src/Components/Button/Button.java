@@ -5,11 +5,13 @@ import Components.Text.Text;
 import Utils.CallBackAction;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
-import enums.Alignment;
+import Components.enums.Alignment;
 import fonts.SuperPixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
+import static Components.enums.States.PRESSED;
 
 public class Button extends Component {
     protected BufferedImage[] buttonSheet = new BufferedImage[3];
@@ -49,6 +51,10 @@ public class Button extends Component {
     public Button hideText() {
         this.hideText = true;
         return this;
+    }
+
+    public void setActive(boolean isActive) {
+        this.state = isActive ? PRESSED : this.state;
     }
 
     @Override

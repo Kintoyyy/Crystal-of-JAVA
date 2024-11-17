@@ -2,8 +2,8 @@ package Components.Layouts;
 
 import Components.Component;
 import Components.Button.EnemyButton;
-import Enemies.*;
-import Game.BattleManager;
+import Entities.Enemies.*;
+import Views.Battle.BattleManager;
 
 import java.awt.*;
 

@@ -1,6 +1,6 @@
 package Components.ToolTip;
 
-import Characters.Character;
+import Entities.Characters.Character;
 import Components.Menu.Menu;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;

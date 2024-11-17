@@ -1,7 +1,6 @@
 package Components.Card;
 
-import Characters.Character;
-import Components.Menu.Menu;
+import Entities.Characters.Character;
 import Game.Handler;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -54,7 +53,7 @@ public class CharacterCard extends Card {
         g.fillRect(bounds.x + (20 * scale), bounds.y + (4 * scale), 162, 10 * scale);
 
         if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x + 1, bounds.y + 8, height + 4, height + 4, null);
+            g.drawImage(playerProfile, bounds.x + 12, bounds.y + 12, height - 26, height - 26, null);
         }
 
         if (player != null) {

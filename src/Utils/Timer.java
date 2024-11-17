@@ -64,7 +64,7 @@ public class Timer {
         elapsedTime = 0;
     }
 
-    public double getElapsedTime() {
+    public double getTime() {
         double decimalTime = (double) elapsedTime / tickRate;
         return Math.round(decimalTime * 100.0) / 100.0;
     }

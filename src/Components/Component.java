@@ -1,13 +1,13 @@
 package Components;
 
-import enums.ComponentStateEnums;
+import Components.enums.States;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static enums.ComponentStateEnums.*;
+import static Components.enums.States.*;
 
 public abstract class Component {
     protected float x = 0;
@@ -21,7 +21,7 @@ public abstract class Component {
     private Component parent;
     protected ArrayList<Component> childComponents = new ArrayList<>();
     protected Rectangle bounds = new Rectangle();
-    protected ComponentStateEnums state = IDLE;
+    protected States state = IDLE;
     private String text;
 
     public Component() {

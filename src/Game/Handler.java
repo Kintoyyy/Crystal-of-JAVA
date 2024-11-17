@@ -1,31 +1,21 @@
 package Game;
 
-import Characters.Character;
 import Inputs.InputMouseListener;
-import Inputs.InputKeyboardManager;
+import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
 import Views.ViewManager;
-import World.World;
 
 public class Handler {
-    private Game game;
-    private World world;
+    private final Game game;
     private DebugMode debugMode;
-    private Character character;
     private ViewManager viewManager;
     private GameState gameState;
-
 
     public Handler(Game game) {
         this.game = game;
     }
 
-    public GameCamera getGameCamera() {
-        return game.getGameCamera();
-    }
-
-    public InputKeyboardManager getKeymanager() {
-
+    public InputKeyboardListener getKeyManager() {
         return game.getKeyManager();
     }
 
@@ -33,8 +23,11 @@ public class Handler {
         return game.getInputMouseListener();
     }
 
-    public int getWidth() {
+    public DebugMode getDebugMode() {
+        return debugMode;
+    }
 
+    public int getWidth() {
         return game.getWidth();
     }
 
@@ -44,31 +37,6 @@ public class Handler {
 
     public Game getGame() {
         return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public World getWorld() {
-        return world;
-    }
-
-    public void setWorld(World world) {
-        this.world = world;
-    }
-
-    public DebugMode getDebugMode() {
-        return debugMode;
-    }
-
-    // TODO: Character should be inside the game class();
-    public Character getCharacter() {
-        return character;
-    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
     }
 
     public ViewManager getViewManager() {

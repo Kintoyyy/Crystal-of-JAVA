@@ -5,46 +5,36 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 import Game.Handler;
-import Views.Battle.BattleView;
-import Views.Game.GameView;
-import Views.Menu.MenuView;
+import Views.Battle.Battle;
+import Views.Game.Game;
+import Views.Menu.Menu;
 import Views.Overlay.Pause;
-import World.World;
-import enums.ViewEnums;
+import Views.enums.Views;
 
 public class ViewManager {
-    private final EnumMap<ViewEnums, View> views = new EnumMap<>(ViewEnums.class);
+    private final EnumMap<Views, View> views = new EnumMap<>(Views.class);
     private final ArrayList<View> layers = new ArrayList<>();
     private final Handler handler;
-    private final World world;
-
     private static final Color OVERLAY_COLOR = new Color(0, 0, 0, 128);
 
     public ViewManager(Handler handler) {
         this.handler = handler;
-        world = new World(handler, "res/worlds/world_1.tmx");
-
-        handler.setWorld(world);
         this.handler.setViewManager(this);
         initializeViews();
 
-        setView(ViewEnums.BATTLE);
-    }
-
-    public World getWorld() {
-        return world;
+        setView(Views.BATTLE);
     }
 
     private void initializeViews() {
-        views.put(ViewEnums.BATTLE, new BattleView(this));
-        views.put(ViewEnums.GAME, new GameView(this));
-        views.put(ViewEnums.MENU, new MenuView(this));
-        views.put(ViewEnums.SETTINGS, new MenuView(this));
-        views.put(ViewEnums.SELECT_CHARACTER, new MenuView(this));
-        views.put(ViewEnums.PAUSE, new Pause(this));
+        views.put(Views.BATTLE, new Battle(this));
+        views.put(Views.GAME, new Game(this));
+        views.put(Views.MENU, new Menu(this));
+        views.put(Views.SETTINGS, new Menu(this));
+        views.put(Views.SELECT_CHARACTER, new Menu(this));
+        views.put(Views.PAUSE, new Pause(this));
     }
 
-    public void setView(ViewEnums viewEnum) {
+    public void setView(Views viewEnum) {
         View selectedView = views.get(viewEnum);
 
         if (selectedView == null) return;
@@ -63,7 +53,7 @@ public class ViewManager {
         handler.getInputMouseListener().setComponentManager(topLayer.getComponentManager());
     }
 
-    public void removeView(ViewEnums viewEnum) {
+    public void removeView(Views viewEnum) {
         View selectedView = views.get(viewEnum);
         if (selectedView == null) return;
 
@@ -112,6 +102,6 @@ public class ViewManager {
     }
 
     public boolean isInGame() {
-        return layers.contains(views.get(ViewEnums.GAME));
+        return layers.contains(views.get(Views.GAME));
     }
 }

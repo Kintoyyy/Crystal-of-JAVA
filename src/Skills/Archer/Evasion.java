@@ -1,6 +1,5 @@
 package Skills.Archer;
 
-import Enemies.Enemy;
 import Skills.Skill;
 import Skills.SkillType;
 

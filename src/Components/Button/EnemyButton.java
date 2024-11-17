@@ -1,14 +1,14 @@
 package Components.Button;
 
 import Components.ToolTip.EnemyHealthBar;
-import Enemies.Enemy;
+import Entities.Enemies.Enemy;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static enums.ComponentStateEnums.PRESSED;
+import static Components.enums.States.PRESSED;
 
 
 public class EnemyButton extends Button {
