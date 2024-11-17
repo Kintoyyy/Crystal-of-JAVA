@@ -13,30 +13,66 @@ import Map.Tile.Tile;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-
+/**
+ * The Movement class handles the movement mechanics of a character in the game.
+ * It includes logic for handling input, managing animations, checking for collisions, and moving the character
+ * based on user input or predefined conditions.
+ * <p>
+ * It supports both single-direction and diagonal movement, adjusting the character's speed accordingly. The class
+ * also includes methods for rendering the character, updating the character's position, and checking for collisions
+ * with entities and tiles in the game world.
+ * </p>
+ * <p>
+ * The movement system is tied to the game handler, camera, world, and character manager for seamless integration
+ * with other components like the camera for smooth scrolling and the character animations for movement visuals.
+ * </p>
+ *
+ * <p>
+ * This class supports the following movement directions:
+ * - UP
+ * - DOWN
+ * - LEFT
+ * - RIGHT
+ * - Diagonal movement (combination of the directions above)
+ * </p>
+ *
+ * @see Handler
+ * @see Parse
+ * @see CharacterManager
+ * @see Camera
+ * @see Tile
+ * @see Animation
+ */
 public class Movement {
-    protected Handler handler;
-    protected float x, y;
-    protected int width, height;
+    protected Handler handler; // The game handler for managing the game state
+    protected float x, y; // The current position of the character on the screen
+    protected int width, height; // Dimensions of the character
 
-    public static final float DEFAULT_SPEED = 4.0f;
+    public static final float DEFAULT_SPEED = 4.0f; // Default movement speed
 
-    protected float speed;
-    public static float xMove, yMove;
-    public static float xPosition, yPosition;
-    public static boolean collided = false;
+    protected float speed; // Speed at which the character moves
+    public static float xMove, yMove; // Movement offsets for the character
+    public static float xPosition, yPosition; // Current world position of the character
+    public static boolean collided = false; // Flag to check if the character collided with something
 
-    private Animation animation;
+    private Animation animation; // Animation object to handle character's movements
 
-    private DIRECTION direction = DIRECTION.DOWN;
+    private DIRECTION direction = DIRECTION.DOWN; // Current movement direction of the character
 
-    protected Rectangle bounds; // Character bounds
+    protected Rectangle bounds; // The bounding rectangle of the character used for collision detection
 
-    private final Parse world;
-    private final Camera camera;
-    private final CharacterManager characterManager;
-    private final InputKeyboardListener keyboard;
+    private final Parse world; // The game world instance
+    private final Camera camera; // The camera for controlling the viewport
+    private final CharacterManager characterManager; // Manages the character-related logic
+    private final InputKeyboardListener keyboard; // Listens for keyboard input
 
+    /**
+     * Constructor for initializing the Movement class.
+     *
+     * @param handler The game handler.
+     * @param world The game world.
+     * @param characterManager The manager handling the character's logic.
+     */
     public Movement(Handler handler, Parse world, CharacterManager characterManager) {
         this.world = world;
         this.handler = handler;
@@ -60,19 +96,9 @@ public class Movement {
         animation = characterManager.getPlayer().getAnimation();
     }
 
-    public Handler getHandler() {
-        return handler;
-    }
-
-    public Parse getWorld() {
-        return world;
-    }
-
-    public void setSpawn(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
+    /**
+     * Updates the character's state, processing input and animations.
+     */
     public void tick() {
         animation = characterManager.getPlayer().getAnimation();
         animation.tick();
@@ -80,6 +106,10 @@ public class Movement {
         camera.centerOnEntity(this);
     }
 
+    /**
+     * Handles the player's input to determine movement direction and speed.
+     * Adjusts for diagonal movement and sets the appropriate speed and direction.
+     */
     private void getInput() {
         xMove = 0;
         yMove = 0;
@@ -115,6 +145,11 @@ public class Movement {
         move();
     }
 
+    /**
+     * Renders the character on the screen, adjusting for camera position.
+     *
+     * @param g The Graphics object used for rendering.
+     */
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - camera.getXOffset()),
                 (int) (y - camera.getYOffset()), width, height, null);
@@ -124,6 +159,11 @@ public class Movement {
                 (int) (y + bounds.y - camera.getYOffset()), bounds.width, bounds.height);
     }
 
+    /**
+     * Gets the current frame for the character's animation based on movement direction.
+     *
+     * @return The current animation frame.
+     */
     private BufferedImage getCurrentAnimationFrame() {
         // Diagonal movement frames are handled first
         if (xMove < 0 && yMove < 0) {
@@ -150,6 +190,9 @@ public class Movement {
         }
     }
 
+    /**
+     * Moves the character based on input and handles collisions.
+     */
     public void move() {
         if (xMove != 0 && !checkEntityCollisions(xMove, 0f)) {
             moveX();
