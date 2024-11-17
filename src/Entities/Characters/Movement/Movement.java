@@ -1,14 +1,13 @@
 package Entities.Characters.Movement;
 
 import Animations.Animation;
-import Animations.Entities.CharacterAnimation;
 import Animations.enums.DIRECTION;
 import Animations.enums.TYPE;
 import Entities.Characters.CharacterManager;
 import Game.Handler;
 import Inputs.InputKeyboardListener;
 import World.Camera;
-import World.ParseWorld;
+import World.ParseMap;
 import World.Tile.Tile;
 
 import java.awt.*;
@@ -33,12 +32,12 @@ public class Movement {
 
     protected Rectangle bounds; // Character bounds
 
-    private ParseWorld world;
+    private ParseMap world;
     private final Camera camera;
     private final CharacterManager characterManager;
     private final InputKeyboardListener keyboard;
 
-    public Movement(Handler handler, ParseWorld world, CharacterManager characterManager) {
+    public Movement(Handler handler, ParseMap world, CharacterManager characterManager) {
         this.world = world;
         this.handler = handler;
         this.keyboard = handler.getKeyManager();
@@ -65,7 +64,7 @@ public class Movement {
         return handler;
     }
 
-    public ParseWorld getWorld() {
+    public ParseMap getWorld() {
         return world;
     }
 

@@ -22,7 +22,7 @@ public class ViewManager {
         this.handler.setViewManager(this);
         initializeViews();
 
-        setView(Views.BATTLE);
+        setView(Views.GAME);
     }
 
     private void initializeViews() {

@@ -8,19 +8,21 @@ import World.Tile.TileTypes;
 
 import java.awt.*;
 
-public class RenderWorld {
-    private int width, height;
-    private int[][][] TileLayers;
-    private TileTypes tileTypes;
+public class RenderMap {
+    private final int width;
+    private final int height;
+    private final int[][][] TileLayers;
+    private final TileTypes tileTypes;
     private final Movement movement;
 
 
-    public RenderWorld(ParseWorld worldParser, Movement movement) {
+    public RenderMap(ParseMap parseMap, Movement movement) {
         this.movement = movement;
-        this.width = worldParser.getWorldWidth();
-        this.height = worldParser.getWorldHeight();
-        this.TileLayers = worldParser.getLayers();
-        this.tileTypes = worldParser.getTileTypes();
+        movement.setSpawn(parseMap.getSpawnX(), parseMap.getSpawnY());
+        this.width = parseMap.getWorldWidth();
+        this.height = parseMap.getWorldHeight();
+        this.TileLayers = parseMap.getLayers();
+        this.tileTypes = parseMap.getTileTypes();
     }
 
     public void tick() {

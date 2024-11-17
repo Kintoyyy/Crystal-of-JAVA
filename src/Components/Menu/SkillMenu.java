@@ -4,7 +4,7 @@ import Entities.Characters.Character;
 import Components.Component;
 import Components.Button.SkillButton;
 import Game.Handler;
-import Views.Battle.BattleManager;
+import Battles.BattleManager;
 import Skills.Skill;
 
 import java.awt.*;

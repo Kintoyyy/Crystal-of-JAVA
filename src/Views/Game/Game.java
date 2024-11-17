@@ -8,25 +8,25 @@ import Entities.Characters.Movement.Movement;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
-import World.ParseWorld;
-import World.RenderWorld;
+import World.ParseMap;
+import World.RenderMap;
 import Views.enums.Views;
 
 import java.awt.*;
 
 public class Game extends View {
-    private final RenderWorld renderWorld;
+    private final RenderMap renderMap;
 
     public Game(ViewManager viewManager) {
         super(viewManager);
 
-        ParseWorld world = new ParseWorld("res/worlds/world_1.tmx");
+        ParseMap world = new ParseMap("res/worlds/world_1.tmx");
 
         CharacterManager characterManager = handler.getGameState().getCharacterManger();
 
         Movement movement = new Movement(handler, world, characterManager);
 
-        this.renderWorld = new RenderWorld(world, movement);
+        this.renderMap = new RenderMap(world, movement);
 
         initComponent();
     }
@@ -34,12 +34,12 @@ public class Game extends View {
     @Override
     public void tick() {
         components.tick();
-        renderWorld.tick();
+        renderMap.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        renderWorld.render(g);
+        renderMap.render(g);
         components.render(g);
     }
 

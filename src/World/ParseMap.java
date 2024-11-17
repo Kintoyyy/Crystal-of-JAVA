@@ -11,7 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ParseWorld {
+public class ParseMap {
     private int worldWidth, worldHeight;
     private int spawnX, spawnY;
     private int[][][] tilesLayer;
@@ -20,9 +20,9 @@ public class ParseWorld {
     private ArrayList<TriggerArea> triggerAreas = new ArrayList<>(); // move to a separate class
 
     /**
-     * @param worldPath Path to the .tmx world file
+     * @param worldPath Path to the .tmx map file
      */
-    public ParseWorld(String worldPath) {
+    public ParseMap(String worldPath) {
         try {
             File inputFile = new File(worldPath);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -47,12 +47,9 @@ public class ParseWorld {
                 tilesLayer = new TileLayers(layers, worldWidth, worldHeight).getTiles();
 
                 spawnX = mapElement.hasAttribute("spawnX") ?
-                        Integer.parseInt(mapElement.getAttribute("spawnX")) : 10;
+                        Integer.parseInt(mapElement.getAttribute("spawnX")) : 200;
                 spawnY = mapElement.hasAttribute("spawnY") ?
-                        Integer.parseInt(mapElement.getAttribute("spawnY")) : 10;
-
-//                entityManager.getPlayer().setX(spawnX * Tile.TILEWIDTH);
-//                entityManager.getPlayer().setY(spawnY * Tile.TILEWIDTH);
+                        Integer.parseInt(mapElement.getAttribute("spawnY")) : 200;
             }
 
         } catch (Exception e) {
@@ -74,6 +71,14 @@ public class ParseWorld {
 
     public int getWorldHeight() {
         return worldHeight;
+    }
+
+    public float getSpawnX() {
+        return spawnX;
+    }
+
+    public float getSpawnY() {
+        return spawnY;
     }
 }
 

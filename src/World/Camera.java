@@ -8,7 +8,7 @@ public class Camera {
 
     private float xOffset, yOffset;
     private final int screenWidth, screenHeight;
-    private final ParseWorld world;
+    private final ParseMap world;
 
     public Camera(Movement movement, float xOffset, float yOffset) {
         Handler handler = movement.getHandler();
@@ -19,7 +19,7 @@ public class Camera {
         this.yOffset = yOffset;
     }
 
-    public void centerOnEntity(Movement e, ParseWorld world) {
+    public void centerOnEntity(Movement e, ParseMap world) {
         xOffset = e.getX() - (float) screenWidth / 2 + (float) e.getWidth() / 2;
         yOffset = e.getY() - (float) screenHeight / 2 + (float) e.getHeight() / 2;
         checkBlankSpace();

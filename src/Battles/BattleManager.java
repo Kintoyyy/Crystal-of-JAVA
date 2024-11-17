@@ -1,4 +1,4 @@
-package Views.Battle;
+package Battles;
 
 import Entities.Characters.Character;
 import Entities.Characters.CharacterManager;

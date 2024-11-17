@@ -121,5 +121,4 @@ public abstract class Enemy extends Entity {
         System.out.println(this.name + " takes " + damage + " damage!");
         health.takeDamage(damage);
     }
-
 }
