@@ -161,43 +161,43 @@ public class Movement {
 
     private void moveX() {
         collided = false;
-        int tx = (int) (x + xMove + bounds.x + (xMove > 0 ? bounds.width : 0)) / Tile.TILEWIDTH;
+        int tx = (int) (x + xMove + bounds.x + (xMove > 0 ? bounds.width : 0)) / Tile.width;
 
         if (canMoveX(tx)) {
             x += xMove;
             xPosition += xMove;
         } else {
             x = xMove > 0
-                    ? tx * Tile.TILEWIDTH + bounds.x - bounds.width - 1
-                    : tx * Tile.TILEWIDTH + Tile.TILEWIDTH - bounds.x;
+                    ? tx * Tile.width + bounds.x - bounds.width - 1
+                    : tx * Tile.width + Tile.width - bounds.x;
         }
     }
 
     private void moveY() {
         collided = false;
-        int ty = (int) (y + yMove + bounds.y + (yMove > 0 ? bounds.height : 0)) / Tile.TILEHEIGHT;
+        int ty = (int) (y + yMove + bounds.y + (yMove > 0 ? bounds.height : 0)) / Tile.height;
 
         if (canMoveY(ty)) {
             y += yMove;
             yPosition += yMove;
         } else {
             y = yMove > 0
-                    ? ty * Tile.TILEHEIGHT - bounds.y - bounds.height - 1
-                    : ty * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.y;
+                    ? ty * Tile.height - bounds.y - bounds.height - 1
+                    : ty * Tile.height + Tile.height - bounds.y;
             collided = true;
         }
     }
 
 
     private boolean canMoveX(int tx) {
-        return collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT) &&
-                collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILEHEIGHT);
+        return collisionWithTile(tx, (int) (y + bounds.y) / Tile.height) &&
+                collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.height);
     }
 
 
     private boolean canMoveY(int ty) {
-        return collisionWithTile((int) (x + bounds.x) / Tile.TILEWIDTH, ty) &&
-                collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty);
+        return collisionWithTile((int) (x + bounds.x) / Tile.width, ty) &&
+                collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.width, ty);
     }
 
     protected boolean collisionWithTile(int x, int y) {
