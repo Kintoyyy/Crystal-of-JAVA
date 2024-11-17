@@ -84,7 +84,7 @@
     "map.width": 20,
     "openFiles": [
     ],
-    "project": "Battles.Map1.tiled-project",
+    "project": "Battles.World1.tiled-project",
     "property.type": "bool",
     "recentFiles": [
         "world_1.tmx",

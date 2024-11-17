@@ -1,14 +1,14 @@
-package World;
+package Map;
 
 import Entities.Characters.Movement.Movement;
 import Game.Handler;
 import Utils.DebugMode;
-import World.Tile.Tile;
-import World.Tile.TileTypes;
+import Map.Tile.Tile;
+import Map.Tile.TileTypes;
 
 import java.awt.*;
 
-public class RenderMap {
+public class Render {
     private final int width;
     private final int height;
     private final int[][][] TileLayers;
@@ -16,13 +16,13 @@ public class RenderMap {
     private final Movement movement;
 
 
-    public RenderMap(ParseMap parseMap, Movement movement) {
+    public Render(Parse parse, Movement movement) {
         this.movement = movement;
-        movement.setSpawn(parseMap.getSpawnX(), parseMap.getSpawnY());
-        this.width = parseMap.getWorldWidth();
-        this.height = parseMap.getWorldHeight();
-        this.TileLayers = parseMap.getLayers();
-        this.tileTypes = parseMap.getTileTypes();
+        movement.setSpawn(parse.getSpawnX(), parse.getSpawnY());
+        this.width = parse.getWorldWidth();
+        this.height = parse.getWorldHeight();
+        this.TileLayers = parse.getLayers();
+        this.tileTypes = parse.getTileTypes();
     }
 
     public void tick() {

@@ -1,4 +1,4 @@
-package World.Tile;
+package Map.Tile;
 
 import Utils.ImageUtils;
 

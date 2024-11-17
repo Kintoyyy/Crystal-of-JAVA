@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class InputKeyboardListener implements KeyListener {
 
-    // Map to dynamically track the state of keys
+    // World to dynamically track the state of keys
     private final Map<Integer, Boolean> keyStates;
 
     // Temporary variable to store the key code being queried

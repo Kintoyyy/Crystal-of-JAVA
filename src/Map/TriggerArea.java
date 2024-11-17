@@ -1,4 +1,4 @@
-package World;
+package Map;
 
 abstract class TriggerArea {
     protected int x, y, width, height;

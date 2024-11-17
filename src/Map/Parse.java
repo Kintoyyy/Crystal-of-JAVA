@@ -1,7 +1,7 @@
-package World;
+package Map;
 
-import World.Tile.TileLayers;
-import World.Tile.TileTypes;
+import Map.Tile.TileLayers;
+import Map.Tile.TileTypes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -11,7 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 
-public class ParseMap {
+public class Parse {
     private int worldWidth, worldHeight;
     private int spawnX, spawnY;
     private int[][][] tilesLayer;
@@ -22,7 +22,7 @@ public class ParseMap {
     /**
      * @param worldPath Path to the .tmx map file
      */
-    public ParseMap(String worldPath) {
+    public Parse(String worldPath) {
         try {
             File inputFile = new File(worldPath);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

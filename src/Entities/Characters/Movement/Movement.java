@@ -6,9 +6,9 @@ import Animations.enums.TYPE;
 import Entities.Characters.CharacterManager;
 import Game.Handler;
 import Inputs.InputKeyboardListener;
-import World.Camera;
-import World.ParseMap;
-import World.Tile.Tile;
+import Map.Camera;
+import Map.Parse;
+import Map.Tile.Tile;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -32,12 +32,12 @@ public class Movement {
 
     protected Rectangle bounds; // Character bounds
 
-    private final ParseMap world;
+    private final Parse world;
     private final Camera camera;
     private final CharacterManager characterManager;
     private final InputKeyboardListener keyboard;
 
-    public Movement(Handler handler, ParseMap world, CharacterManager characterManager) {
+    public Movement(Handler handler, Parse world, CharacterManager characterManager) {
         this.world = world;
         this.handler = handler;
         this.keyboard = handler.getKeyManager();
@@ -64,7 +64,7 @@ public class Movement {
         return handler;
     }
 
-    public ParseMap getWorld() {
+    public Parse getWorld() {
         return world;
     }
 

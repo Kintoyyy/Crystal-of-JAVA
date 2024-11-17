@@ -1,4 +1,4 @@
-package Battles.Map1;
+package Battles.World1;
 
 import Entities.Enemies.Enemy;
 

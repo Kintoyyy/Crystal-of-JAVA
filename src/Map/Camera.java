@@ -1,14 +1,14 @@
-package World;
+package Map;
 
 import Entities.Characters.Movement.Movement;
 import Game.Handler;
-import World.Tile.Tile;
+import Map.Tile.Tile;
 
 public class Camera {
 
     private float xOffset, yOffset;
     private final int screenWidth, screenHeight;
-    private final ParseMap world;
+    private final Parse world;
 
     public Camera(Movement movement, float xOffset, float yOffset) {
         Handler handler = movement.getHandler();
