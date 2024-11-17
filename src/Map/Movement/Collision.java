@@ -5,11 +5,9 @@ import Map.Object.Object;
 import Map.Object.Type;
 
 public class Collision {
-    private final Handler handler;
     private final Movement movement;
 
     public Collision(Handler handler, Movement movement) {
-        this.handler = handler;
         this.movement = movement;
     }
 

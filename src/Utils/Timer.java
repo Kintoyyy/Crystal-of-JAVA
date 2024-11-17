@@ -55,7 +55,7 @@ public class Timer {
     /**
      * The tick rate of the game or system, defaulted to 60 ticks per second.
      */
-    private int tickRate = 60;
+    private final int tickRate = 60;
 
     /**
      * Default constructor to create a new Timer.

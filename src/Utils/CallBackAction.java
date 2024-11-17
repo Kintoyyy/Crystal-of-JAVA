@@ -23,5 +23,5 @@ public interface CallBackAction {
      * The specific behavior of the action should be implemented in the class that
      * implements this interface.
      */
-    public void onAction();
+    void onAction();
 }

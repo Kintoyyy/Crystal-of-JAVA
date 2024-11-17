@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * </p>
  */
 public class CharacterManager {
-    private static ArrayList<Character> characters = new ArrayList<>(4);  // List of characters in the game
+    private static final ArrayList<Character> characters = new ArrayList<>(4);  // List of characters in the game
     private int currentCharacterIndex = 0;  // Index of the currently active character
 
     /**

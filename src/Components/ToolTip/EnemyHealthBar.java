@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 
 public class EnemyHealthBar extends Menu {
     private final Enemy enemy;
-    private final SpriteSheet sheet;
     private final BufferedImage frame;
     private final BufferedImage healthBar;
     private final BufferedImage defenseBar;
@@ -24,7 +23,7 @@ public class EnemyHealthBar extends Menu {
         this.height = 7;
         this.enemy = enemy;
         // Initialize sprite sheet and UI components
-        sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
 
         frame = sheet.crop(84, 0, 21, 7);
         healthBar = sheet.crop(85, 11, 19, 2);
