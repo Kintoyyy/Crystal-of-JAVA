@@ -287,4 +287,17 @@ public class Movement {
     public Camera getCamera() {
         return camera;
     }
+
+    public Parse getWorld() {
+        return world;
+    }
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public void setSpawn(float spawnX, float spawnY) {
+        x = spawnX;
+        y = spawnY;
+    }
 }

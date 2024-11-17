@@ -1,6 +1,6 @@
 package Entities.Characters;
 
-import Skills.Skill;
+import Entities.Characters.Skills.Skill;
 
 import java.util.ArrayList;
 

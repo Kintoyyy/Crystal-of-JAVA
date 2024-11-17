@@ -1,6 +1,6 @@
 package Views.Battle;
 
-import Battles.BattleManager;
+import Worlds.BattleManager;
 import Components.Button.*;
 import Components.Button.Button;
 import Components.Layouts.*;
@@ -8,7 +8,7 @@ import Components.Menu.SkillMenu;
 import Entities.Enemies.*;
 import Utils.Timer;
 import Views.*;
-import Battles.Enums.Turn;
+import Worlds.Enums.Turn;
 import Views.enums.Views;
 
 import java.awt.*;

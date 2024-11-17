@@ -4,8 +4,8 @@ import Entities.Characters.Character;
 import Components.Component;
 import Components.Button.SkillButton;
 import Game.Handler;
-import Battles.BattleManager;
-import Skills.Skill;
+import Worlds.BattleManager;
+import Entities.Characters.Skills.Skill;
 
 import java.awt.*;
 import java.util.ArrayList;

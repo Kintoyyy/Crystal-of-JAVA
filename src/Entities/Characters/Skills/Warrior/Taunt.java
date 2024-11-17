@@ -1,0 +1,23 @@
+package Entities.Characters.Skills.Warrior;
+
+import Entities.Characters.Skills.SkillType;
+import Entities.Characters.Skills.Skill;
+
+public class Taunt extends Skill {
+
+    private static final String name = "Taunt";
+    private static final int cost = 10;
+    private static final int damage = 20;
+    private static final String description = "Forces enemies to target Warrior for 1 turn";
+    private static final SkillType SKILL_TYPE = SkillType.PHYSICAL;
+
+    public Taunt() {
+        super(name, description, cost, damage, SKILL_TYPE,4,3);
+        skillImage = sheet.crop(72, 0, 18, 18);
+    }
+
+    @Override
+    public void useSkill() {
+
+    }
+}

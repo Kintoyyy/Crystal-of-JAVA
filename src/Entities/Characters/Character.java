@@ -3,7 +3,7 @@ package Entities.Characters;
 import Animations.Entities.CharacterAnimation;
 import Entities.Common.*;
 import Entities.Entity;
-import Skills.Skill;
+import Entities.Characters.Skills.Skill;
 import Utils.ImageUtils;
 
 import java.awt.*;
