@@ -19,7 +19,7 @@ public class Camera {
         this.yOffset = yOffset;
     }
 
-    public void centerOnEntity(Movement e, ParseMap world) {
+    public void centerOnEntity(Movement e) {
         xOffset = e.getX() - (float) screenWidth / 2 + (float) e.getWidth() / 2;
         yOffset = e.getY() - (float) screenHeight / 2 + (float) e.getHeight() / 2;
         checkBlankSpace();

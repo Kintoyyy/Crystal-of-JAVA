@@ -20,7 +20,7 @@ public class Game extends View {
     public Game(ViewManager viewManager) {
         super(viewManager);
 
-        ParseMap world = new ParseMap("res/worlds/world_1.tmx");
+        ParseMap world = new ParseMap("res/Maps/world_1.tmx");
 
         CharacterManager characterManager = handler.getGameState().getCharacterManger();
 

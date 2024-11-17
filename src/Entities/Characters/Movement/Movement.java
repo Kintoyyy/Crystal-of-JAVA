@@ -32,7 +32,7 @@ public class Movement {
 
     protected Rectangle bounds; // Character bounds
 
-    private ParseMap world;
+    private final ParseMap world;
     private final Camera camera;
     private final CharacterManager characterManager;
     private final InputKeyboardListener keyboard;
@@ -77,7 +77,7 @@ public class Movement {
         animation = characterManager.getPlayer().getAnimation();
         animation.tick();
         getInput();
-        camera.centerOnEntity(this, world);
+        camera.centerOnEntity(this);
     }
 
     private void getInput() {
