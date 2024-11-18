@@ -1,0 +1,99 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
+        },
+        "world_1.tmx": {
+            "scale": 3,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 130.5,
+                "y": 293.66666666666663
+            }
+        },
+        "world_1.tmx#Beach_Decor_Tiles": {
+            "scaleInDock": 1
+        },
+        "world_1.tmx#Beach_Tiles": {
+            "scaleInEditor": 8
+        },
+        "world_1.tmx#Fences": {
+            "scaleInDock": 1
+        },
+        "world_1.tmx#Flowers": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
+        "world_1.tmx#Grass_Tiles_1": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
+        "world_1.tmx#Grass_Tiles_3": {
+            "scaleInDock": 1
+        },
+        "world_1.tmx#Outdoor_Decor": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "world_1.tmx#Water_Stone_Tile_1": {
+            "scaleInDock": 1
+        },
+        "world_1.tmx#Well": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "world_1.tmx#environment": {
+            "dynamicWrapping": true,
+            "scaleInEditor": 4
+        },
+        "world_2.tmx": {
+            "scale": 2.2978125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 159.9347205222358,
+                "y": 159.9347205222358
+            }
+        },
+        "world_2.tmx#Beach_Decor_Tiles": {
+            "scaleInDock": 1
+        },
+        "world_2.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "world_2.tmx#Grass_Tiles_3": {
+            "scaleInDock": 1
+        }
+    },
+    "frame.defaultDuration": 200,
+    "last.exportedFilePath": "C:/Users/Kintoyyy/Documents/GitHub/Crystal of JAVA v1278365/res/worlds",
+    "last.imagePath": "C:/Users/Kintoyyy/Documents/GitHub/Crystal of JAVA v1278365/res/ui",
+    "map.lastUsedExportFilter": "Tiled map files (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 20,
+    "openFiles": [
+    ],
+    "project": "Worlds.Forest.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "world_1.tmx",
+        "world_2.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.type": 0
+}

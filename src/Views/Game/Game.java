@@ -4,29 +4,31 @@ import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
 import Entities.Characters.CharacterManager;
-import Entities.Characters.Movement.Movement;
+import Map.Movement.Movement;
+import Map.Map;
 import Utils.CallBackAction;
 import Views.View;
 import Views.ViewManager;
-import World.ParseWorld;
-import World.RenderWorld;
+import Map.Render;
 import Views.enums.Views;
 
 import java.awt.*;
 
 public class Game extends View {
-    private final RenderWorld renderWorld;
+    private final Render render;
 
     public Game(ViewManager viewManager) {
         super(viewManager);
 
-        ParseWorld world = new ParseWorld("res/worlds/world_1.tmx");
+        Map world = new Map("res/Maps/world_1.tmx");
+
+
 
         CharacterManager characterManager = handler.getGameState().getCharacterManger();
 
         Movement movement = new Movement(handler, world, characterManager);
 
-        this.renderWorld = new RenderWorld(world, movement);
+        this.render = new Render(world, movement);
 
         initComponent();
     }
@@ -34,12 +36,12 @@ public class Game extends View {
     @Override
     public void tick() {
         components.tick();
-        renderWorld.tick();
+        render.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        renderWorld.render(g);
+        render.render(g);
         components.render(g);
     }
 

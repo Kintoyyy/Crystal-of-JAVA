@@ -1,6 +1,6 @@
 package Components.Button;
 
-import Skills.Skill;
+import Entities.Characters.Skills.Skill;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 

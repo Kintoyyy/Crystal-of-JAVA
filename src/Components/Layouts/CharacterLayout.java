@@ -5,7 +5,7 @@ import Entities.Characters.CharacterManager;
 import Components.Component;
 import Components.Button.CharacterButton;
 import Game.Handler;
-import Views.Battle.BattleManager;
+import Worlds.BattleManager;
 
 import java.awt.*;
 

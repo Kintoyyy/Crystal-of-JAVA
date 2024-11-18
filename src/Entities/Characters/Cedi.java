@@ -1,12 +1,11 @@
 package Entities.Characters;
 
-import Animations.Entities.CharacterAnimation;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
 import Entities.Common.Mana;
-import Skills.*;
-import Skills.Mage.*;
+import Entities.Characters.Skills.*;
+import Entities.Characters.Skills.Mage.*;
 import Utils.SpriteSheet;
 import Utils.ImageUtils;
 

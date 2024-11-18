@@ -1,14 +1,14 @@
 package Views.Battle;
 
+import Worlds.BattleManager;
 import Components.Button.*;
 import Components.Button.Button;
 import Components.Layouts.*;
 import Components.Menu.SkillMenu;
-import Entities.Characters.CharacterManager;
 import Entities.Enemies.*;
 import Utils.Timer;
 import Views.*;
-import Views.enums.Turn;
+import Worlds.Enums.Turn;
 import Views.enums.Views;
 
 import java.awt.*;

@@ -2,9 +2,9 @@ package Entities.Characters;
 
 import Animations.Entities.CharacterAnimation;
 import Entities.Common.*;
-import Skills.Warrior.*;
+import Entities.Characters.Skills.Warrior.*;
 import Utils.SpriteSheet;
-import Skills.*;
+import Entities.Characters.Skills.*;
 import Utils.ImageUtils;
 
 import java.util.ArrayList;
