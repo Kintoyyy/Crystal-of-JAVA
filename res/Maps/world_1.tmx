@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="24">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="25">
  <editorsettings>
   <export target="world_2.tmx" format="tmx"/>
  </editorsettings>
@@ -304,6 +304,9 @@
  </layer>
  <objectgroup id="16" name="TriggerBox">
   <object id="20" name="BATTLE1" type="BATTLE" x="96" y="16" width="48" height="32"/>
+  <object id="24" name="TEST" type="NPC" x="231.5" y="93">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="17" name="Ambot">
   <object id="23" name="asdsa" type="COLLISION" x="107.5" y="77.25" width="32" height="32"/>

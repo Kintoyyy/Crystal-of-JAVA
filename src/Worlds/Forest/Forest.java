@@ -1,16 +1,15 @@
 package Worlds.Forest;
 
-import Map.Map;
+import Worlds.Forest.Battles.*;
 import Worlds.World;
 
 public class Forest extends World {
     public Forest() {
-        world = new Map("res/Maps/world_1.tmx");
-        loadbattle(world);
-    }
+        super("res/Maps/world_1.tmx");
 
-
-    private void loadbattle(Map world){
-
+        // setting the battles
+        setBattle(BattleNames.BATTLE_1, new Battle1());
+        setBattle(BattleNames.BATTLE_2, new Battle2());
+        setBattle(BattleNames.BATTLE_3, new Battle3());
     }
 }

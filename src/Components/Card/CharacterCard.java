@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 public class CharacterCard extends Card {
     private Character player;
     private BufferedImage playerProfile;
-    private final SpriteSheet sheet;
     private final BufferedImage frame;
     private final BufferedImage healthBar;
     private final BufferedImage manaBar;
@@ -27,7 +26,7 @@ public class CharacterCard extends Card {
         this.height = 19;
 
         // Initialize sprite sheet and UI components
-        sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Game_UI.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Game_UI.png"));
         frame = sheet.crop(155, 0, 48, 19);
         healthBar = sheet.crop(144, 0, 10, 5);
         manaBar = sheet.crop(144, 5, 10, 5);

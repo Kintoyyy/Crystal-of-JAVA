@@ -4,6 +4,7 @@ import Map.Movement.Movement;
 import Game.Handler;
 import Map.Object.Object;
 import Map.Object.ObjectGroup;
+import Map.Object.Type;
 import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
@@ -114,6 +115,11 @@ public class Render {
             int x = object.getX();
             int y = object.getY();
             g.drawRect((int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()), width, height);
+
+            if(object.getType() == Type.NPC){
+                g.setColor(Color.red);
+                g.drawString("NPC", (int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()));
+            }
         }
     }
 

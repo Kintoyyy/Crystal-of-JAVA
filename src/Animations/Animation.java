@@ -81,14 +81,12 @@ public abstract class Animation {
     }
 
     /**
-     * Retrieves the current frame for the given animation {@link TYPE}.
-     * If the key does not exist or the frames are unavailable, a fallback to the default animation is used.
+     * Retrieves the current frame for the given animation key.
      *
-     * @param type The {@link TYPE} of animation to retrieve the frame for.
-     * @return The current {@link BufferedImage} frame for the specified animation type, or {@code null} if an error occurs.
+     * @param key The unique key identifying the animation frames.
+     * @return The current {@link BufferedImage} frame for the specified key, or {@code null} if an error occurs.
      */
-    public final BufferedImage getFrame(TYPE type) {
-        key = type.name();
+    private BufferedImage getFrameByKey(String key) {
         try {
             return getFramesForKey(key)[index];
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -101,6 +99,18 @@ public abstract class Animation {
     }
 
     /**
+     * Retrieves the current frame for the given animation {@link TYPE}.
+     * If the key does not exist or the frames are unavailable, a fallback to the default animation is used.
+     *
+     * @param type The {@link TYPE} of animation to retrieve the frame for.
+     * @return The current {@link BufferedImage} frame for the specified animation type, or {@code null} if an error occurs.
+     */
+    public final BufferedImage getFrame(TYPE type) {
+        String key = type.name();
+        return getFrameByKey(key);
+    }
+
+    /**
      * Retrieves the current frame for the given animation {@link TYPE} and {@link DIRECTION}.
      * This allows different frames for the same animation type based on direction.
      *
@@ -109,17 +119,10 @@ public abstract class Animation {
      * @return The current {@link BufferedImage} frame for the specified animation type and direction, or {@code null} if an error occurs.
      */
     public final BufferedImage getFrame(TYPE type, DIRECTION direction) {
-        key = type.name() + "_" + direction.name();
-        try {
-            return getFramesForKey(key)[index];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Error: Index out of bounds for key '" + key + "'. Returning null.");
-            return null;
-        } catch (NullPointerException e) {
-            System.err.println("Error: No frames found for key '" + key + "'. Returning null.");
-            return null;
-        }
+        String key = type.name() + "_" + direction.name();
+        return getFrameByKey(key);
     }
+
 
     /**
      * Adds a new animation for the specified {@link TYPE} with a set of frames.

@@ -7,7 +7,6 @@ public class Battle1 extends Battle {
         super();
         
         name = "Forest Battle 1";
-        objectId = "forestBattle1";
 
     }
 }
