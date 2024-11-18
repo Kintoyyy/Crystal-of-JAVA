@@ -3,12 +3,16 @@ package Map.Movement;
 import Game.Handler;
 import Map.Object.Object;
 import Map.Object.Type;
+import Worlds.Enums.WorldNames;
+import Views.enums.Views;
 
 public class Collision {
     private final Movement movement;
+    private final Handler handler;
 
     public Collision(Handler handler, Movement movement) {
         this.movement = movement;
+        this.handler = handler;
     }
 
     /**
@@ -46,7 +50,17 @@ public class Collision {
                 return false; // Collision detected
             }
 
-            System.out.println("Collision with object: " + object.getName());
+            if (object.getType() == Type.TELEPORT) {
+                handler.getWorldManager().setCurrentWorld(WorldNames.valueOf(object.getName()));
+            }
+
+            if (object.getType() == Type.BATTLE) {
+                handler.getViewManager().setView(Views.PAUSE);
+//                handler.getWorldManager().getCurrentWorld().);
+//                handler.getWorldManager().setCurrentWorld(WorldNames.valueOf(object.getName()));
+            }
+
+            System.out.println("Collision with object: " + object.getName() + " type: " + object.getType());
         }
         return true; // No collision detected
     }

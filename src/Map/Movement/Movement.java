@@ -8,6 +8,7 @@ import Game.Handler;
 import Inputs.InputKeyboardListener;
 import Map.Map;
 import Map.Tile.Tile;
+import Worlds.WorldManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -59,21 +60,21 @@ public class Movement {
 
     private Rectangle bounds; // The bounding rectangle of the character used for collision detection
 
-    private final Map world; // The game world instance
     private final Camera camera; // The camera for controlling the viewport
     private final CharacterManager characterManager; // Manages the character-related logic
     private final InputKeyboardListener keyboard; // Listens for keyboard input
     private final Collision collision;
+    private final WorldManager worldManager;
 
     /**
      * Constructor for initializing the Movement class.
      *
      * @param handler          The game handler.
-     * @param world            The game world.
+     * @param worldManager     The manager handling the game world.
      * @param characterManager The manager handling the character's logic.
      */
-    public Movement(Handler handler, Map world, CharacterManager characterManager) {
-        this.world = world;
+    public Movement(Handler handler, WorldManager worldManager, CharacterManager characterManager) {
+        this.worldManager = worldManager;
         this.handler = handler;
         this.keyboard = handler.getKeyManager();
         this.collision = new Collision(handler, this);
@@ -260,15 +261,16 @@ public class Movement {
     }
 
     public Map getWorld() {
-        return world;
+        return worldManager.getCurrentWorld().getWorld();
     }
 
     public Handler getHandler() {
         return handler;
     }
 
-    public void setSpawn(float spawnX, float spawnY) {
-        x = spawnX;
-        y = spawnY;
+    public void setLocation(Point spawnPoint) {
+        System.out.println("Setting spawn point to: " + spawnPoint);
+        x = spawnPoint.x;
+        y = spawnPoint.y;
     }
 }

@@ -1,4 +1,4 @@
-package Worlds.Forest.Battles;
+package Worlds.Ice.Battles;
 
 import Worlds.Battle;
 

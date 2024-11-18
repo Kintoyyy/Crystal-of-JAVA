@@ -4,11 +4,14 @@ import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
 import Views.ViewManager;
+import Worlds.World;
+import Worlds.WorldManager;
 
 public class Handler {
     private final Game game;
     private DebugMode debugMode;
     private ViewManager viewManager;
+    private WorldManager worldManager;
     private GameState gameState;
 
     public Handler(Game game) {
@@ -54,4 +57,13 @@ public class Handler {
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
+
+    public WorldManager getWorldManager() {
+        return worldManager;
+    }
+
+    public void setWorldManager(WorldManager worldManager) {
+        this.worldManager = worldManager;
+    }
+
 }

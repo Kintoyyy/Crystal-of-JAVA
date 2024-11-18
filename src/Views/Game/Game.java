@@ -14,42 +14,29 @@ import Views.enums.Views;
 import Worlds.Enums.WorldNames;
 import Worlds.Forest.Forest;
 import Worlds.World;
+import Worlds.WorldManager;
 
 import java.awt.*;
 import java.util.HashMap;
 
 public class Game extends View {
-    private final Render render;
-    private final HashMap<WorldNames, World> worlds = new HashMap<>();
-    private final WorldNames currentWorld = WorldNames.FOREST;
+    private final WorldManager worldManager;
 
     public Game(ViewManager viewManager) {
         super(viewManager);
-
-        worlds.put(WorldNames.FOREST, new Forest());
-
-
-        Map world = new Map("res/Maps/world_1.tmx");
-
-
-        CharacterManager characterManager = handler.getGameState().getCharacterManger();
-
-        Movement movement = new Movement(handler, world, characterManager);
-
-        this.render = new Render(world, movement);
-
+        this.worldManager = new WorldManager(handler);
         initComponent();
     }
 
     @Override
     public void tick() {
         components.tick();
-        render.tick();
+        worldManager.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        render.render(g);
+        worldManager.render(g);
         components.render(g);
     }
 

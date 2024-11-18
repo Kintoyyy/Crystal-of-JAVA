@@ -54,11 +54,11 @@ public class ObjectGroup {
                 // Scale factor applied to the object's dimensions and position
                 int magicNumber = 4;
 
-                int width = objectElement.hasAttribute("width") ?
-                        Integer.parseInt(objectElement.getAttribute("width")) * magicNumber : 0;
+                int width = objectElement.hasAttribute("width") ? (int)
+                        Float.parseFloat(objectElement.getAttribute("width")) * magicNumber : 0;
 
-                int height = objectElement.hasAttribute("height") ?
-                        Integer.parseInt(objectElement.getAttribute("height")) * magicNumber : 0;
+                int height = objectElement.hasAttribute("height") ?  (int)
+                        Float.parseFloat(objectElement.getAttribute("height")) * magicNumber : 0;
 
                 int x = (int) Float.parseFloat(objectElement.getAttribute("x")) * magicNumber;
                 int y = (int) Float.parseFloat(objectElement.getAttribute("y")) * magicNumber;

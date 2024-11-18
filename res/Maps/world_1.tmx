@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="25">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="31">
  <editorsettings>
   <export target="world_2.tmx" format="tmx"/>
  </editorsettings>
@@ -307,6 +307,8 @@
   <object id="24" name="TEST" type="NPC" x="231.5" y="93">
    <point/>
   </object>
+  <object id="29" name="DUNGEON" type="TELEPORT" x="32.3333" y="170.333" width="49.3333" height="50"/>
+  <object id="30" name="FOREST" type="TELEPORT" x="287.333" y="43.3333" width="70" height="43"/>
  </objectgroup>
  <objectgroup id="17" name="Ambot">
   <object id="23" name="asdsa" type="COLLISION" x="107.5" y="77.25" width="32" height="32"/>

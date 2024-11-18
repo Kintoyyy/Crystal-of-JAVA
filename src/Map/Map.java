@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
 import java.io.File;
 
 /**
@@ -27,15 +28,8 @@ public class Map {
      */
     private int worldHeight;
 
-    /**
-     * X-coordinate of the spawn point.
-     */
-    private int spawnX;
 
-    /**
-     * Y-coordinate of the spawn point.
-     */
-    private int spawnY;
+    private Point spawnPoint;
 
     /**
      * 3D array representing the tile layers in the world.
@@ -72,7 +66,7 @@ public class Map {
 
                 // Initialize tile types using the tilesets
                 NodeList tilesets = mapElement.getElementsByTagName("tileset");
-                tileTypes = new TileTypes(tilesets);
+                this.tileTypes = new TileTypes(tilesets);
 
                 // Retrieve map dimensions
                 this.worldWidth = Integer.parseInt(mapElement.getAttribute("width"));
@@ -80,17 +74,20 @@ public class Map {
 
                 // Map tile layers
                 NodeList layers = mapElement.getElementsByTagName("layer");
-                tilesLayer = new TileLayers(layers, worldWidth, worldHeight).getTiles();
+                this.tilesLayer = new TileLayers(layers, this.worldWidth, this.worldHeight).getTiles();
 
                 // Map triggers
                 NodeList objectGroups = mapElement.getElementsByTagName("objectgroup");
-                objectGroup = new ObjectGroup(objectGroups);
+                this.objectGroup = new ObjectGroup(objectGroups);
+
 
                 // Retrieve spawn coordinates, with default values if not specified
-                spawnX = mapElement.hasAttribute("spawnX") ?
+                int spawnX = mapElement.hasAttribute("spawnX") ?
                         Integer.parseInt(mapElement.getAttribute("spawnX")) : 200;
-                spawnY = mapElement.hasAttribute("spawnY") ?
+                int spawnY = mapElement.hasAttribute("spawnY") ?
                         Integer.parseInt(mapElement.getAttribute("spawnY")) : 200;
+
+                this.spawnPoint = new Point(spawnX, spawnY);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,20 +140,11 @@ public class Map {
     }
 
     /**
-     * Retrieves the X-coordinate of the spawn point.
+     * Retrieves the x-coordinate of the spawn point.
      *
-     * @return The spawn X-coordinate.
+     * @return The x-coordinate of the spawn point.
      */
-    public float getSpawnX() {
-        return spawnX;
-    }
-
-    /**
-     * Retrieves the Y-coordinate of the spawn point.
-     *
-     * @return The spawn Y-coordinate.
-     */
-    public float getSpawnY() {
-        return spawnY;
+    public Point getSpawnPoint() {
+        return spawnPoint;
     }
 }

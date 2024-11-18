@@ -47,12 +47,12 @@ public class Render {
     /**
      * Constructs a Render object using parsed world data and a movement handler.
      *
-     * @param map      The Map object containing world data such as layers and dimensions.
      * @param movement The Movement instance for managing character movement.
      */
-    public Render(Map map, Movement movement) {
+    public Render(Movement movement) {
         this.movement = movement;
-        movement.setSpawn(map.getSpawnX(), map.getSpawnY());
+        Map map = movement.getWorld();
+        movement.setLocation(map.getSpawnPoint());
         this.width = map.getWorldWidth();
         this.height = map.getWorldHeight();
         this.TileLayers = map.getLayers();
@@ -116,7 +116,7 @@ public class Render {
             int y = object.getY();
             g.drawRect((int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()), width, height);
 
-            if(object.getType() == Type.NPC){
+            if (object.getType() == Type.NPC) {
                 g.setColor(Color.red);
                 g.drawString("NPC", (int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()));
             }
