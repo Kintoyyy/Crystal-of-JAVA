@@ -53,9 +53,12 @@ public class WorldManager {
 //        }
         currentWorld = world;
         movement.setLocation(getCurrentWorld().getSpawnPoint());
+        render.loadWorld();
     }
 
     public void tick() {
+        System.out.println("Current world: " + currentWorld);
+        getCurrentWorld().tick();
         render.tick();
     }
 

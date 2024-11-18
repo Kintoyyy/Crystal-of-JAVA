@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Ice extends World {
     public Ice() {
-        super("res/Maps/world_1.tmx");
+        super("res/Maps/world_2.tmx");
 
         // setting the battles
 //        setBattle(BattleNames.BATTLE_1, new Battle1());

@@ -20,29 +20,31 @@ public class Render {
     /**
      * Width of the world in tiles.
      */
-    private final int width;
+    private int width;
 
     /**
      * Height of the world in tiles.
      */
-    private final int height;
+    private int height;
 
     /**
      * 3D array representing the tile layers in the world.
      */
-    private final int[][][] TileLayers;
+    private int[][][] TileLayers;
 
     /**
      * TileTypes instance for retrieving tile information.
      */
-    private final TileTypes tileTypes;
+    private TileTypes tileTypes;
 
     /**
      * Movement object to handle character movement and camera.
      */
     private final Movement movement;
 
-    private final ObjectGroup objectGroup;
+    private ObjectGroup objectGroup;
+
+    private Map map;
 
     /**
      * Constructs a Render object using parsed world data and a movement handler.
@@ -51,7 +53,13 @@ public class Render {
      */
     public Render(Movement movement) {
         this.movement = movement;
-        Map map = movement.getWorld();
+        map = movement.getWorld();
+        movement.setLocation(map.getSpawnPoint());
+        loadWorld();
+    }
+
+    public void loadWorld() {
+        map = movement.getWorld();
         movement.setLocation(map.getSpawnPoint());
         this.width = map.getWorldWidth();
         this.height = map.getWorldHeight();

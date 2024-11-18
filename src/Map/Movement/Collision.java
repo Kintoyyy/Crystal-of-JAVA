@@ -54,11 +54,11 @@ public class Collision {
                 handler.getWorldManager().setCurrentWorld(WorldNames.valueOf(object.getName()));
             }
 
-            if (object.getType() == Type.BATTLE) {
-                handler.getViewManager().setView(Views.PAUSE);
-//                handler.getWorldManager().getCurrentWorld().);
-//                handler.getWorldManager().setCurrentWorld(WorldNames.valueOf(object.getName()));
-            }
+//            if (object.getType() == Type.BATTLE) {
+//                handler.getViewManager().setView(Views.PAUSE);
+////                handler.getWorldManager().getCurrentWorld().);
+////                handler.getWorldManager().setCurrentWorld(WorldNames.valueOf(object.getName()));
+//            }
 
             System.out.println("Collision with object: " + object.getName() + " type: " + object.getType());
         }

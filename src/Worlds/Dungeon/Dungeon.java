@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Dungeon extends World {
     public Dungeon() {
-        super("res/Maps/world_1.tmx");
+        super("res/Maps/world_2.tmx");
 
         // setting the battles
 //        setBattle(BattleNames.BATTLE_1, new Battle1());
