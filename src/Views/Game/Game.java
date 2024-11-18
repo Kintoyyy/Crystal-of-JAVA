@@ -11,17 +11,25 @@ import Views.View;
 import Views.ViewManager;
 import Map.Render;
 import Views.enums.Views;
+import Worlds.Enums.WorldNames;
+import Worlds.Forest.Forest;
+import Worlds.World;
 
 import java.awt.*;
+import java.util.HashMap;
 
 public class Game extends View {
     private final Render render;
+    private final HashMap<WorldNames, World> worlds = new HashMap<>();
+    private final WorldNames currentWorld = WorldNames.FOREST;
 
     public Game(ViewManager viewManager) {
         super(viewManager);
 
-        Map world = new Map("res/Maps/world_1.tmx");
+        worlds.put(WorldNames.FOREST, new Forest());
 
+
+        Map world = new Map("res/Maps/world_1.tmx");
 
 
         CharacterManager characterManager = handler.getGameState().getCharacterManger();

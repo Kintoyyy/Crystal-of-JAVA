@@ -304,7 +304,7 @@
  </layer>
  <objectgroup id="16" name="TriggerBox">
   <object id="20" name="BATTLE1" type="BATTLE" x="96" y="16" width="48" height="32"/>
-  <object id="24" name="asdasd" type="asdasd" x="231.5" y="93">
+  <object id="24" name="TEST" type="NPC" x="231.5" y="93">
    <point/>
   </object>
  </objectgroup>
