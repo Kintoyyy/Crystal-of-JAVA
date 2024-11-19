@@ -3,8 +3,6 @@ package Map.Movement;
 import Game.Handler;
 import Map.Object.Object;
 import Map.Object.Type;
-import Worlds.Enums.WorldNames;
-import Views.enums.Views;
 
 public class Collision {
     private final Movement movement;
@@ -39,7 +37,7 @@ public class Collision {
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
 
         // Loop through objects and check for collisions
-        for (Object object : movement.getWorld().getObjectGroup().getObjects()) {
+        for (Object object : movement.getWorld().getObjects()) {
             // Skip if the object doesn't intersect with the collision bounds
             if (!object.getBounds().intersects(collisionBounds)) {
                 continue;
@@ -51,7 +49,7 @@ public class Collision {
             }
 
             if (object.getType() == Type.TELEPORT) {
-                handler.getWorldManager().setCurrentWorld(WorldNames.valueOf(object.getName()));
+                handler.getWorldManager().setCurrentWorld(object.getName());
             }
 
             if (object.getType() == Type.BATTLE) {

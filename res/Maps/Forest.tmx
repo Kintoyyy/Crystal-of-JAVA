@@ -33,7 +33,7 @@
   <object id="4" name="BATTLE3" type="BATTLE" x="166" y="220" width="91.5" height="49"/>
  </objectgroup>
  <objectgroup id="4" name="TELEPORT">
-  <object id="6" type="TELEPORT" x="27.5" y="17" width="68" height="37"/>
-  <object id="8" type="TELEPORT" x="33" y="261.5" width="88" height="44.5"/>
+  <object id="6" name="ICE" type="TELEPORT" x="27.5" y="17" width="68" height="37"/>
+  <object id="8" name="FOREST" type="TELEPORT" x="33" y="261.5" width="88" height="44.5"/>
  </objectgroup>
 </map>

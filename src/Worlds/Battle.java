@@ -1,31 +1,37 @@
 package Worlds;
 
 import Entities.Enemies.Enemy;
-import Entities.Enemies.Goblin;
-import Entities.Enemies.Kai;
-import Entities.Enemies.Orc;
-import Worlds.Enums.Turn;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Arrays;
 
-public abstract class Battle {
-    protected String name;
+public class Battle {
+    protected String battleKey;
     protected ArrayList<Enemy> enemies = new ArrayList<>();
+    protected ArrayList<Reward> rewards = new ArrayList<>();
 
     // rewards[]
     // dialog scenes
 
-    public Battle() {
-
+    public Battle(String battleKey) {
+        this.battleKey = battleKey;
     }
 
-    public void start() {
-
+    public Battle enemies(Enemy... enemies) {
+        this.enemies.addAll(Arrays.asList(enemies));
+        return this;
     }
 
-    public ArrayList<Enemy> getEnemies(){
+    public Battle rewards(Reward... rewards) {
+        this.rewards.addAll(Arrays.asList(rewards));
+        return this;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public String getKey() {
+        return battleKey;
     }
 }

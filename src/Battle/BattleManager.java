@@ -35,7 +35,7 @@ public class BattleManager {
 
     public void startBattle(String battleName) {
         // Execption
-        System.out.println("Starting battle: " + battleName + " world: " + handler.getWorldManager().getCurrentWorld().getName() + " enemies: " + handler.getWorldManager().getBattle(battleName).getEnemies());
+        System.out.println("Starting battle: " + battleName + " world: " + " enemies: " + handler.getWorldManager().getBattle(battleName).getEnemies());
 
         Battle battle = handler.getWorldManager().getBattle(battleName);
 

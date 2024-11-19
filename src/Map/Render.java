@@ -10,6 +10,7 @@ import Map.Tile.Tile;
 import Map.Tile.TileTypes;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * The Render class is responsible for rendering the game world and handling
@@ -42,7 +43,7 @@ public class Render {
      */
     private final Movement movement;
 
-    private ObjectGroup objectGroup;
+    private ArrayList<Object> objectGroup;
 
     private Map map;
 
@@ -54,7 +55,9 @@ public class Render {
     public Render(Movement movement) {
         this.movement = movement;
         map = movement.getWorld();
+
         movement.setLocation(map.getSpawnPoint());
+
         loadWorld();
     }
 
@@ -65,7 +68,7 @@ public class Render {
         this.height = map.getWorldHeight();
         this.TileLayers = map.getLayers();
         this.tileTypes = map.getTileTypes();
-        this.objectGroup = map.getObjectGroup();
+        this.objectGroup = map.getObjects();
     }
 
     /**
@@ -116,8 +119,8 @@ public class Render {
             }
         }
 
-        for (int i = 0; i < objectGroup.getObjects().size(); i++) {
-            Object object = objectGroup.getObjects().get(i);
+        for (int i = 0; i < objectGroup.size(); i++) {
+            Object object = objectGroup.get(i);
             int width = object.getWidth();
             int height = object.getHeight();
             int x = object.getX();

@@ -13,8 +13,6 @@ import java.awt.*;
 
 public class Game extends View {
     private final WorldManager worldManager;
-//    private final BattleManager battleManager;
-
     public Game(ViewManager viewManager) {
         super(viewManager);
         this.worldManager = new WorldManager(handler);

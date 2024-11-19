@@ -1,5 +1,6 @@
 package Map;
 
+import Map.Object.Object;
 import Map.Tile.TileLayers;
 import Map.Tile.TileTypes;
 import Map.Object.ObjectGroup;
@@ -11,6 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * The Map class is responsible for parsing a .tmx map file to extract world data such as dimensions,
@@ -117,8 +119,8 @@ public class Map {
      *
      * @return The ObjectGroup object.
      */
-    public ObjectGroup getObjectGroup() {
-        return objectGroup;
+    public ArrayList<Object> getObjects() {
+        return objectGroup.getObjects();
     }
 
     /**

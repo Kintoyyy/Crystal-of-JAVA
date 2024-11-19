@@ -2,34 +2,26 @@ package Worlds;
 
 import Map.Map;
 import Map.Object.Object;
-import Worlds.Forest.Battles.BattleNames;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class World {
-    protected final String name = "World";
-    // map
-    protected Map world;
-    // battle
-    protected HashMap<String, Battle> battles = new HashMap<>();
-    protected ArrayList<Object> objects;
-    protected Point spawnPoint;
+public class World {
+    private final Map world;
+    private final String worldKey;
+    private final HashMap<String, Battle> battles = new HashMap<>();
 
-    // The key is the objectId
-    public World(String mapPath) {
-        world = new Map(mapPath);
-        spawnPoint = world.getSpawnPoint();
-        objects = world.getObjectGroup().getObjects();
+    public World(String worldKey, String mapPath) {
+        this.worldKey = worldKey;
+        this.world = new Map(mapPath);
     }
 
-    protected void setBattle(String objectName, Battle battle) {
-        battles.put(objectName, battle);
-    }
-
-    public String getName() {
-        return name;
+    public World setBattles(Battle... battlesObjects) {
+        for (Battle battle : battlesObjects) {
+            battles.put(battle.getKey(), battle);
+        }
+        return this;
     }
 
     public Map getWorld() {
@@ -37,7 +29,7 @@ public abstract class World {
     }
 
     public ArrayList<Object> getObjects() {
-        return objects;
+        return world.getObjects();
     }
 
     public HashMap<String, Battle> getBattles() {
@@ -45,13 +37,14 @@ public abstract class World {
     }
 
     public Point getSpawnPoint() {
-        return spawnPoint;
+        return world.getSpawnPoint();
     }
 
-    public abstract void tick();
+    public String getName() {
+        return worldKey;
+    }
 
-    public abstract void render(Graphics g);
-
-    public void load() {
+    public Battle getBattle(String battleName) {
+        return battles.get(battleName);
     }
 }
