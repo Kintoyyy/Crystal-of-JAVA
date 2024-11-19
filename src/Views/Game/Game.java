@@ -45,15 +45,6 @@ public class Game extends View {
                         })
                         .setLocation(900, 20),
 
-                new Button("battle")
-                        .setAction(new CallBackAction() {
-                            @Override
-                            public void onAction() {
-                                viewManager.setView(Views.BATTLE);
-                            }
-                        })
-                        .setLocation(680, 20),
-
                 new Components.Menu.CharacterMenu(handler)
                         .setLocation(350, 700)
                         .scale(6),

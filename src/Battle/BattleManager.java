@@ -75,4 +75,10 @@ public class BattleManager {
     public EnemyManager getEnemyManager() {
         return enemyManager;
     }
+
+    public void abortBattle() {
+        enemyManager.getEnemies().clear();
+        System.out.println("Aborting battle: " + enemyManager.getEnemies());
+        viewManager.setView(Views.GAME);
+    }
 }

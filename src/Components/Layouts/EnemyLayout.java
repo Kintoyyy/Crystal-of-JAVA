@@ -11,9 +11,13 @@ import java.util.List;
 public class EnemyLayout extends Layout {
     private EnemyManager currentEnemyManager; // Tracks the active EnemyManager
     private List<Enemy> cachedEnemies;       // Cache the enemies list
+    private final  EnemyManager enemyManager;
 
     public EnemyLayout(EnemyManager enemyManager) {
         super();
+        this.enemyManager = enemyManager;
+//        this.battleManager = battleManager;
+        this.currentEnemyManager = null; // No EnemyManager initially
         this.cachedEnemies = List.of(); // Empty cached enemies initially
     }
 
