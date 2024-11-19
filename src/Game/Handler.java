@@ -3,9 +3,8 @@ package Game;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
-import Views.Battle.BattleManager;
+import Battle.BattleManager;
 import Views.ViewManager;
-import Worlds.World;
 import Worlds.WorldManager;
 
 public class Handler {

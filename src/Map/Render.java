@@ -102,7 +102,7 @@ public class Render {
 
                         if (DebugMode.debugMode()) {
                             if (layer == DebugMode.getRenderedLayerIndex()) {
-                                System.out.println(Tile.height + " " + Tile.width);
+//                                System.out.println(Tile.height + " " + Tile.width);
                                 g.drawRect(tilePosX, tilePosY, Tile.width, Tile.height);
                             }
                         }

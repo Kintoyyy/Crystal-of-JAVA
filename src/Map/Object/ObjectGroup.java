@@ -64,7 +64,7 @@ public class ObjectGroup {
                 int y = (int) Float.parseFloat(objectElement.getAttribute("y")) * magicNumber;
 
                 // Log the parsed object details for debugging
-                System.out.println("Object: " + objectName + " " + objectType + " " + x + " " + y + " " + width + " " + height);
+//                System.out.println("Object: " + objectName + " " + objectType + " " + x + " " + y + " " + width + " " + height);
 
                 // Add the parsed object to the collection
                 objectCollection.add(new Object(objectName, objectType, x, y, width, height));

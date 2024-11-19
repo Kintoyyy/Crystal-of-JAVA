@@ -53,7 +53,7 @@ public class WorldManager {
 
 
     public void setCurrentWorld(WorldNames world) {
-        System.out.println("Setting current world to " + world);
+//        System.out.println("Setting current world to " + world);
 //        if (!worlds.containsKey(world)) {
 //            throw new IllegalArgumentException("World " + world + " does not exist!");
 //        }
@@ -78,7 +78,7 @@ public class WorldManager {
         if (worlds.get(world) == null) {
             throw new IllegalArgumentException("World " + world + " does not exist.");
         }
-        System.out.println("Setting world to " + world);
+//        System.out.println("Setting world to " + world);
         setCurrentWorld(world);
     }
 

@@ -7,12 +7,12 @@ import java.awt.*;
 
 public class Forest extends World {
     public Forest() {
-        super("res/Maps/world_1.tmx");
+        super("res/Maps/Forest.tmx");
 
         // setting the battles
         setBattle("BATTLE1", new Battle1());
         setBattle("BATTLE2", new Battle2());
-//        setBattle(BattleNames.BATTLE_3, new Battle3());
+        setBattle("BATTLE3", new Battle3());
     }
 
     @Override

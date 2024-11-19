@@ -3,31 +3,22 @@ package Views.Game;
 import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
-import Entities.Characters.CharacterManager;
-import Map.Movement.Movement;
-import Map.Map;
 import Utils.CallBackAction;
-import Views.Battle.BattleManager;
 import Views.View;
 import Views.ViewManager;
-import Map.Render;
 import Views.enums.Views;
-import Worlds.Enums.WorldNames;
-import Worlds.Forest.Forest;
-import Worlds.World;
 import Worlds.WorldManager;
 
 import java.awt.*;
-import java.util.HashMap;
 
 public class Game extends View {
     private final WorldManager worldManager;
-    private final BattleManager battleManager;
+//    private final BattleManager battleManager;
 
     public Game(ViewManager viewManager) {
         super(viewManager);
         this.worldManager = new WorldManager(handler);
-        this.battleManager = new BattleManager(handler);
+
         initComponent();
     }
 

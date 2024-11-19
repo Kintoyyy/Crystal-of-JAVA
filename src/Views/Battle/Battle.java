@@ -1,50 +1,36 @@
 package Views.Battle;
 
-import Worlds.BattleManager;
+import Components.Card.BattleStatistic;
+import Components.Menu.SkillMenu;
 import Components.Button.*;
 import Components.Button.Button;
 import Components.Layouts.*;
-import Components.Menu.SkillMenu;
-import Entities.Enemies.*;
-import Utils.Timer;
 import Views.*;
-import Worlds.Enums.Turn;
 import Views.enums.Views;
+import Battle.BattleManager;
 
 import java.awt.*;
 
 public class Battle extends View {
     private final BattleManager battleManager;
 
-    private int seconds = 0;
-    private Timer timer = new Timer();
-
     public Battle(ViewManager viewManager) {
         super(viewManager);
-
-        EnemyManager enemies = new EnemyManager();
-
-
-        enemies.addEnemy(new Kai());
-        enemies.addEnemy(new Orc());
-        enemies.addEnemy(new Goblin());
-
-
-        battleManager = new BattleManager(handler);
-//
-        battleManager.newBattle(enemies);
+        this.battleManager = new BattleManager(handler);
 
         components.init(
-
                 new CharacterLayout(battleManager)
                         .setLocation(100, 300)
                         .scale(6),
 
                 // NAAY POBLEME DIRI INIG SWITCH SA VIEW
-//                new SkillMenu(battleManager)
-//                        .setLocation(500, 650),
-//
-                new EnemyLayout(battleManager)
+                new SkillMenu(battleManager)
+                        .setLocation(500, 650),
+
+                new BattleStatistic(battleManager)
+                        .setLocation(100, 100),
+
+                new EnemyLayout(battleManager.getEnemyManager())
                         .setLocation(700, 300)
                         .showBounds()
                         .scale(6),
@@ -61,11 +47,11 @@ public class Battle extends View {
 
     @Override
     public void tick() {
-        battleManager.tick();
+//        battleManagerOld.tick();
 //        if (handler.getGameState().getEnemies().isEmpty()) {
 //            viewManager.setView(Views.GAME);
 //        }
-
+        battleManager.tick();
         components.tick();
     }
 
@@ -79,7 +65,7 @@ public class Battle extends View {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 20));
         g.drawString(handler.getGameState().getCharacterManger().getPlayer().getSkills().toString(), 20, 50);
-        g.drawString((battleManager.getTurnState() == Turn.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
+//        g.drawString((battleManagerOld.getTurnState() == Turn.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
 //        g.drawString(handler.getGameState(), 20, 70);
     }
 

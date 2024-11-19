@@ -4,7 +4,7 @@ import Entities.Characters.Character;
 import Components.Component;
 import Components.Button.SkillButton;
 import Game.Handler;
-import Worlds.BattleManager;
+import Battle.BattleManager;
 import Entities.Characters.Skills.Skill;
 
 import java.awt.*;
@@ -19,7 +19,7 @@ public class SkillMenu extends Menu {
         super();
         this.battleManager = battleManager;
         this.handler = battleManager.getHandler();
-        this.skills = new ArrayList<>();
+        this.skills = battleManager.getCharacterManager().getPlayer().getSkills();
         scale(6);
         initCharacterFrames();
     }
@@ -32,7 +32,7 @@ public class SkillMenu extends Menu {
         for (Skill skill : skills) {
             SkillButton frame = (SkillButton) new SkillButton(skill)
                     .setAction(() -> {
-                        skill.attack(battleManager);
+//                        skill.attack(battleManagerOld);
                     });
             childComponents.add(frame);
         }
@@ -41,7 +41,7 @@ public class SkillMenu extends Menu {
     @Override
     public void tick() {
         // Get the updated list of skills
-        ArrayList<Skill> updatedSkills = battleManager.getPlayer().getSkills();
+        ArrayList<Skill> updatedSkills = battleManager.getCharacterManager().getPlayer().getSkills();
 
         char[] skillKeys = {'q', 'w', 'e', 'r', 't'};
 
@@ -49,7 +49,7 @@ public class SkillMenu extends Menu {
             if (handler.getKeyManager().isKeyPressed(String.valueOf(skillKeys[i])).ignoreCaps()) {
                 SkillButton button = (SkillButton) childComponents.get(i);
                 button.setActive(true);
-                updatedSkills.get(i).attack(battleManager);
+//                updatedSkills.get(i).attack(battleManagerOld);
                 break; // Only one character can be selected per tick
             }
         }
@@ -67,7 +67,7 @@ public class SkillMenu extends Menu {
 
     @Override
     public void render(Graphics g) {
-        Character player = battleManager.getPlayer();
+        Character player = battleManager.getCharacterManager().getPlayer();
         int xOffset = (int) this.x;
 
         // Render the skill frames

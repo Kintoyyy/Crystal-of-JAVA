@@ -2,7 +2,7 @@ package Entities.Characters.Skills;
 
 import Entities.Characters.Character;
 import Entities.Enemies.Enemy;
-import Worlds.BattleManager;
+import Battle.BattleManager;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
@@ -23,8 +23,6 @@ public abstract class Skill {
 
     protected SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Skills.png"));
     protected BufferedImage skillImage;
-
-    protected BattleManager battleManager;
 
     protected Enemy enemy;
     protected Character player;
@@ -74,30 +72,30 @@ public abstract class Skill {
         return skillType;
     }
 
-    // battleManager.getLastEnemy()
-    // battleManager.attackLowest()
-    // battleManager.attackAll()
+    // battleManagerOld.getLastEnemy()
+    // battleManagerOld.attackLowest()
+    // battleManagerOld.attackAll()
     // etc
     public abstract void useSkill();
 
     public void attack(BattleManager battleManager) {
-        this.enemy = battleManager.getCurrentEnemy();
-
-        if(!battleManager.getCharacterManager().isPlayerAlive()){
-            System.out.println("Player is dead");
-            return;
-        }
-
-        if(!battleManager.isPlayersTurn()){
-            System.out.println("Not players turn");
-            return;
-        }
-
-        if (checkIfSkillIsAvailable()) {
-            useSkill();
-            battleManager.updateTurnState();
-            setBaseTurns();
-        }
+//        this.enemy = battleManagerOld.getCurrentEnemy();
+//
+//        if(!battleManagerOld.getCharacterManager().isPlayerAlive()){
+//            System.out.println("Player is dead");
+//            return;
+//        }
+//
+//        if(!battleManagerOld.isPlayersTurn()){
+//            System.out.println("Not players turn");
+//            return;
+//        }
+//
+//        if (checkIfSkillIsAvailable()) {
+//            useSkill();
+//            battleManagerOld.updateTurnState();
+//            setBaseTurns();
+//        }
     }
 
     private void setBaseTurns() {

@@ -18,6 +18,7 @@ public class EnemyManager {
 
     public void loadEnemies(ArrayList<Enemy> enemies){
         this.enemies.clear();
+        System.out.println("Loading enemies: " + enemies);
         this.enemies.addAll(enemies);
     }
 

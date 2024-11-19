@@ -11,7 +11,7 @@ import Views.enums.Views;
 
 import java.util.ArrayList;
 
-public class BattleManager {
+public class BattleManagerOld {
     private final CharacterManager characterManager;
     private final Timer timer = new Timer();
     private final Handler handler;
@@ -20,7 +20,7 @@ public class BattleManager {
     private Turn turn = Turn.PLAYER;
     private EnemyManager enemyManager;
 
-    public BattleManager(Handler handler) {
+    public BattleManagerOld(Handler handler) {
         this.handler = handler;
         characterManager = handler.getGameState().getCharacterManger();
     }

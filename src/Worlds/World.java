@@ -28,6 +28,10 @@ public abstract class World {
         battles.put(objectName, battle);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Map getWorld() {
         return world;
     }

@@ -18,12 +18,14 @@ public abstract class Battle {
     // dialog scenes
 
     public Battle() {
-        enemies.add(new Kai());
-        enemies.add(new Orc());
-        enemies.add(new Goblin());
+
     }
 
     public void start() {
 
+    }
+
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
     }
 }

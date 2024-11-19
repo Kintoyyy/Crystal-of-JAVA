@@ -56,13 +56,9 @@ public class Collision {
 
             if (object.getType() == Type.BATTLE) {
                 handler.getBattleManager().startBattle(object.getName());
-                // 1. get current world
-                // 2.  look for the battle object
-                // 3. load the battle
-                // 4. change the view
             }
 
-            System.out.println("Collision with object: " + object.getName() + " type: " + object.getType());
+//            System.out.println("Collision with object: " + object.getName() + " type: " + object.getType());
         }
         return true; // No collision detected
     }

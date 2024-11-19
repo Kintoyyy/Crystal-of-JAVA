@@ -269,7 +269,7 @@ public class Movement {
     }
 
     public void setLocation(Point spawnPoint) {
-        System.out.println("Setting spawn point to: " + spawnPoint);
+//        System.out.println("Setting spawn point to: " + spawnPoint);
         x = spawnPoint.x;
         y = spawnPoint.y;
     }
