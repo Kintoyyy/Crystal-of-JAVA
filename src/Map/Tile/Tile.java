@@ -11,54 +11,77 @@ import java.awt.image.BufferedImage;
  */
 public class Tile {
 
-    /** The image used to represent the tile. */
+    /**
+     * The image used to represent the tile.
+     */
     protected BufferedImage image;
 
-    /** The file path of the tile image. */
-    protected String path;
+    /**
+     * The file path of the tile image.
+     */
+    protected static String path;
 
-    /** The name of the tile. */
+    /**
+     * The name of the tile.
+     */
     protected String name;
 
-    /** The unique identifier of the tile. */
+    /**
+     * The unique identifier of the tile.
+     */
     protected int id;
 
-    /** Standard width of a tile in pixels. */
+
+    protected String wangTile;
+
+    /**
+     * Standard width of a tile in pixels.
+     */
     public static final int width = 64;
 
-    /** Standard height of a tile in pixels. */
+    /**
+     * Standard height of a tile in pixels.
+     */
     public static final int height = 64;
 
-    /** Default tile used when no valid tile is found. */
+    /**
+     * Default tile used when no valid tile is found.
+     */
     public static final Tile defaultTile = new Tile(
             ImageUtils.loadImage("/Tiles/Grass/Grass_1_Middle.png"),
             "default",
-            0
-    );
+            path,
+            0,
+            "0,0,0,0,0,0,0,0");
 
-    /** Tile representing a transparent or empty area (null by design). */
+    /**
+     * Tile representing a transparent or empty area (null by design).
+     */
     public static final Tile transparentTile = null;
 
     /**
      * Constructs a Tile with an image, name, and unique ID.
      *
-     * @param image The BufferedImage representing the tile's appearance.
-     * @param name The name of the tile.
-     * @param id The unique identifier for the tile.
+     * @param image    The BufferedImage representing the tile's appearance.
+     * @param name     The name of the tile.
+     * @param path
+     * @param id       The unique identifier for the tile.
+     * @param wangTile Wang tile ids
      */
-    public Tile(BufferedImage image, String name, int id) {
+    public Tile(BufferedImage image, String name, String path, int id, String wangTile) {
         this.image = image;
         this.name = name;
         this.id = id;
+        this.wangTile = wangTile;
     }
 
     /**
      * Constructs a Tile with an image, name, path, and unique ID.
      *
      * @param image The BufferedImage representing the tile's appearance.
-     * @param name The name of the tile.
-     * @param path The file path of the tile image.
-     * @param id The unique identifier for the tile.
+     * @param name  The name of the tile.
+     * @param path  The file path of the tile image.
+     * @param id    The unique identifier for the tile.
      */
     public Tile(BufferedImage image, String name, String path, int id) {
         this.image = image;

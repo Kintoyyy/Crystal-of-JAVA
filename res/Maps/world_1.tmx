@@ -128,7 +128,7 @@
  </layer>
  <layer id="8" name="Terrain" width="30" height="30">
   <properties>
-   <property name="Collision" type="bool" value="true"/>
+   <property name="COLLISION" type="bool" value="true"/>
   </properties>
   <data encoding="csv">
 10,10,10,10,10,44,45,45,45,46,10,10,10,10,44,45,46,10,10,44,77,0,76,45,45,45,46,10,10,10,

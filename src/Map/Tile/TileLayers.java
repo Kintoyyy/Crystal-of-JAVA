@@ -26,6 +26,15 @@ public class TileLayers {
                 int rows = Integer.parseInt(layer.getAttribute("height"));
                 int columns = Integer.parseInt(layer.getAttribute("width"));
 
+                NodeList properties = layer.getElementsByTagName("properties");
+                for (int i = 0; i < properties.getLength(); i++) {
+                    Element property = (Element) properties.item(i);
+
+                    String name = property.getAttribute("name");
+                    String value = property.getAttribute("value");
+                    String type = property.getAttribute("type");
+                }
+
                 NodeList dataNodes = layer.getElementsByTagName("data");
                 if (dataNodes.getLength() > 0) {
                     String[] values = dataNodes.item(0).getTextContent().trim().split(",");
