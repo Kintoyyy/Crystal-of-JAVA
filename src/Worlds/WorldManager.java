@@ -7,6 +7,7 @@ import Map.Render;
 import Worlds.Dungeon.Dungeon;
 import Worlds.Enums.WorldNames;
 import Worlds.Forest.Forest;
+import Worlds.Ice.Battles.BattleNames;
 import Worlds.Ice.Ice;
 import Worlds.Lava.Lava;
 
@@ -28,7 +29,6 @@ public class WorldManager {
         addWorld(WorldNames.LAVA, new Lava());
         addWorld(WorldNames.DUNGEON, new Dungeon());
 
-
         // Ensure the current world exists
         if (getCurrentWorld() == null) {
             throw new IllegalStateException("Current world is null! Ensure worlds are added correctly.");
@@ -46,6 +46,12 @@ public class WorldManager {
         return worlds.get(currentWorld);
     }
 
+
+    public Battle getBattle(String battleName) {
+        return worlds.get(currentWorld).getBattles().get(battleName);
+    }
+
+
     public void setCurrentWorld(WorldNames world) {
         System.out.println("Setting current world to " + world);
 //        if (!worlds.containsKey(world)) {
@@ -57,7 +63,6 @@ public class WorldManager {
     }
 
     public void tick() {
-        System.out.println("Current world: " + currentWorld);
         getCurrentWorld().tick();
         render.tick();
     }

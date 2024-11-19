@@ -63,6 +63,8 @@ public class Game implements Runnable {
         handler.setGameState(gameState);
 
         viewManager = new ViewManager(handler);
+
+
     }
 
     private void tick() { //updates all variables

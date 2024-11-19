@@ -13,7 +13,7 @@ public abstract class World {
     // map
     protected Map world;
     // battle
-    protected HashMap<BattleNames, Battle> battles = new HashMap<>();
+    protected HashMap<String, Battle> battles = new HashMap<>();
     protected ArrayList<Object> objects;
     protected Point spawnPoint;
 
@@ -24,7 +24,7 @@ public abstract class World {
         objects = world.getObjectGroup().getObjects();
     }
 
-    protected void setBattle(BattleNames objectName, Battle battle) {
+    protected void setBattle(String objectName, Battle battle) {
         battles.put(objectName, battle);
     }
 
@@ -36,7 +36,7 @@ public abstract class World {
         return objects;
     }
 
-    public HashMap<BattleNames, Battle> getBattles() {
+    public HashMap<String, Battle> getBattles() {
         return battles;
     }
 

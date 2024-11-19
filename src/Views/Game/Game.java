@@ -7,6 +7,7 @@ import Entities.Characters.CharacterManager;
 import Map.Movement.Movement;
 import Map.Map;
 import Utils.CallBackAction;
+import Views.Battle.BattleManager;
 import Views.View;
 import Views.ViewManager;
 import Map.Render;
@@ -21,10 +22,12 @@ import java.util.HashMap;
 
 public class Game extends View {
     private final WorldManager worldManager;
+    private final BattleManager battleManager;
 
     public Game(ViewManager viewManager) {
         super(viewManager);
         this.worldManager = new WorldManager(handler);
+        this.battleManager = new BattleManager(handler);
         initComponent();
     }
 

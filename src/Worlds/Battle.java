@@ -13,7 +13,7 @@ import java.util.Queue;
 public abstract class Battle {
     protected String name;
     protected ArrayList<Enemy> enemies = new ArrayList<>();
-    protected Queue<Turn> turnqueue = new LinkedList<>();
+
     // rewards[]
     // dialog scenes
 
@@ -23,11 +23,7 @@ public abstract class Battle {
         enemies.add(new Goblin());
     }
 
-    public Queue<Turn> getTurnqueue() {
-        return turnqueue;
-    }
+    public void start() {
 
-    public void addQueue(Turn turn) {
-        turnqueue.add(turn);
     }
 }

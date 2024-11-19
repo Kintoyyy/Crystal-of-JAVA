@@ -3,6 +3,7 @@ package Game;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
+import Views.Battle.BattleManager;
 import Views.ViewManager;
 import Worlds.World;
 import Worlds.WorldManager;
@@ -12,6 +13,7 @@ public class Handler {
     private DebugMode debugMode;
     private ViewManager viewManager;
     private WorldManager worldManager;
+    private BattleManager battleManager;
     private GameState gameState;
 
     public Handler(Game game) {
@@ -66,4 +68,11 @@ public class Handler {
         this.worldManager = worldManager;
     }
 
+    public BattleManager getBattleManager() {
+        return battleManager;
+    }
+
+    public void setBattleManager(BattleManager battleManager) {
+        this.battleManager = battleManager;
+    }
 }

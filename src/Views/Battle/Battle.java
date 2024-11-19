@@ -24,12 +24,14 @@ public class Battle extends View {
 
         EnemyManager enemies = new EnemyManager();
 
+
         enemies.addEnemy(new Kai());
         enemies.addEnemy(new Orc());
         enemies.addEnemy(new Goblin());
 
-        battleManager = new BattleManager(handler);
 
+        battleManager = new BattleManager(handler);
+//
         battleManager.newBattle(enemies);
 
         components.init(
@@ -38,9 +40,10 @@ public class Battle extends View {
                         .setLocation(100, 300)
                         .scale(6),
 
-                new SkillMenu(battleManager)
-                        .setLocation(500, 650),
-
+                // NAAY POBLEME DIRI INIG SWITCH SA VIEW
+//                new SkillMenu(battleManager)
+//                        .setLocation(500, 650),
+//
                 new EnemyLayout(battleManager)
                         .setLocation(700, 300)
                         .showBounds()

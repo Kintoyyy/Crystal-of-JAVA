@@ -3,6 +3,7 @@ package Views;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.SimpleTimeZone;
 
 import Game.Handler;
 import Views.Battle.Battle;
@@ -77,6 +78,7 @@ public class ViewManager {
      * @param viewEnum The enum representing the view to set.
      */
     public void setView(Views viewEnum) {
+        System.out.println("Setting view to: " + viewEnum);
         View selectedView = views.get(viewEnum);
 
         if (selectedView == null) return;
@@ -140,7 +142,11 @@ public class ViewManager {
      */
     public void tick() {
         if (!layers.isEmpty()) {
-            layers.forEach(View::tick);
+            System.out.println(layers.size());
+//            layers.forEach(View::tick);
+            for(View layer: layers){
+                layer.tick();
+            }
         }
     }
 

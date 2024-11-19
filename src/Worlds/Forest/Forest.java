@@ -10,9 +10,9 @@ public class Forest extends World {
         super("res/Maps/world_1.tmx");
 
         // setting the battles
-        setBattle(BattleNames.BATTLE_1, new Battle1());
-        setBattle(BattleNames.BATTLE_2, new Battle2());
-        setBattle(BattleNames.BATTLE_3, new Battle3());
+        setBattle("BATTLE1", new Battle1());
+        setBattle("BATTLE2", new Battle2());
+//        setBattle(BattleNames.BATTLE_3, new Battle3());
     }
 
     @Override
