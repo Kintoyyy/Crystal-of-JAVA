@@ -8,10 +8,10 @@ import Map.Render;
 import java.awt.*;
 
 public class WorldManager {
-    private final Render render;
     private final Worlds worlds;
-    private String currentWorld = "FOREST";
+    private final Render render;
     private final Movement movement;
+    private String currentWorld = "FOREST";
 
     public WorldManager(Handler handler) {
         handler.setWorldManager(this);
@@ -34,7 +34,6 @@ public class WorldManager {
 
     public void setCurrentWorld(String world) {
         this.currentWorld = world;
-        System.out.println("Current World: " + currentWorld);
         movement.setLocation(getCurrentWorld().getSpawnPoint());
         render.loadWorld();
     }

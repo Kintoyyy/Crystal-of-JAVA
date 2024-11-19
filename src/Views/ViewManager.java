@@ -63,12 +63,13 @@ public class ViewManager {
      * This method creates instances of all views and stores them in the {@link #views} map.
      */
     private void initializeViews() {
-        views.put(Views.BATTLE, new Battle(this));
         views.put(Views.GAME, new Game(this));
+        views.put(Views.BATTLE, new Battle(this));
         views.put(Views.MENU, new Menu(this));
         views.put(Views.SETTINGS, new Menu(this));
         views.put(Views.SELECT_CHARACTER, new Menu(this));
         views.put(Views.PAUSE, new Pause(this));
+
     }
 
     /**
@@ -90,6 +91,8 @@ public class ViewManager {
             layers.clear();
             layers.add(selectedView);
         }
+
+        tick();
 
         // Update mouse listener to always point to the last (topmost) layer's component manager
         View topLayer = layers.getLast();

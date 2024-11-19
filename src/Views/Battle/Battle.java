@@ -14,9 +14,10 @@ import java.awt.*;
 public class Battle extends View {
     private final BattleManager battleManager;
 
+
     public Battle(ViewManager viewManager) {
         super(viewManager);
-        this.battleManager = new BattleManager(handler);
+        this.battleManager = handler.getBattleManager();
 
         components.init(
                 new CharacterLayout(battleManager)
@@ -51,6 +52,7 @@ public class Battle extends View {
 //        if (handler.getGameState().getEnemies().isEmpty()) {
 //            viewManager.setView(Views.GAME);
 //        }
+
         battleManager.tick();
         components.tick();
     }

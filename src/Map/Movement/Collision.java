@@ -35,9 +35,9 @@ public class Collision {
     public boolean objectCollisions(float xOffset, float yOffset) {
         // Precompute the collision bounds for the moving entity
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
-
         // Loop through objects and check for collisions
         for (Object object : movement.getWorld().getObjects()) {
+
             // Skip if the object doesn't intersect with the collision bounds
             if (!object.getBounds().intersects(collisionBounds)) {
                 continue;
@@ -56,7 +56,7 @@ public class Collision {
                 handler.getBattleManager().startBattle(object.getName());
             }
 
-//            System.out.println("Collision with object: " + object.getName() + " type: " + object.getType());
+            System.out.println("Collision with object: " + object.getName() + " type: " + object.getType());
         }
         return true; // No collision detected
     }

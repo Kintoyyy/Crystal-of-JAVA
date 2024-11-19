@@ -1,5 +1,6 @@
 package Views.Game;
 
+import Battle.BattleManager;
 import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
@@ -13,9 +14,12 @@ import java.awt.*;
 
 public class Game extends View {
     private final WorldManager worldManager;
+    private final BattleManager battleManager;
+
     public Game(ViewManager viewManager) {
         super(viewManager);
         this.worldManager = new WorldManager(handler);
+        battleManager = new BattleManager(handler, worldManager);
 
         initComponent();
     }

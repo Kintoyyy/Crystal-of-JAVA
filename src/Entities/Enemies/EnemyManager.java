@@ -26,24 +26,8 @@ public class EnemyManager {
 
     }
 
-    public void updateTurns() {
-        if (attackingEnemyIndex < enemies.size() - 1) {
-            attackingEnemyIndex++;
-        } else {
-            attackingEnemyIndex = 0;
-        }
-    }
-
-    public void addEnemy(Enemy enemy) {
-        enemies.add(enemy);
-    }
-
     public int getSize() {
         return enemies.size();
-    }
-
-    public Enemy getEnemyByIndex(int i) {
-        return enemies.get(i);
     }
 
     public void setCurrentEnemy(int index) {

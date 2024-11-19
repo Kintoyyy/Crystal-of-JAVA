@@ -6,9 +6,60 @@
     "activeFile": "",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "Forest.tmx": {
+            "expandedObjectLayers": [
+                2,
+                4
+            ],
+            "scale": 2.648125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 160.11328770356386,
+                "y": 160.11328770356386
+            }
+        },
+        "Forest.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "Ice.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 151.5,
+                "y": 167.5
+            }
+        },
+        "Ice.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "Ice.tmx#Grass_Tiles_3": {
+            "scaleInDock": 1
+        },
+        "Ice.tmx#Water_Middle": {
+            "scaleInDock": 1
+        },
+        "Ice/Forest.tmx": {
+            "expandedObjectLayers": [
+                2,
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 147.5,
+                "y": 166.5
+            }
+        },
+        "Ice/Forest.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        }
     },
-    "last.imagePath": "C:/Users/Kintoyyy/Documents/GitHub/Crystal-of-JAVA-v1278365/res/Tiles/Grass",
+    "last.imagePath": "C:/Users/Kintoyyy/Documents/GitHub/Crystal-of-JAVA-v1278365/res/Tiles/Water",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
@@ -17,6 +68,8 @@
     ],
     "project": "Test-Multimaps.tiled-project",
     "recentFiles": [
+        "Ice/Forest.tmx",
+        "Ice.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {

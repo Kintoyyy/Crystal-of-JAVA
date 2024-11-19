@@ -59,6 +59,7 @@ public class Handler {
         this.gameState = gameState;
     }
 
+    // need to move this
     public WorldManager getWorldManager() {
         return worldManager;
     }
@@ -67,6 +68,7 @@ public class Handler {
         this.worldManager = worldManager;
     }
 
+    // need to move this
     public BattleManager getBattleManager() {
         return battleManager;
     }

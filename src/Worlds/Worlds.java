@@ -12,24 +12,26 @@ public class Worlds {
     public Worlds() {
         this.setWorlds(
                 new World("FOREST", "res/Maps/Forest.tmx").setBattles(
-                        new Battle("BATTLE_1").enemies(
-                                new Kai(),
+                        new Battle("BATTLE1").enemies(
+                                new Goblin()
+                        ),
+                        new Battle("BATTLE2").enemies(
                                 new Orc(),
                                 new Goblin()
                         ),
-                        new Battle("BATTLE_2").enemies(
+                        new Battle("BATTLE3").enemies(
                                 new Kai(),
                                 new Orc(),
                                 new Goblin()
                         )
                 ),
-                new World("ICE", "res/Maps/Forest.tmx").setBattles(
-                        new Battle("BATTLE_1").enemies(
+                new World("ICE", "res/Maps/Ice.tmx").setBattles(
+                        new Battle("BATTLE1").enemies(
                                 new Kai(),
                                 new Orc(),
                                 new Goblin()
                         ),
-                        new Battle("BATTLE_2").enemies(
+                        new Battle("BATTLE2").enemies(
                                 new Kai(),
                                 new Orc(),
                                 new Goblin()
