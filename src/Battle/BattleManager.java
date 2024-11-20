@@ -1,7 +1,7 @@
 package Battle;
 
 import Entities.Characters.CharacterManager;
-import Entities.Enemies.EnemyManager;
+import Entities.Enemies.Enemy;
 import Game.Handler;
 import Utils.Timer;
 import Views.ViewManager;
@@ -10,28 +10,27 @@ import Worlds.Battle;
 import Worlds.Enums.Turn;
 import Worlds.WorldManager;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class BattleManager {
-    protected final Handler handler;
-    private final EnemyManager enemyManager;
+    private final Handler handler;
     private final ViewManager viewManager;
     private final WorldManager worldManager;
 
+    private final ArrayList<Enemy> enemies = new ArrayList<>();
+    private int currentEnemyIndex = 0;
+
     private final Timer timer = new Timer();
 
-    protected Queue<Turn> turnqueue = new LinkedList<>();
+    private final Queue<Turn> turnqueue = new LinkedList<>();
 
     public BattleManager(Handler handler, WorldManager worldManager) {
         handler.setBattleManager(this);
         this.handler = handler;
         this.viewManager = handler.getViewManager();
         this.worldManager = worldManager;
-        this.enemyManager = new EnemyManager();
-
-
-        // set the gameBattleManagen i hendler
 
         turnqueue.add(Turn.PLAYER);
         turnqueue.add(Turn.ENEMY);
@@ -40,14 +39,19 @@ public class BattleManager {
     public void startBattle(String battleName) {
         Battle battle = worldManager.getBattle(battleName);
 
-        if(battle == null) {
+        if (battle.isComplete()) {
+            System.out.println("Battle already completed: " + battleName);
+            return;
+        }
+
+        if (battle == null) {
             System.out.println("Battle not found: " + battleName);
             return;
         }
 
         System.out.println(" world: " + worldManager.getCurrentWorld().getName() + " enemies: " + battle.getEnemies());
 
-        enemyManager.loadEnemies(battle.getEnemies());
+        loadEnemies(battle.getEnemies());
 
         viewManager.setView(Views.BATTLE);
         // start battle
@@ -69,6 +73,11 @@ public class BattleManager {
     }
 
     public void tick() {
+        if (enemies.isEmpty()) {
+            System.out.println("Battle ended");
+            viewManager.setView(Views.GAME);
+            return;
+        }
         timer.update();
     }
 
@@ -80,13 +89,30 @@ public class BattleManager {
         return handler.getGameState().getCharacterManger();
     }
 
-    public EnemyManager getEnemyManager() {
-        return enemyManager;
+    public void abortBattle() {
+        enemies.clear();
+        System.out.println("Aborting battle: " + enemies);
+        viewManager.setView(Views.GAME);
     }
 
-    public void abortBattle() {
-        enemyManager.getEnemies().clear();
-        System.out.println("Aborting battle: " + enemyManager.getEnemies());
-        viewManager.setView(Views.GAME);
+    public boolean isDataLoaded() {
+        return !enemies.isEmpty();
+    }
+
+    public void loadEnemies(ArrayList<Enemy> enemies) {
+        this.enemies.clear();
+        this.enemies.addAll(enemies);
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public void setCurrentEnemy(int index) {
+        this.currentEnemyIndex = index;
+    }
+
+    public Enemy getCurrentEnemy() {
+        return enemies.get(currentEnemyIndex);
     }
 }

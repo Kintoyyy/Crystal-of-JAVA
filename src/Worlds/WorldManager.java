@@ -32,9 +32,21 @@ public class WorldManager {
         return worlds.getBattle(currentWorld, battleName);
     }
 
-    public void setCurrentWorld(String world) {
+    public void changeWorld(String world) {
+
+        getCurrentWorld().setPlayerLastPosition(movement.getLocation());
+
         this.currentWorld = world;
-        movement.setLocation(getCurrentWorld().getSpawnPoint());
+
+        System.out.println("Changing world to: " + getCurrentWorld().getPlayerLastPosition());
+
+        getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getPlayerLastPosition());
+
+//        if (getCurrentWorld().getPlayerLastPosition() == null) {
+//            getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getSpawnPoint());
+//        } else {
+//            movement.setLocation(getCurrentWorld().getPlayerLastPosition());
+//        }
         render.loadWorld();
     }
 

@@ -36,7 +36,7 @@ public class Collision {
         // Precompute the collision bounds for the moving entity
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
         // Loop through objects and check for collisions
-        for (Object object : movement.getWorld().getObjects()) {
+        for (Object object : movement.getWorld().getCurrentWorld().getObjects()) {
 
             // Skip if the object doesn't intersect with the collision bounds
             if (!object.getBounds().intersects(collisionBounds)) {
@@ -49,7 +49,7 @@ public class Collision {
             }
 
             if (object.getType() == Type.TELEPORT) {
-                handler.getWorldManager().setCurrentWorld(object.getName());
+                handler.getWorldManager().changeWorld(object.getName());
             }
 
             if (object.getType() == Type.BATTLE) {

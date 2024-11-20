@@ -103,6 +103,7 @@ public class Movement {
         animation.tick();
         getInput();
         camera.centerOnEntity(this);
+//        handler.getWorldManager().getCurrentWorld().getPlayerLastPosition().setLocation(x, y);
     }
 
     /**
@@ -260,8 +261,9 @@ public class Movement {
         return camera;
     }
 
-    public Map getWorld() {
-        return worldManager.getCurrentWorld().getWorld();
+    public WorldManager getWorld() {
+        System.out.println(worldManager.getCurrentWorld().getWorld().getWorldWidth() + " " + worldManager.getCurrentWorld().getWorld().getWorldHeight());
+        return worldManager;
     }
 
     public Handler getHandler() {
@@ -271,5 +273,9 @@ public class Movement {
     public void setLocation(Point spawnPoint) {
         x = spawnPoint.x;
         y = spawnPoint.y;
+    }
+
+    public Point getLocation() {
+        return new Point((int) x, (int) y);
     }
 }

@@ -66,13 +66,15 @@ public class Map {
             if (map.getLength() > 0) {
                 Element mapElement = (Element) map.item(0);
 
-                // Initialize tile types using the tilesets
-                NodeList tilesets = mapElement.getElementsByTagName("tileset");
-                this.tileTypes = new TileTypes(tilesets);
-
                 // Retrieve map dimensions
                 this.worldWidth = Integer.parseInt(mapElement.getAttribute("width"));
                 this.worldHeight = Integer.parseInt(mapElement.getAttribute("height"));
+
+                System.out.println("Creating world: "  + worldPath + " with world dimensions of " + worldWidth + " by " + worldHeight + " tiles");
+
+                // Initialize tile types using the tilesets
+                NodeList tilesets = mapElement.getElementsByTagName("tileset");
+                this.tileTypes = new TileTypes(tilesets);
 
                 // Map tile layers
                 NodeList layers = mapElement.getElementsByTagName("layer");
@@ -81,7 +83,6 @@ public class Map {
                 // Map triggers
                 NodeList objectGroups = mapElement.getElementsByTagName("objectgroup");
                 this.objectGroup = new ObjectGroup(objectGroups);
-
 
                 // Retrieve spawn coordinates, with default values if not specified
                 int spawnX = mapElement.hasAttribute("spawnX") ?

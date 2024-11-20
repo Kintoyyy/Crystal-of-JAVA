@@ -14,6 +14,19 @@ public class Worlds {
                 new World("FOREST", "res/Maps/Forest.tmx").setBattles(
                         new Battle("BATTLE1").enemies(
                                 new Goblin()
+                        ).dialogBefore(
+                                "You have encountered a Goblin!",
+                                "Prepare for battle!",
+                                "Defeat the Goblin to continue!",
+                                "Good luck!",
+                                "Goblin: I will defeat you!",
+                                "Goblin: You will never defeat me!"
+                        ).dialogAfter(
+                                "You have defeated the Goblin!",
+                                "You have earned 10 gold and 10 exp!",
+                                "You have unlocked the next area!"
+                        ).rewards(
+                                new Reward("Goblin", 10, 10)
                         ),
                         new Battle("BATTLE2").enemies(
                                 new Orc(),
@@ -25,7 +38,31 @@ public class Worlds {
                                 new Goblin()
                         )
                 ),
-                new World("ICE", "res/Maps/Ice.tmx").setBattles(
+                new World("ICE", "res/Maps/Snow.tmx").setBattles(
+                        new Battle("BATTLE1").enemies(
+                                new Kai(),
+                                new Orc(),
+                                new Goblin()
+                        ),
+                        new Battle("BATTLE2").enemies(
+                                new Kai(),
+                                new Orc(),
+                                new Goblin()
+                        )
+                ),
+                new World("LAVA", "res/Maps/Lava.tmx").setBattles(
+                        new Battle("BATTLE1").enemies(
+                                new Kai(),
+                                new Orc(),
+                                new Goblin()
+                        ),
+                        new Battle("BATTLE2").enemies(
+                                new Kai(),
+                                new Orc(),
+                                new Goblin()
+                        )
+                ),
+                new World("DUNGEON", "res/Maps/Dungeon.tmx").setBattles(
                         new Battle("BATTLE1").enemies(
                                 new Kai(),
                                 new Orc(),

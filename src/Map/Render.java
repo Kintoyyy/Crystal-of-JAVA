@@ -54,21 +54,30 @@ public class Render {
      */
     public Render(Movement movement) {
         this.movement = movement;
-        map = movement.getWorld();
+        map = movement.getWorld().getCurrentWorld().getWorld();
 
+        // Set the initial location of the character to the spawn point of the map
         movement.setLocation(map.getSpawnPoint());
 
         loadWorld();
     }
 
     public void loadWorld() {
-        map = movement.getWorld();
-        movement.setLocation(map.getSpawnPoint());
+        map = movement.getWorld().getCurrentWorld().getWorld();
+
+        System.out.println("Loading world...");
+        System.out.println("World width: " + map.getWorldWidth());
+        System.out.println("World height: " + map.getWorldHeight());
+        System.out.println("Tile layers: " + map.getLayers().length);
+        System.out.println("Object count: " + map.getObjects().size());
+
         this.width = map.getWorldWidth();
         this.height = map.getWorldHeight();
         this.TileLayers = map.getLayers();
         this.tileTypes = map.getTileTypes();
         this.objectGroup = map.getObjects();
+
+        movement.setLocation(map.getSpawnPoint());
     }
 
     /**
@@ -94,9 +103,11 @@ public class Render {
             int yStart = (int) Math.max(0, movement.getCamera().getYOffset() / Tile.height);
             int yEnd = (int) Math.min(height, (movement.getCamera().getYOffset() + handler.getHeight()) / Tile.height + 1);
 
+
             for (int i = yStart; i < yEnd; i++) {
                 for (int j = xStart; j < xEnd; j++) {
                     Tile tile = getTile(i, j, layer);
+
                     if (tile != null) {
                         int tilePosX = (int) (j * Tile.width - movement.getCamera().getXOffset());
                         int tilePosY = (int) (i * Tile.height - movement.getCamera().getYOffset());
@@ -112,7 +123,6 @@ public class Render {
                     }
                 }
             }
-
 
             if (layer == TileLayers.length - 1) {
                 movement.render(g);
@@ -144,9 +154,10 @@ public class Render {
      * @return The Tile object at the specified coordinates and layer.
      */
     private Tile getTile(int x, int y, int layer) {
-        if (x < 0 || y < 0 || x >= width || y >= height || layer < 0 || layer >= TileLayers.length) {
-            return Tile.defaultTile;
-        }
+//        if (x < 0 || y < 0 || x >= map.getWorldWidth() || y >= map.getWorldHeight() || layer < 0 || layer >= TileLayers.length) {
+//            return Tile.defaultTile;
+//        }
+
         Tile t = tileTypes.getTile(TileLayers[layer][x][y]);
         if (t == null) {
             return Tile.transparentTile;

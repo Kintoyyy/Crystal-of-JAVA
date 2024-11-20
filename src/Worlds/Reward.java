@@ -1,13 +1,16 @@
 package Worlds;
 
-public class Reward {
-    private final int gold;
-    private final int exp;
-    private final String name;
+public record Reward(String name, int gold, int exp) {
+    public Reward {
+        if (gold < 0) {
+            throw new IllegalArgumentException("Gold cannot be negative");
+        }
+        if (exp < 0) {
+            throw new IllegalArgumentException("Experience cannot be negative");
+        }
+    }
 
-    public Reward(String name, int gold, int exp) {
-        this.name = name;
-        this.gold = gold;
-        this.exp = exp;
+    public String getName() {
+        return name;
     }
 }

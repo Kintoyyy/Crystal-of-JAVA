@@ -40,7 +40,12 @@ public class TileLayers {
                     String[] values = dataNodes.item(0).getTextContent().trim().split(",");
                     for (int y = 0; y < rows; y++) {
                         for (int x = 0; x < columns; x++) {
-                            tiles[l][y][x] = Integer.parseInt(values[x + y * columns].trim());
+                            try {
+                                tiles[l][y][x] = Integer.parseInt(values[x + y * columns].trim());
+                            } catch (NumberFormatException e) {
+                                System.err.println("Tile will not be loaded at layer " + l + ", row " + y + ", column " + x + " id: " + values[x + y * columns]);
+                                tiles[l][y][x] = 0;
+                            }
                         }
                     }
                 }

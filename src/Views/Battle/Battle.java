@@ -13,8 +13,6 @@ import java.awt.*;
 
 public class Battle extends View {
     private final BattleManager battleManager;
-
-
     public Battle(ViewManager viewManager) {
         super(viewManager);
         this.battleManager = handler.getBattleManager();
@@ -24,14 +22,13 @@ public class Battle extends View {
                         .setLocation(100, 300)
                         .scale(6),
 
-                // NAAY POBLEME DIRI INIG SWITCH SA VIEW
                 new SkillMenu(battleManager)
                         .setLocation(500, 650),
 
                 new BattleStatistic(battleManager)
                         .setLocation(100, 100),
 
-                new EnemyLayout(battleManager.getEnemyManager())
+                new EnemyLayout(battleManager)
                         .setLocation(700, 300)
                         .showBounds()
                         .scale(6),
@@ -48,22 +45,13 @@ public class Battle extends View {
 
     @Override
     public void tick() {
-//        battleManagerOld.tick();
-//        if (handler.getGameState().getEnemies().isEmpty()) {
-//            viewManager.setView(Views.GAME);
-//        }
-
         battleManager.tick();
         components.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        // return to the game view if there are no enemies left
-
         components.render(g);
-
-        // Display the skill names at the specified position
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 20));
         g.drawString(handler.getGameState().getCharacterManger().getPlayer().getSkills().toString(), 20, 50);

@@ -11,6 +11,7 @@ public class World {
     private final Map world;
     private final String worldKey;
     private final HashMap<String, Battle> battles = new HashMap<>();
+    private Point playerLastPosition;
 
     public World(String worldKey, String mapPath) {
         this.worldKey = worldKey;
@@ -32,9 +33,6 @@ public class World {
         return world.getObjects();
     }
 
-    public HashMap<String, Battle> getBattles() {
-        return battles;
-    }
 
     public Point getSpawnPoint() {
         return world.getSpawnPoint();
@@ -46,5 +44,13 @@ public class World {
 
     public Battle getBattle(String battleName) {
         return battles.get(battleName);
+    }
+
+    public Point getPlayerLastPosition() {
+        return playerLastPosition;
+    }
+
+    public void setPlayerLastPosition(Point playerLastPosition) {
+        this.playerLastPosition = playerLastPosition;
     }
 }

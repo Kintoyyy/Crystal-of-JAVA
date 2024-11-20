@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Battle {
-    protected String battleKey;
-    protected ArrayList<Enemy> enemies = new ArrayList<>();
-    protected ArrayList<Reward> rewards = new ArrayList<>();
+    private final String battleKey;
+    private final ArrayList<Enemy> enemies = new ArrayList<>();
+    private final ArrayList<Reward> rewards = new ArrayList<>();
 
     // rewards[]
     // dialog scenes
@@ -33,5 +33,23 @@ public class Battle {
 
     public String getKey() {
         return battleKey;
+    }
+
+    public boolean isComplete() {
+        for (Enemy enemy : enemies) {
+            if (enemy.isAlive()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // TODO: Add dialog scenes
+    public Battle dialogBefore(String... s) {
+        return this;
+    }
+
+    public Battle dialogAfter(String... s) {
+        return this;
     }
 }
