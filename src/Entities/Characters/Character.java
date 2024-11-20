@@ -88,7 +88,7 @@ public abstract class Character extends Entity {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics g, int xOffset, int yOffset) {
         // Override this method to render the character on the screen
     }
 

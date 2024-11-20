@@ -37,6 +37,8 @@ public class Worlds {
                                 new Orc(),
                                 new Goblin()
                         )
+                ).setNpc(
+                        new Kai()
                 ),
                 new World("ICE", "res/Maps/Snow.tmx").setBattles(
                         new Battle("BATTLE1").enemies(

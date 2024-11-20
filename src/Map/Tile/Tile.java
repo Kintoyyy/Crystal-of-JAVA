@@ -101,6 +101,7 @@ public class Tile {
         if (image != null) {
             g.drawImage(image, x, y, width, height, null);
         }
+//        g.drawString(String.valueOf(y), x, y);
     }
 
     /**

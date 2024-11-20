@@ -41,7 +41,7 @@ public class Collision {
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
 
         // Loop through objects and check for collisions
-        for (Object object : movement.getWorld().getCurrentWorld().getObjects()) {
+        for (Object object : movement.getWorld().getCurrentWorld().getObjects().getObjects()) {
 
             // Skip if the object doesn't intersect with the collision bounds
             if (!object.getBounds().intersects(collisionBounds)) {
@@ -49,7 +49,7 @@ public class Collision {
             }
 
             // Check polygon-rectangle collision using Separating Axis Theorem (SAT)
-            if (object.getBounds() instanceof Polygon) {
+            if (object.getBounds() != null) {
                 if (!polygonCollidesWithRect((Polygon) object.getBounds(), collisionBounds)) {
                     continue;
                 }

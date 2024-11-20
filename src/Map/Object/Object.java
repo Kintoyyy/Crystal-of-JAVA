@@ -36,7 +36,7 @@ public class Object {
                 parseScaledAttribute(objectElement, "x"),
                 parseScaledAttribute(objectElement, "y")
         );
-        
+
         this.width = parseScaledAttribute(objectElement, "width");
         this.height = parseScaledAttribute(objectElement, "height");
 
@@ -159,6 +159,12 @@ public class Object {
      * @param yOffset The vertical offset.
      */
     public void render(Graphics g, int xOffset, int yOffset) {
+
+        if(classType == ClassType.NPC){
+            g.setColor(Color.RED);
+            g.drawString("NPC", position.x - xOffset, position.y - yOffset);
+        }
+
         // Debugging only
         g.setColor(Color.RED);
             g.drawString(classType + "-" + name + "-" + type, position.x - xOffset, position.y - yOffset);
@@ -220,10 +226,12 @@ public class Object {
                 Polygon ellipsePolygon = new Polygon();
                 int numPoints = 20; // Number of points to sample along the ellipse
                 double angleIncrement = Math.PI * 2 / numPoints; // Angle increment for each point
+                int centerX = position.x + width / 2; // Calculate the center X based on top-left anchor
+                int centerY = position.y + height / 2; // Calculate the center Y based on top-left anchor
                 for (int i = 0; i < numPoints; i++) {
                     double angle = i * angleIncrement;
-                    int x = (int) (position.x + (width / 2) * Math.cos(angle)); // X coordinate of point
-                    int y = (int) (position.y + (height / 2) * Math.sin(angle)); // Y coordinate of point
+                    int x = (int) (centerX + (width / 2.0) * Math.cos(angle)); // X coordinate of point
+                    int y = (int) (centerY + (height / 2.0) * Math.sin(angle)); // Y coordinate of point
                     ellipsePolygon.addPoint(x, y);
                 }
                 return ellipsePolygon;

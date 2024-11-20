@@ -242,6 +242,10 @@ public class Movement {
         return new Rectangle((int) (x + bounds.x + xOffset), (int) (y + bounds.y + yOffset), bounds.width, bounds.height);
     }
 
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
     public float getX() {
         return x;
     }

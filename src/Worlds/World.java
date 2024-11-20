@@ -1,10 +1,13 @@
 package Worlds;
 
+import Entities.Entity;
 import Map.Map;
 import Map.Object.Object;
+import Map.Object.ObjectGroup;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class World {
@@ -12,6 +15,7 @@ public class World {
     private final String worldKey;
     private final HashMap<String, Battle> battles = new HashMap<>();
     private Point playerLastPosition;
+    private final HashMap<String, Entity> npc = new HashMap<>();
 
     public World(String worldKey, String mapPath) {
         this.worldKey = worldKey;
@@ -29,7 +33,7 @@ public class World {
         return world;
     }
 
-    public ArrayList<Object> getObjects() {
+    public ObjectGroup getObjects() {
         return world.getObjects();
     }
 
@@ -52,5 +56,16 @@ public class World {
 
     public void setPlayerLastPosition(Point playerLastPosition) {
         this.playerLastPosition = playerLastPosition;
+    }
+
+    public World setNpc(Entity... npcObjects) {
+        for (Entity entity : npcObjects) {
+            npc.put(entity.getName(), entity);
+        }
+        return this;
+    }
+
+    public Entity getNpc(String npcName) {
+        return npc.get(npcName);
     }
 }

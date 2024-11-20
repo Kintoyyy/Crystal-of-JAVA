@@ -1,5 +1,6 @@
 package Map;
 
+import Entities.Entity;
 import Map.Object.Object;
 import Map.Tile.TileLayers;
 import Map.Tile.TileTypes;
@@ -114,8 +115,8 @@ public class Map {
      *
      * @return The ObjectGroup object.
      */
-    public ArrayList<Object> getObjects() {
-        return objectGroup.getObjects();
+    public ObjectGroup getObjects() {
+        return objectGroup;
     }
 
     /**
@@ -144,4 +145,5 @@ public class Map {
     public Point getSpawnPoint() {
         return spawnPoint;
     }
+
 }

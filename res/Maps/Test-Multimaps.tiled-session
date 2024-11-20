@@ -259,7 +259,7 @@
         "World3.tmx"
     ],
     "project": "Test-Multimaps.tiled-project",
-    "property.type": "object",
+    "property.type": "int",
     "recentFiles": [
         "Forest.tmx",
         "Dungeon.tmx",

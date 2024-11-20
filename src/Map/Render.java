@@ -2,7 +2,9 @@ package Map;
 
 import Map.Movement.Movement;
 import Game.Handler;
+import Map.Object.ClassType;
 import Map.Object.Object;
+import Map.Object.ObjectGroup;
 import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
@@ -41,7 +43,7 @@ public class Render {
      */
     private final Movement movement;
 
-    private ArrayList<Object> objectGroup;
+    private ObjectGroup objectGroup;
 
     private Map map;
 
@@ -67,7 +69,6 @@ public class Render {
         System.out.println("World width: " + map.getWorldWidth());
         System.out.println("World height: " + map.getWorldHeight());
         System.out.println("Tile layers: " + map.getLayers().length);
-        System.out.println("Object count: " + map.getObjects().size());
 
         this.width = map.getWorldWidth();
         this.height = map.getWorldHeight();
@@ -93,15 +94,17 @@ public class Render {
      * @param g The Graphics object used for rendering.
      */
     public void render(Graphics g) {
+        Handler handler = movement.getHandler();
+
+        int xStart = (int) Math.max(0, movement.getCamera().getXOffset() / Tile.width);
+        int xEnd = (int) Math.min(width, (movement.getCamera().getXOffset() + handler.getWidth()) / Tile.width + 1);
+        int yStart = (int) Math.max(0, movement.getCamera().getYOffset() / Tile.height);
+        int yEnd = (int) Math.min(height, (movement.getCamera().getYOffset() + handler.getHeight()) / Tile.height + 1);
+
+        boolean playerRendered = false;
+        int playerRenderY = (int) (movement.getY() - movement.getCamera().getYOffset() + 70); // Calculate player Y offset
+
         for (int layer = 0; layer < TileLayers.length; layer++) {
-            Handler handler = movement.getHandler();
-
-            int xStart = (int) Math.max(0, movement.getCamera().getXOffset() / Tile.width);
-            int xEnd = (int) Math.min(width, (movement.getCamera().getXOffset() + handler.getWidth()) / Tile.width + 1);
-            int yStart = (int) Math.max(0, movement.getCamera().getYOffset() / Tile.height);
-            int yEnd = (int) Math.min(height, (movement.getCamera().getYOffset() + handler.getHeight()) / Tile.height + 1);
-
-
             for (int i = yStart; i < yEnd; i++) {
                 for (int j = xStart; j < xEnd; j++) {
                     Tile tile = getTile(i, j, layer);
@@ -110,38 +113,47 @@ public class Render {
                         int tilePosX = (int) (j * Tile.width - movement.getCamera().getXOffset());
                         int tilePosY = (int) (i * Tile.height - movement.getCamera().getYOffset());
 
+//                        // Render the player before tiles below its Y position
+//                        if (!playerRendered && tilePosY >= playerRenderY) {
+//                            movement.render(g); // Render player
+//                            playerRendered = true;
+//
+//                            // Debugging: Mark where the player is rendered
+//                            g.setColor(Color.RED);
+//                            g.drawString("F", tilePosX, tilePosY);
+//                        }
+
+                        // Render the tile
                         tile.render(g, tilePosX, tilePosY);
 
-                        if (DebugMode.debugMode()) {
-                            if (layer == DebugMode.getRenderedLayerIndex()) {
-//                                System.out.println(Tile.height + " " + Tile.width);
-                                g.drawRect(tilePosX, tilePosY, Tile.width, Tile.height);
-                            }
+                        // Debugging visualization (optional)
+                        if (DebugMode.debugMode() && layer == DebugMode.getRenderedLayerIndex()) {
+                            g.setColor(Color.RED);
+                            g.drawRect(tilePosX, tilePosY, Tile.width, Tile.height);
                         }
                     }
                 }
             }
 
-            if (layer == TileLayers.length - 1) {
-                movement.render(g);
-            }
-        }
-
-        for (int i = 0; i < objectGroup.size(); i++) {
-            Object object = objectGroup.get(i);
-            object.render(g, (int) movement.getCamera().getXOffset(), (int) movement.getCamera().getYOffset());
-//            int width = object.getWidth();
-//            int height = object.getHeight();
-//            int x = object.getX();
-//            int y = object.getY();
-//            g.drawRect((int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()), width, height);
-//
-//            if (object.getClassType() == ClassType.NPC) {
-//                g.setColor(Color.red);
-//                g.drawString("NPC", (int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()));
+            // Render player if not yet rendered and this is the last layer
+//            if (!playerRendered && layer == TileLayers.length - 1) {
+//                movement.render(g);
+//                playerRendered = true;
 //            }
         }
+
+
+        movement.render(g);
+
+//        // Debugging line (optional, for visualization)
+//        g.setColor(Color.GREEN);
+//        g.drawLine(400, playerRenderY, 600, playerRenderY);
+
+        // Render object groups
+        objectGroup.render(g, (int) movement.getCamera().getXOffset(), (int) movement.getCamera().getYOffset());
     }
+
+
 
     /**
      * Retrieves the tile at the specified coordinates and layer.

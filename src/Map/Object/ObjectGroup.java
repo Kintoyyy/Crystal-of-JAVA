@@ -56,7 +56,6 @@ public class ObjectGroup {
                 System.out.println("Object found: " + object.getClassType());
 
                 if (object.getClassType() == ClassType.SPAWN) {
-                    System.out.println("Spawn point found: " + object.getPosition());
                     setPawnPoint(object.getPosition());
                 }
 
@@ -82,5 +81,15 @@ public class ObjectGroup {
         return objectCollection;
     }
 
+    public void tick() {
+//        for (Object object : objectCollection) {
+//            object.tick();
+//        }
+    }
 
+    public void render(Graphics g, int xOffset, int yOffset) {
+        for (Object object : objectCollection) {
+            object.render(g, xOffset, yOffset);
+        }
+    }
 }
