@@ -249,7 +249,7 @@
   <object id="1" name="DIALOG1" type="DIALOG" x="433" y="88" width="43" height="79"/>
   <object id="7" name="BATTLE2" type="BATTLE" x="901" y="155" width="36" height="204"/>
   <object id="9" name="BATTLE3" type="BATTLE" x="638" y="394" width="62" height="105"/>
-  <object id="17" name="1" type="SPAWN" x="142.75" y="193.25">
+  <object id="17" name="1" type="SPAWN" x="133.5" y="215.25">
    <point/>
   </object>
  </objectgroup>

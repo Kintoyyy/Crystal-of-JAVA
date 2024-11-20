@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="94" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="9">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="94" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="10">
  <tileset firstgid="1" name="LavaTile_spritesheet" tilewidth="16" tileheight="16" tilecount="840" columns="56">
   <image source="../Tiles/LavaTile_spritesheet.png" width="896" height="240"/>
  </tileset>
@@ -121,6 +121,9 @@
   <object id="6" name="FOREST" type="TELEPORT" x="121.091" y="337.042" width="14" height="8.5"/>
   <object id="7" name="ICE" type="TELEPORT" x="155.758" y="335.792" width="13" height="9.16667"/>
   <object id="8" name="DUNGEON" type="TELEPORT" x="192.909" y="336.641" width="10.6667" height="8.83333"/>
+  <object id="9" type="SPAWN" x="130.667" y="260.667">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="boss" class="boss">
   <object id="4" x="1188" y="63" width="245" height="232"/>

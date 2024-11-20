@@ -51,9 +51,16 @@ public class ObjectGroup {
                 Element objectElement = (Element) objectElements.item(j);
                 // Add the parsed object to the collection
 
+                Object object = new Object(objectElement);
 
+                System.out.println("Object found: " + object.getClassType());
 
-                objectCollection.add(new Object(objectElement));
+                if (object.getClassType() == ClassType.SPAWN) {
+                    System.out.println("Spawn point found: " + object.getPosition());
+                    setPawnPoint(object.getPosition());
+                }
+
+                objectCollection.add(object);
             }
         }
     }
@@ -65,7 +72,6 @@ public class ObjectGroup {
     public Point getPawnPoint() {
         return pawnPoint;
     }
-
 
     /**
      * Retrieves the collection of parsed objects.

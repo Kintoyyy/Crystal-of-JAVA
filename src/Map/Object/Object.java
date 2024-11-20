@@ -10,7 +10,6 @@ import java.util.List;
 public class Object {
     private final String name;
     private final ClassType classType;
-    private final Rectangle bounds;
     private final Point position;
     private final int width;
     private final int height;
@@ -37,14 +36,13 @@ public class Object {
                 parseScaledAttribute(objectElement, "x"),
                 parseScaledAttribute(objectElement, "y")
         );
+        
         this.width = parseScaledAttribute(objectElement, "width");
         this.height = parseScaledAttribute(objectElement, "height");
 
         this.type = determineType(objectElement);
         this.classType = parseTriggerType(objectElement);
         parseProperties(objectElement);
-
-        this.bounds = new Rectangle(position.x, position.y, width, height);
     }
 
     /**
@@ -66,12 +64,16 @@ public class Object {
      * @return The determined object type.
      */
     private Type determineType(Element objectElement) {
+
+
         if (width > 0 && height > 0) {
-            return Type.RECTANGLE;
+            if(hasChildTag(objectElement, "ellipse")){
+                return Type.ELLIPSE;
+            } else {
+                return Type.RECTANGLE;
+            }
         } else if (hasChildTag(objectElement, "point")) {
             return Type.POINT;
-        } else if (hasChildTag(objectElement, "ellipse")) {
-            return Type.ELLIPSE;
         } else if (hasChildTag(objectElement, "polygon")) {
             parsePolygon(objectElement);
             return Type.POLYGON;
@@ -159,7 +161,7 @@ public class Object {
     public void render(Graphics g, int xOffset, int yOffset) {
         // Debugging only
         g.setColor(Color.RED);
-            g.drawString(classType + "-" + name, position.x - xOffset, position.y - yOffset);
+            g.drawString(classType + "-" + name + "-" + type, position.x - xOffset, position.y - yOffset);
         switch (type) {
             case RECTANGLE -> g.drawRect(position.x - xOffset, position.y - yOffset, width, height);
             case ELLIPSE -> g.drawOval(position.x - xOffset, position.y - yOffset, width, height);
@@ -248,7 +250,7 @@ public class Object {
         return name;
     }
 
-    public ClassType getTriggerType() {
+    public ClassType getClassType() {
         return classType;
     }
 

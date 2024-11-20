@@ -56,20 +56,20 @@ public class Collision {
             }
 
             // Handle specific collision types
-            if (object.getTriggerType() == ClassType.COLLISION) {
-                System.out.println("Collision with object: " + object.getName() + " triggerType: " + object.getTriggerType());
+            if (object.getClassType() == ClassType.COLLISION) {
+                System.out.println("Collision with object: " + object.getName() + " triggerType: " + object.getClassType());
                 return false; // Collision detected
             }
 
-            if (object.getTriggerType() == ClassType.TELEPORT) {
+            if (object.getClassType() == ClassType.TELEPORT) {
                 handler.getWorldManager().changeWorld(object.getName());
             }
 
-            if (object.getTriggerType() == ClassType.BATTLE) {
+            if (object.getClassType() == ClassType.BATTLE) {
                 handler.getBattleManager().startBattle(object.getName());
             }
 
-            System.out.println("Collision with object: " + object.getName() + " triggerType: " + object.getTriggerType());
+            System.out.println("Collision with object: " + object.getName() + " triggerType: " + object.getClassType());
         }
         return true; // No collision detected
     }

@@ -40,6 +40,8 @@ public class WorldManager {
 
         getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getPlayerLastPosition());
 
+        movement.setLocation(getCurrentWorld().getSpawnPoint());
+
 //        if (getCurrentWorld().getPlayerLastPosition() == null) {
 //            getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getSpawnPoint());
 //        } else {

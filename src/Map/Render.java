@@ -136,7 +136,7 @@ public class Render {
 //            int y = object.getY();
 //            g.drawRect((int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()), width, height);
 //
-//            if (object.getTriggerType() == ClassType.NPC) {
+//            if (object.getClassType() == ClassType.NPC) {
 //                g.setColor(Color.red);
 //                g.drawString("NPC", (int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()));
 //            }

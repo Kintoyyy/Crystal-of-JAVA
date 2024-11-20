@@ -91,6 +91,8 @@ public class Movement {
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
+
+        setLocation(worldManager.getCurrentWorld().getSpawnPoint());
     }
 
     /**

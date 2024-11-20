@@ -94,11 +94,11 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 4,
+            "scale": 3,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 164,
-                "y": 128.75
+                "x": 326,
+                "y": 104.66666666666666
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
@@ -167,8 +167,8 @@
             "scale": 3,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 150.66666666666663,
-                "y": 340.3333333333333
+                "x": 152.33333333333334,
+                "y": 266.66666666666663
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -186,10 +186,10 @@
                 10
             ],
             "scale": 2,
-            "selectedLayer": 6,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 251.5,
-                "y": 185.5
+                "x": 148,
+                "y": 147.5
             }
         },
         "Snow.tmx#Outdoor_Decor": {
