@@ -202,9 +202,47 @@ public class Object {
         return height;
     }
 
-    public Rectangle getBounds() {
-        return bounds;
+    public Polygon getBounds() {
+        switch (type) {
+            case RECTANGLE:
+                // Convert the rectangle to a polygon with four corners
+                Polygon rectanglePolygon = new Polygon();
+                rectanglePolygon.addPoint(position.x, position.y); // top-left
+                rectanglePolygon.addPoint(position.x + width, position.y); // top-right
+                rectanglePolygon.addPoint(position.x + width, position.y + height); // bottom-right
+                rectanglePolygon.addPoint(position.x, position.y + height); // bottom-left
+                return rectanglePolygon;
+
+            case ELLIPSE:
+                // Approximate the ellipse with a polygon by sampling points along the perimeter
+                Polygon ellipsePolygon = new Polygon();
+                int numPoints = 20; // Number of points to sample along the ellipse
+                double angleIncrement = Math.PI * 2 / numPoints; // Angle increment for each point
+                for (int i = 0; i < numPoints; i++) {
+                    double angle = i * angleIncrement;
+                    int x = (int) (position.x + (width / 2) * Math.cos(angle)); // X coordinate of point
+                    int y = (int) (position.y + (height / 2) * Math.sin(angle)); // Y coordinate of point
+                    ellipsePolygon.addPoint(x, y);
+                }
+                return ellipsePolygon;
+
+            case POLYGON:
+                // Return the polygon with the given vertices
+                Polygon polygon = new Polygon(polygonX, polygonY, polygonX.length);
+                return polygon;
+
+            case POINT:
+                // A point is just a single location, so it can be treated as a degenerate polygon (with 1 point)
+                Polygon pointPolygon = new Polygon();
+                pointPolygon.addPoint(position.x, position.y);
+                return pointPolygon;
+
+            default:
+                return new Polygon(); // Default case: return an empty polygon
+        }
     }
+
+
 
     public String getName() {
         return name;

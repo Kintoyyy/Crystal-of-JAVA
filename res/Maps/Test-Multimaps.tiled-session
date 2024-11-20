@@ -59,11 +59,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 4,
+            "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 571,
-                "y": 288.125
+                "x": 136.66666666666669,
+                "y": 255.33333333333331
             }
         },
         "Dungeon.tmx#Dungeon_1": {
@@ -94,11 +94,11 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 11,
+            "scale": 4,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 256,
-                "y": 767.9545454545455
+                "x": 164,
+                "y": 128.75
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
@@ -164,11 +164,11 @@
                 7,
                 6
             ],
-            "scale": 0.5,
+            "scale": 3,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 656,
-                "y": 324
+                "x": 150.66666666666663,
+                "y": 340.3333333333333
             }
         },
         "Lava.tmx#Dimensional_Portal": {

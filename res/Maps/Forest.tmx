@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="23">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="39">
  <tileset firstgid="1" name="Dark_Tiles_1" tilewidth="16" tileheight="16" tilecount="80" columns="8">
   <image source="../Tiles/Grass/Dark_Tiles_1.png" width="128" height="160"/>
   <wangsets>
@@ -852,27 +852,37 @@
   <object id="12" name="ICE" type="TELEPORT" x="127.5" y="40.1667" width="14" height="8.5"/>
   <object id="14" name="LAVA" type="TELEPORT" x="162.167" y="38.9167" width="13" height="9.16667"/>
   <object id="15" name="DUNGEON" type="TELEPORT" x="199.318" y="39.7652" width="10.6667" height="8.83333"/>
-  <object id="16" name="1" type="SPAWN" x="178.841" y="104.712">
+  <object id="16" name="1" type="SPAWN" x="172.841" y="96.3787">
    <properties>
     <property name="TO_BATTLE" type="object" value="18"/>
    </properties>
    <point/>
   </object>
-  <object id="18" name="MIKE" type="NPC" x="239.045" y="108.091" width="81.4545" height="81.2727">
+  <object id="18" name="MIKE" type="NPC" x="282.712" y="128.758" width="81.4545" height="81.2727">
    <ellipse/>
   </object>
-  <object id="19" x="227.125" y="65.75">
-   <polygon points="-11.2273,-8.95455 -33.4773,12.7955 0.0227273,34.6705 17.3977,10.6705"/>
-  </object>
-  <object id="20" x="271.25" y="78">
+  <object id="20" x="206.5" y="91.25">
    <polygon points="-5,7.33333 -7.25,-20 26,-26.625 50.75,0.125 48.625,18.375 17.375,18.125"/>
   </object>
-  <object id="21" x="118.182" y="112">
-   <polygon points="0,0 -0.181818,12.3636 19.5455,12.5455 19.6364,0.181818"/>
+  <object id="24" type="COLLISION" x="340.5" y="13">
+   <polygon points="-264,34 -266.5,85 -253.5,90.5 -249,97.5 -248,117 -238,123.5 -232,136.5 -222.5,139 -216,151.5 -207,152 -184,167 -146.5,169 -140,171.5 -136.5,182.5 -98,184.5 -91,192.5 -86.5,199 -61,201 -59,205 -57.5,268.5 -62.5,272 -104,272.5 -106.5,282.5 -114.5,288 -151.5,288.5 -153,300 -162,304 -214.5,304.5 -218,315.5 -225.5,320.5 -262.5,320.5 -265.5,333.5 -280.5,338.5 -280.5,346 -291,353 -297.5,354.5 -297.5,364.5 -311.5,370.5 -344.5,372 -340,34.5"/>
   </object>
-  <object id="22" x="97.2727" y="78.7273">
-   <polygon points="0,0 -0.0909091,11 12,11.1818 12.3636,-0.0909091"/>
+  <object id="26" type="COLLISION" x="97.25" y="77.375" width="12.75" height="14"/>
+  <object id="27" type="COLLISION" x="118" y="109.5" width="19.5" height="15.125"/>
+  <object id="29" type="COLLISION" x="114" y="116.5" width="6.875" height="9.5"/>
+  <object id="30" type="COLLISION" x="208.25" y="0.5">
+   <polygon points="0,0 1.5,11.75 131.5,12.5 133,24.5 135.5,26.75 148.25,29.5 149.25,39.75 153.25,43.25 178.75,44.75 181,72 185.75,75.75 195.5,77 197.25,88.25 200.75,91.75 210.75,93.25 214,106 220.25,109.75 227.75,110.25 229.25,120.25 232.25,123.75 243.25,126 245.5,166.5 249.25,171.75 258,172.75 260.5,177 260.75,274 257,277.25 248,279.5 244.25,285.75 241.25,293.5 230.75,297.75 227,305.25 221.5,308.75 207,308.5 198.5,315.5 188.75,317.5 181.25,324 153.25,325.5 149.5,331 147,339.5 134.5,340 87.25,340 74.75,340.5 71.25,350.25 63.5,356.25 42.75,356.5 37,361 34.75,369.75 30.25,373.5 22.5,374 20,386.25 10.5,391 -8,393.25 -12.25,400 -15,406.25 -25.25,408.5 -26.75,487.5 -19.25,491.75 -8.75,490.5 -4.25,485.5 -4,477.75 7,475.5 11.5,470 12,445.5 23.25,442.25 26.75,438 27.75,413.5 32,411.5 63,412 71.5,406.5 73.5,397 115.25,396.5 122,394.25 125.25,380.75 255.25,380.25 260.25,383.25 260,392 265,396.25 276,396.75 278.75,409 287,413.5 291.25,414.75 292.75,448.25 334.75,446.5 315.5,-5"/>
   </object>
+  <object id="31" type="COLLISION" x="420.5" y="179.625" width="22.875" height="9.5"/>
+  <object id="32" type="COLLISION" x="422.75" y="252.125">
+   <polygon points="0,0 -4.375,5.5 -5.875,10.125 -4.5,13.875 2.875,14.75 7.875,12.625 14.625,15 20.625,13.25 23.875,9.25 24.125,4.25 21.625,1 13.5,-1"/>
+  </object>
+  <object id="33" type="COLLISION" x="369.087" y="152.826" width="3.04348" height="5.34783"/>
+  <object id="34" type="COLLISION" x="396.043" y="152.87" width="3.43478" height="5.95652"/>
+  <object id="35" type="COLLISION" x="401.087" y="152.217" width="3.04348" height="5.13043"/>
+  <object id="36" type="COLLISION" x="411.938" y="125.188" width="3.125" height="5.4375"/>
+  <object id="37" type="COLLISION" x="379.688" y="125" width="3.4375" height="5.875"/>
+  <object id="38" type="COLLISION" x="292.875" y="19.9375" width="23" height="8.875"/>
  </objectgroup>
  <objectgroup id="14" name="boss" class="boss">
   <object id="10" x="218.667" y="1396.67" width="144" height="79.6667"/>

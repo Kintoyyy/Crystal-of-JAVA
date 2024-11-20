@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="94" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="6">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="94" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="9">
  <tileset firstgid="1" name="LavaTile_spritesheet" tilewidth="16" tileheight="16" tilecount="840" columns="56">
   <image source="../Tiles/LavaTile_spritesheet.png" width="896" height="240"/>
  </tileset>
@@ -78,7 +78,7 @@
 0,0,0,0,0,0,0,450,510,453,453,454,509,510,0,0,565,566,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,565,509,508,564,456,0,0,0,0,0,0,0,0,450,508,508,509,508,564,456,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="5" name="objects" width="94" height="32" visible="0">
+ <layer id="5" name="objects" width="94" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,122,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -114,12 +114,15 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="6" name="battle" class="battle" visible="0">
+ <objectgroup id="6" name="battle" class="battle">
   <object id="1" x="362" y="59" width="297" height="178"/>
   <object id="2" x="391" y="323" width="289" height="167"/>
   <object id="3" x="824" y="46" width="269" height="259"/>
+  <object id="6" name="FOREST" type="TELEPORT" x="121.091" y="337.042" width="14" height="8.5"/>
+  <object id="7" name="ICE" type="TELEPORT" x="155.758" y="335.792" width="13" height="9.16667"/>
+  <object id="8" name="DUNGEON" type="TELEPORT" x="192.909" y="336.641" width="10.6667" height="8.83333"/>
  </objectgroup>
- <objectgroup id="7" name="boss" class="boss" visible="0">
+ <objectgroup id="7" name="boss" class="boss">
   <object id="4" x="1188" y="63" width="245" height="232"/>
  </objectgroup>
 </map>
