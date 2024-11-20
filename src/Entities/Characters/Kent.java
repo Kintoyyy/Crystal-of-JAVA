@@ -1,6 +1,6 @@
 package Entities.Characters;
 
-import Animations.Entities.CharacterAnimation;
+import Animations.Entities.EntityAnimation;
 import Entities.Common.*;
 import Entities.Characters.Skills.Warrior.*;
 import Utils.SpriteSheet;
@@ -24,7 +24,7 @@ public class Kent extends Character {
         this.profileImage = profile.crop(0, 0, 300, 300);
 
 
-        animation = new CharacterAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
+        animation = new EntityAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
     }
 
     @Override

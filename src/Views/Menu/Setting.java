@@ -1,5 +1,6 @@
 package Views.Menu;
 
+import Battle.BattleManager;
 import Components.Button.Button;
 import Utils.CallBackAction;
 import Views.View;
@@ -9,27 +10,26 @@ import Views.enums.Views;
 import java.awt.*;
 
 public class Setting extends View {
+    private final BattleManager battleManager;
+
     public Setting(ViewManager viewManager) {
         super(viewManager);
         this.isOverlay = true;
-        components.init(
-                new Button("play")
-                        .setAction(new CallBackAction() {
-                            @Override
-                            public void onAction() {
-                                viewManager.setView(Views.BATTLE);
-                            }
-                        })
-                        .setLocation(400, 400),
+        this.battleManager = handler.getBattleManager();
 
-                new Button("Exit")
+        components.init(
+                new Button("back")
                         .setAction(new CallBackAction() {
                             @Override
                             public void onAction() {
-                                System.out.println("Exit clicked");
+                                viewManager.setView(Views.PAUSE);
                             }
                         })
-                        .setLocation(400, 480)
+                        .setLocation(100, 100),
+                
+                new Button("kill all")
+                        .setAction(battleManager::killAllEnemies)
+                        .setLocation(680, 80)
         );
     }
 

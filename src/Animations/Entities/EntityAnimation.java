@@ -7,9 +7,9 @@ import Animations.enums.TYPE;
 
 import java.awt.image.BufferedImage;
 
-public class CharacterAnimation extends Animation {
+public class EntityAnimation extends Animation {
 
-    public CharacterAnimation(BufferedImage image) {
+    public EntityAnimation(BufferedImage image) {
         super();
 
         Frames sheet = new Frames(image, 32, 32);

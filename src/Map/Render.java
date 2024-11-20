@@ -140,10 +140,14 @@ public class Render {
 //                movement.render(g);
 //                playerRendered = true;
 //            }
+
+            if(layer == 1){
+                movement.render(g);
+            }
         }
 
 
-        movement.render(g);
+
 
 //        // Debugging line (optional, for visualization)
 //        g.setColor(Color.GREEN);

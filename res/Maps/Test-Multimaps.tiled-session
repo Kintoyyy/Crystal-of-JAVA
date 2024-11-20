@@ -62,8 +62,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 136.66666666666669,
-                "y": 255.33333333333331
+                "x": 271.33333333333326,
+                "y": 244.66666666666666
             }
         },
         "Dungeon.tmx#Dungeon_1": {
@@ -94,11 +94,11 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 3,
+            "scale": 0.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 326,
-                "y": 104.66666666666666
+                "x": 248,
+                "y": 630
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
@@ -164,11 +164,11 @@
                 7,
                 6
             ],
-            "scale": 3,
+            "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 152.33333333333334,
-                "y": 266.66666666666663
+                "x": 247,
+                "y": 177
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -185,11 +185,11 @@
                 9,
                 10
             ],
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 148,
-                "y": 147.5
+                "x": 351.33333333333326,
+                "y": 228
             }
         },
         "Snow.tmx#Outdoor_Decor": {

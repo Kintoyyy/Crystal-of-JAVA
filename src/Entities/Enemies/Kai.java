@@ -1,6 +1,6 @@
 package Entities.Enemies;
 
-import Animations.Entities.CharacterAnimation;
+import Animations.Entities.EntityAnimation;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
@@ -13,6 +13,6 @@ public class Kai extends Enemy {
         this.name = "Kai";
         this.dodge = 0.3; // 30% chance to dodge attacks
 
-        animation = new CharacterAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
+        animation = new EntityAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
     }
 }

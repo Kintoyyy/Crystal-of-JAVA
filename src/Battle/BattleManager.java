@@ -34,6 +34,11 @@ public class BattleManager {
         this.viewManager = handler.getViewManager();
         this.worldManager = worldManager;
 
+        timer.setDelay(5).setAction(() -> {
+            System.out.println("Timer action");
+            abortBattle();
+        });
+
         turnqueue.add(Turn.PLAYER);
         turnqueue.add(Turn.ENEMY);
     }
@@ -78,13 +83,33 @@ public class BattleManager {
     }
 
     public void tick() {
+        // Check if all enemies are dead
+        boolean allEnemiesDead = true;
+        for (Enemy enemy : enemies) {
+            if (enemy.isAlive()) {
+                allEnemiesDead = false;
+                break; // No need to continue if one enemy is alive
+            }
+        }
+
+        if (allEnemiesDead && !timer.isActive()) {
+            System.out.println("All enemies dead");
+            timer.start(); // Start the timer if all enemies are dead
+        }
+
+        System.out.println("Battle tick: " + timer.getTime()+ " enemies left");
+
+
+        // If there are no enemies left in the list
         if (enemies.isEmpty()) {
             System.out.println("Battle ended");
             viewManager.setView(Views.GAME);
             return;
         }
-        timer.update();
+
+        timer.update(); // Update the timer regardless
     }
+
 
     public Handler getHandler() {
         return handler;
@@ -126,5 +151,11 @@ public class BattleManager {
             return null;
         }
         return enemies.get(currentEnemyIndex);
+    }
+
+    public void killAllEnemies() {
+        for (Enemy enemy : enemies) {
+            enemy.getHealth().setHealth(0);
+        }
     }
 }
