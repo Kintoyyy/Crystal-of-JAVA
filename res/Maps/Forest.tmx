@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="51">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="55">
  <tileset firstgid="1" name="Dark_Tiles_1" tilewidth="16" tileheight="16" tilecount="80" columns="8">
   <image source="../Tiles/Grass/Dark_Tiles_1.png" width="128" height="160"/>
   <wangsets>
@@ -888,6 +888,9 @@
   <object id="46" name="INTIAL" type="SPAWN" x="150.364" y="89.4545">
    <point/>
   </object>
+  <object id="51" name="BATTLE1" type="BATTLE" x="227.591" y="65.2727" width="13.1818" height="10.6364"/>
+  <object id="53" name="BATTLE2" type="BATTLE" x="253.227" y="65.5909" width="13.1818" height="10.6364"/>
+  <object id="54" name="BATTLE3" type="BATTLE" x="287.409" y="65.0454" width="13.1818" height="10.6364"/>
  </objectgroup>
  <objectgroup id="14" name="boss" class="boss">
   <object id="10" x="218.667" y="1396.67" width="144" height="79.6667"/>

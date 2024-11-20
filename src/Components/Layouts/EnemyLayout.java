@@ -31,12 +31,14 @@ public class EnemyLayout extends Layout {
                     });
             childComponents.add(frame);
         }
+        battleManager.setDataLoaded(true);
+
     }
 
     @Override
     public void tick() {
         if (!battleManager.isDataLoaded()) {
-            System.out.println("EnemyLayout: Data not loaded");
+            System.out.println("Loading data: Data not loaded");
             initEnemyFrames();
         }
         childComponents.forEach(Component::tick);

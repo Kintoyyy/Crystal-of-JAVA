@@ -26,6 +26,8 @@ public class BattleManager {
 
     private final Queue<Turn> turnqueue = new LinkedList<>();
 
+    private boolean isDataLoaded = false;
+
     public BattleManager(Handler handler, WorldManager worldManager) {
         handler.setBattleManager(this);
         this.handler = handler;
@@ -52,6 +54,9 @@ public class BattleManager {
         System.out.println(" world: " + worldManager.getCurrentWorld().getName() + " enemies: " + battle.getEnemies());
 
         loadEnemies(battle.getEnemies());
+
+        this.isDataLoaded = false;
+        currentEnemyIndex = 0;
 
         viewManager.setView(Views.BATTLE);
         // start battle
@@ -96,7 +101,11 @@ public class BattleManager {
     }
 
     public boolean isDataLoaded() {
-        return !enemies.isEmpty();
+        return isDataLoaded;
+    }
+
+    public void setDataLoaded(boolean isDataLoaded) {
+        this.isDataLoaded = isDataLoaded;
     }
 
     public void loadEnemies(ArrayList<Enemy> enemies) {
@@ -113,7 +122,7 @@ public class BattleManager {
     }
 
     public Enemy getCurrentEnemy() {
-        if(enemies.isEmpty()) {
+        if (enemies.isEmpty()) {
             return null;
         }
         return enemies.get(currentEnemyIndex);
