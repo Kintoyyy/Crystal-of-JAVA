@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="94" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="12">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="94" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="16">
  <tileset firstgid="1" name="LavaTile_spritesheet" tilewidth="16" tileheight="16" tilecount="840" columns="56">
   <image source="../Tiles/LavaTile_spritesheet.png" width="896" height="240"/>
  </tileset>
@@ -118,6 +118,12 @@
   <object id="1" name="DIALOG1" type="DIALOG" x="422.667" y="110.333" width="41" height="119.333"/>
   <object id="2" name="BATTLE1" type="BATTLE" x="483.667" y="341.667" width="123.667" height="73"/>
   <object id="3" name="BATTLE2" type="BATTLE" x="817.333" y="121.333" width="129.667" height="117.667"/>
+  <object id="12" name="1" type="SPAWN" x="136" y="267">
+   <point/>
+  </object>
+  <object id="13" name="FOREST" type="TELEPORT" x="104.258" y="349.875" width="14" height="8.5"/>
+  <object id="14" name="SNOW" type="TELEPORT" x="138.925" y="348.625" width="13" height="9.16667"/>
+  <object id="15" name="DUNGEON" type="TELEPORT" x="176.076" y="349.474" width="10.6667" height="8.83333"/>
  </objectgroup>
  <objectgroup id="7" name="boss" class="boss">
   <object id="4" name="BATTLE3" type="BATTLE" x="1188" y="63" width="245" height="232"/>

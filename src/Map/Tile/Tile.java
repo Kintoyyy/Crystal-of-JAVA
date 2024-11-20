@@ -32,7 +32,7 @@ public class Tile {
     protected int id;
 
 
-    protected String wangTile;
+    protected WangTile wangTile;
 
     /**
      * Standard width of a tile in pixels.
@@ -52,7 +52,7 @@ public class Tile {
             "default",
             path,
             0,
-            "0,0,0,0,0,0,0,0");
+            new WangTile("0,0,0,0,0,0,0,0"));
 
     /**
      * Tile representing a transparent or empty area (null by design).
@@ -68,7 +68,7 @@ public class Tile {
      * @param id       The unique identifier for the tile.
      * @param wangTile Wang tile ids
      */
-    public Tile(BufferedImage image, String name, String path, int id, String wangTile) {
+    public Tile(BufferedImage image, String name, String path, int id, WangTile wangTile) {
         this.image = image;
         this.name = name;
         this.id = id;

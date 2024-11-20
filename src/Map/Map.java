@@ -84,13 +84,7 @@ public class Map {
                 NodeList objectGroups = mapElement.getElementsByTagName("objectgroup");
                 this.objectGroup = new ObjectGroup(objectGroups);
 
-                // Retrieve spawn coordinates, with default values if not specified
-                int spawnX = mapElement.hasAttribute("spawnX") ?
-                        Integer.parseInt(mapElement.getAttribute("spawnX")) : 200;
-                int spawnY = mapElement.hasAttribute("spawnY") ?
-                        Integer.parseInt(mapElement.getAttribute("spawnY")) : 200;
-
-                this.spawnPoint = new Point(spawnX, spawnY);
+                this.spawnPoint = objectGroup.getPawnPoint();
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,3 +1,4 @@
+
 package Map.Tile;
 
 import org.w3c.dom.Element;
@@ -25,8 +26,16 @@ public class TileLayers {
 
                 int rows = Integer.parseInt(layer.getAttribute("height"));
                 int columns = Integer.parseInt(layer.getAttribute("width"));
+                boolean visible = !layer.hasAttribute("visible");
+
+                if (!visible) {
+                    continue;
+                }
+
+                String tintcolor = layer.getAttribute("tintcolor");
 
                 NodeList properties = layer.getElementsByTagName("properties");
+
                 for (int i = 0; i < properties.getLength(); i++) {
                     Element property = (Element) properties.item(i);
 

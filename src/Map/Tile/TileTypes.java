@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class TileTypes {
     private final HashMap<Integer, Tile> tiles; // Stores tiles mapped by their unique IDs.
-    private final HashMap<String, String> wangTile;
+    private final HashMap<String, WangTile> wangTile;
 
     /**
      * Constructs a TileTypes object by parsing tileset information from the provided NodeList.
@@ -61,7 +61,8 @@ public class TileTypes {
 
                 String tileid = wangtile.getAttribute("tileid");
                 String wangid = wangtile.getAttribute("wangid");
-                wangTile.put(tileid, wangid);
+                
+                wangTile.put(tileid, new WangTile(wangid));
             }
 
             // Load the tileset image and process tiles
@@ -73,7 +74,7 @@ public class TileTypes {
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < columns; col++) {
                     BufferedImage img = sheet.crop(col * tileWidth, row * tileHeight, tileWidth, tileHeight);
-                    tiles.put(tileId, new Tile(img, name, path, tileId , wangTile.get(tileId)));
+                    tiles.put(tileId, new Tile(img, name, path, tileId, wangTile.get(tileId)));
                     tileId++;
                 }
             }

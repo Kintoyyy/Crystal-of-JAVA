@@ -38,8 +38,6 @@ public class WorldManager {
 
         this.currentWorld = world;
 
-        System.out.println("Changing world to: " + getCurrentWorld().getPlayerLastPosition());
-
         getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getPlayerLastPosition());
 
 //        if (getCurrentWorld().getPlayerLastPosition() == null) {

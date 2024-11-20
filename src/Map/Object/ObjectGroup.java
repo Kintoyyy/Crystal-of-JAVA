@@ -3,6 +3,7 @@ package Map.Object;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +23,8 @@ public class ObjectGroup {
      * A collection of {@link Object} instances parsed from the XML document.
      */
     private final ArrayList<Object> objectCollection = new ArrayList<>();
+
+    private Point pawnPoint;
 
     /**
      * Constructs an {@code ObjectGroup} by parsing the provided {@link NodeList}.
@@ -51,26 +54,63 @@ public class ObjectGroup {
                 String objectType = objectElement.getAttribute("type");
                 String objectName = objectElement.getAttribute("name");
 
-                // Scale factor applied to the object's dimensions and position
                 int magicNumber = 4;
-
-                int width = objectElement.hasAttribute("width") ? (int)
-                        Float.parseFloat(objectElement.getAttribute("width")) * magicNumber : 0;
-
-                int height = objectElement.hasAttribute("height") ?  (int)
-                        Float.parseFloat(objectElement.getAttribute("height")) * magicNumber : 0;
 
                 int x = (int) Float.parseFloat(objectElement.getAttribute("x")) * magicNumber;
                 int y = (int) Float.parseFloat(objectElement.getAttribute("y")) * magicNumber;
 
-                // Log the parsed object details for debugging
-//                System.out.println("Object: " + objectName + " " + objectType + " " + x + " " + y + " " + width + " " + height);
+                int width = objectElement.hasAttribute("width") ? (int)
+                        Float.parseFloat(objectElement.getAttribute("width")) * magicNumber : 0;
+
+                int height = objectElement.hasAttribute("height") ? (int)
+                        Float.parseFloat(objectElement.getAttribute("height")) * magicNumber : 0;
+
+                NodeList properties = objectElement.getElementsByTagName("properties");
+
+                for (int k = 0; k < properties.getLength(); k++) {
+                    Element property = (Element) properties.item(k);
+
+                    String name = property.getAttribute("name");
+                    String value = property.getAttribute("value");
+                    String type = property.getAttribute("type");
+                }
+
+//                properties.
+
+
+                switch (objectType) {
+                    case "SPAWN":
+                        setPawnPoint(new Point(x, y));
+                        System.out.println("Spawn point found at: " + objectName);
+                        break;
+                    case "TRIGGER":
+                        System.out.println("Trigger found at: " + objectName);
+                        break;
+                    case "ENEMY":
+                        System.out.println("Enemy found at: " + objectName);
+                        break;
+                    default:
+                        System.out.println("Object found at: " + objectName);
+                        break;
+                }
+
+                // Scale factor applied to the object's dimensions and position
 
                 // Add the parsed object to the collection
                 objectCollection.add(new Object(objectName, objectType, x, y, width, height));
             }
         }
     }
+
+    private void setPawnPoint(Point point) {
+        this.pawnPoint = point;
+    }
+
+    public Point getPawnPoint() {
+        return pawnPoint;
+    }
+
+
 
     /**
      * Retrieves the collection of parsed objects.
@@ -80,4 +120,6 @@ public class ObjectGroup {
     public ArrayList<Object> getObjects() {
         return objectCollection;
     }
+
+
 }
