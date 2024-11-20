@@ -113,6 +113,9 @@ public class BattleManager {
     }
 
     public Enemy getCurrentEnemy() {
+        if(enemies.isEmpty()) {
+            return null;
+        }
         return enemies.get(currentEnemyIndex);
     }
 }

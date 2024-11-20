@@ -1,7 +1,8 @@
 {
-    "activeFile": "Forest.tmx",
+    "activeFile": "World3.tmx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
             "scaleInDock": 1,
@@ -11,6 +12,20 @@
             "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx": {
+            "scale": 0.7150265957446807,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 752.419564813093,
+                "y": 255.93453598660966
+            }
+        },
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx#Dimensional_Portal": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx#LavaTile_spritesheet": {
+            "scaleInDock": 1
         },
         "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx": {
             "scale": 0.5516927083333333,
@@ -47,8 +62,8 @@
             "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 155.25,
-                "y": 294
+                "x": 571,
+                "y": 288.125
             }
         },
         "Dungeon.tmx#Dungeon_1": {
@@ -79,11 +94,11 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 5.5,
+            "scale": 11,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 138.90909090909093,
-                "y": 58.18181818181819
+                "x": 256,
+                "y": 767.9545454545455
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
@@ -149,11 +164,11 @@
                 7,
                 6
             ],
-            "scale": 3,
+            "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 203.66666666666663,
-                "y": 304
+                "x": 656,
+                "y": 324
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -174,7 +189,7 @@
             "selectedLayer": 6,
             "viewCenter": {
                 "x": 251.5,
-                "y": 215
+                "y": 185.5
             }
         },
         "Snow.tmx#Outdoor_Decor": {
@@ -196,6 +211,20 @@
         "Snow.tmx#Well": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "World3.tmx": {
+            "scale": 0.7150265957446807,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 752.419564813093,
+                "y": 255.93453598660966
+            }
+        },
+        "World3.tmx#Dimensional_Portal": {
+            "scaleInDock": 1
+        },
+        "World3.tmx#LavaTile_spritesheet": {
+            "scaleInDock": 1
         },
         "mapResWorld1/World1.tmx": {
             "scale": 1.5,
@@ -221,19 +250,23 @@
             "scaleInDock": 1
         }
     },
+    "last.imagePath": "C:/Users/Kintoyyy/Documents/GitHub/Crystal-of-JAVA-v1278365/res/Tiles",
     "openFiles": [
         "Forest.tmx",
-        "Snow.tmx",
+        "Dungeon.tmx",
         "Lava.tmx",
-        "Dungeon.tmx"
+        "Snow.tmx",
+        "World3.tmx"
     ],
     "project": "Test-Multimaps.tiled-project",
     "property.type": "object",
     "recentFiles": [
+        "Forest.tmx",
         "Dungeon.tmx",
         "Lava.tmx",
         "Snow.tmx",
-        "Forest.tmx",
+        "World3.tmx",
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx",
         "BossStage/Dimensional_Portal.tsx",
         "Dimensional_Portal.tsx",
         "mapResWorld1/World1.tmx",

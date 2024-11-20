@@ -1,7 +1,7 @@
 package Entities.Common.Effects;
 
 /**
- * Enum representing the type of target for an effect or attack.
+ * Enum representing the triggerType of target for an effect or attack.
  * <p>
  * This enum defines two types of targets:
  * <ul>

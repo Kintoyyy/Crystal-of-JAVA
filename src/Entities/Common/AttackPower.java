@@ -4,7 +4,7 @@ package Entities.Common;
  * Represents the attack power of an entity, which can be either physical or magical.
  * <p>
  * This class calculates the attack power, which can vary randomly within a specified range.
- * It also includes the type of attack (e.g., PHYSICAL, MAGIC) and ensures that the attack power
+ * It also includes the triggerType of attack (e.g., PHYSICAL, MAGIC) and ensures that the attack power
  * falls within the defined minimum and maximum values.
  * </p>
  */
@@ -24,10 +24,10 @@ public class AttackPower {
     }
 
     /**
-     * Constructs an AttackPower object with the specified attack power and attack type.
+     * Constructs an AttackPower object with the specified attack power and attack triggerType.
      *
      * @param attackPower The attack power value.
-     * @param attackType The type of attack (e.g., PHYSICAL or MAGIC).
+     * @param attackType The triggerType of attack (e.g., PHYSICAL or MAGIC).
      */
     public AttackPower(int attackPower, AttackType attackType) {
         this.attackType = attackType;
@@ -47,11 +47,11 @@ public class AttackPower {
 
     /**
      * Constructs an AttackPower object with the specified minimum and maximum attack power
-     * and attack type.
+     * and attack triggerType.
      *
      * @param minAttackPower The minimum attack power.
      * @param attackPower The maximum attack power.
-     * @param attackType The type of attack (e.g., PHYSICAL or MAGIC).
+     * @param attackType The triggerType of attack (e.g., PHYSICAL or MAGIC).
      */
     public AttackPower(int minAttackPower, int attackPower, AttackType attackType) {
         this.attackType = attackType;
@@ -78,9 +78,9 @@ public class AttackPower {
     }
 
     /**
-     * Gets the type of attack (e.g., PHYSICAL or MAGIC).
+     * Gets the triggerType of attack (e.g., PHYSICAL or MAGIC).
      *
-     * @return The attack type.
+     * @return The attack triggerType.
      */
     public AttackType getAttackPowerType() {
         return attackType;

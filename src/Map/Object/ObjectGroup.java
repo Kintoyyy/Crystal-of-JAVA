@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * is used to process and manage objects defined in map files or similar data
  * structures.</p>
  *
- * <p>The attributes of each object (such as name, type, position, and dimensions)
+ * <p>The attributes of each object (such as name, triggerType, position, and dimensions)
  * are extracted and scaled by a constant factor during the parsing process.</p>
  */
 public class ObjectGroup {
@@ -32,7 +32,7 @@ public class ObjectGroup {
      * @param objectGroups a {@link NodeList} containing the object groups as XML elements
      *
      *                     <p>Each object group should have a "name" attribute and contain "object" elements.
-     *                     Each "object" element should have attributes such as "name", "type", "x", "y",
+     *                     Each "object" element should have attributes such as "name", "triggerType", "x", "y",
      *                     "width", and "height".</p>
      *
      *                     <p>The width, height, x, and y values are scaled by a fixed multiplier (magic number)
@@ -48,56 +48,12 @@ public class ObjectGroup {
             // Retrieve all "object" elements within the group
             NodeList objectElements = objectGroupElement.getElementsByTagName("object");
             for (int j = 0; j < objectElements.getLength(); j++) {
-                Element objectElement = (Element) objectElements.item(j); // Individual object node
-
-                // Extract attributes of the object
-                String objectType = objectElement.getAttribute("type");
-                String objectName = objectElement.getAttribute("name");
-
-                int magicNumber = 4;
-
-                int x = (int) Float.parseFloat(objectElement.getAttribute("x")) * magicNumber;
-                int y = (int) Float.parseFloat(objectElement.getAttribute("y")) * magicNumber;
-
-                int width = objectElement.hasAttribute("width") ? (int)
-                        Float.parseFloat(objectElement.getAttribute("width")) * magicNumber : 0;
-
-                int height = objectElement.hasAttribute("height") ? (int)
-                        Float.parseFloat(objectElement.getAttribute("height")) * magicNumber : 0;
-
-                NodeList properties = objectElement.getElementsByTagName("properties");
-
-                for (int k = 0; k < properties.getLength(); k++) {
-                    Element property = (Element) properties.item(k);
-
-                    String name = property.getAttribute("name");
-                    String value = property.getAttribute("value");
-                    String type = property.getAttribute("type");
-                }
-
-//                properties.
-
-
-                switch (objectType) {
-                    case "SPAWN":
-                        setPawnPoint(new Point(x, y));
-                        System.out.println("Spawn point found at: " + objectName);
-                        break;
-                    case "TRIGGER":
-                        System.out.println("Trigger found at: " + objectName);
-                        break;
-                    case "ENEMY":
-                        System.out.println("Enemy found at: " + objectName);
-                        break;
-                    default:
-                        System.out.println("Object found at: " + objectName);
-                        break;
-                }
-
-                // Scale factor applied to the object's dimensions and position
-
+                Element objectElement = (Element) objectElements.item(j);
                 // Add the parsed object to the collection
-                objectCollection.add(new Object(objectName, objectType, x, y, width, height));
+
+
+
+                objectCollection.add(new Object(objectElement));
             }
         }
     }
@@ -109,7 +65,6 @@ public class ObjectGroup {
     public Point getPawnPoint() {
         return pawnPoint;
     }
-
 
 
     /**

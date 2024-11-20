@@ -1,143 +1,220 @@
 package Map.Object;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Represents a generic object within the game world.
- *
- * <p>This class defines the core attributes and behaviors of objects in the game,
- * such as their position, size, name, type, and collision bounds. It is used
- * to manage and interact with objects placed on the game map.</p>
- *
- * <p>The type of the object is determined by an enumerated {@link Type}, which
- * defaults to {@code NONE} if the provided type is invalid or null.</p>
- */
 public class Object {
-
-    /**
-     * The name of the object.
-     */
-    protected String name;
-
-    /**
-     * The type of the object, represented by the {@link Type} enumeration.
-     */
-    protected Type type;
-
-    /**
-     * The rectangular bounds of the object used for collision detection.
-     */
+    private final String name;
+    private final ClassType classType;
     private final Rectangle bounds;
+    private final Point position;
+    private final int width;
+    private final int height;
+    private final Type type;
+    private final List<Properties> properties = new ArrayList<>();
+    private int[] polygonX = new int[0];
+    private int[] polygonY = new int[0];
+
+    // Constants
+    private static final int SCALING_FACTOR = 4;
 
     /**
-     * The x-coordinate of the object's position on the map.
-     */
-    protected int x;
-
-    /**
-     * The y-coordinate of the object's position on the map.
-     */
-    protected int y;
-
-    /**
-     * The width of the object.
-     */
-    protected int width;
-
-    /**
-     * The height of the object.
-     */
-    protected int height;
-
-    /**
-     * Constructs a new {@code Object} with the specified attributes.
+     * Constructor for parsing object element data.
      *
-     * @param name   the name of the object
-     * @param type   the type of the object as a string (case-insensitive)
-     * @param x      the x-coordinate of the object
-     * @param y      the y-coordinate of the object
-     * @param width  the width of the object
-     * @param height the height of the object
-     *
-     * @throws IllegalArgumentException if the provided {@code type} does not match any {@link Type} value
-     * @throws NullPointerException     if {@code type} is null
+     * @param objectElement The XML element representing the object.
      */
-    public Object(String name, String type, int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.name = name;
+    public Object(Element objectElement) {
 
-        try {
-            this.type = Type.valueOf(type.toUpperCase());
-        } catch (IllegalArgumentException | NullPointerException e) {
-            this.type = Type.NONE;
+        this.name = objectElement.hasAttribute("name") ?
+                objectElement.getAttribute("name") :
+                objectElement.getAttribute("id");
+
+        this.position = new Point(
+                parseScaledAttribute(objectElement, "x"),
+                parseScaledAttribute(objectElement, "y")
+        );
+        this.width = parseScaledAttribute(objectElement, "width");
+        this.height = parseScaledAttribute(objectElement, "height");
+
+        this.type = determineType(objectElement);
+        this.classType = parseTriggerType(objectElement);
+        parseProperties(objectElement);
+
+        this.bounds = new Rectangle(position.x, position.y, width, height);
+    }
+
+    /**
+     * Parse and scale a float attribute from the XML element.
+     *
+     * @param element   The XML element.
+     * @param attribute The attribute name.
+     * @return The scaled integer value.
+     */
+    private int parseScaledAttribute(Element element, String attribute) {
+        String value = element.getAttribute(attribute);
+        return value.isEmpty() ? 0 : (int) (Float.parseFloat(value) * SCALING_FACTOR);
+    }
+
+    /**
+     * Determine the object type based on XML tags and dimensions.
+     *
+     * @param objectElement The XML element.
+     * @return The determined object type.
+     */
+    private Type determineType(Element objectElement) {
+        if (width > 0 && height > 0) {
+            return Type.RECTANGLE;
+        } else if (hasChildTag(objectElement, "point")) {
+            return Type.POINT;
+        } else if (hasChildTag(objectElement, "ellipse")) {
+            return Type.ELLIPSE;
+        } else if (hasChildTag(objectElement, "polygon")) {
+            parsePolygon(objectElement);
+            return Type.POLYGON;
         }
-
-        this.bounds = new Rectangle(x, y, width, height);
+        return Type.NONE;
     }
 
     /**
-     * Gets the y-coordinate of the object's position.
+     * Check if the XML element has a specific child tag.
      *
-     * @return the y-coordinate
+     * @param element The XML element.
+     * @param tag     The tag name.
+     * @return True if the child tag exists, false otherwise.
      */
-    public int getY() {
-        return y;
+    private boolean hasChildTag(Element element, String tag) {
+        return element.getElementsByTagName(tag).getLength() > 0;
     }
 
     /**
-     * Gets the x-coordinate of the object's position.
+     * Parse polygon points from the XML element and apply scaling.
      *
-     * @return the x-coordinate
+     * @param objectElement The XML element containing the polygon data.
      */
-    public int getX() {
-        return x;
+    private void parsePolygon(Element objectElement) {
+        String points = objectElement.getElementsByTagName("polygon")
+                .item(0)
+                .getAttributes()
+                .getNamedItem("points")
+                .getNodeValue();
+
+        String[] pointPairs = points.split(" ");
+        polygonX = new int[pointPairs.length];
+        polygonY = new int[pointPairs.length];
+
+        for (int i = 0; i < pointPairs.length; i++) {
+            String[] coords = pointPairs[i].split(",");
+            polygonX[i] = (int) (position.x + Float.parseFloat(coords[0]) * SCALING_FACTOR);
+            polygonY[i] = (int) (position.y + Float.parseFloat(coords[1]) * SCALING_FACTOR);
+        }
     }
 
     /**
-     * Gets the width of the object.
+     * Parse the trigger type from the XML element. Defaults to NONE if not found.
      *
-     * @return the object's width
+     * @param objectElement The XML element.
+     * @return The parsed ClassType.
      */
+    private ClassType parseTriggerType(Element objectElement) {
+        String type = objectElement.getAttribute("type");
+        try {
+            return type.isEmpty() ? ClassType.NONE : ClassType.valueOf(type.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return ClassType.NONE;
+        }
+    }
+
+    /**
+     * Parse properties from the XML element.
+     *
+     * @param objectElement The XML element containing properties.
+     */
+    private void parseProperties(Element objectElement) {
+        NodeList propertiesList = objectElement.getElementsByTagName("properties");
+        for (int i = 0; i < propertiesList.getLength(); i++) {
+            Element propertyElement = (Element) propertiesList.item(i);
+            NodeList propertyNodes = propertyElement.getElementsByTagName("property");
+            for (int j = 0; j < propertyNodes.getLength(); j++) {
+                Element property = (Element) propertyNodes.item(j);
+                properties.add(new Properties(
+                        property.getAttribute("name"),
+                        property.getAttribute("value"),
+                        property.getAttribute("type")
+                ));
+            }
+        }
+    }
+
+    /**
+     * Render the object using the provided Graphics object, adjusting for offsets.
+     *
+     * @param g       The Graphics object to draw with.
+     * @param xOffset The horizontal offset.
+     * @param yOffset The vertical offset.
+     */
+    public void render(Graphics g, int xOffset, int yOffset) {
+        // Debugging only
+        g.setColor(Color.RED);
+            g.drawString(classType + "-" + name, position.x - xOffset, position.y - yOffset);
+        switch (type) {
+            case RECTANGLE -> g.drawRect(position.x - xOffset, position.y - yOffset, width, height);
+            case ELLIPSE -> g.drawOval(position.x - xOffset, position.y - yOffset, width, height);
+            case POLYGON -> {
+                int[] adjustedX = adjustCoordinates(polygonX, xOffset);
+                int[] adjustedY = adjustCoordinates(polygonY, yOffset);
+                g.drawPolygon(adjustedX, adjustedY, polygonX.length);
+            }
+            case POINT ->
+                    g.drawLine(position.x - xOffset, position.y - yOffset, position.x - xOffset, position.y - yOffset);
+            default -> g.drawString("Unknown Type", position.x - xOffset, position.y - yOffset);
+        }
+    }
+
+    /**
+     * Adjust an array of coordinates by subtracting an offset.
+     *
+     * @param coordinates The original coordinates.
+     * @param offset      The offset to subtract.
+     * @return The adjusted coordinates.
+     */
+    private int[] adjustCoordinates(int[] coordinates, int offset) {
+        int[] adjusted = new int[coordinates.length];
+        for (int i = 0; i < coordinates.length; i++) {
+            adjusted[i] = coordinates[i] - offset;
+        }
+        return adjusted;
+    }
+
+    // Getters for encapsulated fields
+    public Point getPosition() {
+        return position;
+    }
+
     public int getWidth() {
         return width;
     }
 
-    /**
-     * Gets the height of the object.
-     *
-     * @return the object's height
-     */
     public int getHeight() {
         return height;
     }
 
-    /**
-     * Gets the collision bounds of the object as a {@link Rectangle}.
-     *
-     * @return the rectangular bounds of the object
-     */
     public Rectangle getBounds() {
         return bounds;
     }
 
-    /**
-     * Gets the name of the object.
-     *
-     * @return the object's name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * Gets the type of the object.
-     *
-     * @return the {@link Type} of the object
-     */
-    public Type getType() {
-        return type;
+    public ClassType getTriggerType() {
+        return classType;
+    }
+
+    public List<Properties> getProperties() {
+        return new ArrayList<>(properties);
     }
 }

@@ -3,7 +3,7 @@ package Animations.enums;
 /**
  * The {@code TYPE} enum represents the various animation states or actions
  * that an object can have in an animation system.
- * These states define the specific type of animation that is being played.
+ * These states define the specific triggerType of animation that is being played.
  * <p>
  * This enum is used to differentiate between various animation behaviors,
  * such as an idle stance, walking, attacking, etc. It can be used in conjunction

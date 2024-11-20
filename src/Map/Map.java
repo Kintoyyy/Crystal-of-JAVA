@@ -31,7 +31,7 @@ public class Map {
     private int worldHeight;
 
 
-    private Point spawnPoint;
+    private Point spawnPoint = new Point(0, 0);
 
     /**
      * 3D array representing the tile layers in the world.

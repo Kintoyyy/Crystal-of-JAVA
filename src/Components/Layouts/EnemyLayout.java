@@ -48,7 +48,6 @@ public class EnemyLayout extends Layout {
         Enemy enemy = (battleManager != null)
                 ? battleManager.getCurrentEnemy()
                 : null;
-
         for (Component component : childComponents) {
             if (component instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);

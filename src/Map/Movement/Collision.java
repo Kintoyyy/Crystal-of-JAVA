@@ -2,7 +2,7 @@ package Map.Movement;
 
 import Game.Handler;
 import Map.Object.Object;
-import Map.Object.Type;
+import Map.Object.ClassType;
 
 public class Collision {
     private final Movement movement;
@@ -30,7 +30,7 @@ public class Collision {
      *
      * @param xOffset Horizontal offset for the collision check
      * @param yOffset Vertical offset for the collision check
-     * @return False if a collision with a Type. COLLISION object is detected, true otherwise
+     * @return False if a collision with a ClassType. COLLISION object is detected, true otherwise
      */
     public boolean objectCollisions(float xOffset, float yOffset) {
         // Precompute the collision bounds for the moving entity
@@ -44,19 +44,19 @@ public class Collision {
             }
 
             // Handle specific collision types
-            if (object.getType() == Type.COLLISION) {
+            if (object.getTriggerType() == ClassType.COLLISION) {
                 return false; // Collision detected
             }
 
-            if (object.getType() == Type.TELEPORT) {
+            if (object.getTriggerType() == ClassType.TELEPORT) {
                 handler.getWorldManager().changeWorld(object.getName());
             }
 
-            if (object.getType() == Type.BATTLE) {
+            if (object.getTriggerType() == ClassType.BATTLE) {
                 handler.getBattleManager().startBattle(object.getName());
             }
 
-            System.out.println("Collision with object: " + object.getName() + " type: " + object.getType());
+            System.out.println("Collision with object: " + object.getName() + " triggerType: " + object.getTriggerType());
         }
         return true; // No collision detected
     }

@@ -3,8 +3,6 @@ package Map;
 import Map.Movement.Movement;
 import Game.Handler;
 import Map.Object.Object;
-import Map.Object.ObjectGroup;
-import Map.Object.Type;
 import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
@@ -57,7 +55,7 @@ public class Render {
         map = movement.getWorld().getCurrentWorld().getWorld();
 
         // Set the initial location of the character to the spawn point of the map
-        movement.setLocation(map.getSpawnPoint());
+//        movement.setLocation(map.getSpawnPoint());
 
         loadWorld();
     }
@@ -77,7 +75,7 @@ public class Render {
         this.tileTypes = map.getTileTypes();
         this.objectGroup = map.getObjects();
 
-        movement.setLocation(map.getSpawnPoint());
+//        movement.setLocation(map.getSpawnPoint());
     }
 
     /**
@@ -131,16 +129,17 @@ public class Render {
 
         for (int i = 0; i < objectGroup.size(); i++) {
             Object object = objectGroup.get(i);
-            int width = object.getWidth();
-            int height = object.getHeight();
-            int x = object.getX();
-            int y = object.getY();
-            g.drawRect((int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()), width, height);
-
-            if (object.getType() == Type.NPC) {
-                g.setColor(Color.red);
-                g.drawString("NPC", (int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()));
-            }
+            object.render(g, (int) movement.getCamera().getXOffset(), (int) movement.getCamera().getYOffset());
+//            int width = object.getWidth();
+//            int height = object.getHeight();
+//            int x = object.getX();
+//            int y = object.getY();
+//            g.drawRect((int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()), width, height);
+//
+//            if (object.getTriggerType() == ClassType.NPC) {
+//                g.setColor(Color.red);
+//                g.drawString("NPC", (int) (x - movement.getCamera().getXOffset()), (int) (y - movement.getCamera().getYOffset()));
+//            }
         }
     }
 

@@ -8,10 +8,10 @@ import java.util.HashMap;
 
 /**
  * The {@code Animation} class is responsible for handling the animation logic for different types and directions of animations.
- * It provides functionality for managing and displaying frames based on animation type and direction, controlling the
+ * It provides functionality for managing and displaying frames based on animation triggerType and direction, controlling the
  * frame update rate, and allowing the addition of custom animations.
  * <p>
- * The class maintains a set of animations in a map, where each key is a combination of animation type and direction,
+ * The class maintains a set of animations in a map, where each key is a combination of animation triggerType and direction,
  * and the value is an array of frames (images). It supports both default and custom animations and automatically loops
  * through frames when the animation reaches the end.
  * </p>
@@ -25,7 +25,7 @@ public abstract class Animation {
     protected int speed = 120;
 
     /**
-     * A map that stores animations for each type and direction, where the key is the animation type and/or direction,
+     * A map that stores animations for each triggerType and direction, where the key is the animation triggerType and/or direction,
      * and the value is an array of {@link BufferedImage} frames.
      */
     private final HashMap<String, BufferedImage[]> animations = new HashMap<>();
@@ -103,7 +103,7 @@ public abstract class Animation {
      * If the key does not exist or the frames are unavailable, a fallback to the default animation is used.
      *
      * @param type The {@link TYPE} of animation to retrieve the frame for.
-     * @return The current {@link BufferedImage} frame for the specified animation type, or {@code null} if an error occurs.
+     * @return The current {@link BufferedImage} frame for the specified animation triggerType, or {@code null} if an error occurs.
      */
     public final BufferedImage getFrame(TYPE type) {
         String key = type.name();
@@ -112,11 +112,11 @@ public abstract class Animation {
 
     /**
      * Retrieves the current frame for the given animation {@link TYPE} and {@link DIRECTION}.
-     * This allows different frames for the same animation type based on direction.
+     * This allows different frames for the same animation triggerType based on direction.
      *
      * @param type The {@link TYPE} of animation to retrieve the frame for.
      * @param direction The {@link DIRECTION} of the animation (e.g., left, right).
-     * @return The current {@link BufferedImage} frame for the specified animation type and direction, or {@code null} if an error occurs.
+     * @return The current {@link BufferedImage} frame for the specified animation triggerType and direction, or {@code null} if an error occurs.
      */
     public final BufferedImage getFrame(TYPE type, DIRECTION direction) {
         String key = type.name() + "_" + direction.name();
