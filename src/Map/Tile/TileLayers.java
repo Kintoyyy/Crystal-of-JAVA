@@ -1,3 +1,4 @@
+
 package Map.Tile;
 
 import org.w3c.dom.Element;
@@ -25,13 +26,35 @@ public class TileLayers {
 
                 int rows = Integer.parseInt(layer.getAttribute("height"));
                 int columns = Integer.parseInt(layer.getAttribute("width"));
+                boolean visible = !layer.hasAttribute("visible");
+
+                if (!visible) {
+                    continue;
+                }
+
+                String tintcolor = layer.getAttribute("tintcolor");
+
+                NodeList properties = layer.getElementsByTagName("properties");
+
+                for (int i = 0; i < properties.getLength(); i++) {
+                    Element property = (Element) properties.item(i);
+
+                    String name = property.getAttribute("name");
+                    String value = property.getAttribute("value");
+                    String type = property.getAttribute("type");
+                }
 
                 NodeList dataNodes = layer.getElementsByTagName("data");
                 if (dataNodes.getLength() > 0) {
                     String[] values = dataNodes.item(0).getTextContent().trim().split(",");
                     for (int y = 0; y < rows; y++) {
                         for (int x = 0; x < columns; x++) {
-                            tiles[l][y][x] = Integer.parseInt(values[x + y * columns].trim());
+                            try {
+                                tiles[l][y][x] = Integer.parseInt(values[x + y * columns].trim());
+                            } catch (NumberFormatException e) {
+                                System.err.println("Tile will not be loaded at layer " + l + ", row " + y + ", column " + x + " id: " + values[x + y * columns]);
+                                tiles[l][y][x] = 0;
+                            }
                         }
                     }
                 }

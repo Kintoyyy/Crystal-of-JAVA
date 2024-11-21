@@ -3,6 +3,7 @@ package Map.Movement;
 import Map.Map;
 import Game.Handler;
 import Map.Tile.Tile;
+import Worlds.WorldManager;
 
 /**
  * The Camera class is responsible for controlling the view of the game world by
@@ -10,31 +11,41 @@ import Map.Tile.Tile;
  */
 public class Camera {
 
-    /** Current horizontal offset of the camera from the origin. */
+    /**
+     * Current horizontal offset of the camera from the origin.
+     */
     private float xOffset;
 
-    /** Current vertical offset of the camera from the origin. */
+    /**
+     * Current vertical offset of the camera from the origin.
+     */
     private float yOffset;
 
-    /** Width of the screen in pixels. */
+    /**
+     * Width of the screen in pixels.
+     */
     private final int screenWidth;
 
-    /** Height of the screen in pixels. */
+    /**
+     * Height of the screen in pixels.
+     */
     private final int screenHeight;
 
-    /** Reference to the parsed world, used for world dimensions. */
-    private final Map world;
+    /**
+     * Reference to the parsed world, used for world dimensions.
+     */
+    private final WorldManager worldManager;
 
     /**
      * Constructs a Camera object.
      *
      * @param movement The Movement object controlling the player's movement.
-     * @param xOffset Initial horizontal offset.
-     * @param yOffset Initial vertical offset.
+     * @param xOffset  Initial horizontal offset.
+     * @param yOffset  Initial vertical offset.
      */
     public Camera(Movement movement, float xOffset, float yOffset) {
         Handler handler = movement.getHandler();
-        this.world = movement.getWorld();
+        this.worldManager = movement.getWorld();
         this.screenWidth = handler.getWidth();
         this.screenHeight = handler.getHeight();
         this.xOffset = xOffset;
@@ -59,17 +70,19 @@ public class Camera {
      */
     public void checkBlankSpace() {
         // Restrict horizontal offset
+//        System.out.println(world.getWorldWidth() + " " + world.getWorldHeight());
+
         if (xOffset < 0) {
             xOffset = 0;
-        } else if (xOffset > world.getWorldWidth() * Tile.width - screenWidth) {
-            xOffset = world.getWorldWidth() * Tile.width - screenWidth;
+        } else if (xOffset > worldManager.getCurrentWorld().getWorld().getWorldWidth() * Tile.width - screenWidth) {
+            xOffset = worldManager.getCurrentWorld().getWorld().getWorldWidth() * Tile.width - screenWidth;
         }
 
         // Restrict vertical offset
         if (yOffset < 0) {
             yOffset = 0;
-        } else if (yOffset > world.getWorldHeight() * Tile.height - screenHeight) {
-            yOffset = world.getWorldHeight() * Tile.height - screenHeight;
+        } else if (yOffset > worldManager.getCurrentWorld().getWorld().getWorldHeight() * Tile.height - screenHeight) {
+            yOffset = worldManager.getCurrentWorld().getWorld().getWorldHeight() * Tile.height - screenHeight;
         }
     }
 

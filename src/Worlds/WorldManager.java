@@ -1,47 +1,60 @@
 package Worlds;
 
-import Worlds.Forest.Forest;
+import Entities.Characters.CharacterManager;
+import Game.Handler;
+import Map.Movement.Movement;
+import Map.Render;
 
-import java.util.ArrayList;
+import java.awt.*;
 
 public class WorldManager {
-    private final ArrayList<World> worlds = new ArrayList<>();
-    private int currentWorld = 0;
+    private final Worlds worlds;
+    private final Render render;
+    private final Movement movement;
+    private String currentWorld = "FOREST";
 
-    public WorldManager() {
-        // set the worlds
-        worlds.add(new Forest());
+    public WorldManager(Handler handler) {
+        handler.setWorldManager(this);
+        this.worlds = new Worlds();
+
+        CharacterManager characterManager = handler.getGameState().getCharacterManger();
+
+        movement = new Movement(handler, this, characterManager);
+
+        this.render = new Render(movement);
     }
 
     public World getCurrentWorld() {
-        return worlds.get(currentWorld);
+        return worlds.getWorld(currentWorld);
     }
 
-    public void setCurrentWorld(int world) {
-        currentWorld = world;
+    public Battle getBattle(String battleName) {
+        return worlds.getBattle(currentWorld, battleName);
     }
 
-    public void setCurrentWorld(World world) {
-        currentWorld = worlds.indexOf(world);
+    public void changeWorld(String world) {
+
+        getCurrentWorld().setPlayerLastPosition(movement.getLocation());
+
+        this.currentWorld = world;
+
+        getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getPlayerLastPosition());
+
+        movement.setLocation(getCurrentWorld().getSpawnPoint());
+
+//        if (getCurrentWorld().getPlayerLastPosition() == null) {
+//            getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getSpawnPoint());
+//        } else {
+//            movement.setLocation(getCurrentWorld().getPlayerLastPosition());
+//        }
+        render.loadWorld();
     }
 
-    public void nextWorld() {
-        currentWorld++;
+    public void tick() {
+        render.tick();
     }
 
-    public void previousWorld() {
-        currentWorld--;
-    }
-
-    public int getCurrentWorldIndex() {
-        return currentWorld;
-    }
-
-    public int getWorldsSize() {
-        return worlds.size();
-    }
-
-    public World getWorld(int index) {
-        return worlds.get(index);
+    public void render(Graphics g) {
+        render.render(g);
     }
 }

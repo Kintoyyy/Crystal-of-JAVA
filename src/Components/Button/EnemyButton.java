@@ -1,5 +1,8 @@
 package Components.Button;
 
+import Animations.Animation;
+import Animations.enums.DIRECTION;
+import Animations.enums.TYPE;
 import Components.ToolTip.EnemyHealthBar;
 import Entities.Enemies.Enemy;
 import Utils.ImageUtils;
@@ -15,6 +18,9 @@ public class EnemyButton extends Button {
     private final Enemy enemy;
     private final EnemyHealthBar healthBar;
 
+    private final Animation animation;
+
+
     public EnemyButton(Enemy enemy) {
         super("Character Frame");
         hideText();
@@ -28,6 +34,8 @@ public class EnemyButton extends Button {
         scale(3);
         this.enemy = enemy;
 
+        animation = enemy.getAnimation();
+
         this.healthBar = (EnemyHealthBar) new EnemyHealthBar(enemy)
                 .scale(3);
     }
@@ -36,6 +44,9 @@ public class EnemyButton extends Button {
     @Override
     public void tick() {
         super.tick();
+        if (animation != null) {
+            animation.tick();
+        }
         healthBar.tick();
     }
 
@@ -56,6 +67,11 @@ public class EnemyButton extends Button {
         // Render enemy name above the frame
         if (enemy != null) {
             g.drawString(enemy.getName(), bounds.x, bounds.y - 10);
+        }
+
+        if (animation != null) {
+            assert enemy != null;
+            g.drawImage(enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
         }
 
         if (showBounds) {

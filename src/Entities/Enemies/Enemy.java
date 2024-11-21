@@ -69,7 +69,7 @@ public abstract class Enemy extends Entity {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics g, int xOffset, int yOffset) {
         // Render the enemy on the screen (e.g., draw the enemy's image or animation)
 //         animation.render(); // Uncomment if animation is used
     }

@@ -55,9 +55,11 @@ public abstract class Entity {
      * Renders the entity on the screen.
      * To be implemented by subclasses to draw the entity on the graphics context.
      *
-     * @param g The graphics context used for rendering.
+     * @param g       The graphics context used for rendering.
+     * @param xOffset
+     * @param yOffset
      */
-    public abstract void render(Graphics g);
+    public abstract void render(Graphics g, int xOffset, int yOffset);
 
     public float getX() {
         return x;

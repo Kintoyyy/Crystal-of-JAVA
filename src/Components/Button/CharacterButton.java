@@ -18,7 +18,7 @@ public class CharacterButton extends Button {
     private final HealthBar healthBar;
     private final Character player;
 
-    Animation characterAnimation;
+    private final Animation characterAnimation;
 
     public CharacterButton(Character player) {
         super("Character Frame");

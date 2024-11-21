@@ -18,6 +18,6 @@ public class ShieldBlock extends Skill {
 
     @Override
     public void useSkill() {
-        System.out.println(battleManager);
+//        System.out.println(battleManagerOld);
     }
 }

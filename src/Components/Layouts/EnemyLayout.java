@@ -1,47 +1,55 @@
 package Components.Layouts;
 
+import Battle.BattleManager;
 import Components.Component;
 import Components.Button.EnemyButton;
 import Entities.Enemies.*;
-import Worlds.BattleManager;
 
 import java.awt.*;
 
-
 public class EnemyLayout extends Layout {
-    private final EnemyManager enemyManager;
+    private final BattleManager battleManager;
 
     public EnemyLayout(BattleManager battleManager) {
         super();
-        this.enemyManager = battleManager.getEnemyManager();
+        this.battleManager = battleManager;
         initEnemyFrames();
     }
 
     private void initEnemyFrames() {
         childComponents.clear();
-        for (int i = 0; i < enemyManager.getSize(); i++) {
-            Enemy enemy = enemyManager.getEnemyByIndex(i);
+        for (int i = 0; i < battleManager.getEnemies().size(); i++) {
+            Enemy enemy = battleManager.getEnemies().get(i);
             final int index = i; // Capture index for lambda use
 
             EnemyButton frame = (EnemyButton) new EnemyButton(enemy)
                     .setAction(() -> {
                         System.out.println("Enemy " + enemy.getName() + " clicked");
-                        enemyManager.setAutoSelectEnemy(false);
-                        enemyManager.setCurrentEnemy(index);
+                        // Uncomment if needed:
+                        // currentEnemyManager.setAutoSelectEnemy(false);
+                        battleManager.setCurrentEnemy(index);
                     });
             childComponents.add(frame);
         }
+        battleManager.setDataLoaded(true);
+
     }
 
     @Override
     public void tick() {
+        if (!battleManager.isDataLoaded()) {
+            System.out.println("Loading data: Data not loaded");
+            initEnemyFrames();
+        }
         childComponents.forEach(Component::tick);
     }
 
     @Override
     public void render(Graphics g) {
         int xOffset = (int) this.x;
-        Enemy enemy = enemyManager.getCurrentEnemy();
+        Enemy enemy = (battleManager != null)
+                ? battleManager.getCurrentEnemy()
+                : null;
         for (Component component : childComponents) {
             if (component instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);

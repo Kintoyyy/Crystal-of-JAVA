@@ -1,5 +1,7 @@
 package Map;
 
+import Entities.Entity;
+import Map.Object.Object;
 import Map.Tile.TileLayers;
 import Map.Tile.TileTypes;
 import Map.Object.ObjectGroup;
@@ -9,7 +11,9 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * The Map class is responsible for parsing a .tmx map file to extract world data such as dimensions,
@@ -27,15 +31,8 @@ public class Map {
      */
     private int worldHeight;
 
-    /**
-     * X-coordinate of the spawn point.
-     */
-    private int spawnX;
 
-    /**
-     * Y-coordinate of the spawn point.
-     */
-    private int spawnY;
+    private Point spawnPoint = new Point(0, 0);
 
     /**
      * 3D array representing the tile layers in the world.
@@ -70,27 +67,25 @@ public class Map {
             if (map.getLength() > 0) {
                 Element mapElement = (Element) map.item(0);
 
-                // Initialize tile types using the tilesets
-                NodeList tilesets = mapElement.getElementsByTagName("tileset");
-                tileTypes = new TileTypes(tilesets);
-
                 // Retrieve map dimensions
                 this.worldWidth = Integer.parseInt(mapElement.getAttribute("width"));
                 this.worldHeight = Integer.parseInt(mapElement.getAttribute("height"));
 
+                System.out.println("Creating world: "  + worldPath + " with world dimensions of " + worldWidth + " by " + worldHeight + " tiles");
+
+                // Initialize tile types using the tilesets
+                NodeList tilesets = mapElement.getElementsByTagName("tileset");
+                this.tileTypes = new TileTypes(tilesets);
+
                 // Map tile layers
                 NodeList layers = mapElement.getElementsByTagName("layer");
-                tilesLayer = new TileLayers(layers, worldWidth, worldHeight).getTiles();
+                this.tilesLayer = new TileLayers(layers, this.worldWidth, this.worldHeight).getTiles();
 
                 // Map triggers
                 NodeList objectGroups = mapElement.getElementsByTagName("objectgroup");
-                objectGroup = new ObjectGroup(objectGroups);
+                this.objectGroup = new ObjectGroup(objectGroups);
 
-                // Retrieve spawn coordinates, with default values if not specified
-                spawnX = mapElement.hasAttribute("spawnX") ?
-                        Integer.parseInt(mapElement.getAttribute("spawnX")) : 200;
-                spawnY = mapElement.hasAttribute("spawnY") ?
-                        Integer.parseInt(mapElement.getAttribute("spawnY")) : 200;
+                this.spawnPoint = objectGroup.getPawnPoint();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +115,7 @@ public class Map {
      *
      * @return The ObjectGroup object.
      */
-    public ObjectGroup getObjectGroup() {
+    public ObjectGroup getObjects() {
         return objectGroup;
     }
 
@@ -143,20 +138,12 @@ public class Map {
     }
 
     /**
-     * Retrieves the X-coordinate of the spawn point.
+     * Retrieves the x-coordinate of the spawn point.
      *
-     * @return The spawn X-coordinate.
+     * @return The x-coordinate of the spawn point.
      */
-    public float getSpawnX() {
-        return spawnX;
+    public Point getSpawnPoint() {
+        return spawnPoint;
     }
 
-    /**
-     * Retrieves the Y-coordinate of the spawn point.
-     *
-     * @return The spawn Y-coordinate.
-     */
-    public float getSpawnY() {
-        return spawnY;
-    }
 }

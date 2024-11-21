@@ -1,0 +1,277 @@
+{
+    "activeFile": "World3.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "BossStage/Dimensional_Portal.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx": {
+            "scale": 0.7150265957446807,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 752.419564813093,
+                "y": 255.93453598660966
+            }
+        },
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx#Dimensional_Portal": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx#LavaTile_spritesheet": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx": {
+            "scale": 0.5516927083333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 256.4833608685391,
+                "y": 767.6374793485959
+            }
+        },
+        "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx#Dark_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx#Outdoor_Decor": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx#Outdoor_Decor_1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx#Spruce_tree_1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx#Well": {
+            "scaleInDock": 1
+        },
+        "Dimensional_Portal.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Dungeon.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 1.5,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 271.33333333333326,
+                "y": 244.66666666666666
+            }
+        },
+        "Dungeon.tmx#Dungeon_1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Dungeon.tmx#Dungeon_1_Pillars": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Dungeon.tmx#Dungeon_1_Stairs": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Dungeon.tmx#Dungeon_2": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Dungeon.tmx#Dungeon_Objects": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Dungeon.tmx#Floor_spikes_1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Forest.tmx": {
+            "expandedObjectLayers": [
+                13
+            ],
+            "scale": 0.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 248,
+                "y": 630
+            }
+        },
+        "Forest.tmx#Dark_Tiles_1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Forest.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "Forest.tmx#Outdoor_Decor": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Forest.tmx#Outdoor_Decor_1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Forest.tmx#Spruce_tree_1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Forest.tmx#Well": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Ice.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 151.5,
+                "y": 167.5
+            }
+        },
+        "Ice.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "Ice.tmx#Grass_Tiles_3": {
+            "scaleInDock": 1
+        },
+        "Ice.tmx#Water_Middle": {
+            "scaleInDock": 1
+        },
+        "Ice/Forest.tmx": {
+            "expandedObjectLayers": [
+                2,
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 147.5,
+                "y": 166.5
+            }
+        },
+        "Ice/Forest.tmx#Grass_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "Lava.tmx": {
+            "expandedObjectLayers": [
+                7,
+                6
+            ],
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 247,
+                "y": 177
+            }
+        },
+        "Lava.tmx#Dimensional_Portal": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Lava.tmx#LavaTile_spritesheet": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Snow.tmx": {
+            "expandedObjectLayers": [
+                9,
+                10
+            ],
+            "scale": 1.5,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 351.33333333333326,
+                "y": 228
+            }
+        },
+        "Snow.tmx#Outdoor_Decor": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Snow.tmx#SnowSpruce_tree_1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Snow.tmx#Snow_Decor": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Snow.tmx#Snow_Tiles1": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Snow.tmx#Well": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "World3.tmx": {
+            "scale": 0.7150265957446807,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 752.419564813093,
+                "y": 255.93453598660966
+            }
+        },
+        "World3.tmx#Dimensional_Portal": {
+            "scaleInDock": 1
+        },
+        "World3.tmx#LavaTile_spritesheet": {
+            "scaleInDock": 1
+        },
+        "mapResWorld1/World1.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 237.3333333333333,
+                "y": 85.33333333333331
+            }
+        },
+        "mapResWorld1/World1.tmx#Dark_Tiles_1": {
+            "scaleInDock": 1
+        },
+        "mapResWorld1/World1.tmx#Outdoor_Decor": {
+            "scaleInDock": 1
+        },
+        "mapResWorld1/World1.tmx#Outdoor_Decor_1": {
+            "scaleInDock": 1
+        },
+        "mapResWorld1/World1.tmx#Spruce_tree_1": {
+            "scaleInDock": 1
+        },
+        "mapResWorld1/World1.tmx#Well": {
+            "scaleInDock": 1
+        }
+    },
+    "last.imagePath": "C:/Users/Kintoyyy/Documents/GitHub/Crystal-of-JAVA-v1278365/res/Tiles",
+    "openFiles": [
+        "Forest.tmx",
+        "Dungeon.tmx",
+        "Lava.tmx",
+        "Snow.tmx",
+        "World3.tmx"
+    ],
+    "project": "Test-Multimaps.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "Forest.tmx",
+        "Dungeon.tmx",
+        "Lava.tmx",
+        "Snow.tmx",
+        "World3.tmx",
+        "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx",
+        "BossStage/Dimensional_Portal.tsx",
+        "Dimensional_Portal.tsx",
+        "mapResWorld1/World1.tmx",
+        "C:/Users/Kintoyyy/Desktop/MapResources/mapResWorld1/World1.tmx",
+        "Ice/Forest.tmx",
+        "Ice.tmx"
+    ]
+}

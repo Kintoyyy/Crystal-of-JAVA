@@ -1,5 +1,6 @@
 package Entities.Characters;
 
+import Animations.Entities.EntityAnimation;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
@@ -25,6 +26,8 @@ public class Zeith extends Character {
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Zeith/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);
+
+        animation = new EntityAnimation(ImageUtils.loadImage("/Player/Zeith/Character.png"));
     }
 
     @Override

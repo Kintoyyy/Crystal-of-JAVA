@@ -1,7 +1,7 @@
 package Game;
 
 import java.awt.*;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * The Display class is responsible for creating and managing the game's window,
@@ -35,8 +35,8 @@ public class Display {
     /**
      * Constructs a Display object with the specified title and dimensions.
      *
-     * @param title The title to display on the game window.
-     * @param width The width of the game window in pixels.
+     * @param title  The title to display on the game window.
+     * @param width  The width of the game window in pixels.
      * @param height The height of the game window in pixels.
      */
     public Display(String title, int width, int height) {
@@ -59,6 +59,11 @@ public class Display {
         frame.setLocationRelativeTo(null);  // Center the window
         frame.setVisible(true);
 
+        ImageIcon img = new ImageIcon("res/icon.png");
+        frame.setIconImage(img.getImage());
+
+        setCursor(frame);
+
         // Create and configure the canvas where the game will be rendered
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));
@@ -78,7 +83,7 @@ public class Display {
      * @param frame The JFrame to which the custom cursor will be applied.
      */
     private void setCursor(JFrame frame) {
-        Image cursorImage = Toolkit.getDefaultToolkit().getImage("path/to/your/cursor/image.png");
+        Image cursorImage = Toolkit.getDefaultToolkit().getImage("res/cursor.png");
         Cursor customCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImage, new Point(0, 0), "Custom Cursor");
         frame.setCursor(customCursor);
     }

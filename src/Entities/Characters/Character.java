@@ -1,6 +1,6 @@
 package Entities.Characters;
 
-import Animations.Entities.CharacterAnimation;
+import Animations.Entities.EntityAnimation;
 import Entities.Common.*;
 import Entities.Entity;
 import Entities.Characters.Skills.Skill;
@@ -53,7 +53,7 @@ public abstract class Character extends Entity {
         super(0, 0, 32, 32);
 
         // Initialize default animation for the character
-        animation = new CharacterAnimation(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
+        animation = new EntityAnimation(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
         this.description = "A generic enemy";
 
         this.name = name;
@@ -88,7 +88,7 @@ public abstract class Character extends Entity {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics g, int xOffset, int yOffset) {
         // Override this method to render the character on the screen
     }
 

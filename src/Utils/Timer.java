@@ -161,4 +161,8 @@ public class Timer {
     public boolean isDone() {
         return !active;
     }
+
+    public boolean isActive() {
+        return active;
+    }
 }

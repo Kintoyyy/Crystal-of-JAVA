@@ -1,5 +1,6 @@
 package Entities.Characters;
 
+import Animations.Entities.EntityAnimation;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
@@ -24,6 +25,8 @@ public class Cedi extends Character {
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Cedi/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);
+
+        animation = new EntityAnimation(ImageUtils.loadImage("/Player/Cedi/Character.png"));
     }
 
     @Override

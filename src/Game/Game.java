@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import java.awt.image.BufferStrategy;
 
+import Battle.BattleManager;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
@@ -16,6 +17,7 @@ public class Game implements Runnable {
     private final InputMouseListener inputMouseListener;
     private final InputKeyboardListener inputKeyboardListener;
     private ViewManager viewManager;
+    private BattleManager battleManager;
 
     // might need to change this to a state manager
     private GameState gameState;
@@ -61,7 +63,7 @@ public class Game implements Runnable {
 
         // set the game state
         handler.setGameState(gameState);
-
+        
         viewManager = new ViewManager(handler);
     }
 

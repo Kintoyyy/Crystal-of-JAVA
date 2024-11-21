@@ -48,7 +48,7 @@ public class Frames {
         int sheetHeight = sheet.getHeight();
 
         if (sheetWidth % frameWidth != 0 || sheetHeight % frameHeight != 0) {
-            throw new IllegalArgumentException("Sheet dimensions must be divisible by frame dimensions.");
+            throw new IllegalArgumentException("Sheet dimensions must be divisible by frame dimensions." );
         }
 
         this.columns = sheetWidth / frameWidth;

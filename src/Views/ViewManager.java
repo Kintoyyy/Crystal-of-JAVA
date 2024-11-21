@@ -3,11 +3,13 @@ package Views;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.SimpleTimeZone;
 
 import Game.Handler;
 import Views.Battle.Battle;
 import Views.Game.Game;
 import Views.Menu.Menu;
+import Views.Menu.Setting;
 import Views.Overlay.Pause;
 import Views.enums.Views;
 /**
@@ -62,12 +64,13 @@ public class ViewManager {
      * This method creates instances of all views and stores them in the {@link #views} map.
      */
     private void initializeViews() {
-        views.put(Views.BATTLE, new Battle(this));
         views.put(Views.GAME, new Game(this));
+        views.put(Views.BATTLE, new Battle(this));
         views.put(Views.MENU, new Menu(this));
-        views.put(Views.SETTINGS, new Menu(this));
+        views.put(Views.SETTINGS, new Setting(this));
         views.put(Views.SELECT_CHARACTER, new Menu(this));
         views.put(Views.PAUSE, new Pause(this));
+
     }
 
     /**
@@ -84,11 +87,16 @@ public class ViewManager {
         handler.getInputMouseListener().setComponentManager(selectedView.getComponentManager());
 
         if (selectedView.isOverlay) {
+            if(layers.getLast().isOverlay){
+                layers.removeLast();
+            }
             layers.add(selectedView);
         } else {
             layers.clear();
             layers.add(selectedView);
         }
+
+        tick();
 
         // Update mouse listener to always point to the last (topmost) layer's component manager
         View topLayer = layers.getLast();
@@ -140,7 +148,11 @@ public class ViewManager {
      */
     public void tick() {
         if (!layers.isEmpty()) {
-            layers.forEach(View::tick);
+//            System.out.println(layers.size());
+//            layers.forEach(View::tick);
+            for(View layer: layers){
+                layer.tick();
+            }
         }
     }
 

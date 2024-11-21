@@ -13,6 +13,7 @@ import java.util.HashMap;
  */
 public class TileTypes {
     private final HashMap<Integer, Tile> tiles; // Stores tiles mapped by their unique IDs.
+    private final HashMap<String, WangTile> wangTile;
 
     /**
      * Constructs a TileTypes object by parsing tileset information from the provided NodeList.
@@ -21,36 +22,60 @@ public class TileTypes {
      */
     public TileTypes(NodeList filesets) {
         tiles = new HashMap<>();
+        wangTile = new HashMap<>();
+
         for (int i = 0; i < filesets.getLength(); i++) {
             Element tileSet = (Element) filesets.item(i);
 
-            // Extract tileset attributes
-            int tileWidth = Integer.parseInt(tileSet.getAttribute("tilewidth"));
-            int tileHeight = Integer.parseInt(tileSet.getAttribute("tileheight"));
-            int firstId = Integer.parseInt(tileSet.getAttribute("firstgid"));
+            // Parse attributes with validation
+            int tileWidth = parseIntOrDefault(tileSet.getAttribute("tilewidth"), 0);
+            int tileHeight = parseIntOrDefault(tileSet.getAttribute("tileheight"), 0);
+            int firstId = parseIntOrDefault(tileSet.getAttribute("firstgid"), 0);
 
-            // Retrieve the image element from the tileset
+            if (tileWidth == 0 || tileHeight == 0 || firstId == 0) {
+                throw new IllegalArgumentException("Invalid tileset attributes: tileWidth, tileHeight, or firstGid is zero.");
+            }
+
+            // Retrieve and validate the image element
             Element imageElement = (Element) tileSet.getElementsByTagName("image").item(0);
+            if (imageElement == null) {
+                throw new IllegalArgumentException("Tileset image element is missing.");
+            }
+
             String path = imageElement.getAttribute("source");
+            if (path.isEmpty()) {
+                throw new IllegalArgumentException("Tileset image path is missing.");
+            }
+
             String name = imageElement.getAttribute("name");
+            int imageWidth = parseIntOrDefault(imageElement.getAttribute("width"), 0);
+            int imageHeight = parseIntOrDefault(imageElement.getAttribute("height"), 0);
 
-            int imageWidth = Integer.parseInt(imageElement.getAttribute("width"));
-            int imageHeight = Integer.parseInt(imageElement.getAttribute("height"));
+            if (imageWidth == 0 || imageHeight == 0) {
+                throw new IllegalArgumentException("Invalid image dimensions: width or height is zero.");
+            }
 
-            // Calculate rows and columns of tiles based on image dimensions
+            NodeList wangsets = tileSet.getElementsByTagName("wangsets");
+            for (int j = 0; j < wangsets.getLength(); j++) {
+                Element wangtile = (Element) wangsets.item(j);
+
+                String tileid = wangtile.getAttribute("tileid");
+                String wangid = wangtile.getAttribute("wangid");
+                
+                wangTile.put(tileid, new WangTile(wangid));
+            }
+
+            // Load the tileset image and process tiles
+            SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage(path));
             int columns = imageWidth / tileWidth;
             int rows = imageHeight / tileHeight;
 
-            // Load the tileset image into a SpriteSheet
-            SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage(path));
-
-            // Iterate through tiles and add them to the tiles HashMap
             int tileId = firstId;
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < columns; col++) {
                     BufferedImage img = sheet.crop(col * tileWidth, row * tileHeight, tileWidth, tileHeight);
-                    int id = tileId++;
-                    tiles.put(id, new Tile(img, name, path, id));
+                    tiles.put(tileId, new Tile(img, name, path, tileId, wangTile.get(tileId)));
+                    tileId++;
                 }
             }
         }
@@ -64,5 +89,20 @@ public class TileTypes {
      */
     public Tile getTile(int id) {
         return tiles.get(id);
+    }
+
+    /**
+     * Safely parses an integer value from a string, returning a default value if parsing fails.
+     *
+     * @param value        The string to parse.
+     * @param defaultValue The default value to return in case of an error.
+     * @return The parsed integer or the default value if parsing fails.
+     */
+    private int parseIntOrDefault(String value, int defaultValue) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
     }
 }

@@ -3,6 +3,7 @@ package Map.Object;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * is used to process and manage objects defined in map files or similar data
  * structures.</p>
  *
- * <p>The attributes of each object (such as name, type, position, and dimensions)
+ * <p>The attributes of each object (such as name, triggerType, position, and dimensions)
  * are extracted and scaled by a constant factor during the parsing process.</p>
  */
 public class ObjectGroup {
@@ -23,13 +24,15 @@ public class ObjectGroup {
      */
     private final ArrayList<Object> objectCollection = new ArrayList<>();
 
+    private Point pawnPoint;
+
     /**
      * Constructs an {@code ObjectGroup} by parsing the provided {@link NodeList}.
      *
      * @param objectGroups a {@link NodeList} containing the object groups as XML elements
      *
      *                     <p>Each object group should have a "name" attribute and contain "object" elements.
-     *                     Each "object" element should have attributes such as "name", "type", "x", "y",
+     *                     Each "object" element should have attributes such as "name", "triggerType", "x", "y",
      *                     "width", and "height".</p>
      *
      *                     <p>The width, height, x, and y values are scaled by a fixed multiplier (magic number)
@@ -45,31 +48,28 @@ public class ObjectGroup {
             // Retrieve all "object" elements within the group
             NodeList objectElements = objectGroupElement.getElementsByTagName("object");
             for (int j = 0; j < objectElements.getLength(); j++) {
-                Element objectElement = (Element) objectElements.item(j); // Individual object node
-
-                // Extract attributes of the object
-                String objectType = objectElement.getAttribute("type");
-                String objectName = objectElement.getAttribute("name");
-
-                // Scale factor applied to the object's dimensions and position
-                int magicNumber = 4;
-
-                int width = objectElement.hasAttribute("width") ?
-                        Integer.parseInt(objectElement.getAttribute("width")) * magicNumber : 0;
-
-                int height = objectElement.hasAttribute("height") ?
-                        Integer.parseInt(objectElement.getAttribute("height")) * magicNumber : 0;
-
-                int x = (int) Float.parseFloat(objectElement.getAttribute("x")) * magicNumber;
-                int y = (int) Float.parseFloat(objectElement.getAttribute("y")) * magicNumber;
-
-                // Log the parsed object details for debugging
-                System.out.println("Object: " + objectName + " " + objectType + " " + x + " " + y + " " + width + " " + height);
-
+                Element objectElement = (Element) objectElements.item(j);
                 // Add the parsed object to the collection
-                objectCollection.add(new Object(objectName, objectType, x, y, width, height));
+
+                Object object = new Object(objectElement);
+
+                System.out.println("Object found: " + object.getClassType());
+
+                if (object.getClassType() == ClassType.SPAWN) {
+                    setPawnPoint(object.getPosition());
+                }
+
+                objectCollection.add(object);
             }
         }
+    }
+
+    private void setPawnPoint(Point point) {
+        this.pawnPoint = point;
+    }
+
+    public Point getPawnPoint() {
+        return pawnPoint;
     }
 
     /**
@@ -79,5 +79,17 @@ public class ObjectGroup {
      */
     public ArrayList<Object> getObjects() {
         return objectCollection;
+    }
+
+    public void tick() {
+//        for (Object object : objectCollection) {
+//            object.tick();
+//        }
+    }
+
+    public void render(Graphics g, int xOffset, int yOffset) {
+        for (Object object : objectCollection) {
+            object.render(g, xOffset, yOffset);
+        }
     }
 }
