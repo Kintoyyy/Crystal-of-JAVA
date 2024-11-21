@@ -22,6 +22,8 @@ public class ObjectGroup {
      */
     private final List<Object> objectCollection = new ArrayList<>();
 
+    private final List<Object> renderNpc = new ArrayList<>();
+
     /**
      * Spawn point of the player, parsed from the object group.
      */
@@ -51,6 +53,10 @@ public class ObjectGroup {
                 // Set spawn point if the object represents a spawn location
                 if (parsedObject.getClassType() == CLASS.SPAWN) {
                     setSpawnPoint(parsedObject.getPosition());
+                }
+
+                if (parsedObject.getClassType() == CLASS.NPC) {
+                    renderNpc.add(parsedObject);
                 }
 
                 // Add the parsed object to the collection
@@ -84,6 +90,10 @@ public class ObjectGroup {
      */
     public List<Object> getObjects() {
         return objectCollection;
+    }
+
+    public List<Object> getNpc() {
+        return renderNpc;
     }
 
     /**

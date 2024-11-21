@@ -33,6 +33,10 @@ public class WorldManager {
         return worlds.getWorld(currentWorld).getWorld();
     }
 
+    public World getWorlds() {
+        return worlds.getWorld(currentWorld);
+    }
+
     public Battle getBattle(String battleName) {
 
         return worlds.getBattle(currentWorld, battleName);

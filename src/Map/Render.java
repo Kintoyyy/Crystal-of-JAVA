@@ -1,5 +1,10 @@
 package Map;
 
+import Animations.enums.DIRECTION;
+import Animations.enums.TYPE;
+import Entities.Enemies.Kai;
+import Entities.Enemies.Orc;
+import Entities.Entity;
 import Map.Movement.Camera;
 import Map.Movement.Movement;
 import Game.Handler;
@@ -8,6 +13,7 @@ import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
 import Worlds.WorldManager;
+import Map.Object.Object;
 
 import java.awt.*;
 
@@ -52,6 +58,10 @@ public class Render {
 
     private int playerLayer;
 
+    private WorldManager worldManager;
+
+    Entity entity = new Orc();
+
     /**
      * Constructs a Render object using parsed world data and a movement handler.
      * <p>
@@ -62,6 +72,7 @@ public class Render {
         this.camera = movement.getCamera();
         this.gameHeight = handler.getHeight();
         this.gameWidth = handler.getWidth();
+        this.worldManager = worldManager;
         loadWorld(worldManager.getCurrentWorld());
     }
 
@@ -90,6 +101,7 @@ public class Render {
      */
     public void tick() {
         movement.tick();
+        entity.getAnimation().tick();
     }
 
     /**
@@ -129,8 +141,17 @@ public class Render {
                 movement.render(g);
             }
         }
+
+        for (Object npc : objectGroup.getNpc()) {
+            System.out.println(entity);
+            Point pos = npc.getPosition();
+            entity.render2(g, (int) (pos.x - camera.getXOffset()), (int) (pos.y - camera.getYOffset()));
+        }
+
+
         // Render object groups
         if (DebugMode.isShowObjects()) {
+
             objectGroup.render(g, (int) camera.getXOffset(), (int) camera.getYOffset());
         }
     }

@@ -53,7 +53,6 @@ public class GameState {
         return handler;
     }
 
-
     public void render(Graphics g) {
         worldManager.render(g);
     }
