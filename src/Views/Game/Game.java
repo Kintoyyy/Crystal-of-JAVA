@@ -11,15 +11,21 @@ import Views.enums.Views;
 import Worlds.WorldManager;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Game extends View {
     private final WorldManager worldManager;
-    private final BattleManager battleManager;
+    //    private final BattleManager battleManager;
+    private ArrayList<String> dialogs = new ArrayList<String>();
+
 
     public Game(ViewManager viewManager) {
         super(viewManager);
-        this.worldManager = new WorldManager(handler);
-        battleManager = new BattleManager(handler, worldManager);
+        this.worldManager = handler.getGameState().getWorldManager();
+        // SHOULD BE IN VIEW MANAGER
+
+//        this.worldManager = new WorldManager(handler);
+//        battleManager = new BattleManager(handler, worldManager);
 
         initComponent();
     }
@@ -34,6 +40,10 @@ public class Game extends View {
     public void render(Graphics g) {
         worldManager.render(g);
         components.render(g);
+    }
+
+    public void showInteraction() {
+
     }
 
     public void initComponent() {

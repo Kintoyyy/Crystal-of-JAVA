@@ -86,10 +86,19 @@ public class Worlds {
     }
 
     public World getWorld(String worldName) {
+        if (!worlds.containsKey(worldName)) {
+            throw new IllegalArgumentException("World " + worldName + " does not exist.");
+        }
         return worlds.get(worldName);
     }
 
     public Battle getBattle(String worldName, String battleName) {
-        return worlds.get(worldName).getBattle(battleName);
+        World world = getWorld(worldName);
+        Battle battle = world.getBattle(battleName);
+        if (battle == null) {
+            throw new IllegalArgumentException("Battle " + battleName + " does not exist in " + worldName);
+        }
+        return battle;
     }
+
 }

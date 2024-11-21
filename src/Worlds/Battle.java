@@ -4,11 +4,14 @@ import Entities.Enemies.Enemy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Battle {
     private final String battleKey;
     private final ArrayList<Enemy> enemies = new ArrayList<>();
     private final ArrayList<Reward> rewards = new ArrayList<>();
+    private final ArrayList<String> preBattleDialogs = new ArrayList<>();
+    private final ArrayList<String> postBattleDialogs = new ArrayList<>();
 
     // rewards[]
     // dialog scenes
@@ -46,10 +49,20 @@ public class Battle {
 
     // TODO: Add dialog scenes
     public Battle dialogBefore(String... s) {
+        preBattleDialogs.addAll(List.of(s));
         return this;
     }
 
     public Battle dialogAfter(String... s) {
+        postBattleDialogs.addAll(List.of(s));
         return this;
+    }
+
+    public ArrayList<String> getPostBattleDialogs() {
+        return postBattleDialogs;
+    }
+
+    public ArrayList<String> getPreBattleDialogs() {
+        return preBattleDialogs;
     }
 }

@@ -6,9 +6,12 @@ public class DebugMode {
     Handler handler;
     private static boolean isDebug = false;
     private static int layerIndex = 0;
+    private static boolean showObjects = true;
 
     public DebugMode(Handler handler) {
+        handler.setDebugMode(this);
         this.handler = handler;
+
     }
 
     public static boolean debugMode() {
@@ -25,5 +28,14 @@ public class DebugMode {
 
     public static void setRenderedLayerIndex(int layerIndex) {
         DebugMode.layerIndex = layerIndex;
+    }
+
+
+    public static boolean isShowObjects() {
+        return showObjects;
+    }
+
+    public static void toggleShowObject() {
+        showObjects = !showObjects;
     }
 }

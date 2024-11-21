@@ -37,8 +37,6 @@ public class Battle extends View {
                         .setAction(() -> viewManager.setView(Views.PAUSE))
                         .setLocation(900, 20),
 
-
-
                 new Button("exit")
                         .setAction(battleManager::abortBattle)
                         .setLocation(680, 20)

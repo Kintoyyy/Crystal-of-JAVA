@@ -34,12 +34,7 @@ public class World {
     }
 
     public ObjectGroup getObjects() {
-        return world.getObjects();
-    }
-
-
-    public Point getSpawnPoint() {
-        return world.getSpawnPoint();
+        return world.getObjectGroup();
     }
 
     public String getName() {
@@ -48,14 +43,6 @@ public class World {
 
     public Battle getBattle(String battleName) {
         return battles.get(battleName);
-    }
-
-    public Point getPlayerLastPosition() {
-        return playerLastPosition;
-    }
-
-    public void setPlayerLastPosition(Point playerLastPosition) {
-        this.playerLastPosition = playerLastPosition;
     }
 
     public World setNpc(Entity... npcObjects) {

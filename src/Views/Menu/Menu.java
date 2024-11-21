@@ -1,6 +1,5 @@
 package Views.Menu;
 
-import Assets.Assets;
 import Components.Button.Button;
 import Utils.CallBackAction;
 import Utils.ImageUtils;

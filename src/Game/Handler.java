@@ -31,12 +31,8 @@ public class Handler {
         return debugMode;
     }
 
-    public int getWidth() {
-        return game.getWidth();
-    }
-
-    public int getHeight() {
-        return game.getHeight();
+    public void setDebugMode(DebugMode debugMode) {
+        this.debugMode = debugMode;
     }
 
     public Game getGame() {
@@ -75,5 +71,13 @@ public class Handler {
 
     public void setBattleManager(BattleManager battleManager) {
         this.battleManager = battleManager;
+    }
+
+    public int getWidth() {
+        return game.getWidth();
+    }
+
+    public int getHeight() {
+        return game.getHeight();
     }
 }

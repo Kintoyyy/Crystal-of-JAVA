@@ -1,13 +1,15 @@
 package Views.Game;
 
-import Assets.Assets;
 import Components.Button.Button;
 import Components.Dialog.Dialog;
 import Utils.CallBackAction;
+import Utils.ImageUtils;
+import Utils.SpriteSheet;
 import Views.View;
 import Views.ViewManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class DialogScene extends View {
     public DialogScene(ViewManager viewManager) {
@@ -39,7 +41,11 @@ public class DialogScene extends View {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.background, 0, 0, handler.getWidth(), handler.getHeight(), null);
+        SpriteSheet backgroundSheet = new SpriteSheet(ImageUtils.loadImage("/Backgrounds/Background_1.png"));
+
+        BufferedImage background = backgroundSheet.crop(0, 0, 800, 678);
+
+        g.drawImage(background, 0, 0, handler.getWidth(), handler.getHeight(), null);
         components.render(g);
     }
 }

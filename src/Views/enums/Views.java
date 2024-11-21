@@ -16,7 +16,7 @@ package Views.enums;
  *     <li>{@link #SELECT_CHARACTER} - Represents the character selection screen before the game starts.</li>
  * </ul>
  *
- * <p>This enum is used in conjunction with the {@link #ViewManager} to manage transitions
+ * <p>This enum is used in conjunction with the ViewManager to manage transitions
  * between these views, and it helps in organizing the game state.</p>
  */
 public enum Views {
@@ -25,5 +25,6 @@ public enum Views {
     BATTLE,           // The battle view where combat or challenges occur.
     PAUSE,            // The overlay that pauses the game.
     SETTINGS,         // The settings view for adjusting game configurations.
+    BATTLE_DIALOG,
     SELECT_CHARACTER  // The character selection view before gameplay begins.
 }

@@ -1,7 +1,10 @@
 package Worlds;
 
-import Entities.Characters.CharacterManager;
+import Game.GameState;
 import Game.Handler;
+import Map.Map;
+import Map.Movement.Camera;
+import Map.Movement.Collision;
 import Map.Movement.Movement;
 import Map.Render;
 
@@ -10,44 +13,34 @@ import java.awt.*;
 public class WorldManager {
     private final Worlds worlds;
     private final Render render;
-    private final Movement movement;
     private String currentWorld = "FOREST";
 
-    public WorldManager(Handler handler) {
-        handler.setWorldManager(this);
+    public WorldManager(GameState gameState, Handler handler) {
+        gameState.getHandler().setWorldManager(this);
+
         this.worlds = new Worlds();
 
-        CharacterManager characterManager = handler.getGameState().getCharacterManger();
+        Camera camera = new Camera(handler, this, 0, 0);
 
-        movement = new Movement(handler, this, characterManager);
+        Collision collision = new Collision(handler);
 
-        this.render = new Render(movement);
+        Movement movement = new Movement(handler, gameState.getCharacterManger(), collision, camera);
+
+        this.render = new Render(handler, movement, this);
     }
 
-    public World getCurrentWorld() {
-        return worlds.getWorld(currentWorld);
+    public Map getCurrentWorld() {
+        return worlds.getWorld(currentWorld).getWorld();
     }
 
     public Battle getBattle(String battleName) {
+
         return worlds.getBattle(currentWorld, battleName);
     }
 
     public void changeWorld(String world) {
-
-        getCurrentWorld().setPlayerLastPosition(movement.getLocation());
-
         this.currentWorld = world;
-
-        getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getPlayerLastPosition());
-
-        movement.setLocation(getCurrentWorld().getSpawnPoint());
-
-//        if (getCurrentWorld().getPlayerLastPosition() == null) {
-//            getCurrentWorld().setPlayerLastPosition(getCurrentWorld().getSpawnPoint());
-//        } else {
-//            movement.setLocation(getCurrentWorld().getPlayerLastPosition());
-//        }
-        render.loadWorld();
+        render.loadWorld(worlds.getWorld(currentWorld).getWorld());
     }
 
     public void tick() {

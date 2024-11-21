@@ -1,14 +1,14 @@
-
 package Map.Tile;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * The TileLayers class is responsible for parsing and storing multiple tile layers from an XML map file.
+ * The TileLayers class parses and stores multiple tile layers from an XML map file.
  */
 public class TileLayers {
-    private int[][][] tiles; // A 3D array to hold tile IDs for multiple layers.
+    private final int[][][] tiles; // A 3D array to store tile IDs for multiple layers.
+    private int playerLayer;
 
     /**
      * Constructs the TileLayers object by parsing layers from the given NodeList.
@@ -18,47 +18,100 @@ public class TileLayers {
      * @param height The height of the map in tiles.
      */
     public TileLayers(NodeList layers, int width, int height) {
-        if (layers != null) {
-            tiles = new int[layers.getLength()][height][width];
+        if (layers == null) {
+            throw new IllegalArgumentException("Layers NodeList cannot be null.");
+        }
 
-            for (int l = 0; l < layers.getLength(); l++) {
-                Element layer = (Element) layers.item(l);
+        int totalLayers = layers.getLength();
+        tiles = new int[totalLayers][height][width];
 
-                int rows = Integer.parseInt(layer.getAttribute("height"));
-                int columns = Integer.parseInt(layer.getAttribute("width"));
-                boolean visible = !layer.hasAttribute("visible");
+        for (int layerIndex = 0; layerIndex < totalLayers; layerIndex++) {
+            Element layer = (Element) layers.item(layerIndex);
+            parseLayer(layer, layerIndex, width, height);
+        }
 
-                if (!visible) {
-                    continue;
-                }
+        // Set the player layer to the middle if not explicitly defined
+        if (this.playerLayer == 0) {
+            this.playerLayer = totalLayers / 2;
+        }
+    }
 
-                String tintcolor = layer.getAttribute("tintcolor");
+    /**
+     * Parses a single layer and populates the tile data.
+     *
+     * @param layer      The XML Element representing the layer.
+     * @param layerIndex The index of the current layer.
+     * @param mapWidth   The width of the map in tiles.
+     * @param mapHeight  The height of the map in tiles.
+     */
+    private void parseLayer(Element layer, int layerIndex, int mapWidth, int mapHeight) {
+        String layerName = layer.getAttribute("name");
+        System.out.println("Parsing layer: " + layerName);
 
-                NodeList properties = layer.getElementsByTagName("properties");
+        int rows = getIntAttribute(layer, "height", mapHeight);
+        int columns = getIntAttribute(layer, "width", mapWidth);
+        boolean isVisible = !layer.hasAttribute("visible") || Boolean.parseBoolean(layer.getAttribute("visible"));
 
-                for (int i = 0; i < properties.getLength(); i++) {
-                    Element property = (Element) properties.item(i);
+        if (isPlayerLayer(layer)) {
+            this.playerLayer = layerIndex;
+        }
 
-                    String name = property.getAttribute("name");
-                    String value = property.getAttribute("value");
-                    String type = property.getAttribute("type");
-                }
+        if (!isVisible || isPlayerLayer(layer)) {
+            return; // Skip invisible layers or player-specific layers
+        }
 
-                NodeList dataNodes = layer.getElementsByTagName("data");
-                if (dataNodes.getLength() > 0) {
-                    String[] values = dataNodes.item(0).getTextContent().trim().split(",");
-                    for (int y = 0; y < rows; y++) {
-                        for (int x = 0; x < columns; x++) {
-                            try {
-                                tiles[l][y][x] = Integer.parseInt(values[x + y * columns].trim());
-                            } catch (NumberFormatException e) {
-                                System.err.println("Tile will not be loaded at layer " + l + ", row " + y + ", column " + x + " id: " + values[x + y * columns]);
-                                tiles[l][y][x] = 0;
-                            }
-                        }
-                    }
+        NodeList dataNodes = layer.getElementsByTagName("data");
+        if (dataNodes.getLength() > 0) {
+            populateTileData(layerIndex, rows, columns, dataNodes.item(0).getTextContent().trim());
+        }
+    }
+
+    /**
+     * Populates the tile data for a specific layer.
+     *
+     * @param layerIndex The index of the current layer.
+     * @param rows       The number of rows in the layer.
+     * @param columns    The number of columns in the layer.
+     * @param data       The comma-separated tile data as a string.
+     */
+    private void populateTileData(int layerIndex, int rows, int columns, String data) {
+        String[] values = data.split(",");
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < columns; x++) {
+                try {
+                    int tileIndex = x + y * columns;
+                    tiles[layerIndex][y][x] = Integer.parseInt(values[tileIndex].trim());
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.err.println("Error parsing tile at layer " + layerIndex + ", row " + y + ", column " + x);
+                    tiles[layerIndex][y][x] = 0; // Default to 0 if parsing fails
                 }
             }
+        }
+    }
+
+    /**
+     * Determines if the given layer is designated as the player layer.
+     *
+     * @param layer The XML Element representing the layer.
+     * @return True if the layer is the player layer, false otherwise.
+     */
+    private boolean isPlayerLayer(Element layer) {
+        return "PLAYER".equals(layer.getAttribute("class"));
+    }
+
+    /**
+     * Safely retrieves an integer attribute from the XML element, with a fallback value.
+     *
+     * @param element      The XML element.
+     * @param attribute    The attribute name.
+     * @param defaultValue The default value if the attribute is not found or invalid.
+     * @return The integer value of the attribute or the default value.
+     */
+    private int getIntAttribute(Element element, String attribute, int defaultValue) {
+        try {
+            return Integer.parseInt(element.getAttribute(attribute));
+        } catch (NumberFormatException e) {
+            return defaultValue;
         }
     }
 
@@ -69,5 +122,14 @@ public class TileLayers {
      */
     public int[][][] getTiles() {
         return tiles;
+    }
+
+    /**
+     * Retrieves the index of the player layer.
+     *
+     * @return The index of the player layer.
+     */
+    public int getPlayerLayer() {
+        return playerLayer;
     }
 }
