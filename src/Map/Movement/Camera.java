@@ -71,15 +71,15 @@ public class Camera {
         // Restrict horizontal offset
         if (xOffset < 0) {
             xOffset = 0;
-        } else if (xOffset > worldManager.getCurrentWorld().getWorldWidth() * Tile.WIDTH - screenWidth) {
-            xOffset = worldManager.getCurrentWorld().getWorldWidth() * Tile.WIDTH - screenWidth;
+        } else if (xOffset > worldManager.getMap().getWorldWidth() * Tile.WIDTH - screenWidth) {
+            xOffset = worldManager.getMap().getWorldWidth() * Tile.WIDTH - screenWidth;
         }
 
         // Restrict vertical offset
         if (yOffset < 0) {
             yOffset = 0;
-        } else if (yOffset > worldManager.getCurrentWorld().getWorldHeight() * Tile.HEIGHT - screenHeight) {
-            yOffset = worldManager.getCurrentWorld().getWorldHeight() * Tile.HEIGHT - screenHeight;
+        } else if (yOffset > worldManager.getMap().getWorldHeight() * Tile.HEIGHT - screenHeight) {
+            yOffset = worldManager.getMap().getWorldHeight() * Tile.HEIGHT - screenHeight;
         }
     }
 

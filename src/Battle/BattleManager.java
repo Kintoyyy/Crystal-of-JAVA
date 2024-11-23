@@ -58,7 +58,7 @@ public class BattleManager {
         }
 
 
-//        System.out.println(" world: " + worldManager.getCurrentWorld() + " enemies: " + battle.getEnemies());
+//        System.out.println(" world: " + worldManager.getMap() + " enemies: " + battle.getEnemies());
 
         loadEnemies(battle.getEnemies());
 

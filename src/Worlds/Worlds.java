@@ -11,7 +11,7 @@ public class Worlds {
 
     public Worlds() {
         this.setWorlds(
-                new World("FOREST", "res/Maps/Forest.tmx").setBattles(
+                new World("FOREST", "res/Maps/Forest.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
                                 new Goblin()
                         ).dialogBefore(
@@ -37,10 +37,8 @@ public class Worlds {
                                 new Orc(),
                                 new Goblin()
                         )
-                ).setNpc(
-                        new Kai()
                 ),
-                new World("ICE", "res/Maps/Snow.tmx").setBattles(
+                new World("ICE", "res/Maps/Snow.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
                                 new Kai(),
                                 new Orc(),
@@ -52,7 +50,7 @@ public class Worlds {
                                 new Goblin()
                         )
                 ),
-                new World("LAVA", "res/Maps/Lava.tmx").setBattles(
+                new World("LAVA", "res/Maps/Lava.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
                                 new Kai(),
                                 new Orc(),
@@ -64,7 +62,7 @@ public class Worlds {
                                 new Goblin()
                         )
                 ),
-                new World("DUNGEON", "res/Maps/Dungeon.tmx").setBattles(
+                new World("DUNGEON", "res/Maps/Dungeon.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
                                 new Kai(),
                                 new Orc(),
@@ -101,4 +99,7 @@ public class Worlds {
         return battle;
     }
 
+    public HashMap<String, World> getWorlds() {
+        return worlds;
+    }
 }

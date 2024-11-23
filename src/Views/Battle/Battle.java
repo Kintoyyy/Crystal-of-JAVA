@@ -23,8 +23,7 @@ public class Battle extends View {
         components.init(
                 new CharacterLayout(battleManager)
 //                        .scale(8) // not working
-                        .setLocation(80, 400)
-                        ,
+                        .setLocation(80, 400),
 
                 new SkillMenu(battleManager)
                         .setLocation(500, 650),

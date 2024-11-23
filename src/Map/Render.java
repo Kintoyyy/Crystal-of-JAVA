@@ -1,8 +1,8 @@
 package Map;
 
-import Animations.enums.DIRECTION;
+import Animations.Animation;
+import Animations.AnimationManager;
 import Animations.enums.TYPE;
-import Entities.Enemies.Kai;
 import Entities.Enemies.Orc;
 import Entities.Entity;
 import Map.Movement.Camera;
@@ -58,9 +58,11 @@ public class Render {
 
     private int playerLayer;
 
-    private WorldManager worldManager;
+    private final WorldManager worldManager;
 
-    Entity entity = new Orc();
+    private final AnimationManager animationManager;
+
+//    Entity entity = new Orc();
 
     /**
      * Constructs a Render object using parsed world data and a movement handler.
@@ -73,7 +75,8 @@ public class Render {
         this.gameHeight = handler.getHeight();
         this.gameWidth = handler.getWidth();
         this.worldManager = worldManager;
-        loadWorld(worldManager.getCurrentWorld());
+        this.animationManager = worldManager.getAnimationManager();
+        loadWorld(worldManager.getMap());
     }
 
     public void loadWorld(Map map) {
@@ -89,7 +92,9 @@ public class Render {
         this.height = map.getWorldHeight();
         this.TileLayers = map.getTileLayers();
         this.tileTypes = map.getTileTypes();
+
         this.objectGroup = map.getObjectGroup();
+
         this.playerLayer = map.getPlayerLayer();
 
         movement.setLocation(map.getSpawnPoint());
@@ -101,7 +106,8 @@ public class Render {
      */
     public void tick() {
         movement.tick();
-        entity.getAnimation().tick();
+        animationManager.tick();
+//        entity.getAnimation().tick();
     }
 
     /**
@@ -138,20 +144,15 @@ public class Render {
             }
             // render player
             if (layer == this.playerLayer) {
+                animationManager.render(g, objectGroup.getNpcObjects(), worldManager.getWorld(), camera);
                 movement.render(g);
             }
         }
 
-        for (Object npc : objectGroup.getNpc()) {
-            System.out.println(entity);
-            Point pos = npc.getPosition();
-            entity.render2(g, (int) (pos.x - camera.getXOffset()), (int) (pos.y - camera.getYOffset()));
-        }
 
 
         // Render object groups
         if (DebugMode.isShowObjects()) {
-
             objectGroup.render(g, (int) camera.getXOffset(), (int) camera.getYOffset());
         }
     }

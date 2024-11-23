@@ -159,12 +159,6 @@ public class Object {
      * @param yOffset The vertical offset.
      */
     public void render(Graphics g, int xOffset, int yOffset) {
-
-        if (CLASS == CLASS.NPC) {
-            g.setColor(Color.RED);
-            g.drawString("RENDER  NPC", position.x - xOffset, position.y - yOffset);
-        }
-
         // Debugging only
         g.setColor(Color.RED);
         g.drawString(CLASS + "-" + key + "-" + type, position.x - xOffset, position.y - yOffset);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="72" height="36" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="39">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="72" height="36" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="98">
  <tileset firstgid="1" name="Dungeon_1" tilewidth="16" tileheight="16" tilecount="117" columns="9">
   <image source="../Dungeons/Dungeon_1/Dungeon_1.png" width="144" height="208"/>
   <wangsets>
@@ -269,5 +269,17 @@
   <object id="36" type="COLLISION" x="81.2727" y="332.182" width="14.1818" height="18.3636"/>
   <object id="37" type="COLLISION" x="49.2727" y="299.636" width="13.8182" height="18"/>
   <object id="38" type="COLLISION" x="198.727" y="343.727" width="3.72727" height="6.63636"/>
+  <object id="39" name="SKELETON" type="NPC" x="1081" y="261">
+   <properties>
+    <property name="DIRECTION" value="LEFT"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="40" name="SKELETON" type="NPC" x="1076" y="294">
+   <properties>
+    <property name="DIRECTION" value="LEFT"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
 </map>

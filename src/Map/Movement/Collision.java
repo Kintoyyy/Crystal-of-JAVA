@@ -32,7 +32,7 @@ public class Collision {
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
 
         // Loop through objects and check for collisions
-        for (Object object : worldManager.getCurrentWorld().getObjectGroup().getObjects()) {
+        for (Object object : worldManager.getMap().getObjectGroup().getObjects()) {
 
             // Check polygon-rectangle collision using Separating Axis Theorem (SAT)
             if (!object.getBounds().intersects(collisionBounds)) continue;
