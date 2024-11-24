@@ -79,23 +79,23 @@ public abstract class Skill {
     public abstract void useSkill();
 
     public void attack(BattleManager battleManager) {
-//        this.enemy = battleManagerOld.getCurrentEnemy();
-//
-//        if(!battleManagerOld.getCharacterManager().isPlayerAlive()){
-//            System.out.println("Player is dead");
-//            return;
-//        }
-//
-//        if(!battleManagerOld.isPlayersTurn()){
+        this.enemy = battleManager.getCurrentEnemy();
+
+        if(!battleManager.getCharacterManager().isPlayerAlive()){
+            System.out.println("Player is dead");
+            return;
+        }
+
+//        if(!battleManager.isPlayersTurn()){
 //            System.out.println("Not players turn");
 //            return;
 //        }
-//
-//        if (checkIfSkillIsAvailable()) {
-//            useSkill();
-//            battleManagerOld.updateTurnState();
-//            setBaseTurns();
-//        }
+
+        if (checkIfSkillIsAvailable()) {
+            useSkill();
+            battleManager.updateTurnState();
+            setBaseTurns();
+        }
     }
 
     private void setBaseTurns() {

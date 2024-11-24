@@ -34,7 +34,7 @@ public class SkillMenu extends Menu {
         for (Skill skill : skills) {
             SkillButton frame = (SkillButton) new SkillButton(skill)
                     .setRightClickAction(() -> {
-//                        skill.attack(battleManagerOld);
+                        skill.attack(battleManager);
                         System.out.println("Skill " + skill.getName() + " clicked");
                     }).setLeftClickAction(() -> {
                         System.out.println("View Skill " + skill.getName());
