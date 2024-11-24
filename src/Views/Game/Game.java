@@ -21,7 +21,7 @@ public class Game extends View {
 
     public Game(ViewManager viewManager) {
         super(viewManager);
-        this.worldManager = handler.getGameState().getWorldManager();
+        this.worldManager = handler.getWorldManager();
         // SHOULD BE IN VIEW MANAGER
 
 //        this.worldManager = new WorldManager(handler);

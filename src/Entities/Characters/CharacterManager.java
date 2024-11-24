@@ -1,6 +1,7 @@
 package Entities.Characters;
 
 import Entities.Characters.Skills.Skill;
+import Game.Handler;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,8 @@ public class CharacterManager {
     /**
      * Initializes the {@code CharacterManager} with default characters.
      */
-    public CharacterManager() {
+    public CharacterManager(Handler handler) {
+        handler.setCharacterManager(this);
         addCharacter(new Kent());
         addCharacter(new Cedi());
         addCharacter(new Nathan());

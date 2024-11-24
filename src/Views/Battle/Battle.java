@@ -61,7 +61,7 @@ public class Battle extends View {
         components.render(g);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString(handler.getGameState().getCharacterManger().getPlayer().getSkills().toString(), 20, 50);
+        g.drawString(handler.getCharacterManager().getPlayer().getSkills().toString(), 20, 50);
 //        g.drawString((battleManagerOld.getTurnState() == Turn.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
 //        g.drawString(handler.getGameState(), 20, 70);
 

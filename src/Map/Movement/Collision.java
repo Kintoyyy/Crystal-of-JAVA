@@ -32,7 +32,7 @@ public class Collision {
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
 
         // Loop through objects and check for collisions
-        for (Object object : worldManager.getMap().getObjectGroup().getObjects()) {
+        for (Object object : worldManager.getCurrentWorld().getObjects()) {
 
             // Check polygon-rectangle collision using Separating Axis Theorem (SAT)
             if (!object.getBounds().intersects(collisionBounds)) continue;
@@ -41,8 +41,8 @@ public class Collision {
 
             switch (object.getClassType()) {
                 case TELEPORT -> {
-                    System.out.println("Changing world to " + object.getKey());
-                    worldManager.changeWorld(object.getKey());
+                    System.out.println("Changing world to " + object.getName());
+                    worldManager.changeWorld(object.getName());
                 }
                 case INTERACT -> {
 //sTODO: Should have an interact ui Manager, only temporary ui elements
@@ -50,11 +50,15 @@ public class Collision {
                     System.out.println("Interaction ");
                 }
                 case BATTLE -> {
-                    Battle battle = worldManager.getBattle(object.getKey());
-                    battleManager.startBattle(battle);
+                    try {
+                        Battle battle = worldManager.getBattle(object.getName());
+                        battleManager.startBattle(battle);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 default -> {
-                    System.out.println("Collision with object: " + object.getKey() + " Type: " + object.getClassType());
+                    System.out.println("Collision with object: " + object.getName() + " Type: " + object.getClassType());
                 }
             }
         }

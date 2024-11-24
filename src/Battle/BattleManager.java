@@ -128,7 +128,7 @@ public class BattleManager {
     }
 
     public CharacterManager getCharacterManager() {
-        return handler.getGameState().getCharacterManger();
+        return handler.getCharacterManager();
     }
 
     public void abortBattle() {

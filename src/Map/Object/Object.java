@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Object {
-    private final String key;
+    private final String name;
     private final CLASS CLASS;
     private final Point position;
     private final int width;
     private final int height;
+    private final int id;
     private final Type type;
     private final List<Properties> properties = new ArrayList<>();
     private int[] polygonX = new int[0];
@@ -28,9 +29,11 @@ public class Object {
      */
     public Object(Element objectElement) {
 
-        this.key = objectElement.hasAttribute("name") ?
+        this.name = objectElement.hasAttribute("name") ?
                 objectElement.getAttribute("name") :
                 objectElement.getAttribute("id");
+
+        this.id = Integer.parseInt(objectElement.getAttribute("id"));
 
         this.position = new Point(
                 parseScaledAttribute(objectElement, "x"),
@@ -49,7 +52,7 @@ public class Object {
      * Parse and scale a float attribute from the XML element.
      *
      * @param element   The XML element.
-     * @param attribute The attribute key.
+     * @param attribute The attribute name.
      * @return The scaled integer value.
      */
     private int parseScaledAttribute(Element element, String attribute) {
@@ -85,7 +88,7 @@ public class Object {
      * Check if the XML element has a specific child tag.
      *
      * @param element The XML element.
-     * @param tag     The tag key.
+     * @param tag     The tag name.
      * @return True if the child tag exists, false otherwise.
      */
     private boolean hasChildTag(Element element, String tag) {
@@ -143,7 +146,7 @@ public class Object {
             for (int j = 0; j < propertyNodes.getLength(); j++) {
                 Element property = (Element) propertyNodes.item(j);
                 properties.add(new Properties(
-                        property.getAttribute("key"),
+                        property.getAttribute("name"),
                         property.getAttribute("value"),
                         property.getAttribute("type")
                 ));
@@ -161,7 +164,7 @@ public class Object {
     public void render(Graphics g, int xOffset, int yOffset) {
         // Debugging only
         g.setColor(Color.RED);
-        g.drawString(CLASS + "-" + key + "-" + type, position.x - xOffset, position.y - yOffset);
+        g.drawString(CLASS + "-" + name + "-" + type, position.x - xOffset, position.y - yOffset);
         switch (type) {
             case RECTANGLE -> g.drawRect(position.x - xOffset, position.y - yOffset, width, height);
             case ELLIPSE -> g.drawOval(position.x - xOffset, position.y - yOffset, width, height);
@@ -250,15 +253,46 @@ public class Object {
         return ellipsePolygon;
     }
 
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
     public CLASS getClassType() {
         return CLASS;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public List<Properties> getProperties() {
         return new ArrayList<>(properties);
+    }
+
+    public Properties getProperty(String name) {
+        for (Properties property : properties) {
+            if (property.name().equals(name)) {
+                return property;
+            }
+        }
+        return null;
+    }
+
+    public boolean hasProperty(String name) {
+        for (Properties property : properties) {
+            if (property.name().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isEnemy() {
+        for (Properties property : properties) {
+            if (property.type().equals("bool") && property.name().equals("ENEMY")) {
+                return true;
+            }
+        }
+        return false;
     }
 }

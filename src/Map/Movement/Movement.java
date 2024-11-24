@@ -26,9 +26,9 @@ public class Movement {
     private final InputKeyboardListener keyboard; // Listens for keyboard input
     private final Collision collision;
 
-    public Movement(Handler handler, CharacterManager characterManager, Collision collision, Camera camera) {
+    public Movement(Handler handler, Collision collision, Camera camera) {
         this.keyboard = handler.getKeyManager();
-        this.characterManager = characterManager;
+        this.characterManager = handler.getCharacterManager();
         this.collision = collision;
         this.camera = camera;
         this.x = 0;

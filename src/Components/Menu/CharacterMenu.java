@@ -16,11 +16,11 @@ public class CharacterMenu extends Menu {
     public CharacterMenu(Handler handler) {
         super();
         this.handler = handler;
-        if (handler == null || handler.getGameState() == null || handler.getGameState().getCharacterManger() == null) {
+        if (handler == null || handler.getCharacterManager() == null) {
             throw new IllegalArgumentException("Handler, GameState, or CharacterManager cannot be null");
         }
 
-        this.characters = handler.getGameState().getCharacterManger();
+        this.characters = handler.getCharacterManager();
         this.childComponents = new ArrayList<>();
 
         initCharacterFrames();

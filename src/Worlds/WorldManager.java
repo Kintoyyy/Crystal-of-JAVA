@@ -1,7 +1,6 @@
 package Worlds;
 
 import Animations.AnimationManager;
-import Game.GameState;
 import Game.Handler;
 import Map.Map;
 import Map.Movement.Camera;
@@ -14,17 +13,17 @@ import java.awt.*;
 public class WorldManager {
     private final Worlds worlds = new Worlds();
     private final Render render;
-    private String currentWorld = "FOREST";
     private final AnimationManager animationManager;
+    private String currentWorld = "FOREST";
 
-    public WorldManager(GameState gameState, Handler handler) {
-        gameState.getHandler().setWorldManager(this);
+    public WorldManager(Handler handler) {
+        handler.setWorldManager(this);
 
         Camera camera = new Camera(handler, this, 0, 0);
 
         Collision collision = new Collision(handler);
 
-        Movement movement = new Movement(handler, gameState.getCharacterManger(), collision, camera);
+        Movement movement = new Movement(handler, collision, camera);
 
         this.animationManager = new AnimationManager(worlds);
 
@@ -35,12 +34,11 @@ public class WorldManager {
         return worlds.getWorld(currentWorld).getWorld();
     }
 
-    public World getWorld() {
+    public World getCurrentWorld() {
         return worlds.getWorld(currentWorld);
     }
 
     public Battle getBattle(String battleName) {
-
         return worlds.getBattle(currentWorld, battleName);
     }
 
