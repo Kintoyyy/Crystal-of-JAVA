@@ -35,7 +35,10 @@ public class Assets {
         ui_frame[0] = ui_bars.crop(96, 6, 46, 22);
         ui_frame[1] = ui_inventory.crop(33, 25, 196, 160);
 
+
+
         SpriteSheet backgroundSheet = new SpriteSheet(ImageUtils.loadImage("/Backgrounds/Background_1.png"));
+
         background = backgroundSheet.crop(0,0,800,678);
 
         bush = sheet.crop(0, height * 3, width, height);

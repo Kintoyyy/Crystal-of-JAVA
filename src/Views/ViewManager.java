@@ -3,15 +3,16 @@ package Views;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.SimpleTimeZone;
 
 import Game.Handler;
 import Views.Battle.Battle;
 import Views.Game.Game;
 import Views.Menu.Menu;
 import Views.Menu.Setting;
+import Views.Overlay.BattleDialog;
 import Views.Overlay.Pause;
 import Views.enums.Views;
+
 /**
  * The ViewManager class manages different views and their respective layers in the game.
  * It is responsible for transitioning between views, handling overlays, and managing
@@ -52,25 +53,23 @@ public class ViewManager {
      * @param handler The Handler responsible for managing game state and input.
      */
     public ViewManager(Handler handler) {
+        handler.setViewManager(this);
         this.handler = handler;
-        this.handler.setViewManager(this);
-        initializeViews();
-
-        setView(Views.GAME);
     }
 
     /**
      * Initializes the available views for the game.
      * This method creates instances of all views and stores them in the {@link #views} map.
      */
-    private void initializeViews() {
+    public void initializeViews() {
         views.put(Views.GAME, new Game(this));
         views.put(Views.BATTLE, new Battle(this));
         views.put(Views.MENU, new Menu(this));
         views.put(Views.SETTINGS, new Setting(this));
         views.put(Views.SELECT_CHARACTER, new Menu(this));
         views.put(Views.PAUSE, new Pause(this));
-
+        views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
+        setView(Views.GAME);
     }
 
     /**
@@ -87,7 +86,7 @@ public class ViewManager {
         handler.getInputMouseListener().setComponentManager(selectedView.getComponentManager());
 
         if (selectedView.isOverlay) {
-            if(layers.getLast().isOverlay){
+            if (layers.getLast().isOverlay) {
                 layers.removeLast();
             }
             layers.add(selectedView);
@@ -148,9 +147,7 @@ public class ViewManager {
      */
     public void tick() {
         if (!layers.isEmpty()) {
-//            System.out.println(layers.size());
-//            layers.forEach(View::tick);
-            for(View layer: layers){
+            for (View layer : layers) {
                 layer.tick();
             }
         }
@@ -191,5 +188,9 @@ public class ViewManager {
      */
     public boolean isInGame() {
         return layers.contains(views.get(Views.GAME));
+    }
+
+    public View getCurrentView() {
+        return layers.getLast();
     }
 }

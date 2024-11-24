@@ -56,23 +56,19 @@ public class Game implements Runnable {
 
         Handler handler = new Handler(this);
 
-        gameState = new GameState(handler);
+        viewManager = new ViewManager(handler);
 
+        gameState = new GameState(handler);
         // set the debug mode
         debugStats = new DebugMode(handler);
 
-        // set the game state
-        handler.setGameState(gameState);
-        
-        viewManager = new ViewManager(handler);
+        viewManager.initializeViews();
     }
 
     private void tick() { //updates all variables
         if (viewManager.hasLayers()) {
             viewManager.tick();
         }
-
-        gameState.tick();
     }
 
 

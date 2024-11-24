@@ -12,7 +12,6 @@ public class Pause extends View {
     public Pause(ViewManager viewManager) {
         super(viewManager);
         this.isOverlay = true;
-
         initComponents(viewManager);
     }
 

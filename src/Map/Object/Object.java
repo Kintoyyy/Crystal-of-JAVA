@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Object {
-    private final String name;
-    private final ClassType classType;
+    private final String key;
+    private final CLASS CLASS;
     private final Point position;
     private final int width;
     private final int height;
@@ -28,7 +28,7 @@ public class Object {
      */
     public Object(Element objectElement) {
 
-        this.name = objectElement.hasAttribute("name") ?
+        this.key = objectElement.hasAttribute("name") ?
                 objectElement.getAttribute("name") :
                 objectElement.getAttribute("id");
 
@@ -41,7 +41,7 @@ public class Object {
         this.height = parseScaledAttribute(objectElement, "height");
 
         this.type = determineType(objectElement);
-        this.classType = parseTriggerType(objectElement);
+        this.CLASS = parseTriggerType(objectElement);
         parseProperties(objectElement);
     }
 
@@ -49,7 +49,7 @@ public class Object {
      * Parse and scale a float attribute from the XML element.
      *
      * @param element   The XML element.
-     * @param attribute The attribute name.
+     * @param attribute The attribute key.
      * @return The scaled integer value.
      */
     private int parseScaledAttribute(Element element, String attribute) {
@@ -67,7 +67,7 @@ public class Object {
 
 
         if (width > 0 && height > 0) {
-            if(hasChildTag(objectElement, "ellipse")){
+            if (hasChildTag(objectElement, "ellipse")) {
                 return Type.ELLIPSE;
             } else {
                 return Type.RECTANGLE;
@@ -85,7 +85,7 @@ public class Object {
      * Check if the XML element has a specific child tag.
      *
      * @param element The XML element.
-     * @param tag     The tag name.
+     * @param tag     The tag key.
      * @return True if the child tag exists, false otherwise.
      */
     private boolean hasChildTag(Element element, String tag) {
@@ -119,14 +119,14 @@ public class Object {
      * Parse the trigger type from the XML element. Defaults to NONE if not found.
      *
      * @param objectElement The XML element.
-     * @return The parsed ClassType.
+     * @return The parsed CLASS.
      */
-    private ClassType parseTriggerType(Element objectElement) {
+    private CLASS parseTriggerType(Element objectElement) {
         String type = objectElement.getAttribute("type");
         try {
-            return type.isEmpty() ? ClassType.NONE : ClassType.valueOf(type.toUpperCase());
+            return type.isEmpty() ? CLASS.NONE : CLASS.valueOf(type.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return ClassType.NONE;
+            return CLASS.NONE;
         }
     }
 
@@ -143,7 +143,7 @@ public class Object {
             for (int j = 0; j < propertyNodes.getLength(); j++) {
                 Element property = (Element) propertyNodes.item(j);
                 properties.add(new Properties(
-                        property.getAttribute("name"),
+                        property.getAttribute("key"),
                         property.getAttribute("value"),
                         property.getAttribute("type")
                 ));
@@ -159,15 +159,9 @@ public class Object {
      * @param yOffset The vertical offset.
      */
     public void render(Graphics g, int xOffset, int yOffset) {
-
-        if(classType == ClassType.NPC){
-            g.setColor(Color.RED);
-            g.drawString("NPC", position.x - xOffset, position.y - yOffset);
-        }
-
         // Debugging only
         g.setColor(Color.RED);
-            g.drawString(classType + "-" + name + "-" + type, position.x - xOffset, position.y - yOffset);
+        g.drawString(CLASS + "-" + key + "-" + type, position.x - xOffset, position.y - yOffset);
         switch (type) {
             case RECTANGLE -> g.drawRect(position.x - xOffset, position.y - yOffset, width, height);
             case ELLIPSE -> g.drawOval(position.x - xOffset, position.y - yOffset, width, height);
@@ -223,23 +217,11 @@ public class Object {
 
             case ELLIPSE:
                 // Approximate the ellipse with a polygon by sampling points along the perimeter
-                Polygon ellipsePolygon = new Polygon();
-                int numPoints = 20; // Number of points to sample along the ellipse
-                double angleIncrement = Math.PI * 2 / numPoints; // Angle increment for each point
-                int centerX = position.x + width / 2; // Calculate the center X based on top-left anchor
-                int centerY = position.y + height / 2; // Calculate the center Y based on top-left anchor
-                for (int i = 0; i < numPoints; i++) {
-                    double angle = i * angleIncrement;
-                    int x = (int) (centerX + (width / 2.0) * Math.cos(angle)); // X coordinate of point
-                    int y = (int) (centerY + (height / 2.0) * Math.sin(angle)); // Y coordinate of point
-                    ellipsePolygon.addPoint(x, y);
-                }
-                return ellipsePolygon;
+                return getEllipsePolygon();
 
             case POLYGON:
                 // Return the polygon with the given vertices
-                Polygon polygon = new Polygon(polygonX, polygonY, polygonX.length);
-                return polygon;
+                return new Polygon(polygonX, polygonY, polygonX.length);
 
             case POINT:
                 // A point is just a single location, so it can be treated as a degenerate polygon (with 1 point)
@@ -253,13 +235,27 @@ public class Object {
     }
 
 
-
-    public String getName() {
-        return name;
+    private Polygon getEllipsePolygon() {
+        Polygon ellipsePolygon = new Polygon();
+        int numPoints = 20; // Number of points to sample along the ellipse
+        double angleIncrement = Math.PI * 2 / numPoints; // Angle increment for each point
+        int centerX = position.x + width / 2; // Calculate the center X based on top-left anchor
+        int centerY = position.y + height / 2; // Calculate the center Y based on top-left anchor
+        for (int i = 0; i < numPoints; i++) {
+            double angle = i * angleIncrement;
+            int x = (int) (centerX + (width / 2.0) * Math.cos(angle)); // X coordinate of point
+            int y = (int) (centerY + (height / 2.0) * Math.sin(angle)); // Y coordinate of point
+            ellipsePolygon.addPoint(x, y);
+        }
+        return ellipsePolygon;
     }
 
-    public ClassType getClassType() {
-        return classType;
+    public String getKey() {
+        return key;
+    }
+
+    public CLASS getClassType() {
+        return CLASS;
     }
 
     public List<Properties> getProperties() {

@@ -28,9 +28,9 @@ public class TileTypes {
             Element tileSet = (Element) filesets.item(i);
 
             // Parse attributes with validation
-            int tileWidth = parseIntOrDefault(tileSet.getAttribute("tilewidth"), 0);
-            int tileHeight = parseIntOrDefault(tileSet.getAttribute("tileheight"), 0);
-            int firstId = parseIntOrDefault(tileSet.getAttribute("firstgid"), 0);
+            int tileWidth = parseIntOrDefault(tileSet.getAttribute("tilewidth"));
+            int tileHeight = parseIntOrDefault(tileSet.getAttribute("tileheight"));
+            int firstId = parseIntOrDefault(tileSet.getAttribute("firstgid"));
 
             if (tileWidth == 0 || tileHeight == 0 || firstId == 0) {
                 throw new IllegalArgumentException("Invalid tileset attributes: tileWidth, tileHeight, or firstGid is zero.");
@@ -48,8 +48,8 @@ public class TileTypes {
             }
 
             String name = imageElement.getAttribute("name");
-            int imageWidth = parseIntOrDefault(imageElement.getAttribute("width"), 0);
-            int imageHeight = parseIntOrDefault(imageElement.getAttribute("height"), 0);
+            int imageWidth = parseIntOrDefault(imageElement.getAttribute("width"));
+            int imageHeight = parseIntOrDefault(imageElement.getAttribute("height"));
 
             if (imageWidth == 0 || imageHeight == 0) {
                 throw new IllegalArgumentException("Invalid image dimensions: width or height is zero.");
@@ -94,15 +94,14 @@ public class TileTypes {
     /**
      * Safely parses an integer value from a string, returning a default value if parsing fails.
      *
-     * @param value        The string to parse.
-     * @param defaultValue The default value to return in case of an error.
+     * @param value The string to parse.
      * @return The parsed integer or the default value if parsing fails.
      */
-    private int parseIntOrDefault(String value, int defaultValue) {
+    private int parseIntOrDefault(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            return defaultValue;
+            return 0;
         }
     }
 }

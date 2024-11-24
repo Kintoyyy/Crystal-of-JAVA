@@ -1,7 +1,5 @@
 package Map;
 
-import Entities.Entity;
-import Map.Object.Object;
 import Map.Tile.TileLayers;
 import Map.Tile.TileTypes;
 import Map.Object.ObjectGroup;
@@ -13,137 +11,133 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
 
 /**
- * The Map class is responsible for parsing a .tmx map file to extract world data such as dimensions,
- * spawn positions, tile layers, and tile types.
+ * The Map class is responsible for parsing a .tmx map file and extracting information such as dimensions,
+ * spawn positions, tile layers, tile types, and object data.
  */
 public class Map {
 
-    /**
-     * Width of the world in tiles.
-     */
-    private int worldWidth;
+    private int worldWidth;  // Width of the world in tiles.
+    private int worldHeight; // Height of the world in tiles.
+    private Point spawnPoint = new Point(0, 0); // Default spawn point (0, 0).
 
-    /**
-     * Height of the world in tiles.
-     */
-    private int worldHeight;
+    private int[][][] tileLayers;  // 3D array representing all tile layers.
+    private TileTypes tileTypes;  // Object for managing tileset data.
+    private ObjectGroup objectGroup;  // Object for managing object and trigger data.
 
-
-    private Point spawnPoint = new Point(0, 0);
-
-    /**
-     * 3D array representing the tile layers in the world.
-     */
-    private int[][][] tilesLayer;
-
-    /**
-     * TileTypes object for managing the tileset data.
-     */
-    private TileTypes tileTypes;
-
-    /**
-     * ObjectGroup object for managing trigger data.
-     */
-    private ObjectGroup objectGroup;
+    private int playerLayer; // The layer where the player resides.
 
     /**
      * Constructs a Map object by parsing a .tmx map file.
      *
-     * @param worldPath Path to the .tmx map file to parse.
+     * @param mapPath Path to the .tmx map file.
      */
-    public Map(String worldPath) {
+    public Map(String mapPath) {
         try {
-            // Load the .tmx map file
-            File inputFile = new File(worldPath);
+            File mapFile = new File(mapPath);
+
+            // Parse the XML document from the map file.
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputFile);
+            Document document = dBuilder.parse(mapFile);
 
-            // Extract the root "map" element
-            NodeList map = doc.getElementsByTagName("map");
-            if (map.getLength() > 0) {
-                Element mapElement = (Element) map.item(0);
+            // Extract the root <map> element.
+            NodeList mapNodes = document.getElementsByTagName("map");
+            if (mapNodes.getLength() > 0) {
+                Element mapElement = (Element) mapNodes.item(0);
 
-                // Retrieve map dimensions
+                // Parse map dimensions.
                 this.worldWidth = Integer.parseInt(mapElement.getAttribute("width"));
                 this.worldHeight = Integer.parseInt(mapElement.getAttribute("height"));
 
-                System.out.println("Creating world: "  + worldPath + " with world dimensions of " + worldWidth + " by " + worldHeight + " tiles");
+                System.out.printf("Loaded map: %s (%dx%d tiles)%n", mapPath, worldWidth, worldHeight);
 
-                // Initialize tile types using the tilesets
-                NodeList tilesets = mapElement.getElementsByTagName("tileset");
-                this.tileTypes = new TileTypes(tilesets);
+                // Parse tilesets.
+                NodeList tilesetNodes = mapElement.getElementsByTagName("tileset");
+                this.tileTypes = new TileTypes(tilesetNodes);
 
-                // Map tile layers
-                NodeList layers = mapElement.getElementsByTagName("layer");
-                this.tilesLayer = new TileLayers(layers, this.worldWidth, this.worldHeight).getTiles();
+                // Parse tile layers.
+                NodeList layerNodes = mapElement.getElementsByTagName("layer");
+                TileLayers tileLayerParser = new TileLayers(layerNodes, worldWidth, worldHeight);
+                this.tileLayers = tileLayerParser.getTiles();
+                this.playerLayer = tileLayerParser.getPlayerLayer();
 
-                // Map triggers
-                NodeList objectGroups = mapElement.getElementsByTagName("objectgroup");
-                this.objectGroup = new ObjectGroup(objectGroups);
+                // Parse object groups (e.g., triggers, spawn points).
+                NodeList objectGroupNodes = mapElement.getElementsByTagName("objectgroup");
+                this.objectGroup = new ObjectGroup(objectGroupNodes);
 
-                this.spawnPoint = objectGroup.getPawnPoint();
+                // Retrieve the spawn point from the object group.
+                this.spawnPoint = objectGroup.getSpawnPoint();
+            } else {
+                System.err.println("Error: Map file does not contain a valid <map> element.");
             }
         } catch (Exception e) {
+            System.err.printf("Failed to parse map file '%s': %s%n", mapPath, e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Retrieves the parsed tile layers.
+     * Returns the tile layers as a 3D array.
      *
-     * @return A 3D array representing the tile layers.
+     * @return A 3D array representing the tile layers ([layer][y][x]).
      */
-    public int[][][] getLayers() {
-        return tilesLayer;
+    public int[][][] getTileLayers() {
+        return tileLayers;
     }
 
     /**
-     * Retrieves the TileTypes object containing tileset data.
+     * Returns the TileTypes object containing tileset data.
      *
-     * @return The TileTypes object.
+     * @return TileTypes object.
      */
     public TileTypes getTileTypes() {
         return tileTypes;
     }
 
     /**
-     * Retrieves the ObjectGroup object containing trigger data.
+     * Returns the ObjectGroup object containing triggers and object data.
      *
-     * @return The ObjectGroup object.
+     * @return ObjectGroup object.
      */
-    public ObjectGroup getObjects() {
+    public ObjectGroup getObjectGroup() {
         return objectGroup;
     }
 
     /**
-     * Retrieves the width of the world in tiles.
+     * Returns the width of the world in tiles.
      *
-     * @return The world width.
+     * @return World width.
      */
     public int getWorldWidth() {
         return worldWidth;
     }
 
     /**
-     * Retrieves the height of the world in tiles.
+     * Returns the height of the world in tiles.
      *
-     * @return The world height.
+     * @return World height.
      */
     public int getWorldHeight() {
         return worldHeight;
     }
 
     /**
-     * Retrieves the x-coordinate of the spawn point.
+     * Returns the spawn point for the player as a Point object.
      *
-     * @return The x-coordinate of the spawn point.
+     * @return Spawn point (x, y).
      */
     public Point getSpawnPoint() {
         return spawnPoint;
     }
 
+    /**
+     * Returns the index of the player's layer.
+     *
+     * @return Player layer index.
+     */
+    public int getPlayerLayer() {
+        return playerLayer;
+    }
 }

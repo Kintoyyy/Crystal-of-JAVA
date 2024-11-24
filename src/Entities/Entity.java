@@ -1,6 +1,8 @@
 package Entities;
 
 import Animations.Animation;
+import Animations.enums.DIRECTION;
+import Animations.enums.TYPE;
 import Entities.Common.Effects.Effect;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
@@ -60,6 +62,12 @@ public abstract class Entity {
      * @param yOffset
      */
     public abstract void render(Graphics g, int xOffset, int yOffset);
+
+    public void render2(Graphics g, int xOffset, int yOffset) {
+        g.drawImage(animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), xOffset, yOffset, width * 4, height * 4, null);
+    }
+
+    ;
 
     public float getX() {
         return x;

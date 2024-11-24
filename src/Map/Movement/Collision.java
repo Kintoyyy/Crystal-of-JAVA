@@ -1,20 +1,64 @@
 package Map.Movement;
 
+import Battle.BattleManager;
 import Game.Handler;
 import Map.Object.Object;
-import Map.Object.ClassType;
+import Map.Object.CLASS;
+import Worlds.Battle;
+import Worlds.WorldManager;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Collision {
-    private final Movement movement;
-    private final Handler handler;
+    private final WorldManager worldManager;
+    private final BattleManager battleManager;
 
-    public Collision(Handler handler, Movement movement) {
-        this.movement = movement;
-        this.handler = handler;
+    public Collision(Handler handler) {
+        this.worldManager = handler.getWorldManager();
+        this.battleManager = handler.getBattleManager();
+    }
+
+    /**
+     * Checks for collisions with objects based on the movement offsets.
+     *
+     * @param xOffset Horizontal offset for the collision check
+     * @param yOffset Vertical offset for the collision check
+     * @return False if a collision with a CLASS. COLLISION object is detected, true otherwise
+     */
+    public boolean objectCollisions(float xOffset, float yOffset, Movement movement) {
+        // Precompute the collision bounds for the moving entity
+        var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
+
+        // Loop through objects and check for collisions
+        for (Object object : worldManager.getMap().getObjectGroup().getObjects()) {
+
+            // Check polygon-rectangle collision using Separating Axis Theorem (SAT)
+            if (!object.getBounds().intersects(collisionBounds)) continue;
+
+            if (object.getClassType() == CLASS.COLLISION) return false;
+
+            switch (object.getClassType()) {
+                case TELEPORT -> {
+                    System.out.println("Changing world to " + object.getKey());
+                    worldManager.changeWorld(object.getKey());
+                }
+                case INTERACT -> {
+//sTODO: Should have an interact ui Manager, only temporary ui elements
+//                gameState.getViewManager().getCurrentView();
+                    System.out.println("Interaction ");
+                }
+                case BATTLE -> {
+                    Battle battle = worldManager.getBattle(object.getKey());
+                    battleManager.startBattle(battle);
+                }
+                default -> {
+                    System.out.println("Collision with object: " + object.getKey() + " Type: " + object.getClassType());
+                }
+            }
+        }
+        return true; // No collision detected
     }
 
     /**
@@ -29,55 +73,18 @@ public class Collision {
         return true;
     }
 
-    /**
-     * Checks for collisions with objects based on the movement offsets.
-     *
-     * @param xOffset Horizontal offset for the collision check
-     * @param yOffset Vertical offset for the collision check
-     * @return False if a collision with a ClassType. COLLISION object is detected, true otherwise
-     */
-    public boolean objectCollisions(float xOffset, float yOffset) {
-        // Precompute the collision bounds for the moving entity
-        var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
+    public boolean canMoveX(int tx, int ty1, int ty2) {
+        return tileCollisions(tx, ty1) && tileCollisions(tx, ty2);
+    }
 
-        // Loop through objects and check for collisions
-        for (Object object : movement.getWorld().getCurrentWorld().getObjects().getObjects()) {
-
-            // Skip if the object doesn't intersect with the collision bounds
-            if (!object.getBounds().intersects(collisionBounds)) {
-                continue;
-            }
-
-            // Check polygon-rectangle collision using Separating Axis Theorem (SAT)
-            if (object.getBounds() != null) {
-                if (!polygonCollidesWithRect((Polygon) object.getBounds(), collisionBounds)) {
-                    continue;
-                }
-            }
-
-            // Handle specific collision types
-            if (object.getClassType() == ClassType.COLLISION) {
-                System.out.println("Collision with object: " + object.getName() + " triggerType: " + object.getClassType());
-                return false; // Collision detected
-            }
-
-            if (object.getClassType() == ClassType.TELEPORT) {
-                handler.getWorldManager().changeWorld(object.getName());
-            }
-
-            if (object.getClassType() == ClassType.BATTLE) {
-                handler.getBattleManager().startBattle(object.getName());
-            }
-
-            System.out.println("Collision with object: " + object.getName() + " triggerType: " + object.getClassType());
-        }
-        return true; // No collision detected
+    public boolean canMoveY(int ty, int tx1, int tx2) {
+        return tileCollisions(tx1, ty) && tileCollisions(tx2, ty);
     }
 
     /**
      * Checks if a polygon collides with a rectangle using the Separating Axis Theorem (SAT).
      *
-     * @param polygon The polygon object
+     * @param polygon    The polygon object
      * @param rectBounds The bounding box of the moving object (player)
      * @return True if no collision, false if collision detected
      */

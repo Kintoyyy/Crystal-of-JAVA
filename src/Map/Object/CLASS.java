@@ -1,0 +1,5 @@
+package Map.Object;
+
+public enum CLASS {
+    COLLISION, DIALOG, BATTLE, TELEPORT, SPAWN, NPC, NONE,INTERACT
+}

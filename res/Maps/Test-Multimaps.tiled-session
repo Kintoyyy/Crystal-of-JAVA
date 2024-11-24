@@ -8,6 +8,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 3
         },
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 1
+        },
         "BossStage/Dimensional_Portal.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
@@ -59,11 +62,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 1.5,
-            "selectedLayer": 4,
+            "scale": 1,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 271.33333333333326,
-                "y": 244.66666666666666
+                "x": 192,
+                "y": 235
             }
         },
         "Dungeon.tmx#Dungeon_1": {
@@ -94,11 +97,11 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 0.5,
-            "selectedLayer": 7,
+            "scale": 1,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 248,
-                "y": 630
+                "x": 270,
+                "y": 1080
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
@@ -161,14 +164,14 @@
         },
         "Lava.tmx": {
             "expandedObjectLayers": [
-                7,
-                6
+                6,
+                10
             ],
-            "scale": 1,
-            "selectedLayer": 3,
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 247,
-                "y": 177
+                "x": 791.3333333333333,
+                "y": 194
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -185,11 +188,11 @@
                 9,
                 10
             ],
-            "scale": 1.5,
-            "selectedLayer": 5,
+            "scale": 1,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 351.33333333333326,
-                "y": 228
+                "x": 286,
+                "y": 470
             }
         },
         "Snow.tmx#Outdoor_Decor": {
@@ -259,7 +262,7 @@
         "World3.tmx"
     ],
     "project": "Test-Multimaps.tiled-project",
-    "property.type": "int",
+    "property.type": "object",
     "recentFiles": [
         "Forest.tmx",
         "Dungeon.tmx",

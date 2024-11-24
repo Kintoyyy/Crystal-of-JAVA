@@ -1,16 +1,21 @@
 package Map;
 
+import Animations.Animation;
+import Animations.AnimationManager;
+import Animations.enums.TYPE;
+import Entities.Enemies.Orc;
+import Entities.Entity;
+import Map.Movement.Camera;
 import Map.Movement.Movement;
 import Game.Handler;
-import Map.Object.ClassType;
-import Map.Object.Object;
 import Map.Object.ObjectGroup;
 import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
+import Worlds.WorldManager;
+import Map.Object.Object;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * The Render class is responsible for rendering the game world and handling
@@ -43,40 +48,56 @@ public class Render {
      */
     private final Movement movement;
 
+    private final Camera camera;
+
     private ObjectGroup objectGroup;
 
-    private Map map;
+    private final int gameWidth;
+
+    private final int gameHeight;
+
+    private int playerLayer;
+
+    private final WorldManager worldManager;
+
+    private final AnimationManager animationManager;
+
+//    Entity entity = new Orc();
 
     /**
      * Constructs a Render object using parsed world data and a movement handler.
-     *
-     * @param movement The Movement instance for managing character movement.
+     * <p>
+     * //     * @param movement The Movement instance for managing character movement.
      */
-    public Render(Movement movement) {
+    public Render(Handler handler, Movement movement, WorldManager worldManager) {
         this.movement = movement;
-        map = movement.getWorld().getCurrentWorld().getWorld();
-
-        // Set the initial location of the character to the spawn point of the map
-//        movement.setLocation(map.getSpawnPoint());
-
-        loadWorld();
+        this.camera = movement.getCamera();
+        this.gameHeight = handler.getHeight();
+        this.gameWidth = handler.getWidth();
+        this.worldManager = worldManager;
+        this.animationManager = worldManager.getAnimationManager();
+        loadWorld(worldManager.getMap());
     }
 
-    public void loadWorld() {
-        map = movement.getWorld().getCurrentWorld().getWorld();
+    public void loadWorld(Map map) {
 
-        System.out.println("Loading world...");
-        System.out.println("World width: " + map.getWorldWidth());
-        System.out.println("World height: " + map.getWorldHeight());
-        System.out.println("Tile layers: " + map.getLayers().length);
+        if (DebugMode.isShowObjects()) {
+            System.out.println("Loading world..." + map);
+            System.out.println("World width: " + map.getWorldWidth());
+            System.out.println("World height: " + map.getWorldHeight());
+            System.out.println("Tile layers: " + map.getTileLayers().length);
+        }
 
         this.width = map.getWorldWidth();
         this.height = map.getWorldHeight();
-        this.TileLayers = map.getLayers();
+        this.TileLayers = map.getTileLayers();
         this.tileTypes = map.getTileTypes();
-        this.objectGroup = map.getObjects();
 
-//        movement.setLocation(map.getSpawnPoint());
+        this.objectGroup = map.getObjectGroup();
+
+        this.playerLayer = map.getPlayerLayer();
+
+        movement.setLocation(map.getSpawnPoint());
     }
 
     /**
@@ -85,6 +106,8 @@ public class Render {
      */
     public void tick() {
         movement.tick();
+        animationManager.tick();
+//        entity.getAnimation().tick();
     }
 
     /**
@@ -94,15 +117,10 @@ public class Render {
      * @param g The Graphics object used for rendering.
      */
     public void render(Graphics g) {
-        Handler handler = movement.getHandler();
-
-        int xStart = (int) Math.max(0, movement.getCamera().getXOffset() / Tile.width);
-        int xEnd = (int) Math.min(width, (movement.getCamera().getXOffset() + handler.getWidth()) / Tile.width + 1);
-        int yStart = (int) Math.max(0, movement.getCamera().getYOffset() / Tile.height);
-        int yEnd = (int) Math.min(height, (movement.getCamera().getYOffset() + handler.getHeight()) / Tile.height + 1);
-
-        boolean playerRendered = false;
-        int playerRenderY = (int) (movement.getY() - movement.getCamera().getYOffset() + 70); // Calculate player Y offset
+        int xStart = (int) Math.max(0, camera.getXOffset() / Tile.WIDTH);
+        int xEnd = (int) Math.min(width, (camera.getXOffset() + this.gameWidth) / Tile.WIDTH + 1);
+        int yStart = (int) Math.max(0, camera.getYOffset() / Tile.HEIGHT);
+        int yEnd = (int) Math.min(height, (camera.getYOffset() + this.gameHeight) / Tile.HEIGHT + 1);
 
         for (int layer = 0; layer < TileLayers.length; layer++) {
             for (int i = yStart; i < yEnd; i++) {
@@ -110,18 +128,8 @@ public class Render {
                     Tile tile = getTile(i, j, layer);
 
                     if (tile != null) {
-                        int tilePosX = (int) (j * Tile.width - movement.getCamera().getXOffset());
-                        int tilePosY = (int) (i * Tile.height - movement.getCamera().getYOffset());
-
-//                        // Render the player before tiles below its Y position
-//                        if (!playerRendered && tilePosY >= playerRenderY) {
-//                            movement.render(g); // Render player
-//                            playerRendered = true;
-//
-//                            // Debugging: Mark where the player is rendered
-//                            g.setColor(Color.RED);
-//                            g.drawString("F", tilePosX, tilePosY);
-//                        }
+                        int tilePosX = (int) (j * Tile.WIDTH - camera.getXOffset());
+                        int tilePosY = (int) (i * Tile.HEIGHT - camera.getYOffset());
 
                         // Render the tile
                         tile.render(g, tilePosX, tilePosY);
@@ -129,34 +137,25 @@ public class Render {
                         // Debugging visualization (optional)
                         if (DebugMode.debugMode() && layer == DebugMode.getRenderedLayerIndex()) {
                             g.setColor(Color.RED);
-                            g.drawRect(tilePosX, tilePosY, Tile.width, Tile.height);
+                            g.drawRect(tilePosX, tilePosY, Tile.WIDTH, Tile.HEIGHT);
                         }
                     }
                 }
             }
-
-            // Render player if not yet rendered and this is the last layer
-//            if (!playerRendered && layer == TileLayers.length - 1) {
-//                movement.render(g);
-//                playerRendered = true;
-//            }
-
-            if(layer == 1){
+            // render player
+            if (layer == this.playerLayer) {
+                animationManager.render(g, objectGroup.getNpcObjects(), worldManager.getWorld(), camera);
                 movement.render(g);
             }
         }
 
 
 
-
-//        // Debugging line (optional, for visualization)
-//        g.setColor(Color.GREEN);
-//        g.drawLine(400, playerRenderY, 600, playerRenderY);
-
         // Render object groups
-        objectGroup.render(g, (int) movement.getCamera().getXOffset(), (int) movement.getCamera().getYOffset());
+        if (DebugMode.isShowObjects()) {
+            objectGroup.render(g, (int) camera.getXOffset(), (int) camera.getYOffset());
+        }
     }
-
 
 
     /**
@@ -169,13 +168,9 @@ public class Render {
      * @return The Tile object at the specified coordinates and layer.
      */
     private Tile getTile(int x, int y, int layer) {
-//        if (x < 0 || y < 0 || x >= map.getWorldWidth() || y >= map.getWorldHeight() || layer < 0 || layer >= TileLayers.length) {
-//            return Tile.defaultTile;
-//        }
-
         Tile t = tileTypes.getTile(TileLayers[layer][x][y]);
         if (t == null) {
-            return Tile.transparentTile;
+            return Tile.TRANSPARENT_TILE;
         }
         return t;
     }

@@ -6,20 +6,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * The Tile class represents a single tile in the game world, including its appearance,
- * dimensions, and identifying attributes such as name and ID.
+ * Represents a single tile in the game world, including its appearance,
+ * dimensions, and identifying attributes such as name, path, and ID.
  */
 public class Tile {
 
     /**
-     * The image used to represent the tile.
+     * The image used to visually represent the tile.
      */
     protected BufferedImage image;
 
     /**
      * The file path of the tile image.
      */
-    protected static String path;
+    protected String path;
 
     /**
      * The name of the tile.
@@ -31,46 +31,50 @@ public class Tile {
      */
     protected int id;
 
-
+    /**
+     * Wang tile details associated with the tile.
+     */
     protected WangTile wangTile;
 
     /**
      * Standard width of a tile in pixels.
      */
-    public static final int width = 64;
+    public static final int WIDTH = 64;
 
     /**
      * Standard height of a tile in pixels.
      */
-    public static final int height = 64;
+    public static final int HEIGHT = 64;
 
     /**
-     * Default tile used when no valid tile is found.
+     * Default tile used when no valid tile is specified.
      */
-    public static final Tile defaultTile = new Tile(
+    public static final Tile DEFAULT_TILE = new Tile(
             ImageUtils.loadImage("/Tiles/Grass/Grass_1_Middle.png"),
             "default",
-            path,
+            "/Tiles/Grass/Grass_1_Middle.png",
             0,
-            new WangTile("0,0,0,0,0,0,0,0"));
+            new WangTile("0,0,0,0,0,0,0,0")
+    );
 
     /**
-     * Tile representing a transparent or empty area (null by design).
+     * Tile representing a transparent or empty area (explicitly null by design).
      */
-    public static final Tile transparentTile = null;
+    public static final Tile TRANSPARENT_TILE = null;
 
     /**
-     * Constructs a Tile with an image, name, and unique ID.
+     * Constructs a Tile with an image, name, path, ID, and Wang tile attributes.
      *
-     * @param image    The BufferedImage representing the tile's appearance.
+     * @param image    The {@link BufferedImage} representing the tile's appearance.
      * @param name     The name of the tile.
-     * @param path
+     * @param path     The file path of the tile image.
      * @param id       The unique identifier for the tile.
-     * @param wangTile Wang tile ids
+     * @param wangTile The Wang tile attributes for the tile.
      */
     public Tile(BufferedImage image, String name, String path, int id, WangTile wangTile) {
         this.image = image;
         this.name = name;
+        this.path = path;
         this.id = id;
         this.wangTile = wangTile;
     }
@@ -78,36 +82,32 @@ public class Tile {
     /**
      * Constructs a Tile with an image, name, path, and unique ID.
      *
-     * @param image The BufferedImage representing the tile's appearance.
+     * @param image The {@link BufferedImage} representing the tile's appearance.
      * @param name  The name of the tile.
      * @param path  The file path of the tile image.
      * @param id    The unique identifier for the tile.
      */
     public Tile(BufferedImage image, String name, String path, int id) {
-        this.image = image;
-        this.name = name;
-        this.path = path;
-        this.id = id;
+        this(image, name, path, id, null);
     }
 
     /**
      * Renders the tile at a specific position on the screen.
      *
-     * @param g The Graphics object used for drawing.
+     * @param g The {@link Graphics} object used for rendering.
      * @param x The x-coordinate of the tile's position.
      * @param y The y-coordinate of the tile's position.
      */
     public void render(Graphics g, int x, int y) {
         if (image != null) {
-            g.drawImage(image, x, y, width, height, null);
+            g.drawImage(image, x, y, WIDTH, HEIGHT, null);
         }
-//        g.drawString(String.valueOf(y), x, y);
     }
 
     /**
      * Retrieves the name of the tile.
      *
-     * @return The tile's name.
+     * @return The name of the tile.
      */
     public String getName() {
         return name;
@@ -116,7 +116,7 @@ public class Tile {
     /**
      * Retrieves the file path of the tile's image.
      *
-     * @return The tile's image path.
+     * @return The file path of the tile image.
      */
     public String getPath() {
         return path;
@@ -125,9 +125,18 @@ public class Tile {
     /**
      * Retrieves the unique identifier of the tile.
      *
-     * @return The tile's ID.
+     * @return The unique ID of the tile.
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * Retrieves the Wang tile attributes of the tile.
+     *
+     * @return The {@link WangTile} attributes or {@code null} if none exist.
+     */
+    public WangTile getWangTile() {
+        return wangTile;
     }
 }

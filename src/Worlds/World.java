@@ -1,30 +1,32 @@
 package Worlds;
 
+import Animations.Animation;
 import Entities.Entity;
 import Map.Map;
-import Map.Object.Object;
 import Map.Object.ObjectGroup;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class World {
     private final Map world;
     private final String worldKey;
     private final HashMap<String, Battle> battles = new HashMap<>();
-    private Point playerLastPosition;
-    private final HashMap<String, Entity> npc = new HashMap<>();
+    private final HashMap<String, Entity> npcs = new HashMap<>();
 
     public World(String worldKey, String mapPath) {
         this.worldKey = worldKey;
         this.world = new Map(mapPath);
     }
 
-    public World setBattles(Battle... battlesObjects) {
-        for (Battle battle : battlesObjects) {
+    public World addBattles(Battle... battleObjects) {
+        for (Battle battle : battleObjects) {
             battles.put(battle.getKey(), battle);
+
+            // Populate NPC map
+            for (Entity entity : battle.getEnemies()) {
+                npcs.put(worldKey + "_" + entity.getName(), entity);
+            }
         }
         return this;
     }
@@ -34,38 +36,27 @@ public class World {
     }
 
     public ObjectGroup getObjects() {
-        return world.getObjects();
-    }
-
-
-    public Point getSpawnPoint() {
-        return world.getSpawnPoint();
+        return world.getObjectGroup();
     }
 
     public String getName() {
         return worldKey;
     }
 
-    public Battle getBattle(String battleName) {
-        return battles.get(battleName);
+    public Battle getBattle(String battleKey) {
+        return battles.get(battleKey);
     }
 
-    public Point getPlayerLastPosition() {
-        return playerLastPosition;
+    public HashMap<String, Battle> getBattles() {
+        return battles;
     }
 
-    public void setPlayerLastPosition(Point playerLastPosition) {
-        this.playerLastPosition = playerLastPosition;
+    public Entity getNpc(String npcKey) {
+        return npcs.get(npcKey);
     }
 
-    public World setNpc(Entity... npcObjects) {
-        for (Entity entity : npcObjects) {
-            npc.put(entity.getName(), entity);
-        }
-        return this;
-    }
-
-    public Entity getNpc(String npcName) {
-        return npc.get(npcName);
+    public Animation getNpcAnimation(String npcKey) {
+        Entity npc = getNpc(npcKey);
+        return npc != null ? npc.getAnimation() : null;
     }
 }

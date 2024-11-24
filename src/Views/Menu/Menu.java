@@ -1,8 +1,9 @@
 package Views.Menu;
 
-import Assets.Assets;
 import Components.Button.Button;
 import Utils.CallBackAction;
+import Utils.ImageUtils;
+import Utils.SpriteSheet;
 import Views.View;
 import Views.ViewManager;
 import Views.enums.Views;
@@ -42,7 +43,12 @@ public class Menu extends View {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.background, 0, 0, handler.getWidth(), handler.getHeight(), null);
+
+
+        SpriteSheet backgroundSheet = new SpriteSheet(ImageUtils.loadImage("/Backgrounds/Background_1.png"));
+
+        g.drawImage(backgroundSheet.crop(0, 0, 962, 972), 0, 0, handler.getWidth(), handler.getHeight(), null);
+
         components.render(g);
     }
 }
