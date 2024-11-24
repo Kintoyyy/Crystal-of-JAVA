@@ -19,7 +19,7 @@ public class Setting extends View {
 
         components.init(
                 new Button("back")
-                        .setAction(new CallBackAction() {
+                        .setRightClickAction(new CallBackAction() {
                             @Override
                             public void onAction() {
                                 viewManager.setView(Views.PAUSE);
@@ -28,7 +28,7 @@ public class Setting extends View {
                         .setLocation(100, 100),
                 
                 new Button("kill all")
-                        .setAction(battleManager::killAllEnemies)
+                        .setRightClickAction(battleManager::killAllEnemies)
                         .setLocation(680, 80)
         );
     }

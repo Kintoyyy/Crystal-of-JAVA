@@ -6,6 +6,7 @@ import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class EnemyHealthBar extends Menu {
@@ -70,7 +71,7 @@ public class EnemyHealthBar extends Menu {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MouseEvent e) {
         // No action implemented for clicks in this menu
     }
 }

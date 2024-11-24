@@ -7,6 +7,7 @@ import Entities.Characters.Character;
 import Game.Handler;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class CharacterMenu extends Menu {
@@ -33,7 +34,7 @@ public class CharacterMenu extends Menu {
 
             final int index = i;
             CharacterSelector frame = (CharacterSelector) new CharacterSelector(character)
-                    .setAction(() -> characters.setPlayer(index));
+                    .setRightClickAction(() -> characters.setPlayer(index));
 
             childComponents.add(frame);
         }
@@ -76,7 +77,7 @@ public class CharacterMenu extends Menu {
     }
 
     @Override
-    public void onClick() {
-        childComponents.forEach(Component::onClick);
+    public void onClick(MouseEvent e) {
+        childComponents.forEach(component -> component.onClick(e));
     }
 }

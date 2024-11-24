@@ -8,6 +8,7 @@ import Game.Handler;
 import Battle.BattleManager;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class CharacterLayout extends Layout {
     private final CharacterManager characters;
@@ -25,9 +26,10 @@ public class CharacterLayout extends Layout {
             // Define a final variable to capture the index for lambda usage
             final int index = i;
             CharacterButton frame = (CharacterButton) new CharacterButton(character)
-                    .setAction(() -> {
+                    .setRightClickAction(() -> {
                         characters.setPlayerByIndex(index);
-                    });
+                    })
+                    .scale(scale);
             childComponents.add(frame);
         }
     }
@@ -62,7 +64,7 @@ public class CharacterLayout extends Layout {
     }
 
     @Override
-    public void onClick() {
-        childComponents.forEach(Component::onClick);
+    public void onClick(MouseEvent e) {
+        childComponents.forEach(component -> component.onClick(e));
     }
 }

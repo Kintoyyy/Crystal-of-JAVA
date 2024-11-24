@@ -8,7 +8,10 @@ import Battle.BattleManager;
 import Entities.Characters.Skills.Skill;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
+import Views.enums.Views;
 
 public class SkillMenu extends Menu {
     private ArrayList<Skill> skills;
@@ -20,7 +23,6 @@ public class SkillMenu extends Menu {
         this.battleManager = battleManager;
         this.handler = battleManager.getHandler();
         this.skills = battleManager.getCharacterManager().getPlayer().getSkills();
-        scale(6);
         initCharacterFrames();
     }
 
@@ -31,8 +33,11 @@ public class SkillMenu extends Menu {
         // Create a new SkillButton for each skill in the updated list
         for (Skill skill : skills) {
             SkillButton frame = (SkillButton) new SkillButton(skill)
-                    .setAction(() -> {
+                    .setRightClickAction(() -> {
 //                        skill.attack(battleManagerOld);
+                        System.out.println("Skill " + skill.getName() + " clicked");
+                    }).setLeftClickAction(() -> {
+                        System.out.println("View Skill " + skill.getName());
                     });
             childComponents.add(frame);
         }
@@ -74,14 +79,14 @@ public class SkillMenu extends Menu {
         for (Component component : childComponents) {
             if (component instanceof SkillButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
-                xOffset += frame.getWidth();
+                xOffset += frame.getWidth() + 40;
             }
             component.render(g);
         }
     }
 
     @Override
-    public void onClick() {
-        childComponents.forEach(Component::onClick);
+    public void onClick(MouseEvent e) {
+        childComponents.forEach(component -> component.onClick(e));
     }
 }

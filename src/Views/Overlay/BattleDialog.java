@@ -4,7 +4,6 @@ import Components.Button.Button;
 import Components.Dialog.Dialog;
 import Views.View;
 import Views.ViewManager;
-import Views.enums.Views;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class BattleDialog extends View {
         components.init(
                 new Dialog("hello").setLocation(20, 20),
 
-                new Button("Next").setAction(
+                new Button("Next").setRightClickAction(
                         () -> {
                             System.out.println("Next!");
                         }

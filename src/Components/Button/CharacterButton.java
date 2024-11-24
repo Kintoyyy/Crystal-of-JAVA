@@ -7,6 +7,7 @@ import Entities.Characters.Character;
 import Components.ToolTip.HealthBar;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
+import fonts.SimplePixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -67,8 +68,12 @@ public class CharacterButton extends Button {
 
         g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
 
-        healthBar.setLocation(bounds.x + 10, bounds.y + 90);
+        healthBar.setLocation(bounds.x + 16, bounds.y + 110);
         healthBar.render(g);
+
+        g.setColor(Color.WHITE);
+        g.setFont( new SimplePixelFont(12));
+        g.drawString(player.getName(), bounds.x + 18, bounds.y + 110);
 
         if (showBounds) {
             g.setColor(Color.BLUE);

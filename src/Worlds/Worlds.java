@@ -27,52 +27,49 @@ public class Worlds {
                                 "You have earned 10 gold and 10 exp!",
                                 "You have unlocked the next area!"
                         ).rewards(
-                                new Reward("Goblin", 10, 10)
+                                new Reward("Coin", 10, 10)
                         ),
                         new Battle("BATTLE2").enemies(
                                 new SkeletonWarrior(),
                                 new SkeletonWarrior()
                         ),
                         new Battle("BATTLE3").enemies(
-                                new Kai(),
+                                new SkeletonWarrior(),
                                 new SkeletonWarrior(),
                                 new SkeletonWarrior()
                         )
                 ),
                 new World("ICE", "res/Maps/Snow.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
-                                new Kai(),
-                                new Orc(),
                                 new Goblin()
                         ),
                         new Battle("BATTLE2").enemies(
-                                new Kai(),
                                 new Orc(),
                                 new Goblin()
+                        ),
+                        new Battle("BATTLE3").enemies(
+                                new Orc(),
+                                new Goblin(),
+                                new Orc()
                         )
                 ),
                 new World("LAVA", "res/Maps/Lava.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
-                                new Kai(),
-                                new Orc(),
-                                new Goblin()
+                                new Orc()
                         ),
                         new Battle("BATTLE2").enemies(
-                                new Kai(),
                                 new Orc(),
-                                new Goblin()
+                                new Orc()
+                        ),
+                        new Battle("BATTLE3").enemies(
+                                new Orc(),
+                                new Orc(),
+                                new Orc()
                         )
                 ),
                 new World("DUNGEON", "res/Maps/Dungeon.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
-                                new Kai(),
-                                new Orc(),
-                                new Goblin()
-                        ),
-                        new Battle("BATTLE2").enemies(
-                                new Kai(),
-                                new Orc(),
-                                new Goblin()
+                                new Kai()
                         )
                 )
         );

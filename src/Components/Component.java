@@ -80,7 +80,7 @@ public abstract class Component {
     /**
      * Abstract method to define the action taken when the component is clicked.
      */
-    public abstract void onClick();
+    public abstract void onClick(MouseEvent e);
 
     /**
      * Updates the component's bounding rectangle based on its position and size.
@@ -113,9 +113,9 @@ public abstract class Component {
      * @param e the {@code MouseEvent} triggered by mouse release
      */
     public void onMouseRelease(MouseEvent e) {
-        if ((state == HOVERED || moved) && e.getButton() == MouseEvent.BUTTON1) {
+        if ((state == HOVERED || moved)) {
             state = PRESSED;
-            onClick();
+            onClick(e);
         }
         for (Component component : childComponents) {
             component.onMouseRelease(e);
@@ -139,7 +139,7 @@ public abstract class Component {
     /**
      * Sets the dimensions (width and height) of the component and updates its bounds.
      *
-     * @param width the width of the component
+     * @param width  the width of the component
      * @param height the height of the component
      * @return the current {@code Component} instance
      */
@@ -185,9 +185,9 @@ public abstract class Component {
     /**
      * Calls the {@code onClick} method of all child components.
      */
-    public void onClickChildren() {
+    public void onClickChildren(MouseEvent e) {
         for (Component component : childComponents) {
-            component.onClick();
+            component.onClick(e);
         }
     }
 
@@ -247,5 +247,15 @@ public abstract class Component {
      */
     public String getText() {
         return text;
+    }
+
+    public void drawImage(Graphics g, Image image, int x, int y, int width, int height) {
+        g.drawImage(image, bounds.x + (x * scale), bounds.y + (y * scale), width * scale, height * scale, null);
+    }
+
+    public void drawString(Graphics g, String text, int x, int y, Font font, Color color) {
+        g.setFont(font);
+        g.setColor(color);
+        g.drawString(text, bounds.x + (x * scale), bounds.y + (y * scale));
     }
 }

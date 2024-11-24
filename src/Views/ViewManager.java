@@ -69,6 +69,7 @@ public class ViewManager {
         views.put(Views.SELECT_CHARACTER, new Menu(this));
         views.put(Views.PAUSE, new Pause(this));
         views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
+
         setView(Views.GAME);
     }
 

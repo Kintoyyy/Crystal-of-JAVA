@@ -1,7 +1,5 @@
 package Views.Game;
 
-import Battle.BattleManager;
-import Components.Button.Button;
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
 import Utils.CallBackAction;
@@ -49,11 +47,9 @@ public class Game extends View {
     public void initComponent() {
         components.init(
                 new PauseButton()
-                        .setAction(new CallBackAction() {
-                            @Override
-                            public void onAction() {
-                                viewManager.setView(Views.PAUSE);
-                            }
+                        .setRightClickAction(() -> {
+                            System.out.println("Pause Button Clicked");
+                            viewManager.setView(Views.PAUSE);
                         })
                         .setLocation(900, 20),
 

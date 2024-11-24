@@ -23,7 +23,7 @@ public class DialogScene extends View {
                         .scale(2),
 //                        .setDimensions(900, 260)
                 new Button("Test button")
-                        .setAction(new CallBackAction() {
+                        .setRightClickAction(new CallBackAction() {
                             @Override
                             public void onAction() {
                                 System.out.println("Button clicked");

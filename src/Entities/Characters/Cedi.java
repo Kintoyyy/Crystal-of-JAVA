@@ -13,9 +13,11 @@ import Utils.ImageUtils;
 import java.util.ArrayList;
 
 public class Cedi extends Character {
+
     public Cedi() {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Cedi", 1, new Health( 800), new Mana( 200), new AttackPower(120),new Defense(10), new ArrayList<>());
+
 
         this.addSkill(new Mage(this));
         this.addSkill(new Fireball());

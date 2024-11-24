@@ -6,6 +6,7 @@ import Components.Button.EnemyButton;
 import Entities.Enemies.*;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class EnemyLayout extends Layout {
     private final BattleManager battleManager;
@@ -23,7 +24,7 @@ public class EnemyLayout extends Layout {
             final int index = i; // Capture index for lambda use
 
             EnemyButton frame = (EnemyButton) new EnemyButton(enemy)
-                    .setAction(() -> {
+                    .setRightClickAction(() -> {
                         System.out.println("Enemy " + enemy.getName() + " clicked");
                         // Uncomment if needed:
                         // currentEnemyManager.setAutoSelectEnemy(false);
@@ -32,7 +33,6 @@ public class EnemyLayout extends Layout {
             childComponents.add(frame);
         }
         battleManager.setDataLoaded(true);
-
     }
 
     @Override
@@ -41,6 +41,7 @@ public class EnemyLayout extends Layout {
             System.out.println("Loading data: Data not loaded");
             initEnemyFrames();
         }
+
         childComponents.forEach(Component::tick);
     }
 
@@ -50,6 +51,8 @@ public class EnemyLayout extends Layout {
         Enemy enemy = (battleManager != null)
                 ? battleManager.getCurrentEnemy()
                 : null;
+
+
         for (Component component : childComponents) {
             if (component instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
@@ -61,7 +64,7 @@ public class EnemyLayout extends Layout {
     }
 
     @Override
-    public void onClick() {
-        childComponents.forEach(Component::onClick);
+    public void onClick(MouseEvent e) {
+        childComponents.forEach(component -> component.onClick(e));
     }
 }

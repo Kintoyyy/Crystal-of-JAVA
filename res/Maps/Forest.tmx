@@ -1042,7 +1042,7 @@
   <object id="46" name="INTIAL" type="SPAWN" x="150.364" y="89.4545">
    <point/>
   </object>
-  <object id="51" name="BATTLE1" type="BATTLE" x="227.591" y="65.2727" width="13.1818" height="10.6364"/>
+  <object id="51" name="BATTLE1" type="BATTLE" x="170.924" y="85.2727" width="13.1818" height="10.6364"/>
   <object id="53" name="BATTLE2" type="BATTLE" x="253.227" y="65.5909" width="13.1818" height="10.6364"/>
   <object id="54" name="BATTLE3" type="BATTLE" x="287.409" y="65.0454" width="13.1818" height="10.6364"/>
   <object id="56" type="NONE" x="210.182" y="12.1818">

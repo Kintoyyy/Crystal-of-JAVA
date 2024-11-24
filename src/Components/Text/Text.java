@@ -4,6 +4,7 @@ import Components.Component;
 import Components.enums.Alignment;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +92,7 @@ public class Text extends Component {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MouseEvent e) {
         // Define click action here if needed
     }
 

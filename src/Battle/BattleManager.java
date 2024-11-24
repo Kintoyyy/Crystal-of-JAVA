@@ -17,7 +17,6 @@ public class BattleManager {
     private final Handler handler;
     private final ArrayList<Enemy> enemies = new ArrayList<>();
     private final ViewManager viewManager;
-
     private int currentEnemyIndex = 0;
     private final Queue<Turn> turnqueue = new LinkedList<>();
 
@@ -30,7 +29,9 @@ public class BattleManager {
     public BattleManager(Handler handler) {
         handler.setBattleManager(this);
         this.viewManager = handler.getViewManager();
+
         this.handler = handler;
+
         timer.setDelay(5).setAction(() -> {
             System.out.println("Timer action");
             abortBattle();
@@ -42,6 +43,8 @@ public class BattleManager {
 
     public void startBattle(Battle battle) {
         this.battle = battle;
+
+        timer.start();
 
         if (!battle.getPreBattleDialogs().isEmpty()) {
 //            System.out.println("Loading pre battle Dialogs");
@@ -64,7 +67,6 @@ public class BattleManager {
 
         this.isDataLoaded = false;
         currentEnemyIndex = 0;
-
 
         viewManager.setView(Views.BATTLE);
         // start battle
@@ -135,6 +137,7 @@ public class BattleManager {
         enemies.clear();
         System.out.println("Aborting battle: " + enemies);
         viewManager.setView(Views.GAME);
+        this.currentEnemyIndex = 0;
     }
 
     public boolean isDataLoaded() {
@@ -147,6 +150,7 @@ public class BattleManager {
 
     public void loadEnemies(ArrayList<Enemy> enemies) {
         System.out.println("Loading enemies: " + enemies);
+        this.currentEnemyIndex = 0;
         this.enemies.clear();
         this.enemies.addAll(enemies);
     }
@@ -156,6 +160,7 @@ public class BattleManager {
     }
 
     public void setCurrentEnemy(int index) {
+        System.out.println("Setting current enemy: " + index);
         this.currentEnemyIndex = index;
     }
 
