@@ -10,6 +10,7 @@ public class SkeletonWarrior extends Enemy {
         super(new Health(800), new AttackPower(50, 70), new Defense(40));
 
         name = "Skeleton Warrior";
+        key = "SKELETON_WARRIOR";
         description = "A generic enemy";
     }
 }

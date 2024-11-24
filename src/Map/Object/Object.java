@@ -30,7 +30,7 @@ public class Object {
     public Object(Element objectElement) {
 
         this.name = objectElement.hasAttribute("name") ?
-                objectElement.getAttribute("name") :
+                objectElement.getAttribute("name").toUpperCase().replace(" ", "_") :
                 objectElement.getAttribute("id");
 
         this.id = Integer.parseInt(objectElement.getAttribute("id"));
