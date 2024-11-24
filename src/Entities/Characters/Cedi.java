@@ -21,7 +21,7 @@ public class Cedi extends Character {
         this.addSkill(new Fireball());
         this.addSkill(new ManaSurge());
         this.addSkill(new FrostBolt());
-        this.addSkill(new ArcaneShield());
+//        this.addSkill(new ArcaneShield());
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Cedi/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);
