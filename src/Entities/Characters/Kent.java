@@ -18,7 +18,7 @@ public class Kent extends Character {
         this.addSkill(new PowerStrike());
         this.addSkill(new ShieldBlock());
         this.addSkill(new WarCry());
-        this.addSkill(new Taunt());
+//        this.addSkill(new Taunt());
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Kent/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);

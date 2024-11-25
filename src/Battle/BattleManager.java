@@ -17,7 +17,6 @@ public class BattleManager {
     private final Handler handler;
     private final ArrayList<Enemy> enemies = new ArrayList<>();
     private final ViewManager viewManager;
-
     private int currentEnemyIndex = 0;
     private final Queue<Turn> turnqueue = new LinkedList<>();
 
@@ -30,11 +29,8 @@ public class BattleManager {
     public BattleManager(Handler handler) {
         handler.setBattleManager(this);
         this.viewManager = handler.getViewManager();
+
         this.handler = handler;
-        timer.setDelay(5).setAction(() -> {
-            System.out.println("Timer action");
-            abortBattle();
-        });
 
         turnqueue.add(Turn.PLAYER);
         turnqueue.add(Turn.ENEMY);
@@ -44,30 +40,21 @@ public class BattleManager {
         this.battle = battle;
 
         if (!battle.getPreBattleDialogs().isEmpty()) {
-//            System.out.println("Loading pre battle Dialogs");
+            System.out.println("Loading pre battle Dialogs");
         }
 
         if (battle.isComplete()) {
             System.out.println("Battle already completed: " + battle.getKey());
+            abortBattle();
             return;
         }
-
-        if (battle == null) {
-            System.out.println("Battle not found: " + battle.getKey());
-            return;
-        }
-
-
-//        System.out.println(" world: " + worldManager.getMap() + " enemies: " + battle.getEnemies());
 
         loadEnemies(battle.getEnemies());
 
         this.isDataLoaded = false;
         currentEnemyIndex = 0;
 
-
         viewManager.setView(Views.BATTLE);
-        // start battle
     }
 
     public void endBattle() {
@@ -75,12 +62,22 @@ public class BattleManager {
             System.out.println("Loading post battle Dialogs");
         }
 
-
     }
 
-    public void updateTurn() {
-        Turn turn = turnqueue.remove();
-        turnqueue.add(turn);
+    public void updateTurnState() {
+        Turn turn = turnqueue.poll();
+        System.out.println("Turn: " + turn);
+        if (turn == Turn.PLAYER) {
+            updateTurnState();
+            turnqueue.add(Turn.ENEMY);
+        } else {
+            turnqueue.add(Turn.PLAYER);
+            timer.reset();
+            timer.start().setDelay(2).setAction(() -> {
+                getCurrentEnemy().attack(getCharacterManager().getPlayer());
+                updateTurnState();
+            });
+        }
     }
 
     public Turn getCurrentTurn() {
@@ -103,13 +100,12 @@ public class BattleManager {
             }
         }
 
+//        System.out.println(timer.getTime());
+
         if (allEnemiesDead && !timer.isActive()) {
-            System.out.println("All enemies dead");
-            timer.start(); // Start the timer if all enemies are dead
+//            System.out.println("All enemies dead");
+//            timer.start(); // Start the timer if all enemies are dead
         }
-
-//        System.out.println("Battle tick: " + timer.getTime()+ " enemies left");
-
 
         // If there are no enemies left in the list
         if (enemies.isEmpty()) {
@@ -128,13 +124,14 @@ public class BattleManager {
     }
 
     public CharacterManager getCharacterManager() {
-        return handler.getGameState().getCharacterManger();
+        return handler.getCharacterManager();
     }
 
     public void abortBattle() {
         enemies.clear();
-        System.out.println("Aborting battle: " + enemies);
+//        System.out.println("Aborting battle: " + enemies);
         viewManager.setView(Views.GAME);
+        this.currentEnemyIndex = 0;
     }
 
     public boolean isDataLoaded() {
@@ -146,7 +143,8 @@ public class BattleManager {
     }
 
     public void loadEnemies(ArrayList<Enemy> enemies) {
-        System.out.println("Loading enemies: " + enemies);
+//        System.out.println("Loading enemies: " + enemies);
+        this.currentEnemyIndex = 0;
         this.enemies.clear();
         this.enemies.addAll(enemies);
     }
@@ -156,6 +154,7 @@ public class BattleManager {
     }
 
     public void setCurrentEnemy(int index) {
+//        System.out.println("Setting current enemy: " + index);
         this.currentEnemyIndex = index;
     }
 

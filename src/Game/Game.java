@@ -5,10 +5,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import Battle.BattleManager;
+import Entities.Characters.CharacterManager;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
 import Views.ViewManager;
+import Worlds.WorldManager;
 
 public class Game implements Runnable {
 
@@ -18,9 +20,10 @@ public class Game implements Runnable {
     private final InputKeyboardListener inputKeyboardListener;
     private ViewManager viewManager;
     private BattleManager battleManager;
+    private CharacterManager characters;
+    private WorldManager worldManager;
 
     // might need to change this to a state manager
-    private GameState gameState;
 
     private final int width;
     private final int height;
@@ -58,7 +61,16 @@ public class Game implements Runnable {
 
         viewManager = new ViewManager(handler);
 
-        gameState = new GameState(handler);
+//        gameState = new GameState(handler);
+
+        this.characters = new CharacterManager(handler);
+
+        this.battleManager = new BattleManager(handler);
+
+        this.worldManager = new WorldManager(handler);
+
+
+
         // set the debug mode
         debugStats = new DebugMode(handler);
 

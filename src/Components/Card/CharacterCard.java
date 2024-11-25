@@ -6,6 +6,7 @@ import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class CharacterCard extends Card {
@@ -36,7 +37,7 @@ public class CharacterCard extends Card {
     public void tick() {
         super.tick();
 
-        player = handler.getGameState().getCharacterManger().getPlayer();
+        player = handler.getCharacterManager().getPlayer();
         if (player != null) {
             playerProfile = player.getProfile();
             health = player.getHealth().getHealth();
@@ -79,7 +80,7 @@ public class CharacterCard extends Card {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MouseEvent e) {
         // No action implemented for clicks in this menu
     }
 }

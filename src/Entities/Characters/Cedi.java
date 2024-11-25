@@ -13,15 +13,17 @@ import Utils.ImageUtils;
 import java.util.ArrayList;
 
 public class Cedi extends Character {
+
     public Cedi() {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Cedi", 1, new Health( 800), new Mana( 200), new AttackPower(120),new Defense(10), new ArrayList<>());
+
 
         this.addSkill(new Mage(this));
         this.addSkill(new Fireball());
         this.addSkill(new ManaSurge());
         this.addSkill(new FrostBolt());
-        this.addSkill(new ArcaneShield());
+//        this.addSkill(new ArcaneShield());
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Cedi/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);

@@ -25,13 +25,13 @@ public class Pause extends View {
 
     private Button createResumeButton(ViewManager viewManager) {
         return (Button) new Button("Resume")
-                .setAction(() -> viewManager.removeView(Views.PAUSE))
+                .setRightClickAction(() -> viewManager.removeView(Views.PAUSE))
                 .setLocation(400, 330);
     }
 
     private Button createChangeViewButton(String label, int yPosition, Views targetView) {
         return (Button) new Button(label)
-                .setAction(() -> viewManager.setView(targetView))
+                .setRightClickAction(() -> viewManager.setView(targetView))
                 .setLocation(400, yPosition);
     }
 

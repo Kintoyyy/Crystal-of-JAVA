@@ -7,6 +7,7 @@ import Utils.SpriteSheet;
 import fonts.SuperPixelFont;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class Dialog extends Component {
@@ -49,7 +50,7 @@ public class Dialog extends Component {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MouseEvent e) {
         // Define behavior on dialog click
     }
 }

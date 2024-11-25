@@ -22,25 +22,27 @@ public class Battle extends View {
 
         components.init(
                 new CharacterLayout(battleManager)
-//                        .scale(8) // not working
+                        .scale(8) // not working
                         .setLocation(80, 400),
 
                 new SkillMenu(battleManager)
-                        .setLocation(500, 650),
+                        .scale(3)
+                        .setLocation(500, 615),
 
                 new BattleStatistic(battleManager)
-                        .setLocation(100, 650),
+                        .scale(3)
+                        .setLocation(80, 610),
 
                 new EnemyLayout(battleManager)
                         .setLocation(700, 400)
                         .showBounds(),
 
                 new PauseButton()
-                        .setAction(() -> viewManager.setView(Views.PAUSE))
+                        .setRightClickAction(() -> viewManager.setView(Views.PAUSE))
                         .setLocation(900, 20),
 
                 new Button("exit")
-                        .setAction(battleManager::abortBattle)
+                        .setRightClickAction(battleManager::abortBattle)
                         .setLocation(680, 20)
         );
     }
@@ -61,7 +63,7 @@ public class Battle extends View {
         components.render(g);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString(handler.getGameState().getCharacterManger().getPlayer().getSkills().toString(), 20, 50);
+        g.drawString(handler.getCharacterManager().getPlayer().getSkills().toString(), 20, 50);
 //        g.drawString((battleManagerOld.getTurnState() == Turn.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
 //        g.drawString(handler.getGameState(), 20, 70);
 

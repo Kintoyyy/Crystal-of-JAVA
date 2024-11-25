@@ -9,9 +9,11 @@ import Components.enums.Alignment;
 import fonts.SuperPixelFont;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import static Components.enums.States.PRESSED;
+
 /**
  * The Button class represents a clickable button component with different states (idle, hovered, pressed).
  * It renders a button with customizable text, images for each state, and supports interaction via callback actions.
@@ -24,7 +26,7 @@ import static Components.enums.States.PRESSED;
  * <p>Usage Example:</p>
  * <pre>
  * Button button = new Button("Click Me")
- *     .setAction(() -> System.out.println("Button clicked!"))
+ *     .setRightClickAction(() -> System.out.println("Button clicked!"))
  *     .hideText()
  *     .setActive(true);
  * </pre>
@@ -48,7 +50,9 @@ public class Button extends Component {
     /**
      * Callback action to be executed when the button is clicked.
      */
-    private CallBackAction clicker;
+    private CallBackAction rightClick;
+
+    private CallBackAction leftClick;
 
     /**
      * Flag to determine if the text should be hidden.
@@ -100,8 +104,13 @@ public class Button extends Component {
      * @param clicker The callback action.
      * @return The current Button instance.
      */
-    public Button setAction(CallBackAction clicker) {
-        this.clicker = clicker;
+    public Button setRightClickAction(CallBackAction clicker) {
+        this.rightClick = clicker;
+        return this;
+    }
+
+    public Button setLeftClickAction(CallBackAction leftClick) {
+        this.leftClick = leftClick;
         return this;
     }
 
@@ -167,9 +176,20 @@ public class Button extends Component {
      * Executes the click action, if defined. If no action is set, a warning is printed.
      */
     @Override
-    public void onClick() {
-        if (clicker != null) {
-            clicker.onAction();
+    public void onClick(MouseEvent e) {
+        if (rightClick != null) {
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                rightClick.onAction();
+            }
+
+            if (e.getButton() == MouseEvent.BUTTON3) {
+                if(leftClick != null){
+                    leftClick.onAction();
+                } else {
+                    rightClick.onAction();
+                }
+            }
+
         } else {
             System.out.println("Warning: No action defined for button click.");
         }

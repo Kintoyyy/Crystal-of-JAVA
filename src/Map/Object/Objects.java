@@ -15,12 +15,12 @@ import java.util.Optional;
  * details such as name, trigger type, position, and dimensions. Each parsed object
  * is stored in a collection and can be rendered or queried.</p>
  */
-public class ObjectGroup {
+public class Objects {
 
     /**
      * A collection of {@link Object} instances parsed from the XML document.
      */
-    private final List<Object> objectCollection = new ArrayList<>();
+    private final List<Object> objects = new ArrayList<>();
 
     private final List<Object> renderNpc = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class ObjectGroup {
     private Point spawnPoint;
 
     /**
-     * Constructs an {@code ObjectGroup} by parsing the provided {@link NodeList}.
+     * Constructs an {@code Objects} by parsing the provided {@link NodeList}.
      *
      * @param objectGroups a {@link NodeList} containing the object groups as XML elements.
      *
@@ -38,7 +38,7 @@ public class ObjectGroup {
      *                     Each "object" element should have attributes such as "name", "triggerType", "x", "y",
      *                     "width", and "height".</p>
      */
-    public ObjectGroup(NodeList objectGroups) {
+    public Objects(NodeList objectGroups) {
         for (int i = 0; i < objectGroups.getLength(); i++) {
             Element objectGroupElement = (Element) objectGroups.item(i);
 
@@ -60,7 +60,7 @@ public class ObjectGroup {
                 }
 
                 // Add the parsed object to the collection
-                objectCollection.add(parsedObject);
+                objects.add(parsedObject);
             }
         }
     }
@@ -89,7 +89,7 @@ public class ObjectGroup {
      * @return A {@link List} containing the {@link Object} instances in this group.
      */
     public List<Object> getObjects() {
-        return objectCollection;
+        return objects;
     }
 
     public List<Object> getNpcObjects() {
@@ -104,6 +104,6 @@ public class ObjectGroup {
      * @param yOffset The y-offset for rendering.
      */
     public void render(Graphics g, int xOffset, int yOffset) {
-        objectCollection.forEach(object -> object.render(g, xOffset, yOffset));
+        objects.forEach(object -> object.render(g, xOffset, yOffset));
     }
 }

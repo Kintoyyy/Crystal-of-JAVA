@@ -21,7 +21,7 @@ public class Nathan extends Character {
         this.addSkill(new PrecisionShot());
         this.addSkill(new MultiShot());
         this.addSkill(new PoisonArrow());
-        this.addSkill(new Evasion());
+//        this.addSkill(new Evasion());
 
         SpriteSheet profile = new SpriteSheet(ImageUtils.loadImage("/Player/Nathan/Profile.png"));
         this.profileImage = profile.crop(0, 0, 300, 300);

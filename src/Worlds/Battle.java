@@ -25,6 +25,10 @@ public class Battle {
         return this;
     }
 
+    public void addEnemy(Enemy enemy) {
+        this.enemies.add(enemy);
+    }
+
     public Battle rewards(Reward... rewards) {
         this.rewards.addAll(Arrays.asList(rewards));
         return this;

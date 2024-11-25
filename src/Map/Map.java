@@ -1,8 +1,8 @@
 package Map;
 
+import Map.Object.Objects;
 import Map.Tile.TileLayers;
 import Map.Tile.TileTypes;
-import Map.Object.ObjectGroup;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -24,7 +24,7 @@ public class Map {
 
     private int[][][] tileLayers;  // 3D array representing all tile layers.
     private TileTypes tileTypes;  // Object for managing tileset data.
-    private ObjectGroup objectGroup;  // Object for managing object and trigger data.
+    private Objects objects;  // Object for managing object and trigger data.
 
     private int playerLayer; // The layer where the player resides.
 
@@ -65,10 +65,10 @@ public class Map {
 
                 // Parse object groups (e.g., triggers, spawn points).
                 NodeList objectGroupNodes = mapElement.getElementsByTagName("objectgroup");
-                this.objectGroup = new ObjectGroup(objectGroupNodes);
+                this.objects = new Objects(objectGroupNodes);
 
                 // Retrieve the spawn point from the object group.
-                this.spawnPoint = objectGroup.getSpawnPoint();
+                this.spawnPoint = objects.getSpawnPoint();
             } else {
                 System.err.println("Error: Map file does not contain a valid <map> element.");
             }
@@ -97,12 +97,12 @@ public class Map {
     }
 
     /**
-     * Returns the ObjectGroup object containing triggers and object data.
+     * Returns the Objects object containing triggers and object data.
      *
-     * @return ObjectGroup object.
+     * @return Objects object.
      */
-    public ObjectGroup getObjectGroup() {
-        return objectGroup;
+    public Objects getObjectGroup() {
+        return objects;
     }
 
     /**

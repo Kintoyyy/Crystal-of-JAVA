@@ -3,6 +3,7 @@ package Components.Menu;
 import Components.Component;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class Menu extends Component {
 
@@ -22,7 +23,7 @@ public class Menu extends Component {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MouseEvent e) {
 
     }
 }

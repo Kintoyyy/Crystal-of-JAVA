@@ -20,7 +20,7 @@ public class Menu extends View {
                 createChangeViewButton("play", 330, GAME),
                 createChangeViewButton("setting", 400, SETTINGS),
                 new Button("Exit")
-                        .setAction(new CallBackAction() {
+                        .setRightClickAction(new CallBackAction() {
                             @Override
                             public void onAction() {
                                 handler.getGame().stop();
@@ -32,7 +32,7 @@ public class Menu extends View {
 
     private Button createChangeViewButton(String label, int yPosition, Views targetView) {
         return (Button) new Button(label)
-                .setAction(() -> viewManager.setView(targetView))
+                .setRightClickAction(() -> viewManager.setView(targetView))
                 .setLocation(400, yPosition);
     }
 

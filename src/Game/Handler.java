@@ -1,5 +1,6 @@
 package Game;
 
+import Entities.Characters.CharacterManager;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
 import Utils.DebugMode;
@@ -11,9 +12,9 @@ public class Handler {
     private final Game game;
     private DebugMode debugMode;
     private ViewManager viewManager;
+    private CharacterManager characterManager;
     private WorldManager worldManager;
     private BattleManager battleManager;
-    private GameState gameState;
 
     public Handler(Game game) {
         this.game = game;
@@ -47,15 +48,6 @@ public class Handler {
         this.viewManager = viewManager;
     }
 
-    public GameState getGameState() {
-        return gameState;
-    }
-
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
-
-    // need to move this
     public WorldManager getWorldManager() {
         return worldManager;
     }
@@ -79,5 +71,13 @@ public class Handler {
 
     public int getHeight() {
         return game.getHeight();
+    }
+
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+
+    public CharacterManager getCharacterManager() {
+        return characterManager;
     }
 }

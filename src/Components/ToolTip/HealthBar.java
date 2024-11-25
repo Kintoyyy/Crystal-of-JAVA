@@ -6,6 +6,7 @@ import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class HealthBar extends Menu {
@@ -52,9 +53,9 @@ public class HealthBar extends Menu {
             renderHealthManaBars(g);
         }
 
-        g.drawString("Health: " + health, bounds.x, bounds.y + 40);
-        g.drawString("Mana: " + mana, bounds.x, bounds.y + 50);
-        g.drawString("Defense: " + defense, bounds.x, bounds.y + 60);
+//        g.drawString("Health: " + health, bounds.x, bounds.y + 40);
+//        g.drawString("Mana: " + mana, bounds.x, bounds.y + 50);
+//        g.drawString("Defense: " + defense, bounds.x, bounds.y + 60);
 
         // Frame rendering
         g.drawImage(frame, bounds.x, bounds.y, width, height, null);
@@ -78,7 +79,7 @@ public class HealthBar extends Menu {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MouseEvent e) {
         // No action implemented for clicks in this menu
     }
 }

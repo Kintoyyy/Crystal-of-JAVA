@@ -65,8 +65,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 192,
-                "y": 235
+                "x": 556,
+                "y": 287.5
             }
         },
         "Dungeon.tmx#Dungeon_1": {
@@ -100,8 +100,8 @@
             "scale": 1,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 270,
-                "y": 1080
+                "x": 256,
+                "y": 767.5
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
@@ -164,14 +164,14 @@
         },
         "Lava.tmx": {
             "expandedObjectLayers": [
-                6,
-                10
+                10,
+                6
             ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 791.3333333333333,
-                "y": 194
+                "x": 860,
+                "y": 255.66666666666669
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -185,13 +185,13 @@
         },
         "Snow.tmx": {
             "expandedObjectLayers": [
-                9,
-                10
+                10,
+                9
             ],
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 286,
+                "x": 285.5,
                 "y": 470
             }
         },
@@ -262,7 +262,7 @@
         "World3.tmx"
     ],
     "project": "Test-Multimaps.tiled-project",
-    "property.type": "object",
+    "property.type": "bool",
     "recentFiles": [
         "Forest.tmx",
         "Dungeon.tmx",

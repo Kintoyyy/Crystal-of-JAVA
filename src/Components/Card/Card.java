@@ -2,7 +2,7 @@ package Components.Card;
 
 import Components.Component;
 
-import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public abstract class Card extends Component {
 
@@ -17,7 +17,7 @@ public abstract class Card extends Component {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MouseEvent e) {
 
     }
 }

@@ -1,19 +1,14 @@
 package Map;
 
-import Animations.Animation;
 import Animations.AnimationManager;
-import Animations.enums.TYPE;
-import Entities.Enemies.Orc;
-import Entities.Entity;
 import Map.Movement.Camera;
 import Map.Movement.Movement;
 import Game.Handler;
-import Map.Object.ObjectGroup;
+import Map.Object.Objects;
 import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
 import Worlds.WorldManager;
-import Map.Object.Object;
 
 import java.awt.*;
 
@@ -50,7 +45,7 @@ public class Render {
 
     private final Camera camera;
 
-    private ObjectGroup objectGroup;
+    private Objects objects;
 
     private final int gameWidth;
 
@@ -92,8 +87,7 @@ public class Render {
         this.height = map.getWorldHeight();
         this.TileLayers = map.getTileLayers();
         this.tileTypes = map.getTileTypes();
-
-        this.objectGroup = map.getObjectGroup();
+        this.objects = map.getObjectGroup();
 
         this.playerLayer = map.getPlayerLayer();
 
@@ -107,7 +101,6 @@ public class Render {
     public void tick() {
         movement.tick();
         animationManager.tick();
-//        entity.getAnimation().tick();
     }
 
     /**
@@ -144,7 +137,13 @@ public class Render {
             }
             // render player
             if (layer == this.playerLayer) {
-                animationManager.render(g, objectGroup.getNpcObjects(), worldManager.getWorld(), camera);
+
+                // if entity is in render distance of player
+//                if(){
+//
+//                }
+
+                animationManager.render(g, objects.getNpcObjects(), worldManager.getCurrentWorld(), camera);
                 movement.render(g);
             }
         }
@@ -153,7 +152,7 @@ public class Render {
 
         // Render object groups
         if (DebugMode.isShowObjects()) {
-            objectGroup.render(g, (int) camera.getXOffset(), (int) camera.getYOffset());
+            objects.render(g, (int) camera.getXOffset(), (int) camera.getYOffset());
         }
     }
 

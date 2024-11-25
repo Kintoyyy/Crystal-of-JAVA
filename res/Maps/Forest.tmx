@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="115">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="121">
  <tileset firstgid="1" name="Dark_Tiles_1" tilewidth="16" tileheight="16" tilecount="80" columns="8">
   <image source="../Tiles/Grass/Dark_Tiles_1.png" width="128" height="160"/>
   <wangsets>
@@ -950,35 +950,83 @@
   <object id="14" name="LAVA" type="TELEPORT" x="162.167" y="38.9167" width="13" height="9.16667"/>
   <object id="15" name="DUNGEON" type="TELEPORT" x="199.318" y="39.7652" width="10.6667" height="8.83333"/>
   <object id="24" type="COLLISION" x="340.5" y="13">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
    <polygon points="-264,34 -266.5,85 -253.5,90.5 -249,97.5 -248,117 -238,123.5 -232,136.5 -222.5,139 -216,151.5 -207,152 -184,167 -146.5,169 -140,171.5 -136.5,182.5 -98,184.5 -91,192.5 -86.5,199 -61,201 -57,205.727 -57.5,268.5 -62.5,272 -103.182,272.318 -105.227,282.864 -112.227,288 -151.5,288.5 -153,300 -162,304 -214.5,304.5 -218,315.5 -225.5,320.5 -262.5,320.5 -265.5,333.5 -280.5,338.5 -280.5,346 -291,353 -297.5,354.5 -297.5,364.5 -311.5,370.5 -344.5,372 -340,34.5"/>
   </object>
-  <object id="26" type="COLLISION" x="97.25" y="77.375" width="12.75" height="14"/>
-  <object id="27" type="COLLISION" x="118" y="109.5" width="19.5" height="15.125"/>
-  <object id="29" type="COLLISION" x="114" y="116.5" width="6.875" height="9.5"/>
+  <object id="26" type="COLLISION" x="97.25" y="77.375" width="12.75" height="14">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="27" type="COLLISION" x="118" y="109.5" width="19.5" height="15.125">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="29" type="COLLISION" x="114" y="116.5" width="6.875" height="9.5">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="30" type="COLLISION" x="208.25" y="0.5">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
    <polygon points="0,0 1.5,11.75 131.5,12.5 133,24.5 135.5,26.75 148.25,29.5 149.25,39.75 153.25,43.25 178.75,44.75 181,72 185.75,75.75 195.5,77 197.25,88.25 200.75,91.75 210.75,93.25 214,106 220.25,109.75 227.75,110.25 229.25,120.25 232.25,123.75 243.25,126 245.5,166.5 249.25,171.75 258,172.75 260.5,177 260.75,274 257,277.25 248,279.5 244.25,285.75 241.25,293.5 230.75,297.75 227,305.25 221.5,308.75 207,308.5 198.5,315.5 188.75,317.5 181.25,324 153.25,325.5 149.5,331 147,339.5 134.5,340 87.25,340 74.75,340.5 71.25,350.25 63.5,356.25 42.75,356.5 37,361 34.75,369.75 30.25,373.5 22.5,374 20,386.25 10.5,391 -8,393.25 -12.25,400 -15,406.25 -27.9773,409.773 -26.75,487.5 -19.25,491.75 -8.75,490.5 -4.25,485.5 -4,477.75 7,475.5 11.5,470 12,445.5 23.25,442.25 26.75,438 27.75,413.5 32,411.5 63,412 71.5,406.5 73.5,397 115.25,396.5 122,394.25 125.25,380.75 255.25,380.25 260.25,383.25 260,392 265,396.25 276,396.75 278.75,409 287,413.5 291.25,414.75 292.75,448.25 334.75,446.5 315.5,-5"/>
   </object>
-  <object id="31" type="COLLISION" x="420.5" y="179.625" width="22.875" height="9.5"/>
+  <object id="31" type="COLLISION" x="420.5" y="179.625" width="22.875" height="9.5">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="32" type="COLLISION" x="422.75" y="252.125">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
    <polygon points="0,0 -4.375,5.5 -5.875,10.125 -4.5,13.875 2.875,14.75 7.875,12.625 14.625,15 20.625,13.25 23.875,9.25 24.125,4.25 21.625,1 13.5,-1"/>
   </object>
-  <object id="33" type="COLLISION" x="369.087" y="144.076" width="3.04348" height="14.0978"/>
-  <object id="34" type="COLLISION" x="396.043" y="143.995" width="3.43478" height="14.8315"/>
-  <object id="35" type="COLLISION" x="401.087" y="144.092" width="3.04348" height="13.2554"/>
-  <object id="36" type="COLLISION" x="411.938" y="123.001" width="3.125" height="7.625"/>
-  <object id="37" type="COLLISION" x="379.875" y="122.563" width="3.4375" height="8.375"/>
-  <object id="38" type="COLLISION" x="292.875" y="19.9375" width="23" height="8.875"/>
+  <object id="33" type="COLLISION" x="369.087" y="144.076" width="3.04348" height="14.0978">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="34" type="COLLISION" x="396.043" y="143.995" width="3.43478" height="14.8315">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="35" type="COLLISION" x="401.087" y="144.092" width="3.04348" height="13.2554">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="36" type="COLLISION" x="411.938" y="123.001" width="3.125" height="7.625">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="37" type="COLLISION" x="379.875" y="122.563" width="3.4375" height="8.375">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="38" type="COLLISION" x="292.875" y="19.9375" width="23" height="8.875">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="39" name="KAI1" type="DIALOG" x="295" y="78.8333" width="144.667" height="142.5">
    <ellipse/>
   </object>
-  <object id="42" name="SKELETON" type="NPC" x="39.9167" y="464.848">
+  <object id="42" name="Skeleton Warrior" type="NPC" x="48.1667" y="454.098">
    <properties>
-    <property name="BATTLE" type="object" value="43"/>
     <property name="DIRECTION" value="RIGHT"/>
    </properties>
    <point/>
   </object>
-  <object id="43" name="BATTLE1" type="BATTLE" x="26.5" y="426" width="155" height="48"/>
+  <object id="43" name="BATTLE1" type="BATTLE" x="26.125" y="428.625" width="155" height="48"/>
   <object id="44" name="SKELETON1" type="NPC" x="464.25" y="614.75">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
@@ -994,16 +1042,25 @@
   <object id="46" name="INTIAL" type="SPAWN" x="150.364" y="89.4545">
    <point/>
   </object>
-  <object id="51" name="BATTLE1" type="BATTLE" x="227.591" y="65.2727" width="13.1818" height="10.6364"/>
+  <object id="51" name="BATTLE1" type="BATTLE" x="170.924" y="85.2727" width="13.1818" height="10.6364"/>
   <object id="53" name="BATTLE2" type="BATTLE" x="253.227" y="65.5909" width="13.1818" height="10.6364"/>
   <object id="54" name="BATTLE3" type="BATTLE" x="287.409" y="65.0454" width="13.1818" height="10.6364"/>
   <object id="56" type="NONE" x="210.182" y="12.1818">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
    <polygon points="0,0 -83.2727,-0.181818 -86,10.7273 -91.2727,16.7273 -117.636,17.6364 -120.182,27.4545 -124.727,33.4545 -133.636,36.3636 -213.455,36.9091 -224.182,-26.5455 -0.727273,-17.6364"/>
   </object>
   <object id="57" type="COLLISION" x="-10" y="380">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
    <polygon points="0,0 35.75,1.25 37.25,5.5 37.25,61 31,65.5 22.75,66.5 21.75,147.25 25,152.5 44.25,154 64,154 69.5,160 68.5,220.75 64.75,224.25 39.25,225.75 37,232.5 37,396 33.25,400 21.5,403 21.5,432.5 25.5,440.5 42.5,440.25 52.75,444.75 54,476.5 49.75,481 39.25,482.25 40.5,490 50.75,493.5 54.25,502.5 53.5,516.5 60.5,522.75 68,525.25 72,542 70.5,550.25 78,550.5 79.75,541.25 91.25,536 96.5,527.25 105.25,520 111.25,492.5 127.25,489.75 143.5,489.5 152,497.75 161.75,504 187.75,502.75 191.5,491.25 192.5,476.75 203,468.25 214.5,456.5 223.75,447 243.5,426.25 283,423 284,417.5 274,415 269.5,400 271.5,349.5 294,345 300.5,342.5 303,329.5 300,254 309,251.5 320,244.5 319,219 377,215.5 385,218.5 390,224 390.5,382 372,387 374.5,412 360,419 358,459.5 343,467 342,490.5 329,498.5 325,526.5 312,532 307,546 295.5,548 292,559 249,561.5 244,577 199,578.5 198.5,591 189,594 182,595 178,608 136,610 132,621.5 119,626.5 41,627.5 38,657 38.5,691.5 37,703 23.5,707.5 21.5,749.5 22,791.5 -1.5,790"/>
   </object>
   <object id="58" type="COLLISION" x="545.333" y="446.333">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
    <polygon points="0,0 -44.6667,1.33333 -44,385.333 -45.3333,392 -56.6667,394.333 -60.6667,403 -68,407.333 -76.3333,411.667 -77.3333,434 -86,440 -92,444.333 -93.6667,455 -107.667,461 -109.667,487.333 -103,494.333 -77.3333,496 -76.3333,533.667 -72.6667,543.333 -56.3333,543 -45,544.667 -45,561.333 -57,568.667 -61.3333,576.667 -62,594.333 -67.3333,600 -78.3333,603 -78,610 -83.6667,615.667 -88.6667,616.667 -93,623.333 -94.3333,629.667 -102.333,632.333 -107,635.333 -109,643.333 -123.667,648.667 -135.333,649 -143.667,660.333 -158.333,663.333 -373.333,663.333 -377.667,666 -381,674 -384.333,678.667 -396,682.667 -398,697.333 -397.333,705.667 -403,712.333 -410.667,716 -412.667,747.667 -400,750.667 -395.333,757.333 -396.333,778 -390.667,783.333 -367.667,783.667 -362.333,795.333 -357.667,799 -254.333,800.667 -251,805.333 -250.667,812.667 -243.333,817 -198.333,815.333 -196.333,805.333 -191.667,798.333 -176,799.667 -173,808.667 -167.333,813.667 -136,818.333 -123,816.667 -125.333,825 -117.333,831 -108.667,833.667 -108,843.333 -102,847.667 -96,848 -93.6667,858.667 -92,877.667 -76.6667,881.333 -76.6667,903.333 -74.3333,910.667 -63.6667,913 -60.6667,925.333 -60.3333,941.333 -46.6667,946.333 -44.6667,981.333 -29,981.333"/>
   </object>
   <object id="59" type="COLLISION" x="-25.6667" y="1159">
@@ -1040,11 +1097,31 @@
    </properties>
    <point/>
   </object>
-  <object id="69" type="COLLISION" x="263.482" y="424.565" width="17.1739" height="7.30435"/>
-  <object id="70" type="COLLISION" x="370.364" y="386.364" width="11.0909" height="12.3636"/>
-  <object id="71" type="COLLISION" x="290.636" y="450.364" width="11.0909" height="12.3636"/>
-  <object id="73" type="COLLISION" x="438.868" y="408.166" width="17.1739" height="7.30435"/>
-  <object id="74" type="COLLISION" x="467.182" y="433.455" width="11.0909" height="12.3636"/>
+  <object id="69" type="COLLISION" x="263.482" y="424.565" width="17.1739" height="7.30435">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="70" type="COLLISION" x="370.364" y="386.364" width="11.0909" height="12.3636">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="71" type="COLLISION" x="290.636" y="450.364" width="11.0909" height="12.3636">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="73" type="COLLISION" x="438.868" y="408.166" width="17.1739" height="7.30435">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="74" type="COLLISION" x="467.182" y="433.455" width="11.0909" height="12.3636">
+   <properties>
+    <property name="COLLISION" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="76" type="COLLISION" x="50.4545" y="690.818" width="11.0909" height="12.3636"/>
   <object id="77" type="COLLISION" x="66.1212" y="733.818" width="11.0909" height="12.3636"/>
   <object id="78" type="COLLISION" x="66.7879" y="754.152" width="11.0909" height="12.3636"/>
@@ -1053,42 +1130,14 @@
   <object id="81" type="COLLISION" x="242.455" y="737.818" width="11.0909" height="12.3636"/>
   <object id="82" type="COLLISION" x="194.455" y="690.152" width="11.0909" height="12.3636"/>
   <object id="83" type="COLLISION" x="33.9545" y="435.818" width="11.0909" height="12.3636"/>
-  <object id="84" type="COLLISION" x="450.58" y="194.193" width="11.0909" height="12.3636"/>
-  <object id="88" name="ORC" type="NPC" x="101.591" y="473.682">
+  <object id="84" type="COLLISION" x="450.58" y="194.193" width="11.0909" height="12.3636">
    <properties>
-    <property name="DIRECTION" value="RIGHT"/>
+    <property name="COLLISION" type="bool" value="true"/>
    </properties>
-   <point/>
   </object>
-  <object id="89" name="GOBLIN" type="NPC" x="131.455" y="461.5">
-   <properties>
-    <property name="DIRECTION" value="UP"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="91" name="GOBLIN" type="NPC" x="69.5" y="465.5">
-   <properties>
-    <property name="DIRECTION" value="UP"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="92" name="GOBLIN" type="NPC" x="71" y="392">
-   <properties>
-    <property name="DIRECTION" value="RIGHT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="93" name="GOBLIN" type="NPC" x="150.5" y="449.5">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="94" name="GOBLIN" type="NPC" x="51" y="422">
-   <properties>
-    <property name="DIRECTION" value="RIGHT"/>
-   </properties>
+  <object id="119" name="SKELETON_WARRIOR" type="NPC" x="254.667" y="132">
    <point/>
   </object>
  </objectgroup>
+ <objectgroup id="21" name="Object Layer 2"/>
 </map>

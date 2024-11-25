@@ -3,20 +3,25 @@ package Worlds;
 import Animations.Animation;
 import Entities.Entity;
 import Map.Map;
-import Map.Object.ObjectGroup;
+import Map.Object.CLASS;
+import Map.Object.Object;
+import Map.Object.Properties;
 
-import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 
 public class World {
     private final Map world;
     private final String worldKey;
     private final HashMap<String, Battle> battles = new HashMap<>();
     private final HashMap<String, Entity> npcs = new HashMap<>();
+    private final List<Object> objects;
 
     public World(String worldKey, String mapPath) {
         this.worldKey = worldKey;
         this.world = new Map(mapPath);
+
+        this.objects = world.getObjectGroup().getObjects();
     }
 
     public World addBattles(Battle... battleObjects) {
@@ -35,8 +40,12 @@ public class World {
         return world;
     }
 
-    public ObjectGroup getObjects() {
-        return world.getObjectGroup();
+//    public Objects getObjects() {
+//        return world.getObjectGroup();
+//    }
+
+    public List<Object> getObjects() {
+        return objects;
     }
 
     public String getName() {
@@ -59,4 +68,6 @@ public class World {
         Entity npc = getNpc(npcKey);
         return npc != null ? npc.getAnimation() : null;
     }
+
+
 }

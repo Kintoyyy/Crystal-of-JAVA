@@ -1,9 +1,11 @@
 package Entities.Enemies;
 
+import Animations.Entities.EntityAnimation;
 import Entities.Characters.Character;
 import Entities.Common.*;
 import Entities.Enemies.SpecialSkill.SpecialSkill;
 import Entities.Entity;
+import Utils.ImageUtils;
 
 import java.awt.*;
 
@@ -22,6 +24,7 @@ public abstract class Enemy extends Entity {
     protected double maxDamage = 1.5; // Maximum damage multiplier
     protected double lowHealthThreshold = 0.3; // Threshold to consider health as "low" (30%)
     protected double dodge = 0.05; // Chance for the enemy to dodge attacks
+    protected String key;
 
     /**
      * Constructs an enemy with health, attack power, defense, and a special skill.
@@ -34,6 +37,7 @@ public abstract class Enemy extends Entity {
     Enemy(Health health, AttackPower attackPower, Defense defense, SpecialSkill specialSkill) {
         this(health, attackPower, defense);
         this.name = "Enemy"; // Default name
+        this.key = this.name.toUpperCase().replace(" ", "_");
         this.description = "A generic enemy"; // Default description
         this.specialSkill = specialSkill; // Set the special skill
     }
@@ -50,6 +54,8 @@ public abstract class Enemy extends Entity {
         this.health = health;
         this.attackPower = attackPower;
         this.defense = defense;
+
+        animation = new EntityAnimation(ImageUtils.loadImage("/Player/Kent/Character.png"));
     }
 
     /**
@@ -172,5 +178,9 @@ public abstract class Enemy extends Entity {
         // Apply damage to the enemy's health
         System.out.println(this.name + " takes " + damage + " damage!");
         health.takeDamage(damage);
+    }
+
+    public String getKey() {
+        return key;
     }
 }

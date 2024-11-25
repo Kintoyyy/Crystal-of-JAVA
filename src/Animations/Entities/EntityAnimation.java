@@ -15,6 +15,7 @@ public class EntityAnimation extends Animation {
         Frames sheet = new Frames(image, 32, 32);
 
         this.setDefaultAnimation(sheet.extractFrames(0, 0, 6, 1));
+
         this.addAnimation(TYPE.IDLE, DIRECTION.DOWN, sheet.extractFrames(0, 0, 6, 1));
         this.addAnimation(TYPE.IDLE, DIRECTION.LEFT, sheet.extractFrames(0, 1, 6, 2, true));
         this.addAnimation(TYPE.IDLE, DIRECTION.RIGHT, sheet.extractFrames(0, 1, 6, 2));
