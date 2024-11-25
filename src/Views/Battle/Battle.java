@@ -5,6 +5,7 @@ import Components.Menu.SkillMenu;
 import Components.Button.*;
 import Components.Button.Button;
 import Components.Layouts.*;
+import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import Views.*;
@@ -14,7 +15,9 @@ import Battle.BattleManager;
 import java.awt.*;
 
 public class Battle extends View {
-    private final BattleManager battleManager;
+    private BattleManager battleManager;
+    private Text text;
+
     public Battle(ViewManager viewManager) {
         super(viewManager);
         //should be gameState
@@ -45,12 +48,16 @@ public class Battle extends View {
                         .setRightClickAction(battleManager::abortBattle)
                         .setLocation(680, 20)
         );
+
+        text = (Text) new Text("Hello").setLocation(100, 100);
     }
 
     @Override
     public void tick() {
         battleManager.tick();
         components.tick();
+        text.tick();
+
     }
 
     @Override
@@ -66,8 +73,9 @@ public class Battle extends View {
         g.drawString(handler.getCharacterManager().getPlayer().getSkills().toString(), 20, 50);
 //        g.drawString((battleManagerOld.getTurnState() == Turn.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
 //        g.drawString(handler.getGameState(), 20, 70);
-
-
+//        System.out.println(battleManager.isPlayersTurn());
+        text.setText(battleManager.isPlayersTurn() ? "Players turn" : "Enemy Turn : " + battleManager.getTimer());
+        text.render(g);
     }
 
 

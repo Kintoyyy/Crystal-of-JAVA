@@ -3,7 +3,7 @@ package Entities;
 import Animations.Animation;
 import Animations.enums.DIRECTION;
 import Animations.enums.TYPE;
-import Entities.Common.Effects.Effect;
+import Battle.Effects.Effect;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Abstract base class representing an entity in the game.
- * Entities can have health, attack power, defense, and a set of effects.
+ * Entities can have health, attack power, defense, and a set of ActiveEffects.
  * Provides methods for updating and rendering the entity on the screen.
  */
 public abstract class Entity {
@@ -23,7 +23,7 @@ public abstract class Entity {
     protected Health health; // Health of the entity
     protected AttackPower attackPower; // Attack power of the entity
     protected Defense defense; // Defense of the entity
-    protected ArrayList<Effect> effects = new ArrayList<>(); // Effects applied to the entity
+    protected ArrayList<Effect> ActiveEffects = new ArrayList<>(); // Effects applied to the entity
 
     protected BufferedImage profileImage; // Profile image for the entity
     protected Animation animation; // Animation for the entity
@@ -105,15 +105,24 @@ public abstract class Entity {
         return defense;
     }
 
+    public AttackPower getAttackPower(){
+        return attackPower;
+    }
+
     public BufferedImage getProfile() {
         return profileImage;
     }
 
-    public ArrayList<Effect> getEffects() {
-        return effects;
+    public ArrayList<Effect> getActiveEffects() {
+        return ActiveEffects;
     }
 
     public Animation getAnimation() {
         return animation;
     }
+
+    public void addEffect(Effect effect) {
+        ActiveEffects.add(effect);
+    }
 }
+

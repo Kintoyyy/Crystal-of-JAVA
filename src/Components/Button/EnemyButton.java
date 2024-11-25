@@ -64,7 +64,7 @@ public class EnemyButton extends Button {
         healthBar.setLocation(bounds.x + 10, bounds.y + 90);
         healthBar.render(g);
 
-        // Render enemy name above the frame
+        // Render selectedEnemy name above the frame
         if (enemy != null) {
             g.drawString(enemy.getName(), bounds.x, bounds.y - 10);
         }

@@ -2,12 +2,15 @@ package Entities.Characters;
 
 import Animations.Entities.EntityAnimation;
 import Entities.Common.*;
+import Battle.Effects.Effect;
 import Entities.Entity;
-import Entities.Characters.Skills.Skill;
+import Battle.Skills.Skill;
 import Utils.ImageUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Character class represents a generic character in the game with attributes like health, mana, energy,
  * skills, level, experience, and dodge rate. It provides basic functionality for managing character attributes
@@ -41,20 +44,20 @@ public abstract class Character extends Entity {
     /**
      * Constructs a new Character with the specified attributes.
      *
-     * @param name The name of the character.
-     * @param level The initial level of the character.
-     * @param health The health stats for the character.
-     * @param mana The mana stats for the character.
+     * @param name        The name of the character.
+     * @param level       The initial level of the character.
+     * @param health      The health stats for the character.
+     * @param mana        The mana stats for the character.
      * @param attackPower The attack power of the character.
-     * @param defense The defense stats of the character.
-     * @param skills A list of skills available to the character.
+     * @param defense     The defense stats of the character.
+     * @param skills      A list of skills available to the character.
      */
     public Character(String name, int level, Health health, Mana mana, AttackPower attackPower, Defense defense, ArrayList<Skill> skills) {
         super(0, 0, 32, 32);
 
         // Initialize default animation for the character
         animation = new EntityAnimation(ImageUtils.loadImage("/Player/Player_New/Player_Anim/Player_Idle_Run_Death_Anim.png"));
-        this.description = "A generic enemy";
+        this.description = "A generic selectedEnemy";
 
         this.name = name;
         this.level = level;
@@ -201,12 +204,19 @@ public abstract class Character extends Entity {
         mana.regenMana();
     }
 
-    /**
-     * Gets the attack power of the character.
-     *
-     * @return The character's attack power.
-     */
-    public double getAttackPower() {
-        return attackPower.getAttackPower();
+
+    public void takeDamage(double damage) {
+        // get effect first adjust the
+    }
+
+    private final List<Effect> effects = new ArrayList<Effect>();
+
+    public void addEffect(Effect effect) {
+        effects.add(effect);
+        effect.applyToCharacter(this);
+    }
+
+    public void processEffects() {
+        effects.removeIf(Effect::isExpired);
     }
 }

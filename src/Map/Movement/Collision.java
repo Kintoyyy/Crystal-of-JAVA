@@ -89,7 +89,7 @@ public class Collision {
      * Checks if a polygon collides with a rectangle using the Separating Axis Theorem (SAT).
      *
      * @param polygon    The polygon object
-     * @param rectBounds The bounding box of the moving object (player)
+     * @param rectBounds The bounding box of the moving object (selectedPlayer)
      * @return True if no collision, false if collision detected
      */
     private boolean polygonCollidesWithRect(Polygon polygon, Rectangle rectBounds) {

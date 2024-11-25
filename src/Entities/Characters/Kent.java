@@ -2,9 +2,9 @@ package Entities.Characters;
 
 import Animations.Entities.EntityAnimation;
 import Entities.Common.*;
-import Entities.Characters.Skills.Warrior.*;
+import Battle.Skills.Warrior.*;
 import Utils.SpriteSheet;
-import Entities.Characters.Skills.*;
+import Battle.Skills.*;
 import Utils.ImageUtils;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Kent extends Character {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(150, AttackType.PHYSICAL), new Defense(30), new ArrayList<>());
 
-        this.addSkill(new Warrior(this));
+        this.addSkill(new Warrior());
         this.addSkill(new PowerStrike());
         this.addSkill(new ShieldBlock());
         this.addSkill(new WarCry());

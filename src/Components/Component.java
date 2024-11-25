@@ -1,6 +1,8 @@
 package Components;
 
 import Components.enums.States;
+import Game.Handler;
+import Inputs.InputKeyboardListener;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -57,6 +59,7 @@ public abstract class Component {
     protected Rectangle bounds = new Rectangle();
     protected States state = IDLE;
     private String text;
+    protected Handler handler;
 
     /**
      * Constructor that initializes the component and updates its bounds.
@@ -89,6 +92,18 @@ public abstract class Component {
         int parentX = parent != null ? (int) parent.x : 0;
         int parentY = parent != null ? (int) parent.y : 0;
         bounds.setBounds(parentX + (int) x, parentY + (int) y, width, height);
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public InputKeyboardListener isKeyPressed(String key) {
+        return handler.getKeyManager().isKeyPressed(key);
     }
 
     /**
@@ -258,4 +273,6 @@ public abstract class Component {
         g.setColor(color);
         g.drawString(text, bounds.x + (x * scale), bounds.y + (y * scale));
     }
+
+
 }

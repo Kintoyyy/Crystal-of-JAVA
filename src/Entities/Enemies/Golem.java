@@ -10,6 +10,6 @@ public class Golem extends Enemy {
         super(new Health(2000), new AttackPower(60, 80), new Defense(30));
 
         name = "Golem";
-        description = "A generic enemy";
+        description = "A generic selectedEnemy";
     }
 }

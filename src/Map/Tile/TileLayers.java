@@ -30,7 +30,7 @@ public class TileLayers {
             parseLayer(layer, layerIndex, width, height);
         }
 
-        // Set the player layer to the middle if not explicitly defined
+        // Set the selectedPlayer layer to the middle if not explicitly defined
         if (this.playerLayer == 0) {
             this.playerLayer = totalLayers / 2;
         }
@@ -57,7 +57,7 @@ public class TileLayers {
         }
 
         if (!isVisible || isPlayerLayer(layer)) {
-            return; // Skip invisible layers or player-specific layers
+            return; // Skip invisible layers or selectedPlayer-specific layers
         }
 
         NodeList dataNodes = layer.getElementsByTagName("data");
@@ -90,10 +90,10 @@ public class TileLayers {
     }
 
     /**
-     * Determines if the given layer is designated as the player layer.
+     * Determines if the given layer is designated as the selectedPlayer layer.
      *
      * @param layer The XML Element representing the layer.
-     * @return True if the layer is the player layer, false otherwise.
+     * @return True if the layer is the selectedPlayer layer, false otherwise.
      */
     private boolean isPlayerLayer(Element layer) {
         return "PLAYER".equals(layer.getAttribute("class"));
@@ -125,9 +125,9 @@ public class TileLayers {
     }
 
     /**
-     * Retrieves the index of the player layer.
+     * Retrieves the index of the selectedPlayer layer.
      *
-     * @return The index of the player layer.
+     * @return The index of the selectedPlayer layer.
      */
     public int getPlayerLayer() {
         return playerLayer;

@@ -57,19 +57,17 @@ public class Game implements Runnable {
         display.getCanvas().addMouseListener(inputMouseListener);
         display.getCanvas().addMouseMotionListener(inputMouseListener);
 
-        Handler handler = new Handler(this);
+        Handler handler = Handler.getInstance(this);
 
-        viewManager = new ViewManager(handler);
+        viewManager = new ViewManager();
 
-//        gameState = new GameState(handler);
+        this.characters = new CharacterManager();
 
-        this.characters = new CharacterManager(handler);
+        this.battleManager = new BattleManager();
 
-        this.battleManager = new BattleManager(handler);
+        this.worldManager = new WorldManager();
 
-        this.worldManager = new WorldManager(handler);
-
-
+        handler.initManagers(viewManager, characters, worldManager, battleManager);
 
         // set the debug mode
         debugStats = new DebugMode(handler);

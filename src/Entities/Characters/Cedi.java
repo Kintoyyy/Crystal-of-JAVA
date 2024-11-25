@@ -5,8 +5,8 @@ import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
 import Entities.Common.Mana;
-import Entities.Characters.Skills.*;
-import Entities.Characters.Skills.Mage.*;
+import Battle.Skills.*;
+import Battle.Skills.Mage.*;
 import Utils.SpriteSheet;
 import Utils.ImageUtils;
 
@@ -19,7 +19,7 @@ public class Cedi extends Character {
         super("Cedi", 1, new Health( 800), new Mana( 200), new AttackPower(120),new Defense(10), new ArrayList<>());
 
 
-        this.addSkill(new Mage(this));
+        this.addSkill(new Mage());
         this.addSkill(new Fireball());
         this.addSkill(new ManaSurge());
         this.addSkill(new FrostBolt());

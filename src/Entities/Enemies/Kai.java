@@ -7,7 +7,7 @@ import Entities.Common.Health;
 import Utils.ImageUtils;
 
 public class Kai extends Enemy {
-    // Ultra-high health, ultra-high attack, has a special skill that can instantly kill the player.
+    // Ultra-high health, ultra-high attack, has a special skill that can instantly kill the selectedPlayer.
     public Kai() {
         super(new Health(3000), new AttackPower(300, 500), new Defense(20));
         this.name = "KAI";

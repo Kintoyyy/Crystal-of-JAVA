@@ -6,7 +6,7 @@ import Worlds.WorldManager;
 
 /**
  * The Camera class is responsible for controlling the view of the game world by
- * adjusting the camera's position based on the player's movement or specific events.
+ * adjusting the camera's position based on the selectedPlayer's movement or specific events.
  */
 public class Camera {
 
@@ -38,7 +38,7 @@ public class Camera {
     /**
      * Constructs a Camera object.
      * <p>
-     * //     * @param movement The Movement object controlling the player's movement.
+     * //     * @param movement The Movement object controlling the selectedPlayer's movement.
      *
      * @param xOffset Initial horizontal offset.
      * @param yOffset Initial vertical offset.

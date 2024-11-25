@@ -16,7 +16,8 @@ public class WorldManager {
     private final AnimationManager animationManager;
     private String currentWorld = "FOREST";
 
-    public WorldManager(Handler handler) {
+    public WorldManager() {
+        Handler handler = Handler.getInstance();
         handler.setWorldManager(this);
 
         Camera camera = new Camera(handler, this, 0, 0);

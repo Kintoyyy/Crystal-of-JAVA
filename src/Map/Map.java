@@ -26,7 +26,7 @@ public class Map {
     private TileTypes tileTypes;  // Object for managing tileset data.
     private Objects objects;  // Object for managing object and trigger data.
 
-    private int playerLayer; // The layer where the player resides.
+    private int playerLayer; // The layer where the selectedPlayer resides.
 
     /**
      * Constructs a Map object by parsing a .tmx map file.
@@ -124,7 +124,7 @@ public class Map {
     }
 
     /**
-     * Returns the spawn point for the player as a Point object.
+     * Returns the spawn point for the selectedPlayer as a Point object.
      *
      * @return Spawn point (x, y).
      */
@@ -133,7 +133,7 @@ public class Map {
     }
 
     /**
-     * Returns the index of the player's layer.
+     * Returns the index of the selectedPlayer's layer.
      *
      * @return Player layer index.
      */

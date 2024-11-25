@@ -52,9 +52,10 @@ public class ViewManager {
      *
      * @param handler The Handler responsible for managing game state and input.
      */
-    public ViewManager(Handler handler) {
+    public ViewManager() {
+        this.handler = Handler.getInstance();
         handler.setViewManager(this);
-        this.handler = handler;
+//        this.handler = handler;
     }
 
     /**

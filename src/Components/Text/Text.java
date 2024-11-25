@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Text extends Component {
 
-    private final String fullText;
+    private String fullText;
     private String displayedText = "";
     private Alignment alignment = Alignment.LEFT;
     private Color color = Color.WHITE;
@@ -126,7 +126,7 @@ public class Text extends Component {
     }
 
     public Text setText(String text) {
-        this.text = text;
+        this.fullText = text;
         return this;
     }
 

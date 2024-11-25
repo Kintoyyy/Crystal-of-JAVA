@@ -1,6 +1,6 @@
 package Entities.Characters;
 
-import Entities.Characters.Skills.Skill;
+import Battle.Skills.Skill;
 import Game.Handler;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Manages the characters in the game.
  * <p>
  * The {@code CharacterManager} is responsible for keeping track of all the characters,
- * switching between the current player, and updating the game state for each character.
+ * switching between the current selectedPlayer, and updating the game state for each character.
  * This includes managing health, mana, and skill turns.
  * </p>
  */
@@ -20,8 +20,8 @@ public class CharacterManager {
     /**
      * Initializes the {@code CharacterManager} with default characters.
      */
-    public CharacterManager(Handler handler) {
-        handler.setCharacterManager(this);
+    public CharacterManager() {
+        Handler.getInstance().setCharacterManager(this);
         addCharacter(new Kent());
         addCharacter(new Cedi());
         addCharacter(new Nathan());
@@ -29,13 +29,13 @@ public class CharacterManager {
     }
 
     /**
-     * Sets the player by the provided index.
+     * Sets the selectedPlayer by the provided index.
      * <p>
      * This method updates the {@code currentCharacterIndex} to the specified index.
      * If the index is invalid (out of bounds), an error message is printed.
      * </p>
      *
-     * @param index the index of the character to set as the player
+     * @param index the index of the character to set as the selectedPlayer
      */
     public void setPlayerByIndex(int index) {
         if (index < 0 || index >= characters.size()) {
@@ -64,21 +64,21 @@ public class CharacterManager {
     }
 
     /**
-     * Retrieves the current player (active character).
+     * Retrieves the current selectedPlayer (active character).
      *
-     * @return the current player (active character)
+     * @return the current selectedPlayer (active character)
      */
     public Character getPlayer() {
         return characters.get(currentCharacterIndex);
     }
 
     /**
-     * Checks if the current player is alive.
+     * Checks if the current selectedPlayer is alive.
      * <p>
      * This method checks the health of the current character and determines if they are alive.
      * </p>
      *
-     * @return {@code true} if the player is alive, {@code false} otherwise
+     * @return {@code true} if the selectedPlayer is alive, {@code false} otherwise
      */
     public boolean isPlayerAlive() {
         return !characters.get(currentCharacterIndex).getHealth().isDead();
@@ -143,13 +143,14 @@ public class CharacterManager {
     }
 
     /**
-     * Sets the current player by their index.
+     * Sets the current selectedPlayer by their index.
      *
-     * @param index the index of the character to set as the player
+     * @param index the index of the character to set as the selectedPlayer
      */
     public void setPlayer(int index) {
         this.currentCharacterIndex = index;
     }
+
 
     /**
      * Updates the turns of all characters' skills.
@@ -160,7 +161,7 @@ public class CharacterManager {
     public void updateTurns() {
         for (Character character : characters) {
             for (Skill skill : character.getSkills()) {
-                skill.updateTurns();
+                skill.reduceCooldown();
             }
         }
     }

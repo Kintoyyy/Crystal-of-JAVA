@@ -1,6 +1,6 @@
 package Components.Button;
 
-import Entities.Characters.Skills.Skill;
+import Battle.Skills.Skill;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import fonts.SimplePixelFont;
@@ -50,8 +50,8 @@ public class SkillButton extends Button {
         g.setFont( new SimplePixelFont(8));
         g.drawString(Skill.getName(), bounds.x, bounds.y + height + 10);
         g.drawString("Cost: " + Skill.getCost(), bounds.x, bounds.y + height + 20);
-        g.drawString("Damage: " + Skill.getDamage(), bounds.x, bounds.y + height + 30);
-        g.drawString("cd: " + Skill.getCooldownTurns(), bounds.x, bounds.y + height + 40);
-        g.drawString("eff dur: " + Skill.getEffectDurationTurns(), bounds.x, bounds.y + height + 50);
+        g.drawString("Cooldown: " + Skill.getCooldown(), bounds.x, bounds.y + height + 30);
+//        g.drawString("cd: " + Skill.getCooldown(), bounds.x, bounds.y + height + 40);
+//        g.drawString("eff dur: " + Skill.getEffectDurationTurns(), bounds.x, bounds.y + height + 50);
     }
 }
