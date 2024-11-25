@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class InputKeyboardListener implements KeyListener {
 
-    // Map to track the pressed/released state of keys using their key codes.
+    // Parser to track the pressed/released state of keys using their key codes.
     private final Map<Integer, Boolean> keyStates;
 
     // Temporary variable to store the key code being queried.

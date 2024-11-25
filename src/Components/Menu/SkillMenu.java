@@ -14,13 +14,11 @@ import java.util.ArrayList;
 public class SkillMenu extends Menu {
     private ArrayList<Skill> skills;
     private final BattleManager battleManager;
-    private final Handler handler;
 
     public SkillMenu(BattleManager battleManager) {
         super();
         this.battleManager = battleManager;
-        this.handler = battleManager.getHandler();
-        this.skills = Handler.getInstance().getCharacterManager().getPlayer().getSkills();
+        this.skills = handler.getCharacterManager().getPlayer().getSkills();
         initCharacterFrames();
     }
 

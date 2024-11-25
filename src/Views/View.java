@@ -45,8 +45,7 @@ import java.awt.*;
  * </pre>
  */
 public abstract class View {
-
-    protected final Handler handler;
+    protected final Handler handler = Handler.getInstance();
     protected final ViewManager viewManager;
     protected final ComponentManager components;
     protected boolean isOverlay = false;
@@ -58,7 +57,6 @@ public abstract class View {
      */
     public View(ViewManager viewManager) {
         this.viewManager = viewManager;
-        this.handler = viewManager.getHandler();
         this.components = new ComponentManager(viewManager);
     }
 

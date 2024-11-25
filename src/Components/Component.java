@@ -46,6 +46,7 @@ import static Components.enums.States.*;
  * @see Components.enums.States
  */
 public abstract class Component {
+    protected Handler handler = Handler.getInstance();
     protected float x = 0;
     protected float y = 0;
     protected int width = 0;
@@ -59,7 +60,7 @@ public abstract class Component {
     protected Rectangle bounds = new Rectangle();
     protected States state = IDLE;
     private String text;
-    protected Handler handler;
+
 
     /**
      * Constructor that initializes the component and updates its bounds.

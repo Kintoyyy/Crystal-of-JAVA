@@ -26,15 +26,15 @@ public class BattleManager {
     private boolean isDataLoaded = false;
     private boolean isPlayersTurn = true;
 
-    public BattleManager() {
-        handler = Handler.getInstance();
+    public BattleManager(Handler handler) {
         handler.setBattleManager(this);
+        this.handler = handler;
+
         this.effectsManager = new EffectsManager();
         this.enemyManager = new EnemyManager(handler);
         this.characterManager = handler.getCharacterManager();
 
         this.viewManager = handler.getViewManager();
-//        this.handler = handler; // remove this
     }
 
     public void startBattle(Battle battle) {

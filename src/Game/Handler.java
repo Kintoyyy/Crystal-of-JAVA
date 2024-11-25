@@ -3,10 +3,10 @@ package Game;
 import Entities.Characters.CharacterManager;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
+import Map.Map;
 import Utils.DebugMode;
 import Battle.BattleManager;
 import Views.ViewManager;
-import Worlds.WorldManager;
 
 public class Handler {
     private static Handler instance; // Singleton instance
@@ -14,7 +14,7 @@ public class Handler {
     private DebugMode debugMode;
     private ViewManager viewManager;
     private CharacterManager characterManager;
-    private WorldManager worldManager;
+    private Map map;
     private BattleManager battleManager;
 
     // Private constructor for Singleton
@@ -38,14 +38,6 @@ public class Handler {
         return instance;
     }
 
-    // Initialization of managers
-    public void initManagers(ViewManager viewManager, CharacterManager characterManager, WorldManager worldManager, BattleManager battleManager) {
-        this.viewManager = viewManager;
-        this.characterManager = characterManager;
-        this.worldManager = worldManager;
-        this.battleManager = battleManager;
-    }
-
     // Public getter methods
     public InputKeyboardListener getKeyManager() {
         return game.getKeyManager();
@@ -53,14 +45,6 @@ public class Handler {
 
     public InputMouseListener getInputMouseListener() {
         return game.getInputMouseListener();
-    }
-
-    public DebugMode getDebugMode() {
-        return debugMode;
-    }
-
-    public void setDebugMode(DebugMode debugMode) {
-        this.debugMode = debugMode;
     }
 
     public Game getGame() {
@@ -71,20 +55,24 @@ public class Handler {
         return viewManager;
     }
 
-    public WorldManager getWorldManager() {
-        return worldManager;
+    public void setViewManager(ViewManager viewManager) {
+        this.viewManager = viewManager;
+    }
+
+    public Map getWorldManager() {
+        return map;
+    }
+
+    public void setWorldManager(Map map) {
+        this.map = map;
     }
 
     public BattleManager getBattleManager() {
         return battleManager;
     }
 
-    public int getWidth() {
-        return game.getWidth();
-    }
-
-    public int getHeight() {
-        return game.getHeight();
+    public void setBattleManager(BattleManager battleManager) {
+        this.battleManager = battleManager;
     }
 
     public CharacterManager getCharacterManager() {
@@ -95,15 +83,15 @@ public class Handler {
         this.characterManager = characterManager;
     }
 
-    public void setViewManager(ViewManager viewManager) {
-        this.viewManager = viewManager;
+    public int getWidth() {
+        return game.getWidth();
     }
 
-    public void setWorldManager(WorldManager worldManager) {
-        this.worldManager = worldManager;
+    public int getHeight() {
+        return game.getHeight();
     }
 
-    public void setBattleManager(BattleManager battleManager) {
-        this.battleManager = battleManager;
+    public void setDebugMode(DebugMode debugMode) {
+        this.debugMode = debugMode;
     }
 }

@@ -8,7 +8,6 @@ import Map.Object.Objects;
 import Utils.DebugMode;
 import Map.Tile.Tile;
 import Map.Tile.TileTypes;
-import Worlds.WorldManager;
 
 import java.awt.*;
 
@@ -53,7 +52,7 @@ public class Render {
 
     private int playerLayer;
 
-    private final WorldManager worldManager;
+    private final Map map;
 
     private final AnimationManager animationManager;
 
@@ -64,34 +63,34 @@ public class Render {
      * <p>
      * //     * @param movement The Movement instance for managing character movement.
      */
-    public Render(Handler handler, Movement movement, WorldManager worldManager) {
+    public Render(Handler handler, Movement movement, Map map) {
         this.movement = movement;
         this.camera = movement.getCamera();
         this.gameHeight = handler.getHeight();
         this.gameWidth = handler.getWidth();
-        this.worldManager = worldManager;
-        this.animationManager = worldManager.getAnimationManager();
-        loadWorld(worldManager.getMap());
+        this.map = map;
+        this.animationManager = map.getAnimationManager();
+        loadWorld(map.getMap());
     }
 
-    public void loadWorld(Map map) {
+    public void loadWorld(Parser parser) {
 
         if (DebugMode.isShowObjects()) {
-            System.out.println("Loading world..." + map);
-            System.out.println("World width: " + map.getWorldWidth());
-            System.out.println("World height: " + map.getWorldHeight());
-            System.out.println("Tile layers: " + map.getTileLayers().length);
+            System.out.println("Loading world..." + parser);
+            System.out.println("World width: " + parser.getWorldWidth());
+            System.out.println("World height: " + parser.getWorldHeight());
+            System.out.println("Tile layers: " + parser.getTileLayers().length);
         }
 
-        this.width = map.getWorldWidth();
-        this.height = map.getWorldHeight();
-        this.TileLayers = map.getTileLayers();
-        this.tileTypes = map.getTileTypes();
-        this.objects = map.getObjectGroup();
+        this.width = parser.getWorldWidth();
+        this.height = parser.getWorldHeight();
+        this.TileLayers = parser.getTileLayers();
+        this.tileTypes = parser.getTileTypes();
+        this.objects = parser.getObjectGroup();
 
-        this.playerLayer = map.getPlayerLayer();
+        this.playerLayer = parser.getPlayerLayer();
 
-        movement.setLocation(map.getSpawnPoint());
+        movement.setLocation(parser.getSpawnPoint());
     }
 
     /**
@@ -143,7 +142,7 @@ public class Render {
 //
 //                }
 
-                animationManager.render(g, objects.getNpcObjects(), worldManager.getCurrentWorld(), camera);
+                animationManager.render(g, objects.getNpcObjects(), map.getCurrentWorld(), camera);
                 movement.render(g);
             }
         }

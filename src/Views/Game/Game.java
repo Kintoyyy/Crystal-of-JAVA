@@ -2,28 +2,27 @@ package Views.Game;
 
 import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
-import Utils.CallBackAction;
+import Map.Map;
 import Views.View;
 import Views.ViewManager;
 import Views.enums.Views;
-import Worlds.WorldManager;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Game extends View {
-    private final WorldManager worldManager;
+    private final Map map;
     //    private final BattleManager battleManager;
     private ArrayList<String> dialogs = new ArrayList<String>();
 
 
     public Game(ViewManager viewManager) {
         super(viewManager);
-        this.worldManager = handler.getWorldManager();
+        this.map = handler.getWorldManager();
         // SHOULD BE IN VIEW MANAGER
 
-//        this.worldManager = new WorldManager(handler);
-//        battleManager = new BattleManager(handler, worldManager);
+//        this.map = new Map(handler);
+//        battleManager = new BattleManager(handler, map);
 
         initComponent();
     }
@@ -31,12 +30,12 @@ public class Game extends View {
     @Override
     public void tick() {
         components.tick();
-        worldManager.tick();
+        map.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        worldManager.render(g);
+        map.render(g);
         components.render(g);
     }
 

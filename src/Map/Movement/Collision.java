@@ -5,18 +5,18 @@ import Game.Handler;
 import Map.Object.Object;
 import Map.Object.CLASS;
 import Worlds.Battle;
-import Worlds.WorldManager;
+import Map.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Collision {
-    private final WorldManager worldManager;
+    private final Map map;
     private final BattleManager battleManager;
 
     public Collision(Handler handler) {
-        this.worldManager = handler.getWorldManager();
+        this.map = handler.getWorldManager();
         this.battleManager = handler.getBattleManager();
     }
 
@@ -32,7 +32,7 @@ public class Collision {
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
 
         // Loop through objects and check for collisions
-        for (Object object : worldManager.getCurrentWorld().getObjects()) {
+        for (Object object : map.getCurrentWorld().getObjects()) {
 
             // Check polygon-rectangle collision using Separating Axis Theorem (SAT)
             if (!object.getBounds().intersects(collisionBounds)) continue;
@@ -42,7 +42,7 @@ public class Collision {
             switch (object.getClassType()) {
                 case TELEPORT -> {
                     System.out.println("Changing world to " + object.getName());
-                    worldManager.changeWorld(object.getName());
+                    map.changeWorld(object.getName());
                 }
                 case INTERACT -> {
 //sTODO: Should have an interact ui Manager, only temporary ui elements
@@ -51,7 +51,7 @@ public class Collision {
                 }
                 case BATTLE -> {
                     try {
-                        Battle battle = worldManager.getBattle(object.getName());
+                        Battle battle = map.getBattle(object.getName());
                         battleManager.startBattle(battle);
                     } catch (Exception e) {
                         e.printStackTrace();

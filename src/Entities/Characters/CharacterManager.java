@@ -20,8 +20,8 @@ public class CharacterManager {
     /**
      * Initializes the {@code CharacterManager} with default characters.
      */
-    public CharacterManager() {
-        Handler.getInstance().setCharacterManager(this);
+    public CharacterManager(Handler handler) {
+        handler.setCharacterManager(this);
         addCharacter(new Kent());
         addCharacter(new Cedi());
         addCharacter(new Nathan());
