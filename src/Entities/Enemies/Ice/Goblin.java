@@ -12,8 +12,9 @@ import Utils.ImageUtils;
 
 public class Goblin extends Enemy {
     // Low health, high dodge rate, may steal mana.
-    public Goblin() {
+    public Goblin(String key) {
         super(new Health(500), new AttackPower(50), new Defense(0));
+        this.key = key;
         name = "Goblin";
         description = "A generic selectedEnemy";
         dodge = 0.2; // 20% chance to dodge attacks
