@@ -51,8 +51,19 @@ public class Collision {
                     map.changeWorld(object.getName());
                 }
                 case DIALOG -> {
+
+                    ArrayList<String> preBattleDialogs = new ArrayList<>();
+
+                    preBattleDialogs.add("Hello Traveler! ");
+                    preBattleDialogs.add("asdasdasd! ");
+                    preBattleDialogs.add("asdasd! ");
+                    preBattleDialogs.add("das! ");
+                    preBattleDialogs.add("dadbdf ");
+
+                    viewManager.customView(new DialogScene(preBattleDialogs));
+
 //                    Battle battle = map.getBattle(object.getName());
-//                    viewManager.customView(new DialogScene(battle.getPreBattleDialogs()));
+//                    viewManager.customView(new BattleDialog(battle.getPreBattleDialogs()));
 
 //                    if(!viewManager.isViewActive(Views.BATTLE_DIALOG)){
 //                        viewManager.setView(Views.BATTLE_DIALOG);

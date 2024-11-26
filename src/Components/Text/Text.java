@@ -60,7 +60,7 @@ public class Text extends Component {
                 displayedText += fullText.charAt(currentIndex++);
                 lastTick = System.currentTimeMillis();
             }
-        } else {
+        } else if (displayedText.isEmpty()) {
             displayedText = fullText;
         }
     }
@@ -124,9 +124,12 @@ public class Text extends Component {
             case RIGHT -> bounds.x + bounds.width - lineWidth;
         };
     }
-
     public Text setText(String text) {
         this.fullText = text;
+//        this.displayedText = ""; // Reset displayedText to start fresh
+//        this.currentIndex = 0;  // Reset typing index
+//        this.lastTick = System.currentTimeMillis(); // Reset the typing timer
         return this;
     }
+
 }

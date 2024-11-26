@@ -13,6 +13,7 @@ public class EnemyManager {
     }
 
     public void loadEnemies(ArrayList<Enemy> enemies) {
+        System.out.println(enemies);
         this.currentEnemyIndex = 0;
         this.enemies.clear();
         this.enemies.addAll(enemies);

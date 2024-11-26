@@ -59,8 +59,6 @@ public class Game implements Runnable {
 
         Handler handler = Handler.getInstance(this);
 
-
-
         this.characters = new CharacterManager(handler);
 
         this.viewManager = new ViewManager(handler);
@@ -68,8 +66,6 @@ public class Game implements Runnable {
         this.battleManager = new BattleManager(handler);
 
         this.map = new Map(handler);
-
-
 
         // set the debug mode
         debugStats = new DebugMode(handler);
@@ -79,7 +75,11 @@ public class Game implements Runnable {
 
     private void tick() { //updates all variables
         if (viewManager.hasLayers()) {
-            viewManager.tick();
+            try {
+                viewManager.tick();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 

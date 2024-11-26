@@ -31,9 +31,6 @@ public class ComponentManager {
     public void tick() {
         for (Component component : components) {
             component.tick();
-            if (component.getHandler() == null) {
-                component.setHandler(handler);
-            }
         }
     }
 

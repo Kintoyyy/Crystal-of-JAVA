@@ -45,7 +45,7 @@ public class ViewManager {
         views.put(Views.SETTINGS, new Setting());
         views.put(Views.SELECT_CHARACTER, new Menu());
         views.put(Views.PAUSE, new Pause());
-//        views.put(Views.DIALOG, new DialogScene());
+//        views.put(Views.DIALOG, new BattleDialog());
 //        views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
 
 //        updateViewData(Views.DIALOG, new String[]{"one", "two", "three", "four", "five"});
@@ -55,18 +55,17 @@ public class ViewManager {
     public void customView(View customView) {
 //        views.put(Views.DIALOG, customView);
 
-        if(customView.isOverlay){
-            layers.add(customView);
+        if (customView.isOverlay) {
+            if (!layers.getLast().isOverlay) {
+                layers.add(customView);
+            }
         } else {
             layers.clear();
             layers.add(customView);
         }
-
         updateInputListener();
-        tick();
     }
-
-    public void overlayView(){
+    public void overlayView() {
 
     }
 
@@ -75,6 +74,9 @@ public class ViewManager {
         if (selectedView == null) return;
 
         if (selectedView.isOverlay) {
+            if (layers.getLast().isOverlay) {
+                layers.removeLast();
+            }
             layers.add(selectedView);
         } else {
             layers.clear();
@@ -82,7 +84,7 @@ public class ViewManager {
         }
 
         updateInputListener();
-        tick();
+//        tick();
     }
 
     public boolean isViewActive(Views viewEnum) {

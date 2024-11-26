@@ -8,6 +8,7 @@ import Entities.Enemies.EnemyManager;
 import Game.Handler;
 import Utils.Timer;
 import Views.Game.DialogScene;
+import Views.Overlay.BattleDialog;
 import Views.enums.Views;
 import Views.ViewManager;
 import Worlds.Battle;
@@ -39,6 +40,7 @@ public class BattleManager {
     }
 
     public void startBattle(Battle battle) {
+
         //set battle
         if (!battle.getPreBattleDialogs().isEmpty()) {
             System.out.println("Loading pre battle Dialogs");
@@ -48,12 +50,19 @@ public class BattleManager {
             abortBattle();
             return;
         }
+
+
+        //get battle enemies
         enemyManager.loadEnemies(battle.getEnemies()); // load enemies to enemies array
         this.isDataLoaded = false;// flag for ui components tobe removed
 
-        viewManager.customView(new DialogScene(battle.getPreBattleDialogs()));
+        // load load pre battle dialogs
+        viewManager.customView(new BattleDialog(    battle.getPreBattleDialogs()));
 
-        viewManager.setView(Views.BATTLE); // set view to battle
+//        viewManager.setView(Views.BATTLE); // set view to battle
+
+
+        // change view to battle
     }
 
     public void enemiesTurn() {
