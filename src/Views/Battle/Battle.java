@@ -15,14 +15,12 @@ import Battle.BattleManager;
 import java.awt.*;
 
 public class Battle extends View {
-    private BattleManager battleManager;
+    private final BattleManager battleManager;
     private Text text;
 
-    public Battle(ViewManager viewManager) {
-        super(viewManager);
-        //should be gameState
+    public Battle() {
         this.battleManager = handler.getBattleManager();
-
+        
         components.init(
                 new CharacterLayout(battleManager)
                         .scale(8) // not working
@@ -57,6 +55,11 @@ public class Battle extends View {
         battleManager.tick();
         components.tick();
         text.tick();
+
+    }
+
+    @Override
+    public void setData(Object data) {
 
     }
 

@@ -1,6 +1,7 @@
 package Battle.Skills.Healer;
 
 import Battle.Skills.Skill;
+import Entities.Characters.Character;
 
 public class Restore extends Skill {
     private static final String name = "Restore";
@@ -14,6 +15,8 @@ public class Restore extends Skill {
 
     @Override
     public void useSkill() {
-        selectedPlayer.getHealth().heal(300);
+        for(Character character: characters){
+            character.getHealth().heal(300);
+        }
     }
 }

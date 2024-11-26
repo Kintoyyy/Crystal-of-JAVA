@@ -26,5 +26,5 @@ public enum Views {
     PAUSE,            // The overlay that pauses the game.
     SETTINGS,         // The settings view for adjusting game configurations.
     BATTLE_DIALOG,
-    SELECT_CHARACTER  // The character selection view before gameplay begins.
+    DIALOG, SELECT_CHARACTER  // The character selection view before gameplay begins.
 }

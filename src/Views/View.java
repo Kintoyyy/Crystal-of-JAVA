@@ -46,17 +46,15 @@ import java.awt.*;
  */
 public abstract class View {
     protected final Handler handler = Handler.getInstance();
-    protected final ViewManager viewManager;
+    protected final ViewManager viewManager = handler.getViewManager();
     protected final ComponentManager components;
     protected boolean isOverlay = false;
 
     /**
      * Constructor for the View class.
      *
-     * @param viewManager The ViewManager responsible for managing the current view.
      */
-    public View(ViewManager viewManager) {
-        this.viewManager = viewManager;
+    public View() {
         this.components = new ComponentManager(viewManager);
     }
 
@@ -82,4 +80,6 @@ public abstract class View {
      * Concrete implementations of this method should define how the view updates each tick.
      */
     public abstract void tick();
+
+    public abstract void setData(Object data);
 }

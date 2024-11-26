@@ -16,8 +16,7 @@ public class Game extends View {
     private ArrayList<String> dialogs = new ArrayList<String>();
 
 
-    public Game(ViewManager viewManager) {
-        super(viewManager);
+    public Game() {
         this.map = handler.getWorldManager();
         // SHOULD BE IN VIEW MANAGER
 
@@ -31,6 +30,11 @@ public class Game extends View {
     public void tick() {
         components.tick();
         map.tick();
+    }
+
+    @Override
+    public void setData(Object data) {
+
     }
 
     @Override

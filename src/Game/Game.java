@@ -71,13 +71,6 @@ public class Game implements Runnable {
 
 
 
-
-
-
-
-
-
-
         // set the debug mode
         debugStats = new DebugMode(handler);
 

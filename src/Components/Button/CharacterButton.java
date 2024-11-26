@@ -54,6 +54,15 @@ public class CharacterButton extends Button {
         }
     }
 
+
+    public void getDyingAnimation() {
+        if (!player.getHealth().isDead()) {
+            return;
+        }
+
+
+    }
+
     @Override
     public void render(Graphics g) {
         BufferedImage buttonImage = switch (state) {
@@ -63,6 +72,11 @@ public class CharacterButton extends Button {
         };
 
         if (characterAnimation != null) {
+
+            if (player.getHealth().isDead()) {
+                characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT);
+            }
+
             g.drawImage(player.getHealth().isDead() ? characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT) : characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
         }
 
@@ -72,7 +86,7 @@ public class CharacterButton extends Button {
         healthBar.render(g);
 
         g.setColor(Color.WHITE);
-        g.setFont( new SimplePixelFont(12));
+        g.setFont(new SimplePixelFont(12));
         g.drawString(player.getName(), bounds.x + 18, bounds.y + 110);
 
         if (showBounds) {

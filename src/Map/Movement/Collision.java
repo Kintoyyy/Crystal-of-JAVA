@@ -4,6 +4,8 @@ import Battle.BattleManager;
 import Game.Handler;
 import Map.Object.Object;
 import Map.Object.CLASS;
+import Views.Game.DialogScene;
+import Views.ViewManager;
 import Worlds.Battle;
 import Map.Map;
 
@@ -14,10 +16,12 @@ import java.util.List;
 public class Collision {
     private final Map map;
     private final BattleManager battleManager;
+    private final ViewManager viewManager;
 
     public Collision(Handler handler) {
         this.map = handler.getWorldManager();
         this.battleManager = handler.getBattleManager();
+        this.viewManager = handler.getViewManager();
     }
 
     /**
@@ -39,15 +43,21 @@ public class Collision {
 
             if (object.getClassType() == CLASS.COLLISION) return false;
 
+            System.out.println("Collision with object: " + object.getName() + " Type: " + object.getClassType());
+
             switch (object.getClassType()) {
                 case TELEPORT -> {
                     System.out.println("Changing world to " + object.getName());
                     map.changeWorld(object.getName());
                 }
-                case INTERACT -> {
-//sTODO: Should have an interact ui Manager, only temporary ui elements
-//                gameState.getViewManager().getCurrentView();
-                    System.out.println("Interaction ");
+                case DIALOG -> {
+//                    Battle battle = map.getBattle(object.getName());
+//                    viewManager.customView(new DialogScene(battle.getPreBattleDialogs()));
+
+//                    if(!viewManager.isViewActive(Views.BATTLE_DIALOG)){
+//                        viewManager.setView(Views.BATTLE_DIALOG);
+//                        viewManager.updateViewData(Views.BATTLE_DIALOG, new String[]{"Hello", "World"});
+//                    }
                 }
                 case BATTLE -> {
                     try {

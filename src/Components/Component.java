@@ -1,5 +1,6 @@
 package Components;
 
+import Components.Text.Text;
 import Components.enums.States;
 import Game.Handler;
 import Inputs.InputKeyboardListener;

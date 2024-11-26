@@ -13,13 +13,8 @@ public class BattleDialog extends View {
     private ArrayList<String> dialogs = new ArrayList<>();
 
     public BattleDialog(ViewManager viewManager) {
-        super(viewManager);
-        this.isOverlay = true;
+//        this.isOverlay = true;
 
-        initComponents(viewManager);
-    }
-
-    private void initComponents(ViewManager viewManager) {
         components.init(
                 new Dialog("hello").setLocation(20, 20),
 
@@ -39,6 +34,11 @@ public class BattleDialog extends View {
     @Override
     public void tick() {
         components.tick();
+    }
+
+    @Override
+    public void setData(Object data) {
+
     }
 
     public void setDialogs(String... dialogsString) {

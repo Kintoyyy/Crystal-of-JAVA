@@ -7,6 +7,7 @@ import Entities.Enemies.Enemy;
 import Entities.Enemies.EnemyManager;
 import Game.Handler;
 import Utils.Timer;
+import Views.Game.DialogScene;
 import Views.enums.Views;
 import Views.ViewManager;
 import Worlds.Battle;
@@ -49,6 +50,9 @@ public class BattleManager {
         }
         enemyManager.loadEnemies(battle.getEnemies()); // load enemies to enemies array
         this.isDataLoaded = false;// flag for ui components tobe removed
+
+        viewManager.customView(new DialogScene(battle.getPreBattleDialogs()));
+
         viewManager.setView(Views.BATTLE); // set view to battle
     }
 
@@ -56,7 +60,7 @@ public class BattleManager {
         isPlayersTurn = false;
         System.out.println("Enemies turn");
         timer.reset();
-        timer.start().setDelay(1.5).setAction(() -> {
+        timer.start().setDelay(1).setAction(() -> {
             System.out.println("Enemy Attacked!");
             // decide to randomly select a character or attack the lowest
             getCurrentEnemy().attack(getCharacterManager().getPlayer());

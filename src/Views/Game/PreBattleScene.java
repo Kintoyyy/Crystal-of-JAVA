@@ -10,15 +10,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class DialogScene extends View {
+public class PreBattleScene extends View {
     private String[] dialogText = new String[]{"World", "World"};
     private int dialogIndex = 0;
     private final Dialog dialog;
-    private final ArrayList<String> preBattleDialogs;
 
-    public DialogScene(ArrayList<String> preBattleDialogs) {
-        this.preBattleDialogs = preBattleDialogs;
-        dialog = (Dialog) new Dialog(preBattleDialogs.get(dialogIndex))
+    public PreBattleScene(ArrayList<String> string) {
+
+        dialog = (Dialog) new Dialog(dialogText[0])
+
                 .showBounds()
                 .setLocation(150, 580)
                 .scale(2);

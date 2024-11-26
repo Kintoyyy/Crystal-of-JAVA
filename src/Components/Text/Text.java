@@ -129,8 +129,4 @@ public class Text extends Component {
         this.fullText = text;
         return this;
     }
-
-    public String getText() {
-        return text;
-    }
 }

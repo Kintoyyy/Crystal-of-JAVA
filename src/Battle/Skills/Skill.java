@@ -78,6 +78,7 @@ public abstract class Skill {
 
         if (isAvailable()) {
             selectedPlayer.getMana().useMana(cost);
+            if(selectedPlayer.getHealth().isDead()) return;
             applyCooldown();
 
             //get ActiveEffects first adjust Skill damage or attributes
