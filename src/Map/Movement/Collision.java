@@ -61,14 +61,6 @@ public class Collision {
                     preBattleDialogs.add("dadbdf ");
 
                     viewManager.customView(new DialogScene(preBattleDialogs));
-
-//                    Battle battle = map.getBattle(object.getName());
-//                    viewManager.customView(new BattleDialog(battle.getPreBattleDialogs()));
-
-//                    if(!viewManager.isViewActive(Views.BATTLE_DIALOG)){
-//                        viewManager.setView(Views.BATTLE_DIALOG);
-//                        viewManager.updateViewData(Views.BATTLE_DIALOG, new String[]{"Hello", "World"});
-//                    }
                 }
                 case BATTLE -> {
                     try {

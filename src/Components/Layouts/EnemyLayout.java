@@ -1,7 +1,7 @@
 package Components.Layouts;
 
 import Battle.BattleManager;
-import Components.Component;
+import Components.UIComponent;
 import Components.Button.EnemyButton;
 import Entities.Enemies.*;
 
@@ -18,7 +18,7 @@ public class EnemyLayout extends Layout {
     }
 
     private void initEnemyFrames() {
-        childComponents.clear();
+        children.clear();
         for (int i = 0; i < battleManager.getEnemies().size(); i++) {
             Enemy enemy = battleManager.getEnemies().get(i);
             final int index = i; // Capture index for lambda use
@@ -30,7 +30,7 @@ public class EnemyLayout extends Layout {
                         // currentEnemyManager.setAutoSelectEnemy(false);
                         battleManager.setCurrentEnemy(index);
                     });
-            childComponents.add(frame);
+            children.add(frame);
         }
         battleManager.setDataLoaded(true);
     }
@@ -42,7 +42,7 @@ public class EnemyLayout extends Layout {
             initEnemyFrames();
         }
 
-        childComponents.forEach(Component::tick);
+        children.forEach(UIComponent::tick);
     }
 
     @Override
@@ -53,18 +53,18 @@ public class EnemyLayout extends Layout {
                 : null;
 
 
-        for (Component component : childComponents) {
-            if (component instanceof EnemyButton frame) {
+        for (UIComponent UIComponent : children) {
+            if (UIComponent instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 frame.isActive(enemy != null && enemy.equals(frame.getEnemy()));
                 xOffset += frame.getWidth();
             }
-            component.render(g);
+            UIComponent.render(g);
         }
     }
 
     @Override
     public void onClick(MouseEvent e) {
-        childComponents.forEach(component -> component.onClick(e));
+        children.forEach(component -> component.onClick(e));
     }
 }

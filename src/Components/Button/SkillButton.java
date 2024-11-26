@@ -39,19 +39,17 @@ public class SkillButton extends Button {
         };
 //
         g.setColor(new Color(232, 210, 169));
-        g.fillRect(bounds.x + (5 * scale), bounds.y + (5 * scale), width - (10 * scale), height - (10 * scale));
+        g.fillRect(this.x + (5 * scale), this.y + (5 * scale), width - (10 * scale), height - (10 * scale));
 
-        g.drawImage(Skill.getSkillImage(), bounds.x + (5 * scale), bounds.y + (5 * scale), width - (10 * scale), height - (10 * scale), null);
+        g.drawImage(Skill.getSkillImage(), this.x + (5 * scale), this.y + (5 * scale), width - (10 * scale), height - (10 * scale), null);
 
-        g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
+        g.drawImage(buttonImage, this.x, this.y, width, height, null);
 
         g.setColor(Color.WHITE);
 
         g.setFont( new SimplePixelFont(8));
-        g.drawString(Skill.getName(), bounds.x, bounds.y + height + 10);
-        g.drawString("Cost: " + Skill.getCost(), bounds.x, bounds.y + height + 20);
-        g.drawString("Cooldown: " + Skill.getCooldown(), bounds.x, bounds.y + height + 30);
-//        g.drawString("cd: " + Skill.getCooldown(), bounds.x, bounds.y + height + 40);
-//        g.drawString("eff dur: " + Skill.getEffectDurationTurns(), bounds.x, bounds.y + height + 50);
+        g.drawString(Skill.getName(), this.x, this.y + height + 10);
+        g.drawString("Cost: " + Skill.getCost(), this.x, this.y + height + 20);
+        g.drawString("Cooldown: " + Skill.getCooldown(), this.x, this.y + height + 30);
     }
 }

@@ -61,24 +61,19 @@ public class EnemyButton extends Button {
         };
 
         // Draw button image
-        g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
+        g.drawImage(buttonImage, this.x, this.y, width, height, null);
 
-        healthBar.setLocation(bounds.x + 10, bounds.y + 90);
+        healthBar.setLocation(this.x + 10, this.y + 90);
         healthBar.render(g);
 
         // Render selectedEnemy name above the frame
         if (enemy != null) {
-            g.drawString(enemy.getName(), bounds.x, bounds.y - 10);
+            g.drawString(enemy.getName(), this.x, this.y - 10);
         }
 
         if (animation != null) {
             assert enemy != null;
-            g.drawImage(enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
-        }
-
-        if (showBounds) {
-            g.setColor(Color.BLUE);
-            g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+            g.drawImage(enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x - 4, this.y + 2, width + 10, height + 10, null);
         }
     }
 

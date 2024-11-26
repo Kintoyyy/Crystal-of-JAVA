@@ -1,11 +1,12 @@
 package Views.Overlay;
 
 import Components.Button.Button;
+import Components.ComponentEventListener;
 import Views.View;
-import Views.ViewManager;
 import Views.enums.Views;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class Pause extends View {
 
@@ -15,22 +16,31 @@ public class Pause extends View {
     }
 
     private void initComponents() {
-        components.init(
-                createResumeButton(),
+        components.addComponents(
+                createChangeViewButton("Resume", 330, Views.GAME),
                 createChangeViewButton("Settings", 400, Views.SETTINGS),
                 createChangeViewButton("Menu", 470, Views.MENU)
         );
     }
 
-    private Button createResumeButton() {
-        return (Button) new Button("Resume")
-                .setRightClickAction(() -> viewManager.removeView(Views.PAUSE))
-                .setLocation(400, 330);
-    }
-
     private Button createChangeViewButton(String label, int yPosition, Views targetView) {
         return (Button) new Button(label)
-                .setRightClickAction(() -> viewManager.setView(targetView))
+                .setEventListener(new ComponentEventListener() {
+                    @Override
+                    public void onComponentClick(MouseEvent event) {
+                        viewManager.setView(targetView);
+                    }
+
+                    @Override
+                    public void onMouseEnter(MouseEvent event) {
+
+                    }
+
+                    @Override
+                    public void onMouseExit(MouseEvent event) {
+
+                    }
+                })
                 .setLocation(400, yPosition);
     }
 

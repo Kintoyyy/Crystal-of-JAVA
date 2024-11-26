@@ -1,28 +1,39 @@
 package Views.Menu;
 
 import Components.Button.Button;
+import Components.ComponentEventListener;
 import Utils.CallBackAction;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import Views.View;
-import Views.ViewManager;
 import Views.enums.Views;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 import static Views.enums.Views.*;
 
 public class Menu extends View {
 
     public Menu() {
-        components.init(
+        components.addComponents(
                 createChangeViewButton("play", 330, GAME),
                 createChangeViewButton("setting", 400, SETTINGS),
                 new Button("Exit")
-                        .setRightClickAction(new CallBackAction() {
+                        .setEventListener(new ComponentEventListener() {
                             @Override
-                            public void onAction() {
+                            public void onComponentClick(MouseEvent event) {
                                 handler.getGame().stop();
+                            }
+
+                            @Override
+                            public void onMouseEnter(MouseEvent event) {
+
+                            }
+
+                            @Override
+                            public void onMouseExit(MouseEvent event) {
+
                             }
                         })
                         .setLocation(400, 470)
@@ -31,7 +42,20 @@ public class Menu extends View {
 
     private Button createChangeViewButton(String label, int yPosition, Views targetView) {
         return (Button) new Button(label)
-                .setRightClickAction(() -> viewManager.setView(targetView))
+                .setEventListener(new ComponentEventListener() {
+                    @Override
+                    public void onComponentClick(MouseEvent event) {
+                        viewManager.setView(targetView);
+                    }
+
+                    @Override
+                    public void onMouseEnter(MouseEvent event) {
+                    }
+
+                    @Override
+                    public void onMouseExit(MouseEvent event) {
+                    }
+                })
                 .setLocation(400, yPosition);
     }
 

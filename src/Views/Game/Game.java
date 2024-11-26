@@ -4,7 +4,6 @@ import Components.Button.PauseButton;
 import Components.Card.CharacterCard;
 import Map.Map;
 import Views.View;
-import Views.ViewManager;
 import Views.enums.Views;
 
 import java.awt.*;
@@ -48,7 +47,7 @@ public class Game extends View {
     }
 
     public void initComponent() {
-        components.init(
+        components.addComponents(
                 new PauseButton()
                         .setRightClickAction(() -> {
                             System.out.println("Pause Button Clicked");

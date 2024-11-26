@@ -7,6 +7,7 @@ public class DebugMode {
     private static boolean isDebug = false;
     private static int layerIndex = 0;
     private static boolean showObjects = true;
+    private static boolean showComponents = true;
 
     public DebugMode(Handler handler) {
         handler.setDebugMode(this);
@@ -37,5 +38,9 @@ public class DebugMode {
 
     public static void toggleShowObject() {
         showObjects = !showObjects;
+    }
+
+    public static boolean isShowComponents() {
+        return showComponents;
     }
 }

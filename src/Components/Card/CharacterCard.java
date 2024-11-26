@@ -49,11 +49,11 @@ public class CharacterCard extends Card {
     public void render(Graphics g) {
         // Background and profile image rendering
         g.setColor(new Color(24, 20, 37));
-        g.fillRect(bounds.x + 10, bounds.y + 10, height - 20, height - 20);
-        g.fillRect(bounds.x + (20 * scale), bounds.y + (4 * scale), 162, 10 * scale);
+        g.fillRect(this.x + 10, this.y + 10, height - 20, height - 20);
+        g.fillRect(this.x + (20 * scale), this.y + (4 * scale), 162, 10 * scale);
 
         if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x + 12, bounds.y + 12, height - 26, height - 26, null);
+            g.drawImage(playerProfile, this.x + 12, this.y + 12, height - 26, height - 26, null);
         }
 
         if (player != null) {
@@ -61,7 +61,7 @@ public class CharacterCard extends Card {
         }
 
         // Frame rendering
-        g.drawImage(frame, bounds.x, bounds.y, width, height, null);
+        g.drawImage(frame, this.x, this.y, width, height, null);
 
 
     }
@@ -75,8 +75,8 @@ public class CharacterCard extends Card {
         int manaWidth = (int) ((mana / maxMana) * (27 * scale));
 
         // Draw health and mana bars
-        g.drawImage(healthBar, bounds.x + (20 * scale), bounds.y + (4 * scale), healthWidth, 5 * scale, null);
-        g.drawImage(manaBar, bounds.x + (20 * scale), bounds.y + (9 * scale), manaWidth, 5 * scale, null);
+        g.drawImage(healthBar, this.x + (20 * scale), this.y + (4 * scale), healthWidth, 5 * scale, null);
+        g.drawImage(manaBar, this.x + (20 * scale), this.y + (9 * scale), manaWidth, 5 * scale, null);
     }
 
     @Override

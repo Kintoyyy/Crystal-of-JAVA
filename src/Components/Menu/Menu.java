@@ -1,11 +1,11 @@
 package Components.Menu;
 
-import Components.Component;
+import Components.UIComponent;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Menu extends Component {
+public class Menu extends UIComponent {
 
     public Menu() {
         super();

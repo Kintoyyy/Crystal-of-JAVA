@@ -1,8 +1,8 @@
 package Components.Layouts;
 
+import Components.UIComponent;
 import Entities.Characters.Character;
 import Entities.Characters.CharacterManager;
-import Components.Component;
 import Components.Button.CharacterButton;
 import Game.Handler;
 import Battle.BattleManager;
@@ -28,13 +28,13 @@ public class CharacterLayout extends Layout {
                         characters.setPlayerByIndex(index);
                     })
                     .scale(scale);
-            childComponents.add(frame);
+            children.add(frame);
         }
     }
 
     @Override
     public void tick() {
-        childComponents.forEach(Component::tick);
+        children.forEach(UIComponent::tick);
         for (int i = 0; i < characters.getCharacters().size(); i++) {
             if(handler == null) return;
             if (handler.getKeyManager().isKeyPressed(String.valueOf(i + 1)).ignoreCaps()) {
@@ -50,18 +50,18 @@ public class CharacterLayout extends Layout {
         Character player = characters.getPlayer();
         int xOffset = (int) this.x;
 
-        for (Component component : childComponents) {
-            if (component instanceof CharacterButton frame) {
+        for (UIComponent UIComponent : children) {
+            if (UIComponent instanceof CharacterButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 frame.isActive(player != null && player.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();
             }
-            component.render(g);
+            UIComponent.render(g);
         }
     }
 
     @Override
     public void onClick(MouseEvent e) {
-        childComponents.forEach(component -> component.onClick(e));
+        children.forEach(component -> component.onClick(e));
     }
 }

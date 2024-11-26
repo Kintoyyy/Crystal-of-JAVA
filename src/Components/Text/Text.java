@@ -1,6 +1,6 @@
 package Components.Text;
 
-import Components.Component;
+import Components.UIComponent;
 import Components.enums.Alignment;
 
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Text extends Component {
+public class Text extends UIComponent {
 
     private String fullText;
     private String displayedText = "";
@@ -75,9 +75,8 @@ public class Text extends Component {
         int lineHeight = fm.getHeight();
 
         this.height = lineHeight * lines.size();
-        updateBounds();
 
-        int baseY = bounds.y + lineHeight;
+        int baseY = this.y + lineHeight;
 
         for (String line : lines) {
             g.drawString(line, (int) calculateHorizontalPosition(fm, line), baseY);
@@ -87,7 +86,7 @@ public class Text extends Component {
         // Show bounds for debugging
         if (showBounds) {
             g.setColor(Color.YELLOW);
-            g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+            g.drawRect(this.x, this.y, this.width, this.height);
         }
     }
 
@@ -119,17 +118,13 @@ public class Text extends Component {
     private float calculateHorizontalPosition(FontMetrics fm, String line) {
         int lineWidth = fm.stringWidth(line);
         return switch (alignment) {
-            case CENTER, JUSTIFY -> bounds.x + (bounds.width - lineWidth) / 2f;
-            case LEFT -> bounds.x;
-            case RIGHT -> bounds.x + bounds.width - lineWidth;
+            case CENTER, JUSTIFY -> this.x + (this.width - lineWidth) / 2f;
+            case LEFT -> this.x;
+            case RIGHT -> this.x + this.width - lineWidth;
         };
     }
-    public Text setText(String text) {
-        this.fullText = text;
-//        this.displayedText = ""; // Reset displayedText to start fresh
-//        this.currentIndex = 0;  // Reset typing index
-//        this.lastTick = System.currentTimeMillis(); // Reset the typing timer
-        return this;
-    }
 
+    public void setText(String text) {
+        this.fullText = text;
+    }
 }

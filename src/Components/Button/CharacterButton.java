@@ -77,21 +77,21 @@ public class CharacterButton extends Button {
                 characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT);
             }
 
-            g.drawImage(player.getHealth().isDead() ? characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT) : characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), bounds.x - 4, bounds.y + 2, width + 10, height + 10, null);
+            g.drawImage(player.getHealth().isDead() ? characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT) : characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), this.x - 4, this.y + 2, width + 10, height + 10, null);
         }
 
-        g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
+        g.drawImage(buttonImage, this.x, this.y, width, height, null);
 
-        healthBar.setLocation(bounds.x + 16, bounds.y + 110);
+        healthBar.setLocation(this.x + 16, this.y + 110);
         healthBar.render(g);
 
         g.setColor(Color.WHITE);
         g.setFont(new SimplePixelFont(12));
-        g.drawString(player.getName(), bounds.x + 18, bounds.y + 110);
+        g.drawString(player.getName(), this.x + 18, this.y + 110);
 
         if (showBounds) {
             g.setColor(Color.BLUE);
-            g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+            g.drawRect(this.x, this.y, this.width, this.height);
         }
     }
 
