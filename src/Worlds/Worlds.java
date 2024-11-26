@@ -78,7 +78,7 @@ public class Worlds {
                                 "You have earned 10 gold and 10 exp!",
                                 "You have unlocked the next area!"
                         )
-                ),
+                ).setBattleBackground("/Backgrounds/Forest.png"),
                 new World("ICE", "res/Maps/Snow.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
                                 new Goblin()
@@ -92,7 +92,7 @@ public class Worlds {
                                 new Goblin(),
                                 new Orc()
                         )
-                ),
+                ).setBattleBackground("/Backgrounds/Ice.png"),
                 new World("LAVA", "res/Maps/Lava.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
                                 new Orc()
@@ -106,12 +106,12 @@ public class Worlds {
                                 new Orc(),
                                 new Orc()
                         )
-                ),
+                ).setBattleBackground("/Backgrounds/Lava.png"),
                 new World("DUNGEON", "res/Maps/Dungeon.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
                                 new Kai()
                         )
-                )
+                ).setBattleBackground("/Backgrounds/Forest.png")
         );
     }
 

@@ -65,7 +65,11 @@ public class CharacterButton extends Button {
                 characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT);
             }
 
-            g.drawImage(player.getHealth().isDead() ? characterAnimation.getFrame(TYPE.GHOST, DIRECTION.RIGHT) : characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), this.x - 4, this.y + 2, width + 10, height + 10, null);
+            if(player.getHealth().isDead()){
+                g.drawImage(characterAnimation.getFrame(TYPE.DEAD), this.x - 4, this.y + 2, width + 10, height + 10, null);
+            } else {
+                g.drawImage(characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), this.x - 4, this.y + 2, width + 10, height + 10, null);
+            }
         }
 
         g.drawImage(buttonImage, this.x, this.y, width, height, null);

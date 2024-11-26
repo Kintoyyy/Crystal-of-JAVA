@@ -13,7 +13,7 @@ import Utils.ImageUtils;
 public class SkeletonSwordman extends Enemy {
     // Moderate health, high defense, low attack, immune to poison.
     public SkeletonSwordman(String key) {
-        super(new Health(800), new AttackPower(50, 70), new Defense(40));
+        super(new Health(800), new AttackPower(60, 200), new Defense(400));
         this.key = key;
         name = "Sword man";
         description = "A generic selectedEnemy";

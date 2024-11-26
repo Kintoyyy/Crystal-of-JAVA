@@ -52,7 +52,8 @@ public class Zeith extends Character {
                 .addAnimation(TYPE.TIRED, DIRECTION.DOWN, sheet.extractFrames(0, 11, 6, 12))
                 .addAnimation(TYPE.TIRED, DIRECTION.LEFT, sheet.extractFrames(0, 12, 6, 13, true))
                 .addAnimation(TYPE.TIRED, DIRECTION.RIGHT, sheet.extractFrames(0, 12, 6, 13))
-                .addAnimation(TYPE.DANCE, sheet.extractFrames(0, 12, 8, 13));
+                .addAnimation(TYPE.DANCE, sheet.extractFrames(0, 12, 8, 13))
+                .addAnimation(TYPE.DEAD, sheet.extractFrame(0, 6));
     }
 
     @Override

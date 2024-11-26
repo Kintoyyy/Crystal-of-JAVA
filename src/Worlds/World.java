@@ -16,6 +16,7 @@ import java.util.List;
 
 public class World {
     private Handler handler = Handler.getInstance();
+    private String battleBackground;
     private final Parser world;
     private final String worldKey;
     private final HashMap<String, Battle> battles = new HashMap<>();
@@ -119,5 +120,17 @@ public class World {
             // Render the entity with the appropriate animation frame
 
         }
+    }
+
+    public World setBattleBackground(String s) {
+        this.battleBackground = s;
+        return this;
+    }
+
+    public String getBattleBackground() {
+        if(battleBackground == null) {
+            battleBackground = "/Backgrounds/Forest.png";
+        }
+        return battleBackground;
     }
 }

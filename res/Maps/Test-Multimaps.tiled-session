@@ -97,11 +97,11 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 256,
-                "y": 767.5
+                "x": 116.99999999999994,
+                "y": 388
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
