@@ -31,6 +31,7 @@ public class Game implements Runnable {
 
     private boolean running = false;
 
+    public static boolean flag = true;
 
     private DebugMode debugStats;
 

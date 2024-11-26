@@ -1,4 +1,4 @@
-package Entities.Enemies.Ice;
+package Entities.Enemies.Lava;
 
 import Animations.Animation;
 import Animations.Frames;
@@ -10,16 +10,16 @@ import Entities.Common.Health;
 import Entities.Enemies.Enemy;
 import Utils.ImageUtils;
 
-public class IceGoblinArcher extends Enemy {
+public class RedOrcGrunt extends Enemy {
     // Low health, high dodge rate, may steal mana.
-    public IceGoblinArcher(String key) {
+    public RedOrcGrunt(String key) {
         super(new Health(500), new AttackPower(50), new Defense(0));
         this.key = key;
-        name = "IceGoblinArcher";
+        name = "RedOrcGrunt";
         description = "A generic selectedEnemy";
         dodge = 0.2; // 20% chance to dodge attacks
 
-        Frames sheet = new Frames(ImageUtils.loadImage("/Maps/Ice/IceGoblin_Archer.png"), 48, 48);
+        Frames sheet = new Frames(ImageUtils.loadImage("/Maps/Lava/RedOrc_Grunt.png"), 64, 64);
 
         animation = new Animation(sheet)
                 .setDefaultAnimation(sheet.extractFrames(0, 0, 3, 1))
