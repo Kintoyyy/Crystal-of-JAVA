@@ -49,7 +49,7 @@ public class ViewManager {
 //        views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
 
 //        updateViewData(Views.DIALOG, new String[]{"one", "two", "three", "four", "five"});
-        setView(Views.GAME);
+        setView(Views.MENU);
     }
 
     public void customView(View customView) {

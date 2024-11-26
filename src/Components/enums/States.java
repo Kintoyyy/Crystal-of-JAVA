@@ -18,5 +18,5 @@ public enum States {
     PRESSED, // The component is being pressed or clicked
     HOVERED, // The component is being hovered over by the mouse
     DRAGGED, // The component is being dragged by the user
-    ACTIVE   // The component is actively in use or enabled
+    DISABLED, ACTIVE   // The component is actively in use or enabled
 }

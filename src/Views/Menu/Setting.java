@@ -4,7 +4,6 @@ import Battle.BattleManager;
 import Components.Button.Button;
 import Utils.CallBackAction;
 import Views.View;
-import Views.ViewManager;
 import Views.enums.Views;
 
 import java.awt.*;
@@ -17,7 +16,7 @@ public class Setting extends View {
         this.isOverlay = true;
         this.battleManager = handler.getBattleManager();
 
-        components.init(
+        components.addComponents(
                 new Button("back")
                         .setRightClickAction(new CallBackAction() {
                             @Override

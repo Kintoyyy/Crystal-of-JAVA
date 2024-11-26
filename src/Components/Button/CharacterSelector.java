@@ -58,22 +58,17 @@ public class CharacterSelector extends Button {
         };
 
         g.setColor(new Color(184, 111, 80));
-        g.fillRect(bounds.x + 10, bounds.y + 10, width - 20, height - 20);
+        g.fillRect(this.x + 10, this.y + 10, width - 20, height - 20);
 
         if (playerProfile != null) {
-            g.drawImage(playerProfile, bounds.x + 15, bounds.y + 15, width - 30, height - 30, null);
+            g.drawImage(playerProfile, this.x + 15, this.y + 15, width - 30, height - 30, null);
         }
 
-        g.drawImage(buttonImage, bounds.x, bounds.y, width, height, null);
+        g.drawImage(buttonImage, this.x, this.y, width, height, null);
 
         if (state == HOVERED) {
-            tooltip.setLocation(bounds.x, bounds.y - 30);
+            tooltip.setLocation(this.x, this.y - 30);
             tooltip.render(g);
-        }
-
-        if (showBounds) {
-            g.setColor(Color.BLUE);
-            g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
         }
     }
 

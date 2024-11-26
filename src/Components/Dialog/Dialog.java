@@ -1,6 +1,6 @@
 package Components.Dialog;
 
-import Components.Component;
+import Components.UIComponent;
 import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class Dialog extends Component {
+public class Dialog extends UIComponent {
     private Text text;
     private final BufferedImage dialogImage;
 
@@ -36,18 +36,17 @@ public class Dialog extends Component {
 
     @Override
     public void tick() {
-        tickChildren();
+//        tickChildren();
         text.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(dialogImage, bounds.x, bounds.y, width, height, null);
-        renderChildren(g);
+        g.drawImage(dialogImage, this.x, this.y, width, height, null);
 
         if (showBounds) {
             g.setColor(Color.PINK);
-            g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+            g.drawRect(this.x, this.y, this.width, this.height);
         }
     }
 

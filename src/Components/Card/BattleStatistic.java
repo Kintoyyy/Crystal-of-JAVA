@@ -63,7 +63,7 @@ public class BattleStatistic extends Card {
             renderHealthManaBars(g);
         }
 
-        g.drawImage(frame, bounds.x, bounds.y, width, height, null);
+        g.drawImage(frame, this.x, this.y, width, height, null);
 
         assert player != null;
         drawString(g, player.getName(), 27, 20, new SuperPixelFont(32), new Color(183, 109, 79));

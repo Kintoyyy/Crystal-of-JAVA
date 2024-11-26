@@ -36,7 +36,7 @@ public class HealthBar extends Menu {
     @Override
     public void tick() {
         super.tick();
-        this.tickChildren();
+//        this.tickChildren();
         if (player != null) {
             health = player.getHealth().getHealth();
             mana = player.getMana().getMana();
@@ -53,12 +53,12 @@ public class HealthBar extends Menu {
             renderHealthManaBars(g);
         }
 
-//        g.drawString("Health: " + health, bounds.x, bounds.y + 40);
-//        g.drawString("Mana: " + mana, bounds.x, bounds.y + 50);
-//        g.drawString("Defense: " + defense, bounds.x, bounds.y + 60);
+//        g.drawString("Health: " + health, this.x, this.y + 40);
+//        g.drawString("Mana: " + mana, this.x, this.y + 50);
+//        g.drawString("Defense: " + defense, this.x, this.y + 60);
 
         // Frame rendering
-        g.drawImage(frame, bounds.x, bounds.y, width, height, null);
+        g.drawImage(frame, this.x, this.y, width, height, null);
 //        this.renderChildren(g);
     }
 
@@ -73,9 +73,9 @@ public class HealthBar extends Menu {
         int defenseWidth = (int) ((defense / maxDefense) * (19 * scale));
 
         // Draw health and mana bars
-        g.drawImage(healthBar, bounds.x + (scale), bounds.y + (scale), healthWidth, 2 * scale, null);
-        g.drawImage(manaBar, bounds.x + (scale), bounds.y + (4 * scale), manaWidth, 2 * scale, null);
-//        g.drawImage(defenseBar, bounds.x + (scale), bounds.y + (7 * scale), defenseWidth, 2 * scale, null);
+        g.drawImage(healthBar, this.x + (scale), this.y + (scale), healthWidth, 2 * scale, null);
+        g.drawImage(manaBar, this.x + (scale), this.y + (4 * scale), manaWidth, 2 * scale, null);
+//        g.drawImage(defenseBar, this.x + (scale), this.y + (7 * scale), defenseWidth, 2 * scale, null);
     }
 
     @Override

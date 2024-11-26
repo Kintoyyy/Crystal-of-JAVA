@@ -34,7 +34,7 @@ public class EnemyHealthBar extends Menu {
     @Override
     public void tick() {
         super.tick();
-        this.tickChildren();
+//        this.tickChildren();
         if (enemy != null) {
             health = enemy.getHealth().getHealth();
             defense = enemy.getDefense().getDefense();
@@ -50,10 +50,10 @@ public class EnemyHealthBar extends Menu {
             renderHealthManaBars(g);
         }
 
-        g.drawString("Health: " + health, bounds.x, bounds.y + height + 10);
-        g.drawString("Defence: " + defense, bounds.x, bounds.y  + height + 20);
+        g.drawString("Health: " + health, this.x, this.y + height + 10);
+        g.drawString("Defence: " + defense, this.x, this.y  + height + 20);
         // Frame rendering
-        g.drawImage(frame, bounds.x, bounds.y, width, height, null);
+        g.drawImage(frame, this.x, this.y, width, height, null);
 //        this.renderChildren(g);
     }
 
@@ -66,8 +66,8 @@ public class EnemyHealthBar extends Menu {
         int defenseWidth = (int) ((defense / maxDefense) * (19 * scale));
 
         // Draw health and mana bars
-        g.drawImage(healthBar, bounds.x + (1 * scale), bounds.y + (1 * scale), healthWidth, 2 * scale, null);
-//        g.drawImage(defenseBar, bounds.x + (1 * scale), bounds.y + (4 * scale), defenseWidth, 2 * scale, null);
+        g.drawImage(healthBar, this.x + (1 * scale), this.y + (1 * scale), healthWidth, 2 * scale, null);
+//        g.drawImage(defenseBar, this.x + (1 * scale), this.y + (4 * scale), defenseWidth, 2 * scale, null);
     }
 
     @Override

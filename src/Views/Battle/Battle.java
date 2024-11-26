@@ -1,6 +1,7 @@
 package Views.Battle;
 
 import Components.Card.BattleStatistic;
+import Components.ComponentEventListener;
 import Components.Menu.SkillMenu;
 import Components.Button.*;
 import Components.Button.Button;
@@ -13,39 +14,41 @@ import Views.enums.Views;
 import Battle.BattleManager;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class Battle extends View {
-    private final BattleManager battleManager;
-    private Text text;
+
+    private final Text text;
 
     public Battle() {
-        this.battleManager = handler.getBattleManager();
-        
-        components.init(
-                new CharacterLayout(battleManager)
-                        .scale(8) // not working
+        components.addComponents(new CharacterLayout(battleManager).scale(8) // not working
                         .setLocation(80, 400),
 
-                new SkillMenu(battleManager)
-                        .scale(3)
-                        .setLocation(500, 615),
+                new SkillMenu(battleManager).scale(3).setLocation(500, 615),
 
-                new BattleStatistic(battleManager)
-                        .scale(3)
-                        .setLocation(80, 610),
+                new BattleStatistic(battleManager).scale(3).setLocation(80, 610),
 
-                new EnemyLayout(battleManager)
-                        .setLocation(700, 400)
-                        .showBounds(),
+                new EnemyLayout(battleManager).setLocation(700, 400).showBounds(),
 
-                new PauseButton()
-                        .setRightClickAction(() -> viewManager.setView(Views.PAUSE))
-                        .setLocation(900, 20),
+                new PauseButton().setLocation(900, 20),
 
                 new Button("exit")
-                        .setRightClickAction(battleManager::abortBattle)
-                        .setLocation(680, 20)
-        );
+                        .setEventListener(new ComponentEventListener() {
+                            @Override
+                            public void onComponentClick(MouseEvent event) {
+                                battleManager.abortBattle();
+                            }
+
+                            @Override
+                            public void onMouseEnter(MouseEvent event) {
+
+                            }
+
+                            @Override
+                            public void onMouseExit(MouseEvent event) {
+
+                            }
+                        }).setLocation(680, 20));
 
         text = (Text) new Text("Hello").setLocation(100, 100);
     }
@@ -55,7 +58,6 @@ public class Battle extends View {
         battleManager.tick();
         components.tick();
         text.tick();
-
     }
 
     @Override

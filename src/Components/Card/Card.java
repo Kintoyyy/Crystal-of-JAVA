@@ -1,10 +1,10 @@
 package Components.Card;
 
-import Components.Component;
+import Components.UIComponent;
 
 import java.awt.event.MouseEvent;
 
-public abstract class Card extends Component {
+public abstract class Card extends UIComponent {
 
     public Card() {
         super();

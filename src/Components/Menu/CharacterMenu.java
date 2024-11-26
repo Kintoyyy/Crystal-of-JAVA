@@ -1,7 +1,7 @@
 package Components.Menu;
 
 import Entities.Characters.CharacterManager;
-import Components.Component;
+import Components.UIComponent;
 import Components.Button.CharacterSelector;
 import Entities.Characters.Character;
 import Game.Handler;
@@ -22,7 +22,7 @@ public class CharacterMenu extends Menu {
         }
 
         this.characters = handler.getCharacterManager();
-        this.childComponents = new ArrayList<>();
+        this.children = new ArrayList<UIComponent>();
 
         initCharacterFrames();
         ensureMinimumFrames(4); // Ensure at least 4 frames
@@ -36,20 +36,20 @@ public class CharacterMenu extends Menu {
             CharacterSelector frame = (CharacterSelector) new CharacterSelector(character)
                     .setRightClickAction(() -> characters.setPlayer(index));
 
-            childComponents.add(frame);
+            children.add(frame);
         }
     }
 
     private void ensureMinimumFrames(int minFrames) {
-        while (childComponents.size() < minFrames) {
-            childComponents.add(new CharacterSelector(null)); // Adds empty frames if necessary
+        while (children.size() < minFrames) {
+            children.add(new CharacterSelector(null)); // Adds empty frames if necessary
         }
     }
 
     @Override
     public void tick() {
         // Update all child components
-        childComponents.forEach(Component::tick);
+        children.forEach(UIComponent::tick);
 
         // Handle character switching via keys (1-4)
         for (int i = 0; i < characters.getCharacters().size(); i++) {
@@ -65,19 +65,19 @@ public class CharacterMenu extends Menu {
         Character currentPlayer = characters.getPlayer();
         int xOffset = (int) this.x;
 
-        for (Component component : childComponents) {
-            if (component instanceof CharacterSelector frame) {
+        for (UIComponent UIComponent : children) {
+            if (UIComponent instanceof CharacterSelector frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 frame.isActive(currentPlayer != null && currentPlayer.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();
             }
 
-            component.render(g);
+            UIComponent.render(g);
         }
     }
 
     @Override
     public void onClick(MouseEvent e) {
-        childComponents.forEach(component -> component.onClick(e));
+        children.forEach(component -> component.onClick(e));
     }
 }

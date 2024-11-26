@@ -1,9 +1,8 @@
 package Components.Menu;
 
+import Components.UIComponent;
 import Entities.Characters.Character;
-import Components.Component;
 import Components.Button.SkillButton;
-import Game.Handler;
 import Battle.BattleManager;
 import Battle.Skills.Skill;
 
@@ -24,7 +23,7 @@ public class SkillMenu extends Menu {
 
     private void initCharacterFrames() {
         // Remove previous skill frames if any
-        childComponents.clear();
+        children.clear();
 
         // Create a new SkillButton for each skill in the updated list
         for (Skill skill : skills) {
@@ -35,7 +34,7 @@ public class SkillMenu extends Menu {
                     }).setLeftClickAction(() -> {
 //                        System.out.println("View Skill " + skill.getName());
                     });
-            childComponents.add(frame);
+            children.add(frame);
         }
     }
 
@@ -48,7 +47,7 @@ public class SkillMenu extends Menu {
 
         for (int i = 0; i < updatedSkills.size(); i++) {
             if (handler.getKeyManager().isKeyPressed(String.valueOf(skillKeys[i])).ignoreCaps()) {
-                SkillButton button = (SkillButton) childComponents.get(i);
+                SkillButton button = (SkillButton) children.get(i);
                 button.setActive(true);
 //                updatedSkills.get(i).attack(battleManagerOld);
                 break; // Only one character can be selected per tick
@@ -63,7 +62,7 @@ public class SkillMenu extends Menu {
         }
 
         // Update child components
-        childComponents.forEach(Component::tick);
+        children.forEach(UIComponent::tick);
     }
 
     @Override
@@ -72,17 +71,17 @@ public class SkillMenu extends Menu {
         int xOffset = (int) this.x;
 
         // Render the skill frames
-        for (Component component : childComponents) {
-            if (component instanceof SkillButton frame) {
+        for (UIComponent UIComponent : children) {
+            if (UIComponent instanceof SkillButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
                 xOffset += frame.getWidth() + 40;
             }
-            component.render(g);
+            UIComponent.render(g);
         }
     }
 
     @Override
     public void onClick(MouseEvent e) {
-        childComponents.forEach(component -> component.onClick(e));
+        children.forEach(component -> component.onClick(e));
     }
 }
