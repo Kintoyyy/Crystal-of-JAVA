@@ -136,17 +136,10 @@ public class Render {
             }
             // render selectedPlayer
             if (layer == this.playerLayer) {
-
-                // if entity is in render distance of selectedPlayer
-//                if(){
-//
-//                }
-
-                animationManager.render(g, objects.getNpcObjects(), map.getCurrentWorld(), camera);
+                map.getCurrentWorld().renderEntities(g, camera.getXOffset(), camera.getYOffset());
                 movement.render(g);
             }
         }
-
 
 
         // Render object groups

@@ -52,7 +52,7 @@ public abstract class Enemy extends Entity {
      * @param attackPower The attack power of the selectedEnemy.
      * @param defense     The defense of the selectedEnemy.
      */
-    Enemy(Health health, AttackPower attackPower, Defense defense) {
+    protected Enemy(Health health, AttackPower attackPower, Defense defense) {
         super(0, 0, 32, 32); // Initialize with default position and size
         this.health = health;
         this.attackPower = attackPower;
@@ -98,7 +98,7 @@ public abstract class Enemy extends Entity {
      *
      * @param player The selectedPlayer character to be attacked.
      */
-    public void attack(Character player) {
+    public double attack(Character player) {
         // Check if the special attack should be used
         if (shouldUseSpecialAttack()) {
             useSpecialSkill(player); // Use the special skill
@@ -109,11 +109,12 @@ public abstract class Enemy extends Entity {
                 if (damage < 1) damage = 1; // Ensure minimum damage of 1
                 player.takeDamage(damage);
                 player.getHealth().takeDamage(damage);
-                System.out.println(this.name + " hits for " + damage + " damage!");
+                return damage;
             } else {
-                System.out.println(this.name + " missed the attack!");
+
             }
         }
+        return -1;
     }
 
     /**

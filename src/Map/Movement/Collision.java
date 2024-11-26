@@ -52,15 +52,15 @@ public class Collision {
                 }
                 case DIALOG -> {
 
-                    ArrayList<String> preBattleDialogs = new ArrayList<>();
-
-                    preBattleDialogs.add("Hello Traveler! ");
-                    preBattleDialogs.add("asdasdasd! ");
-                    preBattleDialogs.add("asdasd! ");
-                    preBattleDialogs.add("das! ");
-                    preBattleDialogs.add("dadbdf ");
-
-                    viewManager.customView(new DialogScene(preBattleDialogs));
+//                    ArrayList<String> preBattleDialogs = new ArrayList<>();
+//
+//                    preBattleDialogs.add("Hello Traveler! ");
+//                    preBattleDialogs.add("asdasdasd! ");
+//                    preBattleDialogs.add("asdasd! ");
+//                    preBattleDialogs.add("das! ");
+//                    preBattleDialogs.add("dadbdf ");
+//
+//                    viewManager.customView(new DialogScene(preBattleDialogs));
                 }
                 case BATTLE -> {
                     try {

@@ -50,9 +50,9 @@ public class EnemyHealthBar extends Menu {
             renderHealthManaBars(g);
         }
 
-        g.drawString("Health: " + health, this.x, this.y + height + 10);
-        g.drawString("Defence: " + defense, this.x, this.y  + height + 20);
-        // Frame rendering
+//        g.drawString("Health: " + health, this.x, this.y + height + 10);
+//        g.drawString("Defence: " + defense, this.x, this.y  + height + 20);
+//        // Frame rendering
         g.drawImage(frame, this.x, this.y, width, height, null);
 //        this.renderChildren(g);
     }

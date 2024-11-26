@@ -1,5 +1,6 @@
 package Components.Layouts;
 
+import Components.ComponentEventListener;
 import Components.UIComponent;
 import Entities.Characters.Character;
 import Entities.Characters.CharacterManager;
@@ -24,8 +25,21 @@ public class CharacterLayout extends Layout {
             // Define a final variable to capture the index for lambda usage
             final int index = i;
             CharacterButton frame = (CharacterButton) new CharacterButton(character)
-                    .setRightClickAction(() -> {
-                        characters.setPlayerByIndex(index);
+                    .setEventListener(new ComponentEventListener() {
+                        @Override
+                        public void onComponentClick(MouseEvent event) {
+                            characters.setPlayerByIndex(index);
+                        }
+
+                        @Override
+                        public void onMouseEnter(MouseEvent event) {
+
+                        }
+
+                        @Override
+                        public void onMouseExit(MouseEvent event) {
+
+                        }
                     })
                     .scale(scale);
             children.add(frame);
@@ -34,7 +48,6 @@ public class CharacterLayout extends Layout {
 
     @Override
     public void tick() {
-        children.forEach(UIComponent::tick);
         for (int i = 0; i < characters.getCharacters().size(); i++) {
             if(handler == null) return;
             if (handler.getKeyManager().isKeyPressed(String.valueOf(i + 1)).ignoreCaps()) {
@@ -43,20 +56,20 @@ public class CharacterLayout extends Layout {
                 break; // Only one character can be selected per tick
             }
         }
+        children.forEach(UIComponent::tick);
     }
 
     @Override
     public void render(Graphics g) {
-        Character player = characters.getPlayer();
+        Character player = handler.getCharacterManager().getPlayer();
         int xOffset = (int) this.x;
 
         for (UIComponent UIComponent : children) {
             if (UIComponent instanceof CharacterButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
-                frame.isActive(player != null && player.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();
+                UIComponent.render(g);
             }
-            UIComponent.render(g);
         }
     }
 

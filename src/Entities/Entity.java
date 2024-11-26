@@ -7,8 +7,10 @@ import Battle.Effects.Effect;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
+import Map.Object.Object;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -31,6 +33,10 @@ public abstract class Entity {
 
     protected float x, y; // Position of the entity
     protected int width, height; // Dimensions of the entity
+    protected Point location = new Point(); // Location of the entity
+    protected Object object;
+    protected Ellipse2D.Float detectionCircle; // Detection circle
+
 
     /**
      * Constructs an entity at the specified position and size.
@@ -45,6 +51,14 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
+
+        float radius = Math.max(width, height) * 1.5f; // Example: 1.5 times the larger dimension
+        this.detectionCircle = new Ellipse2D.Float(x - radius / 2, y - radius / 2, radius, radius);
+    }
+
+    public void updateDetectionCircle() {
+        float radius = (float) detectionCircle.getWidth();
+        detectionCircle.setFrame(x - radius / 2, y - radius / 2, radius, radius);
     }
 
     /**
@@ -63,11 +77,6 @@ public abstract class Entity {
      */
     public abstract void render(Graphics g, int xOffset, int yOffset);
 
-    public void render2(Graphics g, int xOffset, int yOffset) {
-        g.drawImage(animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), xOffset, yOffset, width * 4, height * 4, null);
-    }
-
-    ;
 
     public float getX() {
         return x;
@@ -105,7 +114,7 @@ public abstract class Entity {
         return defense;
     }
 
-    public AttackPower getAttackPower(){
+    public AttackPower getAttackPower() {
         return attackPower;
     }
 
@@ -117,12 +126,45 @@ public abstract class Entity {
         return ActiveEffects;
     }
 
+    public Point getLocation() {
+        return location;
+    }
+
     public Animation getAnimation() {
         return animation;
     }
 
     public void addEffect(Effect effect) {
         ActiveEffects.add(effect);
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
+    public Object getObject() {
+        return object;
+    }
+
+
+    public boolean isPointInDetectionCircle(float px, float py) {
+        return detectionCircle.contains(px, py);
+    }
+
+    /**
+     * Checks if another entity is within the detection circle.
+     *
+     * @param other The other entity.
+     * @return True if the other entity is within the detection circle, false otherwise.
+     */
+    public boolean isEntityInDetectionCircle(Entity other) {
+        float otherX = other.x + other.width / 2f;
+        float otherY = other.y + other.height / 2f;
+        return detectionCircle.contains(otherX, otherY);
+    }
+
+    public boolean isPointInDetectionCircle(Point playerScreenLocation) {
+        return detectionCircle.contains(playerScreenLocation);
     }
 }
 

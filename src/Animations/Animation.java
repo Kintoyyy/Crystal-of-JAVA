@@ -16,7 +16,7 @@ import java.util.HashMap;
  * through frames when the animation reaches the end.
  * </p>
  */
-public abstract class Animation {
+public class Animation {
 
     /**
      * The speed (in milliseconds) at which the animation frames change.
@@ -45,6 +45,9 @@ public abstract class Animation {
      */
     private int index;
 
+
+    private int width, height;
+
     /**
      * The default key used when no specific animation is found.
      */
@@ -59,7 +62,9 @@ public abstract class Animation {
      * Constructs an {@code Animation} object, initializing the animation state.
      * Sets the initial frame index to 0 and records the current system time for the first tick.
      */
-    public Animation() {
+    public Animation(Frames sheet) {
+        this.height = sheet.getHeight();
+        this.width = sheet.getWidth();
         index = 0;
         lastTime = System.currentTimeMillis();
     }
@@ -130,8 +135,9 @@ public abstract class Animation {
      * @param type The {@link TYPE} of animation to add.
      * @param frames The array of {@link BufferedImage} frames for this animation.
      */
-    public final void addAnimation(TYPE type, BufferedImage[] frames) {
+    public final Animation addAnimation(TYPE type, BufferedImage[] frames) {
         animations.put(type.name(), frames);
+        return this;
     }
 
     /**
@@ -141,8 +147,9 @@ public abstract class Animation {
      * @param direction The {@link DIRECTION} of the animation (e.g., left, right).
      * @param frames The array of {@link BufferedImage} frames for this animation.
      */
-    public final void addAnimation(TYPE type, DIRECTION direction, BufferedImage[] frames) {
+    public final Animation addAnimation(TYPE type, DIRECTION direction, BufferedImage[] frames) {
         animations.put(type.name() + "_" + direction.name(), frames);
+        return this;
     }
 
     /**
@@ -151,13 +158,14 @@ public abstract class Animation {
      * @param frames The array of {@link BufferedImage} frames for the default animation.
      * @throws IllegalArgumentException If the frames array is {@code null} or empty.
      */
-    public final void setDefaultAnimation(BufferedImage[] frames) {
+    public final Animation setDefaultAnimation(BufferedImage[] frames) {
         if (frames != null && frames.length > 0) {
             defaultFrames = frames;
             animations.put(DEFAULT_KEY, frames);
         } else {
             throw new IllegalArgumentException("Default animation frames cannot be null or empty.");
         }
+        return this;
     }
 
     /**
@@ -176,5 +184,13 @@ public abstract class Animation {
             }
             throw new IllegalStateException("No animation found for key: " + animationKey + ", and no default animation is set.");
         }
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

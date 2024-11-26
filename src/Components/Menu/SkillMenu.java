@@ -1,5 +1,6 @@
 package Components.Menu;
 
+import Components.ComponentEventListener;
 import Components.UIComponent;
 import Entities.Characters.Character;
 import Components.Button.SkillButton;
@@ -28,11 +29,21 @@ public class SkillMenu extends Menu {
         // Create a new SkillButton for each skill in the updated list
         for (Skill skill : skills) {
             SkillButton frame = (SkillButton) new SkillButton(skill)
-                    .setRightClickAction(() -> {
-                        skill.execute(battleManager);
-//                        System.out.println("Skill " + skill.getName() + " clicked");
-                    }).setLeftClickAction(() -> {
-//                        System.out.println("View Skill " + skill.getName());
+                    .setEventListener(new ComponentEventListener() {
+                        @Override
+                        public void onComponentClick(MouseEvent event) {
+                            skill.execute(battleManager);
+                        }
+
+                        @Override
+                        public void onMouseEnter(MouseEvent event) {
+
+                        }
+
+                        @Override
+                        public void onMouseExit(MouseEvent event) {
+
+                        }
                     });
             children.add(frame);
         }

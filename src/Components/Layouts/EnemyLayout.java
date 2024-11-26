@@ -1,6 +1,7 @@
 package Components.Layouts;
 
 import Battle.BattleManager;
+import Components.ComponentEventListener;
 import Components.UIComponent;
 import Components.Button.EnemyButton;
 import Entities.Enemies.*;
@@ -24,11 +25,24 @@ public class EnemyLayout extends Layout {
             final int index = i; // Capture index for lambda use
 
             EnemyButton frame = (EnemyButton) new EnemyButton(enemy)
-                    .setRightClickAction(() -> {
-                        System.out.println("Enemy " + enemy.getName() + " clicked");
-                        // Uncomment if needed:
-                        // currentEnemyManager.setAutoSelectEnemy(false);
-                        battleManager.setCurrentEnemy(index);
+                    .setEventListener(new ComponentEventListener() {
+                        @Override
+                        public void onComponentClick(MouseEvent event) {
+                            System.out.println("Enemy " + enemy.getName() + " clicked");
+                            // Uncomment if needed:
+                            // currentEnemyManager.setAutoSelectEnemy(false);
+                            battleManager.setCurrentEnemy(index);
+                        }
+
+                        @Override
+                        public void onMouseEnter(MouseEvent event) {
+
+                        }
+
+                        @Override
+                        public void onMouseExit(MouseEvent event) {
+
+                        }
                     });
             children.add(frame);
         }
@@ -56,7 +70,7 @@ public class EnemyLayout extends Layout {
         for (UIComponent UIComponent : children) {
             if (UIComponent instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
-                frame.isActive(enemy != null && enemy.equals(frame.getEnemy()));
+//                frame.isActive(enemy != null && enemy.equals(frame.getEnemy()));
                 xOffset += frame.getWidth();
             }
             UIComponent.render(g);

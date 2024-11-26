@@ -10,8 +10,6 @@ import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import Views.*;
-import Views.enums.Views;
-import Battle.BattleManager;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -19,6 +17,7 @@ import java.awt.event.MouseEvent;
 public class Battle extends View {
 
     private final Text text;
+    private String backgroundPath;
 
     public Battle() {
         components.addComponents(new CharacterLayout(battleManager).scale(8) // not working
@@ -68,7 +67,7 @@ public class Battle extends View {
     @Override
     public void render(Graphics g) {
 
-        SpriteSheet backgroundSheet = new SpriteSheet(ImageUtils.loadImage("/Backgrounds/Forest.png"));
+        SpriteSheet backgroundSheet = new SpriteSheet(ImageUtils.loadImage(handler.getWorldManager().getCurrentWorld().getBattleBackground()));
 
         g.drawImage(backgroundSheet.crop(0, 0, 962, 972), 0, 0, handler.getWidth(), handler.getHeight(), null);
 

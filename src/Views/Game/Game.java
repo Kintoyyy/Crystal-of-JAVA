@@ -28,6 +28,9 @@ public class Game extends View {
     @Override
     public void tick() {
         components.tick();
+        if (viewManager.isViewActive(Views.BATTLE)) {
+            return;
+        }
         map.tick();
     }
 

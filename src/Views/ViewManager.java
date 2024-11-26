@@ -6,12 +6,10 @@ import java.util.EnumMap;
 
 import Game.Handler;
 import Inputs.InputMouseListener;
-import Views.Battle.Battle;
-import Views.Game.DialogScene;
 import Views.Game.Game;
 import Views.Menu.Menu;
 import Views.Menu.Setting;
-import Views.Overlay.BattleDialog;
+import Views.Battle.Battle;
 import Views.Overlay.Pause;
 import Views.enums.Views;
 
@@ -40,11 +38,11 @@ public class ViewManager {
      */
     public void initializeViews() {
         views.put(Views.GAME, new Game());
-        views.put(Views.BATTLE, new Battle());
         views.put(Views.MENU, new Menu());
         views.put(Views.SETTINGS, new Setting());
         views.put(Views.SELECT_CHARACTER, new Menu());
         views.put(Views.PAUSE, new Pause());
+        views.put(Views.BATTLE, new Battle());
 //        views.put(Views.DIALOG, new BattleDialog());
 //        views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
 
@@ -154,14 +152,14 @@ public class ViewManager {
     public void tick() {
         if (!layers.isEmpty()) {
             for (View layer : layers) {
-                layer.tick();
+                layer.tickLayer();
             }
         }
     }
 
     public void render(Graphics g) {
         for (int i = 0; i < layers.size(); i++) {
-            layers.get(i).render(g);
+            layers.get(i).renderLayer(g);
             if (i < layers.size() - 1) {
                 applyOverlay(g);
             }

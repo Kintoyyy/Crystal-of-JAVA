@@ -44,4 +44,14 @@ public abstract class View {
     public abstract void tick();
 
     public abstract void setData(Object data);
+
+    public void tickLayer() {
+        components.tick();
+        tick();
+    }
+
+    public void renderLayer(Graphics g) {
+        components.render(g);
+        render(g);
+    }
 }
