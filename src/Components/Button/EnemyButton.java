@@ -7,6 +7,7 @@ import Components.ToolTip.EnemyHealthBar;
 import Entities.Enemies.Enemy;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
+import fonts.SimplePixelFont;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -44,7 +45,7 @@ public class EnemyButton extends Button {
 
     @Override
     public void tick() {
-        super.tick();
+
         healthBar.tick();
         if (animation != null) {
             animation.tick();
@@ -60,15 +61,19 @@ public class EnemyButton extends Button {
             default -> buttonSheet[0];
         };
 
+        buttonImage = battleManager.getCurrentEnemy() == enemy ? buttonSheet[2] : buttonImage;
+
         // Draw button image
         g.drawImage(buttonImage, this.x, this.y, width, height, null);
 
-        healthBar.setLocation(this.x + 10, this.y + 90);
+        healthBar.setLocation(this.x + 10, this.y + 110);
         healthBar.render(g);
 
         // Render selectedEnemy name above the frame
         if (enemy != null) {
-            g.drawString(enemy.getName(), this.x, this.y - 10);
+            g.setColor(Color.WHITE);
+            g.setFont(new SimplePixelFont(12));
+            g.drawString(enemy.getName(), this.x + 18, this.y + 110);
         }
 
         if (animation != null) {
@@ -77,17 +82,13 @@ public class EnemyButton extends Button {
             int height = animation.getHeight();
             int width = animation.getWidth();
 
+
+            if (!enemy.getHealth().isDead()) {
+                g.drawImage(animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x - width / 2 + 8, this.y - height / 2 + 8, width * scale, height * scale, null);
+            }
+
             // NOT WORKING
 //            drawImage(g, enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x, this.y, width, height);
-            g.drawImage(enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x - (width * scale) / 2, this.y - (height * scale) / 2, width * scale, height * scale, null);
         }
-    }
-
-    public Enemy getEnemy() {
-        return enemy;
-    }
-
-    public void isActive(boolean b) {
-        state = b ? PRESSED : state;
     }
 }

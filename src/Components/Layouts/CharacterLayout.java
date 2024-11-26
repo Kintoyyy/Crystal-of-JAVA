@@ -67,7 +67,6 @@ public class CharacterLayout extends Layout {
         for (UIComponent UIComponent : children) {
             if (UIComponent instanceof CharacterButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
-                frame.isActive(player != null && player.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();
                 UIComponent.render(g);
             }

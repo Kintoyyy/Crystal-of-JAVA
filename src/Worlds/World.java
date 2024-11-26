@@ -3,6 +3,7 @@ package Worlds;
 import Animations.Animation;
 import Animations.enums.DIRECTION;
 import Animations.enums.TYPE;
+import Entities.Enemies.Enemy;
 import Entities.Entity;
 import Game.Handler;
 import Map.Parser;
@@ -32,9 +33,9 @@ public class World {
         for (Battle battle : battleObjects) {
             battles.put(battle.getKey(), battle);
             // Populate NPC map
-            for (Entity entity : battle.getEnemies()) {
+            for (Enemy entity : battle.getEnemies()) {
                 for (Object object : world.getObjectGroup().getNpcObjects()) {
-                    if (object.getName().equals(entity.getName())) {
+                    if (object.getName().equals(entity.getKey())) {
 //                        entity.getLocation().setLocation(object.getPosition());
                         entity.setObject(object);
                         npcs.add(entity);
@@ -68,8 +69,6 @@ public class World {
 
     public void renderEntities(Graphics g, float xOffset, float yOffset) {
         for (Entity entity : npcs) {
-            System.out.println(entity.getName() + " " + entity.getObject().getPosition());
-
             int x = (int) (entity.getObject().getPosition().x - xOffset);
             int y = (int) (entity.getObject().getPosition().y - yOffset);
 
@@ -109,8 +108,16 @@ public class World {
                 }
             }
 
+
+            if (entity.getHealth().isDead()) {
+                // Render the entity with the appropriate animation frame
+//                g.drawImage(animation.getFrame(TYPE.DEAD), renderX, renderY, frameWidth, frameHeight, null);
+            } else {
+                g.drawImage(animation.getFrame(TYPE.IDLE, direction), renderX, renderY, frameWidth, frameHeight, null);
+            }
+
             // Render the entity with the appropriate animation frame
-            g.drawImage(animation.getFrame(TYPE.IDLE, direction), renderX, renderY, frameWidth, frameHeight, null);
+
         }
     }
 }

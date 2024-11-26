@@ -41,23 +41,11 @@ public class CharacterButton extends Button {
                 .scale(3);
     }
 
-    public void isActive(boolean isActive) {
-        System.out.println("isActive: " + isActive + " " + player.getName());
-        state = isActive ? PRESSED : state;
-    }
-
     @Override
     public void tick() {
         healthBar.tick();
         if (characterAnimation != null) {
             characterAnimation.tick();
-        }
-    }
-
-
-    public void getDyingAnimation() {
-        if (!player.getHealth().isDead()) {
-            return;
         }
     }
 
@@ -68,6 +56,8 @@ public class CharacterButton extends Button {
             case PRESSED -> buttonSheet[2];
             default -> buttonSheet[0];
         };
+
+        buttonImage = characterManager.getPlayer() == player ? buttonSheet[2] : buttonImage;
 
         if (characterAnimation != null) {
 

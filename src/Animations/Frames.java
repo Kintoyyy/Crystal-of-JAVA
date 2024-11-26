@@ -28,9 +28,9 @@ public class Frames {
      * @param frameWidth  The width of each individual frame.
      * @param frameHeight The height of each individual frame.
      * @throws IllegalArgumentException if any of the following conditions are met:
-     *                                   - The sheet is null.
-     *                                   - Frame width or height is non-positive.
-     *                                   - The sheet's dimensions are not divisible by the frame's dimensions.
+     *                                  - The sheet is null.
+     *                                  - Frame width or height is non-positive.
+     *                                  - The sheet's dimensions are not divisible by the frame's dimensions.
      */
     public Frames(BufferedImage sheet, int frameWidth, int frameHeight) {
         if (sheet == null) {
@@ -111,6 +111,11 @@ public class Frames {
 
         return animationFrames;
     }
+
+    public BufferedImage[] extractFrame(int col, int row) {
+        return new BufferedImage[]{frames[row][col]};
+    }
+
 
     /**
      * Extracts a range of frames from the sprite sheet, with an option to flip

@@ -70,7 +70,7 @@ public class EnemyLayout extends Layout {
         for (UIComponent UIComponent : children) {
             if (UIComponent instanceof EnemyButton frame) {
                 frame.setLocation(xOffset, (int) this.y);
-                frame.isActive(enemy != null && enemy.equals(frame.getEnemy()));
+//                frame.isActive(enemy != null && enemy.equals(frame.getEnemy()));
                 xOffset += frame.getWidth();
             }
             UIComponent.render(g);
