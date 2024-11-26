@@ -1,8 +1,9 @@
-package Entities.Enemies;
+package Entities.Enemies.Forest;
 
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
+import Entities.Enemies.Enemy;
 
 public class SkeletonWarrior extends Enemy {
     // Moderate health, high defense, low attack, immune to poison.

@@ -27,6 +27,7 @@ public class Movement {
     private final Collision collision;
 
     public Movement(Handler handler, Collision collision, Camera camera) {
+        handler.setMovement(this);
         this.keyboard = handler.getKeyManager();
         this.characterManager = handler.getCharacterManager();
         this.collision = collision;
@@ -80,6 +81,10 @@ public class Movement {
         }
 
         move();
+    }
+
+    public Point getPlayerScreenLocation() {
+        return new Point((int) (x - camera.getXOffset()), (int) (y - camera.getYOffset()));
     }
 
     public void render(Graphics g) {

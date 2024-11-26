@@ -1,9 +1,9 @@
-package Entities.Enemies;
+package Entities.Enemies.Lava;
 
-import Animations.Entities.GoblinAnimation;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
+import Entities.Enemies.Enemy;
 import Utils.ImageUtils;
 
 public class Orc extends Enemy {
@@ -14,6 +14,6 @@ public class Orc extends Enemy {
         name = "Orc";
         description = "A generic selectedEnemy";
 
-        animation = new GoblinAnimation(ImageUtils.loadImage("/Entities/Enemies/Orcs/Orc_Grunt.png"));
+//        animation = new GoblinAnimation(ImageUtils.loadImage("/Entities/Enemies/Orcs/Orc_Grunt.png"));
     }
 }

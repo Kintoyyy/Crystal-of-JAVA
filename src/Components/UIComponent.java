@@ -202,13 +202,23 @@ public abstract class UIComponent {
 
 
     public void drawImage(Graphics g, Image image, int x, int y, int width, int height) {
-        g.drawImage(image, (int) (parent.x + (x * scale)), (int) (parent.y + (y * scale)), width * scale, height * scale, null);
+        if (parent == null) {
+            g.drawImage(image, this.x + (x * scale), this.y + (y * scale), width * scale, height * scale, null);
+        } else {
+            g.drawImage(image, (int) (parent.x + (x * scale)), (int) (parent.y + (y * scale)), width * scale, height * scale, null);
+        }
+
     }
 
     public void drawString(Graphics g, String text, int x, int y, Font font, Color color) {
         g.setFont(font);
         g.setColor(color);
-        g.drawString(text, (int) (parent.x + (x * scale)), (int) (parent.y + (y * scale)));
+
+        if (parent == null) {
+            g.drawString(text, this.x + (x * scale), this.y + (y * scale));
+        } else {
+            g.drawString(text, (int) (parent.x + (x * scale)), (int) (parent.y + (y * scale)));
+        }
     }
 
     // TODO: DO BE REMOVED

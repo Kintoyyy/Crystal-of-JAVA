@@ -4,6 +4,7 @@ import Entities.Characters.CharacterManager;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
 import Map.Map;
+import Map.Movement.Movement;
 import Utils.DebugMode;
 import Battle.BattleManager;
 import Views.ViewManager;
@@ -16,6 +17,8 @@ public class Handler {
     private CharacterManager characterManager;
     private Map map;
     private BattleManager battleManager;
+    private Movement movement;
+
 
     // Private constructor for Singleton
     Handler(Game game) {
@@ -93,5 +96,13 @@ public class Handler {
 
     public void setDebugMode(DebugMode debugMode) {
         this.debugMode = debugMode;
+    }
+
+    public void setMovement(Movement movement) {
+        this.movement = movement;
+    }
+
+    public Movement getMovement() {
+        return movement;
     }
 }

@@ -154,14 +154,14 @@ public class ViewManager {
     public void tick() {
         if (!layers.isEmpty()) {
             for (View layer : layers) {
-                layer.tick();
+                layer.tickLayer();
             }
         }
     }
 
     public void render(Graphics g) {
         for (int i = 0; i < layers.size(); i++) {
-            layers.get(i).render(g);
+            layers.get(i).renderLayer(g);
             if (i < layers.size() - 1) {
                 applyOverlay(g);
             }

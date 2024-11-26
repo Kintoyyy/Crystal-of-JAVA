@@ -1,9 +1,9 @@
 package Worlds;
 
-import Entities.Enemies.Goblin;
-import Entities.Enemies.Kai;
-import Entities.Enemies.Orc;
-import Entities.Enemies.SkeletonWarrior;
+import Entities.Enemies.Ice.Goblin;
+import Entities.Enemies.Dungeon.Kai;
+import Entities.Enemies.Lava.Orc;
+import Entities.Enemies.Forest.SkeletonWarrior;
 
 import java.util.HashMap;
 
@@ -14,7 +14,6 @@ public class Worlds {
         this.setWorlds(
                 new World("FOREST", "res/Maps/Forest.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
-                                new SkeletonWarrior(),
                                 new Kai()
                         ).dialogBefore(
                                 "You have encountered a Goblin!",

@@ -73,7 +73,13 @@ public class EnemyButton extends Button {
 
         if (animation != null) {
             assert enemy != null;
-            g.drawImage(enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x - 4, this.y + 2, width + 10, height + 10, null);
+
+            int height = animation.getHeight();
+            int width = animation.getWidth();
+
+            // NOT WORKING
+//            drawImage(g, enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x, this.y, width, height);
+            g.drawImage(enemy.getHealth().isDead() ? animation.getFrame(TYPE.GHOST, DIRECTION.LEFT) : animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x - (width * scale) / 2, this.y - (height * scale) / 2, width * scale, height * scale, null);
         }
     }
 

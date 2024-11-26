@@ -170,8 +170,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 860,
-                "y": 255.66666666666669
+                "x": 860.3333333333333,
+                "y": 255.3333333333333
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -264,10 +264,10 @@
     "project": "Test-Multimaps.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "Snow.tmx",
         "Forest.tmx",
         "Dungeon.tmx",
         "Lava.tmx",
-        "Snow.tmx",
         "World3.tmx",
         "C:/Users/Kintoyyy/AppData/Local/Temp/3794f25a-2f89-45c4-a8d9-3f571ffae30c_MapResources.zip.MapResources.zip/mapResWorld3/World3.tmx",
         "BossStage/Dimensional_Portal.tsx",

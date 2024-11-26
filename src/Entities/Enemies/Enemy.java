@@ -52,7 +52,7 @@ public abstract class Enemy extends Entity {
      * @param attackPower The attack power of the selectedEnemy.
      * @param defense     The defense of the selectedEnemy.
      */
-    Enemy(Health health, AttackPower attackPower, Defense defense) {
+    protected Enemy(Health health, AttackPower attackPower, Defense defense) {
         super(0, 0, 32, 32); // Initialize with default position and size
         this.health = health;
         this.attackPower = attackPower;

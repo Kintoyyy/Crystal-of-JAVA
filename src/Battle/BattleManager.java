@@ -57,9 +57,9 @@ public class BattleManager {
         this.isDataLoaded = false;// flag for ui components tobe removed
 
         // load load pre battle dialogs
-        viewManager.customView(new DialogScene( battle.getPreBattleDialogs()));
+//        viewManager.customView(new DialogScene( battle.getPreBattleDialogs()));
 
-//        viewManager.setView(Views.BATTLE); // set view to battle
+        viewManager.setView(Views.BATTLE); // set view to battle
 
 
         // change view to battle

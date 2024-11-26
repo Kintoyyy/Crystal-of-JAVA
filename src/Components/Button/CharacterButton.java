@@ -42,12 +42,12 @@ public class CharacterButton extends Button {
     }
 
     public void isActive(boolean isActive) {
+        System.out.println("isActive: " + isActive + " " + player.getName());
         state = isActive ? PRESSED : state;
     }
 
     @Override
     public void tick() {
-        super.tick();
         healthBar.tick();
         if (characterAnimation != null) {
             characterAnimation.tick();
@@ -59,8 +59,6 @@ public class CharacterButton extends Button {
         if (!player.getHealth().isDead()) {
             return;
         }
-
-
     }
 
     @Override

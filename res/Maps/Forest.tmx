@@ -1017,7 +1017,7 @@
     <property name="COLLISION" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="39" name="KAI1" type="DIALOG" x="295" y="78.8333" width="144.667" height="142.5">
+  <object id="39" name="KAI1" type="DIALOG" x="335.75" y="114.083" width="58.167" height="57.25">
    <ellipse/>
   </object>
   <object id="42" name="Skeleton Warrior" type="NPC" x="48.1667" y="454.098">
@@ -1136,9 +1136,6 @@
    </properties>
   </object>
   <object id="123" name="KAI" type="NPC" x="364.182" y="145.273">
-   <point/>
-  </object>
-  <object id="129" name="TEST" type="NPC" x="217.273" y="121.455">
    <point/>
   </object>
  </objectgroup>
