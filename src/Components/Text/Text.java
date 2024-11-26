@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Text extends Component {
 
-    private final String fullText;
+    private String fullText;
     private String displayedText = "";
     private Alignment alignment = Alignment.LEFT;
     private Color color = Color.WHITE;
@@ -60,7 +60,7 @@ public class Text extends Component {
                 displayedText += fullText.charAt(currentIndex++);
                 lastTick = System.currentTimeMillis();
             }
-        } else {
+        } else if (displayedText.isEmpty()) {
             displayedText = fullText;
         }
     }
@@ -124,13 +124,12 @@ public class Text extends Component {
             case RIGHT -> bounds.x + bounds.width - lineWidth;
         };
     }
-
     public Text setText(String text) {
-        this.text = text;
+        this.fullText = text;
+//        this.displayedText = ""; // Reset displayedText to start fresh
+//        this.currentIndex = 0;  // Reset typing index
+//        this.lastTick = System.currentTimeMillis(); // Reset the typing timer
         return this;
     }
 
-    public String getText() {
-        return text;
-    }
 }

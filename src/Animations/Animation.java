@@ -90,7 +90,7 @@ public abstract class Animation {
         try {
             return getFramesForKey(key)[index];
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Error: Index out of bounds for key '" + key + "'. Returning null.");
+//            System.err.println("Error: Index out of bounds for key '" + key + "'. Returning null.");
             return null;
         } catch (NullPointerException e) {
             System.err.println("Error: No frames found for key '" + key + "'. Returning null.");

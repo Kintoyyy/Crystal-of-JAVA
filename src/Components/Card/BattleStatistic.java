@@ -2,6 +2,7 @@ package Components.Card;
 
 import Entities.Characters.Character;
 import Battle.BattleManager;
+import Entities.Characters.CharacterManager;
 import Game.Handler;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
@@ -14,6 +15,7 @@ import java.awt.image.BufferedImage;
 
 public class BattleStatistic extends Card {
     private final BattleManager battleManager;
+    private final CharacterManager characterManager;
     private Character player;
     private BufferedImage playerStat;
     private final BufferedImage frame;
@@ -23,13 +25,12 @@ public class BattleStatistic extends Card {
     private double health;
     private double mana;
     private double defense;
-    private final Handler handler;
 
     public BattleStatistic(BattleManager battleManager) {
         super();
         this.battleManager = battleManager;
-        this.player = battleManager.getCharacterManager().getPlayer();
-        this.handler = battleManager.getHandler();
+        this.characterManager = battleManager.getCharacterManager();
+        this.player = characterManager.getPlayer();
 
         this.width = 119;
         this.height = 49;
@@ -43,7 +44,7 @@ public class BattleStatistic extends Card {
 
     @Override
     public void tick() {
-        player = handler.getCharacterManager().getPlayer();
+        player = this.characterManager.getPlayer();
         if (player != null) {
             playerStat = player.getProfile();
             health = player.getHealth().getHealth();

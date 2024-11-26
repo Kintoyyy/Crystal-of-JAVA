@@ -1,12 +1,12 @@
 package Map.Movement;
 
 import Game.Handler;
+import Map.Map;
 import Map.Tile.Tile;
-import Worlds.WorldManager;
 
 /**
  * The Camera class is responsible for controlling the view of the game world by
- * adjusting the camera's position based on the player's movement or specific events.
+ * adjusting the camera's position based on the selectedPlayer's movement or specific events.
  */
 public class Camera {
 
@@ -33,18 +33,18 @@ public class Camera {
     /**
      * Reference to the parsed world, used for world dimensions.
      */
-    private final WorldManager worldManager;
+    private final Map map;
 
     /**
      * Constructs a Camera object.
      * <p>
-     * //     * @param movement The Movement object controlling the player's movement.
+     * //     * @param movement The Movement object controlling the selectedPlayer's movement.
      *
      * @param xOffset Initial horizontal offset.
      * @param yOffset Initial vertical offset.
      */
-    public Camera(Handler handler, WorldManager worldManager, float xOffset, float yOffset) {
-        this.worldManager = worldManager;
+    public Camera(Handler handler, Map map, float xOffset, float yOffset) {
+        this.map = map;
         this.screenWidth = handler.getWidth();
         this.screenHeight = handler.getHeight();
         this.xOffset = xOffset;
@@ -71,15 +71,15 @@ public class Camera {
         // Restrict horizontal offset
         if (xOffset < 0) {
             xOffset = 0;
-        } else if (xOffset > worldManager.getMap().getWorldWidth() * Tile.WIDTH - screenWidth) {
-            xOffset = worldManager.getMap().getWorldWidth() * Tile.WIDTH - screenWidth;
+        } else if (xOffset > map.getMap().getWorldWidth() * Tile.WIDTH - screenWidth) {
+            xOffset = map.getMap().getWorldWidth() * Tile.WIDTH - screenWidth;
         }
 
         // Restrict vertical offset
         if (yOffset < 0) {
             yOffset = 0;
-        } else if (yOffset > worldManager.getMap().getWorldHeight() * Tile.HEIGHT - screenHeight) {
-            yOffset = worldManager.getMap().getWorldHeight() * Tile.HEIGHT - screenHeight;
+        } else if (yOffset > map.getMap().getWorldHeight() * Tile.HEIGHT - screenHeight) {
+            yOffset = map.getMap().getWorldHeight() * Tile.HEIGHT - screenHeight;
         }
     }
 

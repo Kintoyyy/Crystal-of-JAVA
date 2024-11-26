@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 import Game.Handler;
+import Inputs.InputMouseListener;
 import Views.Battle.Battle;
+import Views.Game.DialogScene;
 import Views.Game.Game;
 import Views.Menu.Menu;
 import Views.Menu.Setting;
@@ -13,39 +15,12 @@ import Views.Overlay.BattleDialog;
 import Views.Overlay.Pause;
 import Views.enums.Views;
 
-/**
- * The ViewManager class manages different views and their respective layers in the game.
- * It is responsible for transitioning between views, handling overlays, and managing
- * the rendering and updating of each view's state.
- *
- * <p>Views represent different screens or states in the game, such as the main menu,
- * game screen, battle, pause overlay, etc. The ViewManager handles these views and allows
- * for easy switching between them. It also supports layering of views, allowing for overlays
- * such as pause screens to be displayed on top of other views.</p>
- *
- * <p>The ViewManager maintains an EnumMap of available views and an ArrayList to track the
- * current layers of views. Each view is responsible for its own rendering and updating logic.</p>
- *
- * <p>Fields:</p>
- * <ul>
- *     <li>{@link #views} - A map storing available views by their enum representation.</li>
- *     <li>{@link #layers} - A list of currently active views (layers), with the topmost view rendered last.</li>
- *     <li>{@link #handler} - The Handler instance used to manage game state and input.</li>
- *     <li>{@link #OVERLAY_COLOR} - The color of the overlay applied to non-top layers when rendering.</li>
- * </ul>
- *
- * <p>Usage Example:</p>
- * <pre>
- * ViewManager viewManager = new ViewManager(handler);
- * viewManager.setView(Views.MENU); // Set the current view to the main menu
- * viewManager.removeView(Views.PAUSE); // Remove the pause overlay view
- * </pre>
- */
 public class ViewManager {
     private final EnumMap<Views, View> views = new EnumMap<>(Views.class);
     private final ArrayList<View> layers = new ArrayList<>();
     private final Handler handler;
     private static final Color OVERLAY_COLOR = new Color(0, 0, 0, 128);
+    private final InputMouseListener inputMouseListener;
 
     /**
      * Constructor for the ViewManager class.
@@ -55,36 +30,48 @@ public class ViewManager {
     public ViewManager(Handler handler) {
         handler.setViewManager(this);
         this.handler = handler;
+        this.inputMouseListener = handler.getInputMouseListener();
     }
+
 
     /**
      * Initializes the available views for the game.
      * This method creates instances of all views and stores them in the {@link #views} map.
      */
     public void initializeViews() {
-        views.put(Views.GAME, new Game(this));
-        views.put(Views.BATTLE, new Battle(this));
-        views.put(Views.MENU, new Menu(this));
-        views.put(Views.SETTINGS, new Setting(this));
-        views.put(Views.SELECT_CHARACTER, new Menu(this));
-        views.put(Views.PAUSE, new Pause(this));
-        views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
+        views.put(Views.GAME, new Game());
+        views.put(Views.BATTLE, new Battle());
+        views.put(Views.MENU, new Menu());
+        views.put(Views.SETTINGS, new Setting());
+        views.put(Views.SELECT_CHARACTER, new Menu());
+        views.put(Views.PAUSE, new Pause());
+//        views.put(Views.DIALOG, new BattleDialog());
+//        views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
 
+//        updateViewData(Views.DIALOG, new String[]{"one", "two", "three", "four", "five"});
         setView(Views.GAME);
     }
 
-    /**
-     * Sets the current view for the game. If the view is an overlay, it is added to the layers list,
-     * otherwise, the layers list is cleared and the new view is added as the sole view.
-     *
-     * @param viewEnum The enum representing the view to set.
-     */
+    public void customView(View customView) {
+//        views.put(Views.DIALOG, customView);
+
+        if (customView.isOverlay) {
+            if (!layers.getLast().isOverlay) {
+                layers.add(customView);
+            }
+        } else {
+            layers.clear();
+            layers.add(customView);
+        }
+        updateInputListener();
+    }
+    public void overlayView() {
+
+    }
+
     public void setView(Views viewEnum) {
         View selectedView = views.get(viewEnum);
-
         if (selectedView == null) return;
-
-        handler.getInputMouseListener().setComponentManager(selectedView.getComponentManager());
 
         if (selectedView.isOverlay) {
             if (layers.getLast().isOverlay) {
@@ -96,11 +83,29 @@ public class ViewManager {
             layers.add(selectedView);
         }
 
-        tick();
+        updateInputListener();
+//        tick();
+    }
 
-        // Update mouse listener to always point to the last (topmost) layer's component manager
-        View topLayer = layers.getLast();
-        handler.getInputMouseListener().setComponentManager(topLayer.getComponentManager());
+    public boolean isViewActive(Views viewEnum) {
+        return layers.contains(views.get(viewEnum));
+    }
+
+
+    private void updateInputListener() {
+        View topLayer = getTopLayer();
+        if (topLayer != null) {
+            inputMouseListener.setComponentManager(topLayer.getComponentManager());
+        }
+    }
+
+    private View getTopLayer() {
+        return layers.isEmpty() ? null : layers.getLast();
+    }
+
+    private void applyOverlay(Graphics g) {
+        g.setColor(OVERLAY_COLOR);
+        g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
     }
 
     /**
@@ -154,44 +159,19 @@ public class ViewManager {
         }
     }
 
-    /**
-     * Renders all active views in the layers stack. An overlay effect is applied to non-top layers.
-     *
-     * @param g The Graphics object used for rendering the views.
-     */
     public void render(Graphics g) {
         for (int i = 0; i < layers.size(); i++) {
             layers.get(i).render(g);
             if (i < layers.size() - 1) {
-                applyOverlay(g);  // Apply overlay for non-top layers
+                applyOverlay(g);
             }
         }
-
-        g.setFont(new Font("Arial", Font.PLAIN, 12));
-        g.setColor(Color.GRAY);
-        g.drawString("Layers: " + layers, 10, 20);
     }
 
-    /**
-     * Applies a semi-transparent overlay over the screen, used for non-top layers.
-     *
-     * @param g The Graphics object used for rendering the overlay.
-     */
-    private void applyOverlay(Graphics g) {
-        g.setColor(OVERLAY_COLOR);
-        g.fillRect(0, 0, handler.getWidth(), handler.getHeight());
-    }
-
-    /**
-     * Checks if the game view is currently active in the layers stack.
-     *
-     * @return true if the game view is active, false otherwise.
-     */
-    public boolean isInGame() {
-        return layers.contains(views.get(Views.GAME));
-    }
-
-    public View getCurrentView() {
-        return layers.getLast();
+    public void updateViewData(Views viewEnum, Object data) {
+        View view = views.get(viewEnum);
+        if (view != null) {
+            view.setData(data);
+        }
     }
 }

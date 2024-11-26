@@ -1,122 +1,92 @@
 package Battle;
 
+import Entities.Characters.Character;
 import Entities.Characters.CharacterManager;
+import Battle.Effects.EffectsManager;
 import Entities.Enemies.Enemy;
+import Entities.Enemies.EnemyManager;
 import Game.Handler;
 import Utils.Timer;
+import Views.Game.DialogScene;
+import Views.Overlay.BattleDialog;
 import Views.enums.Views;
 import Views.ViewManager;
 import Worlds.Battle;
-import Worlds.Enums.Turn;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class BattleManager {
     private final Handler handler;
-    private final ArrayList<Enemy> enemies = new ArrayList<>();
     private final ViewManager viewManager;
-    private int currentEnemyIndex = 0;
-    private final Queue<Turn> turnqueue = new LinkedList<>();
+
+    private final CharacterManager characterManager;
+    private final EnemyManager enemyManager;
+
+    private final EffectsManager effectsManager;
 
     private final Timer timer = new Timer();
-
     private boolean isDataLoaded = false;
-
-    private Battle battle;
+    private boolean isPlayersTurn = true;
 
     public BattleManager(Handler handler) {
         handler.setBattleManager(this);
-        this.viewManager = handler.getViewManager();
-
         this.handler = handler;
 
-        turnqueue.add(Turn.PLAYER);
-        turnqueue.add(Turn.ENEMY);
+        this.effectsManager = new EffectsManager();
+        this.enemyManager = new EnemyManager(handler);
+        this.characterManager = handler.getCharacterManager();
+
+        this.viewManager = handler.getViewManager();
     }
 
     public void startBattle(Battle battle) {
-        this.battle = battle;
 
+        //set battle
         if (!battle.getPreBattleDialogs().isEmpty()) {
             System.out.println("Loading pre battle Dialogs");
         }
-
         if (battle.isComplete()) {
             System.out.println("Battle already completed: " + battle.getKey());
             abortBattle();
             return;
         }
 
-        loadEnemies(battle.getEnemies());
 
-        this.isDataLoaded = false;
-        currentEnemyIndex = 0;
+        //get battle enemies
+        enemyManager.loadEnemies(battle.getEnemies()); // load enemies to enemies array
+        this.isDataLoaded = false;// flag for ui components tobe removed
 
-        viewManager.setView(Views.BATTLE);
+        // load load pre battle dialogs
+        viewManager.customView(new BattleDialog(    battle.getPreBattleDialogs()));
+
+//        viewManager.setView(Views.BATTLE); // set view to battle
+
+
+        // change view to battle
     }
 
-    public void endBattle() {
-        if (!battle.getPreBattleDialogs().isEmpty()) {
-            System.out.println("Loading post battle Dialogs");
-        }
-
-    }
-
-    public void updateTurnState() {
-        Turn turn = turnqueue.poll();
-        System.out.println("Turn: " + turn);
-        if (turn == Turn.PLAYER) {
-            updateTurnState();
-            turnqueue.add(Turn.ENEMY);
-        } else {
-            turnqueue.add(Turn.PLAYER);
-            timer.reset();
-            timer.start().setDelay(2).setAction(() -> {
-                getCurrentEnemy().attack(getCharacterManager().getPlayer());
-                updateTurnState();
-            });
-        }
-    }
-
-    public Turn getCurrentTurn() {
-        return turnqueue.peek();
-    }
-
-    public void skipTurn() {
-        Turn turn = turnqueue.remove();
-        turnqueue.add(turn);
-        turnqueue.add(turn);
+    public void enemiesTurn() {
+        isPlayersTurn = false;
+        System.out.println("Enemies turn");
+        timer.reset();
+        timer.start().setDelay(1).setAction(() -> {
+            System.out.println("Enemy Attacked!");
+            // decide to randomly select a character or attack the lowest
+            getCurrentEnemy().attack(getCharacterManager().getPlayer());
+            isPlayersTurn = true;
+            characterManager.updateTurns();
+        });
     }
 
     public void tick() {
+        timer.update(); // Update the timer regardless
         // Check if all enemies are dead
-        boolean allEnemiesDead = true;
-        for (Enemy enemy : enemies) {
-            if (enemy.isAlive()) {
-                allEnemiesDead = false;
-                break; // No need to continue if one enemy is alive
-            }
-        }
-
-//        System.out.println(timer.getTime());
-
-        if (allEnemiesDead && !timer.isActive()) {
-//            System.out.println("All enemies dead");
-//            timer.start(); // Start the timer if all enemies are dead
-        }
-
-        // If there are no enemies left in the list
-        if (enemies.isEmpty()) {
+        if (enemyManager.isEmpty()) {
             System.out.println("Battle ended");
             viewManager.setView(Views.GAME);
             return;
         }
-
-        timer.update(); // Update the timer regardless
     }
-
 
     // TODO: need to move this
     public Handler getHandler() {
@@ -124,16 +94,14 @@ public class BattleManager {
     }
 
     public CharacterManager getCharacterManager() {
-        return handler.getCharacterManager();
+        return characterManager;
     }
 
-    public void abortBattle() {
-        enemies.clear();
-//        System.out.println("Aborting battle: " + enemies);
-        viewManager.setView(Views.GAME);
-        this.currentEnemyIndex = 0;
+    public ArrayList<Enemy> getEnemies() {
+        return enemyManager.getEnemies();
     }
 
+    // for ui
     public boolean isDataLoaded() {
         return isDataLoaded;
     }
@@ -142,32 +110,32 @@ public class BattleManager {
         this.isDataLoaded = isDataLoaded;
     }
 
-    public void loadEnemies(ArrayList<Enemy> enemies) {
-//        System.out.println("Loading enemies: " + enemies);
-        this.currentEnemyIndex = 0;
-        this.enemies.clear();
-        this.enemies.addAll(enemies);
-    }
 
-    public ArrayList<Enemy> getEnemies() {
-        return enemies;
+    public void abortBattle() {
+        viewManager.setView(Views.GAME);
+        enemyManager.clearEnemies();
     }
 
     public void setCurrentEnemy(int index) {
-//        System.out.println("Setting current enemy: " + index);
-        this.currentEnemyIndex = index;
+        System.out.println("Enemy Selected: " + index);
+        enemyManager.setCurrentEnemy(index);
     }
 
+    // get current selectedEnemy
     public Enemy getCurrentEnemy() {
-        if (enemies.isEmpty()) {
-            return null;
-        }
-        return enemies.get(currentEnemyIndex);
+        return enemyManager.getCurrentEnemy();
     }
 
+    //for debugging only
     public void killAllEnemies() {
-        for (Enemy enemy : enemies) {
-            enemy.getHealth().setHealth(0);
-        }
+        enemyManager.killAllEnemies();
+    }
+
+    public boolean isPlayersTurn() {
+        return isPlayersTurn;
+    }
+
+    public Double getTimer() {
+        return timer.getTime();
     }
 }

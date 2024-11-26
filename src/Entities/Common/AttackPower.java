@@ -9,7 +9,7 @@ package Entities.Common;
  * </p>
  */
 public class AttackPower {
-    private double attackPower;
+    private final double attackPower;
     private final double minAttackPower;
     private final AttackType attackType;
 
@@ -27,7 +27,7 @@ public class AttackPower {
      * Constructs an AttackPower object with the specified attack power and attack triggerType.
      *
      * @param attackPower The attack power value.
-     * @param attackType The triggerType of attack (e.g., PHYSICAL or MAGIC).
+     * @param attackType  The triggerType of attack (e.g., PHYSICAL or MAGIC).
      */
     public AttackPower(int attackPower, AttackType attackType) {
         this.attackType = attackType;
@@ -39,7 +39,7 @@ public class AttackPower {
      * Constructs an AttackPower object with the specified minimum and maximum attack power.
      *
      * @param minAttackPower The minimum attack power.
-     * @param attackPower The maximum attack power.
+     * @param attackPower    The maximum attack power.
      */
     public AttackPower(int minAttackPower, int attackPower) {
         this(minAttackPower, attackPower, null);
@@ -50,8 +50,8 @@ public class AttackPower {
      * and attack triggerType.
      *
      * @param minAttackPower The minimum attack power.
-     * @param attackPower The maximum attack power.
-     * @param attackType The triggerType of attack (e.g., PHYSICAL or MAGIC).
+     * @param attackPower    The maximum attack power.
+     * @param attackType     The triggerType of attack (e.g., PHYSICAL or MAGIC).
      */
     public AttackPower(int minAttackPower, int attackPower, AttackType attackType) {
         this.attackType = attackType;
@@ -64,25 +64,7 @@ public class AttackPower {
      *
      * @return A random attack power value.
      */
-    public double getAttackPower() {
+    public double getDamage() {
         return minAttackPower + Math.random() * (attackPower - minAttackPower);
-    }
-
-    /**
-     * Sets the attack power to the specified value.
-     *
-     * @param attackPower The new attack power value.
-     */
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
-    }
-
-    /**
-     * Gets the triggerType of attack (e.g., PHYSICAL or MAGIC).
-     *
-     * @return The attack triggerType.
-     */
-    public AttackType getAttackPowerType() {
-        return attackType;
     }
 }

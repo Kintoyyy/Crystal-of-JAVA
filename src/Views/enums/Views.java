@@ -12,7 +12,7 @@ package Views.enums;
  *     <li>{@link #MENU} - Represents the main menu screen, typically shown when the game is started.</li>
  *     <li>{@link #BATTLE} - Represents the battle screen, where the game engages in combat mode.</li>
  *     <li>{@link #PAUSE} - Represents the pause screen, typically shown when the game is paused.</li>
- *     <li>{@link #SETTINGS} - Represents the settings screen, where the player can adjust game settings.</li>
+ *     <li>{@link #SETTINGS} - Represents the settings screen, where the selectedPlayer can adjust game settings.</li>
  *     <li>{@link #SELECT_CHARACTER} - Represents the character selection screen before the game starts.</li>
  * </ul>
  *
@@ -26,5 +26,5 @@ public enum Views {
     PAUSE,            // The overlay that pauses the game.
     SETTINGS,         // The settings view for adjusting game configurations.
     BATTLE_DIALOG,
-    SELECT_CHARACTER  // The character selection view before gameplay begins.
+    DIALOG, SELECT_CHARACTER  // The character selection view before gameplay begins.
 }

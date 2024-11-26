@@ -4,20 +4,24 @@ import Battle.BattleManager;
 import Game.Handler;
 import Map.Object.Object;
 import Map.Object.CLASS;
+import Views.Game.DialogScene;
+import Views.ViewManager;
 import Worlds.Battle;
-import Worlds.WorldManager;
+import Map.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Collision {
-    private final WorldManager worldManager;
+    private final Map map;
     private final BattleManager battleManager;
+    private final ViewManager viewManager;
 
     public Collision(Handler handler) {
-        this.worldManager = handler.getWorldManager();
+        this.map = handler.getWorldManager();
         this.battleManager = handler.getBattleManager();
+        this.viewManager = handler.getViewManager();
     }
 
     /**
@@ -32,26 +36,43 @@ public class Collision {
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
 
         // Loop through objects and check for collisions
-        for (Object object : worldManager.getCurrentWorld().getObjects()) {
+        for (Object object : map.getCurrentWorld().getObjects()) {
 
             // Check polygon-rectangle collision using Separating Axis Theorem (SAT)
             if (!object.getBounds().intersects(collisionBounds)) continue;
 
             if (object.getClassType() == CLASS.COLLISION) return false;
 
+            System.out.println("Collision with object: " + object.getName() + " Type: " + object.getClassType());
+
             switch (object.getClassType()) {
                 case TELEPORT -> {
                     System.out.println("Changing world to " + object.getName());
-                    worldManager.changeWorld(object.getName());
+                    map.changeWorld(object.getName());
                 }
-                case INTERACT -> {
-//sTODO: Should have an interact ui Manager, only temporary ui elements
-//                gameState.getViewManager().getCurrentView();
-                    System.out.println("Interaction ");
+                case DIALOG -> {
+
+                    ArrayList<String> preBattleDialogs = new ArrayList<>();
+
+                    preBattleDialogs.add("Hello Traveler! ");
+                    preBattleDialogs.add("asdasdasd! ");
+                    preBattleDialogs.add("asdasd! ");
+                    preBattleDialogs.add("das! ");
+                    preBattleDialogs.add("dadbdf ");
+
+                    viewManager.customView(new DialogScene(preBattleDialogs));
+
+//                    Battle battle = map.getBattle(object.getName());
+//                    viewManager.customView(new BattleDialog(battle.getPreBattleDialogs()));
+
+//                    if(!viewManager.isViewActive(Views.BATTLE_DIALOG)){
+//                        viewManager.setView(Views.BATTLE_DIALOG);
+//                        viewManager.updateViewData(Views.BATTLE_DIALOG, new String[]{"Hello", "World"});
+//                    }
                 }
                 case BATTLE -> {
                     try {
-                        Battle battle = worldManager.getBattle(object.getName());
+                        Battle battle = map.getBattle(object.getName());
                         battleManager.startBattle(battle);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -89,7 +110,7 @@ public class Collision {
      * Checks if a polygon collides with a rectangle using the Separating Axis Theorem (SAT).
      *
      * @param polygon    The polygon object
-     * @param rectBounds The bounding box of the moving object (player)
+     * @param rectBounds The bounding box of the moving object (selectedPlayer)
      * @return True if no collision, false if collision detected
      */
     private boolean polygonCollidesWithRect(Polygon polygon, Rectangle rectBounds) {

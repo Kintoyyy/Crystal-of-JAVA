@@ -1,6 +1,9 @@
 package Components;
 
+import Components.Text.Text;
 import Components.enums.States;
+import Game.Handler;
+import Inputs.InputKeyboardListener;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -44,6 +47,7 @@ import static Components.enums.States.*;
  * @see Components.enums.States
  */
 public abstract class Component {
+    protected final Handler handler;
     protected float x = 0;
     protected float y = 0;
     protected int width = 0;
@@ -56,12 +60,12 @@ public abstract class Component {
     protected ArrayList<Component> childComponents = new ArrayList<>();
     protected Rectangle bounds = new Rectangle();
     protected States state = IDLE;
-    private String text;
 
     /**
      * Constructor that initializes the component and updates its bounds.
      */
     public Component() {
+        this.handler = Handler.getInstance();
         updateBounds();
     }
 
@@ -89,6 +93,10 @@ public abstract class Component {
         int parentX = parent != null ? (int) parent.x : 0;
         int parentY = parent != null ? (int) parent.y : 0;
         bounds.setBounds(parentX + (int) x, parentY + (int) y, width, height);
+    }
+
+    public InputKeyboardListener isKeyPressed(String key) {
+        return handler.getKeyManager().isKeyPressed(key);
     }
 
     /**
@@ -240,15 +248,6 @@ public abstract class Component {
         return height;
     }
 
-    /**
-     * Returns the text associated with the component (if any).
-     *
-     * @return the text of the component
-     */
-    public String getText() {
-        return text;
-    }
-
     public void drawImage(Graphics g, Image image, int x, int y, int width, int height) {
         g.drawImage(image, bounds.x + (x * scale), bounds.y + (y * scale), width * scale, height * scale, null);
     }
@@ -258,4 +257,6 @@ public abstract class Component {
         g.setColor(color);
         g.drawString(text, bounds.x + (x * scale), bounds.y + (y * scale));
     }
+
+
 }

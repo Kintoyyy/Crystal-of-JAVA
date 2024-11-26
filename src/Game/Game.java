@@ -8,9 +8,9 @@ import Battle.BattleManager;
 import Entities.Characters.CharacterManager;
 import Inputs.InputMouseListener;
 import Inputs.InputKeyboardListener;
+import Map.Map;
 import Utils.DebugMode;
 import Views.ViewManager;
-import Worlds.WorldManager;
 
 public class Game implements Runnable {
 
@@ -21,7 +21,7 @@ public class Game implements Runnable {
     private ViewManager viewManager;
     private BattleManager battleManager;
     private CharacterManager characters;
-    private WorldManager worldManager;
+    private Map map;
 
     // might need to change this to a state manager
 
@@ -57,19 +57,15 @@ public class Game implements Runnable {
         display.getCanvas().addMouseListener(inputMouseListener);
         display.getCanvas().addMouseMotionListener(inputMouseListener);
 
-        Handler handler = new Handler(this);
-
-        viewManager = new ViewManager(handler);
-
-//        gameState = new GameState(handler);
+        Handler handler = Handler.getInstance(this);
 
         this.characters = new CharacterManager(handler);
 
+        this.viewManager = new ViewManager(handler);
+
         this.battleManager = new BattleManager(handler);
 
-        this.worldManager = new WorldManager(handler);
-
-
+        this.map = new Map(handler);
 
         // set the debug mode
         debugStats = new DebugMode(handler);
@@ -79,7 +75,11 @@ public class Game implements Runnable {
 
     private void tick() { //updates all variables
         if (viewManager.hasLayers()) {
-            viewManager.tick();
+            try {
+                viewManager.tick();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 

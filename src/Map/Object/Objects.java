@@ -25,7 +25,7 @@ public class Objects {
     private final List<Object> renderNpc = new ArrayList<>();
 
     /**
-     * Spawn point of the player, parsed from the object group.
+     * Spawn point of the selectedPlayer, parsed from the object group.
      */
     private Point spawnPoint;
 
@@ -66,7 +66,7 @@ public class Objects {
     }
 
     /**
-     * Sets the spawn point for the player.
+     * Sets the spawn point for the selectedPlayer.
      *
      * @param point The spawn point to set.
      */
@@ -75,7 +75,7 @@ public class Objects {
     }
 
     /**
-     * Retrieves the spawn point for the player, if available.
+     * Retrieves the spawn point for the selectedPlayer, if available.
      *
      * @return An {@link Optional} containing the spawn point, or empty if none exists.
      */

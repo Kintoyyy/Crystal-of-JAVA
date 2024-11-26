@@ -33,11 +33,33 @@ public class Worlds {
                         new Battle("BATTLE2").enemies(
                                 new SkeletonWarrior(),
                                 new SkeletonWarrior()
+                        ).dialogBefore(
+                                "You have encountered a Goblin!",
+                                "Prepare for battle!",
+                                "Defeat the Goblin to continue!",
+                                "Good luck!",
+                                "Goblin: I will defeat you!",
+                                "Goblin: You will never defeat me!"
+                        ).dialogAfter(
+                                "You have defeated the Goblin!",
+                                "You have earned 10 gold and 10 exp!",
+                                "You have unlocked the next area!"
                         ),
                         new Battle("BATTLE3").enemies(
                                 new SkeletonWarrior(),
                                 new SkeletonWarrior(),
                                 new SkeletonWarrior()
+                        ).dialogBefore(
+                                "You have encountered a Goblin!",
+                                "Prepare for battle!",
+                                "Defeat the Goblin to continue!",
+                                "Good luck!",
+                                "Goblin: I will defeat you!",
+                                "Goblin: You will never defeat me!"
+                        ).dialogAfter(
+                                "You have defeated the Goblin!",
+                                "You have earned 10 gold and 10 exp!",
+                                "You have unlocked the next area!"
                         )
                 ),
                 new World("ICE", "res/Maps/Snow.tmx").addBattles(

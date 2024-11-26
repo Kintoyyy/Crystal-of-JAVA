@@ -2,16 +2,14 @@ package Worlds;
 
 import Animations.Animation;
 import Entities.Entity;
-import Map.Map;
-import Map.Object.CLASS;
+import Map.Parser;
 import Map.Object.Object;
-import Map.Object.Properties;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class World {
-    private final Map world;
+    private final Parser world;
     private final String worldKey;
     private final HashMap<String, Battle> battles = new HashMap<>();
     private final HashMap<String, Entity> npcs = new HashMap<>();
@@ -19,7 +17,7 @@ public class World {
 
     public World(String worldKey, String mapPath) {
         this.worldKey = worldKey;
-        this.world = new Map(mapPath);
+        this.world = new Parser(mapPath);
 
         this.objects = world.getObjectGroup().getObjects();
     }
@@ -36,7 +34,7 @@ public class World {
         return this;
     }
 
-    public Map getWorld() {
+    public Parser getWorld() {
         return world;
     }
 

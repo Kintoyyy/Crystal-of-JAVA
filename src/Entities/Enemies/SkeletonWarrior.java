@@ -11,6 +11,6 @@ public class SkeletonWarrior extends Enemy {
 
         name = "Skeleton Warrior";
         key = "SKELETON_WARRIOR";
-        description = "A generic enemy";
+        description = "A generic selectedEnemy";
     }
 }

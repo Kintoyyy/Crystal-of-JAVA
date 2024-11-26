@@ -13,7 +13,7 @@ import java.util.Arrays;
  * as well as mouse events.
  */
 public class ComponentManager {
-    private Handler handler;
+    private final Handler handler = Handler.getInstance();
     private final ArrayList<Component> components = new ArrayList<>();
 
     /**
@@ -22,7 +22,6 @@ public class ComponentManager {
      * @param viewManager the ViewManager instance used to get the handler and input listener.
      */
     public ComponentManager(ViewManager viewManager) {
-        setHandler(viewManager.getHandler());
         handler.getInputMouseListener().setComponentManager(this);
     }
 
@@ -93,14 +92,5 @@ public class ComponentManager {
      */
     public Handler getHandler() {
         return handler;
-    }
-
-    /**
-     * Sets the Handler for this ComponentManager.
-     *
-     * @param handler the Handler instance to set.
-     */
-    public void setHandler(Handler handler) {
-        this.handler = handler;
     }
 }

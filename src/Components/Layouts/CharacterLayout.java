@@ -12,11 +12,9 @@ import java.awt.event.MouseEvent;
 
 public class CharacterLayout extends Layout {
     private final CharacterManager characters;
-    private final Handler handler;
     public CharacterLayout(BattleManager battleManager) {
         super();
-        this.handler = battleManager.getHandler();
-        characters = battleManager.getCharacterManager();
+        characters = Handler.getInstance().getCharacterManager();
         initCharacterFrames();
     }
 
@@ -34,12 +32,11 @@ public class CharacterLayout extends Layout {
         }
     }
 
-
     @Override
     public void tick() {
         childComponents.forEach(Component::tick);
-
         for (int i = 0; i < characters.getCharacters().size(); i++) {
+            if(handler == null) return;
             if (handler.getKeyManager().isKeyPressed(String.valueOf(i + 1)).ignoreCaps()) {
                 characters.setPlayer(i);
                 // need to rerender the character layout

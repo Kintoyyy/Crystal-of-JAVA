@@ -11,6 +11,6 @@ public class Dragon extends Enemy {
         super(new Health(2500), new AttackPower(150, 200), new Defense(20), new FireBreath());
 
         name = "Dragon";
-        description = "A generic enemy";
+        description = "A generic selectedEnemy";
     }
 }

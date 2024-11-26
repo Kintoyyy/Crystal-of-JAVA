@@ -68,8 +68,8 @@ public class Timer {
      * @param delayInSeconds The delay in seconds before the timer should expire.
      * @return The current Timer instance.
      */
-    public Timer setDelay(int delayInSeconds) {
-        this.delayInTicks = delayInSeconds * tickRate;
+    public Timer setDelay(double delayInSeconds) {
+        this.delayInTicks = (int) (delayInSeconds * tickRate);
         return this;
     }
 

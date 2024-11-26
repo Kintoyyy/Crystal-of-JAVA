@@ -5,8 +5,8 @@ import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
 import Entities.Common.Mana;
-import Entities.Characters.Skills.Healer.*;
-import Entities.Characters.Skills.Skill;
+import Battle.Skills.Healer.*;
+import Battle.Skills.Skill;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 
@@ -18,7 +18,7 @@ public class Zeith extends Character {
         super("Zeith", 1, new Health(1000), new Mana(180), new AttackPower(90), new Defense(20), new ArrayList<>());
 
 
-        this.addSkill(new Healer(this));
+        this.addSkill(new Healer());
         this.addSkill(new Restore());
         this.addSkill(new DivineShield());
         this.addSkill(new Revive());

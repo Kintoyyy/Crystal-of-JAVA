@@ -10,7 +10,7 @@ public class DebugMode {
 
     public DebugMode(Handler handler) {
         handler.setDebugMode(this);
-        this.handler = handler;
+//        this.handler = Handler.getInstance();
 
     }
 

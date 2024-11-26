@@ -14,8 +14,7 @@ import static Views.enums.Views.*;
 
 public class Menu extends View {
 
-    public Menu(ViewManager viewManager) {
-        super(viewManager);
+    public Menu() {
         components.init(
                 createChangeViewButton("play", 330, GAME),
                 createChangeViewButton("setting", 400, SETTINGS),
@@ -39,6 +38,11 @@ public class Menu extends View {
     @Override
     public void tick() {
         components.tick();
+    }
+
+    @Override
+    public void setData(Object data) {
+
     }
 
     @Override

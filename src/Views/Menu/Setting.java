@@ -12,8 +12,8 @@ import java.awt.*;
 public class Setting extends View {
     private final BattleManager battleManager;
 
-    public Setting(ViewManager viewManager) {
-        super(viewManager);
+    public Setting() {
+//        super(viewManager);
         this.isOverlay = true;
         this.battleManager = handler.getBattleManager();
 
@@ -36,6 +36,11 @@ public class Setting extends View {
     @Override
     public void tick() {
         components.tick();
+    }
+
+    @Override
+    public void setData(Object data) {
+
     }
 
     @Override

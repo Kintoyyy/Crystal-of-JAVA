@@ -9,21 +9,20 @@ import java.awt.*;
 
 public class Pause extends View {
 
-    public Pause(ViewManager viewManager) {
-        super(viewManager);
+    public Pause() {
         this.isOverlay = true;
-        initComponents(viewManager);
+        initComponents();
     }
 
-    private void initComponents(ViewManager viewManager) {
+    private void initComponents() {
         components.init(
-                createResumeButton(viewManager),
+                createResumeButton(),
                 createChangeViewButton("Settings", 400, Views.SETTINGS),
                 createChangeViewButton("Menu", 470, Views.MENU)
         );
     }
 
-    private Button createResumeButton(ViewManager viewManager) {
+    private Button createResumeButton() {
         return (Button) new Button("Resume")
                 .setRightClickAction(() -> viewManager.removeView(Views.PAUSE))
                 .setLocation(400, 330);
@@ -43,5 +42,10 @@ public class Pause extends View {
     @Override
     public void tick() {
         components.tick();
+    }
+
+    @Override
+    public void setData(Object data) {
+
     }
 }

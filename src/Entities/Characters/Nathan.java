@@ -5,8 +5,8 @@ import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
 import Entities.Common.Mana;
-import Entities.Characters.Skills.*;
-import Entities.Characters.Skills.Archer.*;
+import Battle.Skills.*;
+import Battle.Skills.Archer.*;
 import Utils.SpriteSheet;
 import Utils.ImageUtils;
 
@@ -17,7 +17,7 @@ public class Nathan extends Character {
         // Pass all parameters, including playerSheet, to the superclass constructor
         super("Nathan", 1, new Health(900), new Mana(120), new AttackPower(140), new Defense(15), new ArrayList<>());
 
-        this.addSkill(new Archer(this));
+        this.addSkill(new Archer());
         this.addSkill(new PrecisionShot());
         this.addSkill(new MultiShot());
         this.addSkill(new PoisonArrow());

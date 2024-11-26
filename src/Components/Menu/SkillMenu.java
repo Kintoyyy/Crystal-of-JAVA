@@ -5,24 +5,20 @@ import Components.Component;
 import Components.Button.SkillButton;
 import Game.Handler;
 import Battle.BattleManager;
-import Entities.Characters.Skills.Skill;
+import Battle.Skills.Skill;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import Views.enums.Views;
-
 public class SkillMenu extends Menu {
     private ArrayList<Skill> skills;
     private final BattleManager battleManager;
-    private final Handler handler;
 
     public SkillMenu(BattleManager battleManager) {
         super();
         this.battleManager = battleManager;
-        this.handler = battleManager.getHandler();
-        this.skills = battleManager.getCharacterManager().getPlayer().getSkills();
+        this.skills = handler.getCharacterManager().getPlayer().getSkills();
         initCharacterFrames();
     }
 
@@ -34,10 +30,10 @@ public class SkillMenu extends Menu {
         for (Skill skill : skills) {
             SkillButton frame = (SkillButton) new SkillButton(skill)
                     .setRightClickAction(() -> {
-                        skill.attack(battleManager);
-                        System.out.println("Skill " + skill.getName() + " clicked");
+                        skill.execute(battleManager);
+//                        System.out.println("Skill " + skill.getName() + " clicked");
                     }).setLeftClickAction(() -> {
-                        System.out.println("View Skill " + skill.getName());
+//                        System.out.println("View Skill " + skill.getName());
                     });
             childComponents.add(frame);
         }

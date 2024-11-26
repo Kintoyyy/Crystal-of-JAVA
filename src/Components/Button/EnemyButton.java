@@ -26,12 +26,13 @@ public class EnemyButton extends Button {
         hideText();
         sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
 
-        buttonSheet[0] = sheet.crop(135, 0, 1, 1); // Default
-        buttonSheet[1] = sheet.crop(135, 0, 1, 1); // Hovered
-        buttonSheet[2] = sheet.crop(135, 0, 28, 28);  // Pressed
+        buttonSheet[0] = sheet.crop(106, 0, 1, 1); // default
+        buttonSheet[1] = sheet.crop(106, 0, 1, 1); // hovered
+        buttonSheet[2] = sheet.crop(106, 0, 28, 28);  // pressed
 
         setDimensions(28, 28);
         scale(3);
+
         this.enemy = enemy;
 
         animation = enemy.getAnimation();
@@ -44,14 +45,15 @@ public class EnemyButton extends Button {
     @Override
     public void tick() {
         super.tick();
+        healthBar.tick();
         if (animation != null) {
             animation.tick();
         }
-        healthBar.tick();
     }
 
     @Override
     public void render(Graphics g) {
+
         BufferedImage buttonImage = switch (state) {
             case HOVERED -> buttonSheet[1];
             case PRESSED -> buttonSheet[2];
@@ -64,7 +66,7 @@ public class EnemyButton extends Button {
         healthBar.setLocation(bounds.x + 10, bounds.y + 90);
         healthBar.render(g);
 
-        // Render enemy name above the frame
+        // Render selectedEnemy name above the frame
         if (enemy != null) {
             g.drawString(enemy.getName(), bounds.x, bounds.y - 10);
         }

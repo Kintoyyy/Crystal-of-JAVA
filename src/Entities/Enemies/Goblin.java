@@ -13,7 +13,7 @@ public class Goblin extends Enemy {
     public Goblin() {
         super(new Health(500), new AttackPower(50), new Defense(0));
         name = "Goblin";
-        description = "A generic enemy";
+        description = "A generic selectedEnemy";
         dodge = 0.2; // 20% chance to dodge attacks
 
         animation = new OrcAnimation(ImageUtils.loadImage("/Entities/Enemies/Goblins/Goblin_Maceman.png"));

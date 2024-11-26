@@ -22,12 +22,12 @@ public class HealthBar extends Menu {
     public HealthBar(Character player) {
         super();
         this.width = 21;
-        this.height = 10;
+        this.height = 7;
         this.player = player;
         // Initialize sprite sheet and UI components
         SpriteSheet sheet = new SpriteSheet(ImageUtils.loadImage("/ui/Battle_UI.png"));
 
-        frame = sheet.crop(84, 0, 21, 10);
+        frame = sheet.crop(84, 0, 21, 7);
         healthBar = sheet.crop(85, 11, 19, 2);
         manaBar = sheet.crop(85, 13, 19, 2);
         defenseBar = sheet.crop(85, 15, 19, 2);
@@ -75,7 +75,7 @@ public class HealthBar extends Menu {
         // Draw health and mana bars
         g.drawImage(healthBar, bounds.x + (scale), bounds.y + (scale), healthWidth, 2 * scale, null);
         g.drawImage(manaBar, bounds.x + (scale), bounds.y + (4 * scale), manaWidth, 2 * scale, null);
-        g.drawImage(defenseBar, bounds.x + (scale), bounds.y + (7 * scale), defenseWidth, 2 * scale, null);
+//        g.drawImage(defenseBar, bounds.x + (scale), bounds.y + (7 * scale), defenseWidth, 2 * scale, null);
     }
 
     @Override
