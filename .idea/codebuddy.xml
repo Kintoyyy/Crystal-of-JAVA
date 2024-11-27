@@ -20,8 +20,13 @@
         <option value="can you update it for me, adjust add a random id, ill adjust it later" />
         <option value="uhm just fill it update the worlds calss" />
         <option value="i mean on initalization i want o set an id to the entity new SkeletonSwordman(23) to be use as reference to the tmx file" />
+        <option value="show the prebattle dalog befoare starting a battle use the component to show it on top" />
+        <option value="also add the post battle dailog" />
+        <option value="show the prebattle dalog before starting a battle use the component to show it on top and alos show the post battle dialogs" />
+        <option value="fix the missing methods in text class" />
+        <option value="fix the             Battle currentBattle = handler.getWorldManager().getCurrentWorld().getCurrentBattle();&#10;&#10;&#10;it prints null and also the text doesnt show up" />
       </list>
     </option>
-    <option name="selectedModel" value="codebuddy:GPT_4_Omni_Mini_V7" />
+    <option name="selectedModel" value="codebuddy:CLAUDE_3.5_SONNET_V7" />
   </component>
 </project>

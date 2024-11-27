@@ -12,6 +12,7 @@ public class Text extends UIComponent {
 
     private String fullText;
     private String displayedText = "";
+    private boolean isTypingComplete = false;
     private Alignment alignment = Alignment.LEFT;
     private Color color = Color.WHITE;
     private Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
@@ -53,15 +54,39 @@ public class Text extends UIComponent {
         return this;
     }
 
+    public boolean isTypingComplete() {
+        return !typingEffect || currentIndex >= fullText.length();
+    }
+
+    public void resetTyping() {
+        currentIndex = 0;
+        displayedText = "";
+        lastTick = System.currentTimeMillis();
+    }
+
+    public String getDisplayedText() {
+        return displayedText;
+    }
+
+    public String getFullText() {
+        return fullText;
+    }
+
+    public void setTypingSpeed(int speed) {
+        this.typingSpeed = speed;
+    }
+
     @Override
     public void tick() {
         if (typingEffect && System.currentTimeMillis() - lastTick >= typingSpeed) {
             if (currentIndex < fullText.length()) {
                 displayedText += fullText.charAt(currentIndex++);
                 lastTick = System.currentTimeMillis();
+                isTypingComplete = (currentIndex >= fullText.length());
             }
         } else if (displayedText.isEmpty()) {
             displayedText = fullText;
+            isTypingComplete = true;
         }
     }
 
@@ -126,5 +151,6 @@ public class Text extends UIComponent {
 
     public void setText(String text) {
         this.fullText = text;
+        if (typingEffect) resetTyping();
     }
 }

@@ -36,7 +36,6 @@ public class Dialog extends UIComponent {
 
     @Override
     public void tick() {
-//        tickChildren();
         text.tick();
     }
 
@@ -52,10 +51,17 @@ public class Dialog extends UIComponent {
 
     @Override
     public void onClick(MouseEvent e) {
-        // Define behavior on dialog click
+        if (text.isTypingComplete()) {
+            text.resetTyping();
+        }
     }
 
     public Text getTextObj() {
         return text;
+    }
+    
+    public void setText(String newText) {
+        text.setText(newText);
+        text.resetTyping();
     }
 }
