@@ -11,12 +11,10 @@ import Map.Tile.Tile;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.Comparator;
 
 public class Movement {
     private final int width, height; // Dimensions of the character
     private float x, y; // The current position of the character on the screen
-    public static final float DEFAULT_SPEED = 4.0f; // Default movement speed
     protected float speed; // Speed at which the character moves
     private static float xMove, yMove; // Movement offsets for the character
     private Animation animation; // Animation object to handle character's movements
@@ -38,7 +36,6 @@ public class Movement {
         this.y = 0;
         this.width = 128;
         this.height = 128;
-        speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
     }
@@ -46,6 +43,7 @@ public class Movement {
     public void tick() {
         animation = characterManager.getPlayer().getAnimation();
         bounds = characterManager.getPlayer().getBounds();
+        speed = characterManager.getPlayer().getSpeed();
         camera.centerOnEntity(this);
         animation.tick();
         getInput();

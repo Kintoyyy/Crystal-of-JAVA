@@ -40,6 +40,7 @@ public abstract class Character extends Entity {
     protected int experience;          // Character's experience points
     protected double dodgeRate = 0.0;  // Character's dodge rate
     protected double dodgeChance = 0.0; // Character's chance to dodge attacks
+    protected float speed = 4.0F;  // Character's movement speed
 
     /**
      * Constructs a new Character with the specified attributes.
@@ -203,6 +204,10 @@ public abstract class Character extends Entity {
 
     public void takeDamage(double damage) {
         // get effect first adjust the
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 
     private final List<Effect> effects = new ArrayList<Effect>();
