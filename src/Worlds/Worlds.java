@@ -63,9 +63,7 @@ public class Worlds {
                                 "You have earned 10 gold and 10 exp!",
                                 "You have unlocked the next area!"
                         ),
-                        new Battle("BATTLE3").enemies(
-                                new SkeletonSwordman("SKELETON_SWORDMAN_5"),
-                                new SkeletonBowman("SKELETON_BOWMAN_3"),
+                        new Battle("BATTLE4").enemies(
                                 new SkeletonBoss("SKELETON_BOSS")
                         ).dialogBefore(
                                 "You have encountered a Goblin!",

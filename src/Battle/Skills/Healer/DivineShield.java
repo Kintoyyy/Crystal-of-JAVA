@@ -14,6 +14,6 @@ public class DivineShield extends Skill {
 
     @Override
     public void useSkill() {
-
+        // add
     }
 }

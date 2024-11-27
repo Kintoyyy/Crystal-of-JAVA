@@ -106,7 +106,6 @@ public class BattleManager {
         }
 
 
-
         switch (strategy.toLowerCase()) {
             case "random":
 
@@ -143,6 +142,15 @@ public class BattleManager {
     public void tick() {
         timer.update(); // Update the timer regardless
         // Check if all enemies are dead
+
+        if (enemyManager.isAllEnemiesDead() && !timer.isActive()) {
+            System.out.println("All enemies are dead");
+            timer.reset();
+            timer.start().setDelay(0.5).setAction(() -> {
+                viewManager.setView(Views.GAME);
+            });
+        }
+
         if (enemyManager.isEmpty()) {
             System.out.println("Battle ended");
             viewManager.setView(Views.GAME);
