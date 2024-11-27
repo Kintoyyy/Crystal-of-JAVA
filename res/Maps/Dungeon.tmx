@@ -268,7 +268,7 @@
   <object id="36" type="COLLISION" x="81.2727" y="332.182" width="14.1818" height="18.3636"/>
   <object id="37" type="COLLISION" x="49.2727" y="299.636" width="13.8182" height="18"/>
   <object id="38" type="COLLISION" x="198.727" y="343.727" width="3.72727" height="6.63636"/>
-  <object id="39" name="KAI" type="NPC" x="1058.5" y="276.25">
+  <object id="39" name="KAI" type="NPC" x="1041.83" y="276.917">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>

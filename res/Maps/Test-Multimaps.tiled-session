@@ -62,11 +62,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 1,
+            "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 437.5,
-                "y": 222
+                "x": 992.4999999999999,
+                "y": 241
             }
         },
         "Dungeon.tmx#Dungeon_1": {
@@ -170,11 +170,11 @@
                 6,
                 10
             ],
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 1131,
-                "y": 288
+                "x": 821.5,
+                "y": 270
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -191,11 +191,11 @@
                 10,
                 9
             ],
-            "scale": 0.75,
-            "selectedLayer": 6,
+            "scale": 1,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 425.9999999999999,
-                "y": 392
+                "x": 1133.5,
+                "y": 209
             }
         },
         "Snow.tmx#Dimensional_Portal": {

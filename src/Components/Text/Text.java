@@ -24,7 +24,7 @@ public class Text extends UIComponent {
 
     public Text(String text) {
         super();
-        this.width = 800;  // Increased width to accommodate more text
+        this.width = 700;  // Increased width to accommodate more text
         this.fullText = text;
         this.displayedText = text;  // Initialize displayed text immediately
     }
