@@ -44,10 +44,10 @@ public class EntityDialog extends UIComponent {
     }
 
     private void updatePosition() {
-        // Position dialog above entity
+        // Center the dialog above the entity
         Point entityScreenPos = entity.getLocation();
-        this.x = entityScreenPos.x - DIALOG_WIDTH / 2;
-        this.y = entityScreenPos.y - DIALOG_HEIGHT - 20; // 20 pixels above entity
+        this.x = entityScreenPos.x - (DIALOG_WIDTH / 2);
+        this.y = entityScreenPos.y - DIALOG_HEIGHT - 40; // Position higher above entity
     }
 
     @Override

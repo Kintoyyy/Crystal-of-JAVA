@@ -72,6 +72,15 @@ public class World {
         return npcs;
     }
 
+    public Entity findNpcById(int id) {
+        for (Entity npc : npcs) {
+            if (npc.getObject() != null && npc.getObject().getId() == id) {
+                return npc;
+            }
+        }
+        return null;
+    }
+
     public void renderEntities(Graphics g, float xOffset, float yOffset, Movement playerMovement) {
         // Create a temporary class to hold renderable entities
         class RenderableEntity {
@@ -122,6 +131,7 @@ public class World {
     }
 
     private void renderEntity(Graphics g, Entity entity, Point renderPos) {
+        entity.getDetectionZone().render(g);
         // Update render method to use the passed position
         int x = renderPos.x;
         int y = renderPos.y;

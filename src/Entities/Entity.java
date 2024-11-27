@@ -9,10 +9,10 @@ import Entities.Common.Defense;
 import Entities.Common.Health;
 import Game.Handler;
 import Map.Object.Object;
+import Map.Movement.DetectionZone;
 import Components.Dialog.EntityDialog;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public abstract class Entity {
     protected int width, height; // Dimensions of the entity
     protected Point location = new Point(); // Location of the entity
     protected Object object;
-    protected Ellipse2D.Float detectionCircle;
+    protected DetectionZone detectionZone;
     protected List<String> dialogLines = new ArrayList<>();
     public EntityDialog dialog;
 
@@ -56,15 +56,12 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
-
-        float radius = Math.max(width, height) * 1.5f; // Example: 1.5 times the larger dimension
-        this.detectionCircle = new Ellipse2D.Float(x - radius / 2, y - radius / 2, radius, radius);
-        this.dialog = new EntityDialog(this, dialogLines);
+        this.detectionZone = new DetectionZone(x, y, DetectionZone.DEFAULT_RADIUS);
+        this.dialog = (EntityDialog) new EntityDialog(this, dialogLines).setLocation(400,400);
     }
 
     public void updateDetectionCircle() {
-        float radius = (float) detectionCircle.getWidth();
-        detectionCircle.setFrame(x - radius / 2, y - radius / 2, radius, radius);
+        detectionZone.update(x, y);
     }
 
     /**
@@ -163,7 +160,7 @@ public abstract class Entity {
     public void setDialogLines(String... lines) {
         this.dialogLines = List.of(lines);
         if (dialog != null) {
-            dialog = new EntityDialog(this, List.of(lines));
+            dialog = (EntityDialog) new EntityDialog(this, List.of(lines)).setLocation(400,400);
         }
     }
 
@@ -190,8 +187,8 @@ public abstract class Entity {
         }
     }
 
-    public Ellipse2D.Float getDetectionCircle() {
-        return detectionCircle;
+    public DetectionZone getDetectionZone() {
+        return detectionZone;
     }
 
     public void setLocation(Point location) {

@@ -5,6 +5,7 @@ import Entities.Entity;
 import Game.Handler;
 import Map.Object.Object;
 import Map.Object.CLASS;
+import Map.Object.Properties;
 import Views.Game.DialogScene;
 import Views.ViewManager;
 import Worlds.Battle;
@@ -51,8 +52,9 @@ public class Collision {
 
             // Check for entity interactions
             for (Entity entity : map.getCurrentWorld().getNpcs()) {
-                if (entity.getDetectionCircle().intersects(collisionBounds)) {
-                    System.out.println("Collision with entity: " + entity.getName());
+//                System.out.println("Checking entity: " + entity.getName());
+                if (entity.getDetectionZone().intersects(collisionBounds)) {
+//                    System.out.println("Collision with entity: " + entity.getName());
                     if (input.isKeyPressed("E").exactMatch()) {
                         entity.showDialog();
                         return true;
@@ -65,17 +67,19 @@ public class Collision {
                     System.out.println("Changing world to " + object.getName());
                     map.changeWorld(object.getName());
                 }
-                case DIALOG -> {
-
-//                    ArrayList<String> preBattleDialogs = new ArrayList<>();
-//
-//                    preBattleDialogs.add("Hello Traveler! ");
-//                    preBattleDialogs.add("asdasdasd! ");
-//                    preBattleDialogs.add("asdasd! ");
-//                    preBattleDialogs.add("das! ");
-//                    preBattleDialogs.add("dadbdf ");
-//
-//                    viewManager.customView(new DialogScene(preBattleDialogs));
+                case DIALOG_TRIGGER -> {
+                    System.out.println("Displaying dialog for object: " + object.getName());
+                    if (object.getClassType() == CLASS.DIALOG_TRIGGER) {
+                        Properties npcProp = object.getProperty("NPC");
+                        if (npcProp != null) {
+                            int npcId = Integer.parseInt(npcProp.value());
+                            Entity npc = map.getCurrentWorld().findNpcById(npcId);
+                            System.out.println("Found NPC: " + npc.getName());
+                            if (npc != null && input.isKeyPressed("E").ignoreCaps()) {
+                                npc.showDialog();
+                            }
+                        }
+                    }
                 }
                 case BATTLE -> {
                     try {
@@ -86,7 +90,7 @@ public class Collision {
                     }
                 }
                 default -> {
-                    System.out.println("Collision with object: " + object.getName() + " Type: " + object.getClassType());
+//                    System.out.println("Collision with object: " + object.getName() + " Type: " + object.getClassType());
                 }
             }
         }

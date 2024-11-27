@@ -16,7 +16,8 @@ public class Worlds {
         this.setWorlds(
                 new World("FOREST", "res/Maps/Forest.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
-                                new SkeletonSwordman("SKELETON_SWORDMAN_1")
+                                new SkeletonSwordman("SKELETON_SWORDMAN_1"),
+                                new Kai()
                         ).dialogBefore(
                                 "You have encountered a Goblin!",
                                 "Prepare for battle!",

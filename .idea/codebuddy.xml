@@ -11,6 +11,9 @@
         <option value="its not working no showing anything, how do i trigger it? how do i test it?" />
         <option value="refactor the entity detection circle, also render the circle for debugging purpose. the dailog doesnt show" />
         <option value="change the     protected Ellipse2D.Float detectionCircle;&#10;&#10;find a better way for detection all entity have default interaction circle size" />
+        <option value="i want to use the DIALOG_TRIGGER to trigger the dialog of the npc" />
+        <option value="i want to use the DIALOG_TRIGGER to trigger the dialog of the npc. use the tmx file. please refactor the whole codebase if needed" />
+        <option value="how about use the object dialog to trigger the dialog for npc it has the id for the npc, adjust the code accordingly&#10;&#10;  &lt;object id=&quot;39&quot; name=&quot;DAILOG&quot; type=&quot;DIALOG_TRIGGER&quot; x=&quot;330.5&quot; y=&quot;106.583&quot; width=&quot;64.292&quot; height=&quot;62.75&quot;&gt;&#10;   &lt;properties&gt;&#10;    &lt;property name=&quot;NPC&quot; type=&quot;object&quot; value=&quot;123&quot;/&gt;&#10;   &lt;/properties&gt;&#10;   &lt;ellipse/&gt;&#10;  &lt;/object&gt;&#10;&#10;&#10;" />
       </list>
     </option>
     <option name="selectedModel" value="codebuddy:CLAUDE_3.5_SONNET_V7" />

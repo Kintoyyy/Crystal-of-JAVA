@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="141">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="32" height="96" tilewidth="16" tileheight="16" infinite="0" nextlayerid="22" nextobjectid="145">
  <tileset firstgid="1" name="Dark_Tiles_1" tilewidth="16" tileheight="16" tilecount="80" columns="8">
   <image source="../Tiles/Grass/Dark_Tiles_1.png" width="128" height="160"/>
   <wangsets>
@@ -1017,7 +1017,10 @@
     <property name="COLLISION" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="39" name="KAI1" type="DIALOG" x="335.75" y="114.083" width="58.167" height="57.25">
+  <object id="39" name="DAILOG" type="DIALOG_TRIGGER" x="330.5" y="106.583" width="64.292" height="62.75">
+   <properties>
+    <property name="NPC" type="object" value="123"/>
+   </properties>
    <ellipse/>
   </object>
   <object id="42" name="SKELETON_SWORDMAN_1" type="NPC" x="92.697" y="454.598">
@@ -1123,7 +1126,7 @@
     <property name="COLLISION" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="123" name="KAI" type="NPC" x="364.182" y="145.273">
+  <object id="123" name="KAI" type="NPC" x="362.307" y="139.023">
    <point/>
   </object>
   <object id="131" name="SKELETON_SWORDMAN_2" type="NPC" x="418.97" y="621.455">
@@ -1145,42 +1148,6 @@
    <point/>
   </object>
   <object id="134" name="SKELETON_BOWMAN_3" type="NPC" x="235" y="1457">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="135" name="SKELETON_BOWMAN_2" type="NPC" x="271" y="125.5">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="136" name="SKELETON_BOWMAN_2" type="NPC" x="233.5" y="111">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="137" name="SKELETON_BOWMAN_2" type="NPC" x="230" y="138.5">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="138" name="SKELETON_BOWMAN_2" type="NPC" x="271.5" y="157">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="139" name="SKELETON_BOWMAN_2" type="NPC" x="312" y="112.5">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="140" name="SKELETON_BOWMAN_2" type="NPC" x="313.5" y="148.5">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>

@@ -191,8 +191,8 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 285.5,
-                "y": 470
+                "x": 47.5,
+                "y": 72
             }
         },
         "Snow.tmx#Outdoor_Decor": {
@@ -262,7 +262,7 @@
         "World3.tmx"
     ],
     "project": "Test-Multimaps.tiled-project",
-    "property.type": "bool",
+    "property.type": "object",
     "recentFiles": [
         "Snow.tmx",
         "Forest.tmx",

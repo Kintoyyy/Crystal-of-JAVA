@@ -1,5 +1,6 @@
 package Map.Object;
 
+import Entities.Entity;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -18,6 +19,7 @@ public class Object {
     private final List<Properties> properties = new ArrayList<>();
     private int[] polygonX = new int[0];
     private int[] polygonY = new int[0];
+    private Entity linkedNpc;
 
     // Constants
     private static final int SCALING_FACTOR = 4;
@@ -294,5 +296,13 @@ public class Object {
             }
         }
         return false;
+    }
+
+    public void setLinkedNpc(Entity npc) {
+        this.linkedNpc = npc;
+    }
+
+    public Entity getLinkedNpc() {
+        return linkedNpc;
     }
 }
