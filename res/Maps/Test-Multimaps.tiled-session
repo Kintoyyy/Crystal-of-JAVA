@@ -97,16 +97,19 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 4,
+            "scale": 2,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 273.375,
-                "y": 743
+                "x": 330.75,
+                "y": 197
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "Forest.tmx#Dimensional_Portal": {
+            "scaleInDock": 1
         },
         "Forest.tmx#Grass_Tiles_1": {
             "scaleInDock": 1
@@ -167,11 +170,11 @@
                 6,
                 10
             ],
-            "scale": 0.75,
+            "scale": 0.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 457.9999999999999,
-                "y": 214.66666666666669
+                "x": 1131,
+                "y": 288
             }
         },
         "Lava.tmx#Dimensional_Portal": {
@@ -188,12 +191,15 @@
                 10,
                 9
             ],
-            "scale": 3,
-            "selectedLayer": 4,
+            "scale": 0.75,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 247.83333333333331,
-                "y": 150.33333333333334
+                "x": 425.9999999999999,
+                "y": 392
             }
+        },
+        "Snow.tmx#Dimensional_Portal": {
+            "scaleInDock": 1
         },
         "Snow.tmx#Outdoor_Decor": {
             "scaleInDock": 1,
@@ -264,8 +270,8 @@
     "project": "Test-Multimaps.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "Snow.tmx",
         "Forest.tmx",
+        "Snow.tmx",
         "Dungeon.tmx",
         "Lava.tmx",
         "World3.tmx",

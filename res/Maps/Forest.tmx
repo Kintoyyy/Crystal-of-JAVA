@@ -1023,20 +1023,20 @@
   <object id="39" name="KAI1" type="DIALOG" x="295" y="78.8333" width="144.667" height="142.5">
    <ellipse/>
   </object>
-  <object id="42" name="Skeleton Warrior" type="NPC" x="79.9167" y="456.348">
+  <object id="42" name="SKELETON_SWORDMAN_1" type="NPC" x="88.5834" y="460.348">
    <properties>
     <property name="DIRECTION" value="RIGHT"/>
    </properties>
    <point/>
   </object>
   <object id="43" name="BATTLE1" type="BATTLE" x="26.125" y="428.625" width="155" height="48"/>
-  <object id="44" name="SKELETON1" type="NPC" x="464.25" y="614.75">
+  <object id="44" name="SKELETON_BOWMAN_1" type="NPC" x="476.917" y="621.417">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
    <point/>
   </object>
-  <object id="45" name="SKELETON1" type="NPC" x="413.864" y="617.818">
+  <object id="45" name="SKELETON_SWORDMAN_2" type="NPC" x="411.864" y="621.818">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
@@ -1076,25 +1076,25 @@
    <ellipse/>
   </object>
   <object id="10" x="196.667" y="1366" width="166" height="110.333"/>
-  <object id="65" name="SKELETON1" type="NPC" x="430.667" y="1000">
+  <object id="65" name="SKELETON_SWORDMAN_4" type="NPC" x="430.667" y="1000">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
    <point/>
   </object>
-  <object id="66" name="SKELETON1" type="NPC" x="372.5" y="1027.83">
+  <object id="66" name="SKELETON_BOWMAN_2" type="NPC" x="372.5" y="1027.83">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
    <point/>
   </object>
-  <object id="67" name="SKELETON1" type="NPC" x="329.583" y="954.333">
+  <object id="67" name="SKELETON_SWORDMAN_3" type="NPC" x="329.583" y="954.333">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
    <point/>
   </object>
-  <object id="68" name="SKELETON1" type="NPC" x="288.5" y="1449">
+  <object id="68" name="SKELETON_BOSS" type="NPC" x="288.5" y="1449">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>

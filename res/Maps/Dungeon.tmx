@@ -241,7 +241,6 @@
   <object id="5" name="FOREST" type="TELEPORT" x="117.758" y="378.375" width="14" height="8.5"/>
   <object id="6" name="ICE" type="TELEPORT" x="152.425" y="377.125" width="13" height="9.16667"/>
   <object id="7" name="LAVA" type="TELEPORT" x="189.576" y="377.974" width="10.6667" height="8.83333"/>
-  <object id="8" name="DIALOG" type="DIALOG" x="399" y="229" width="32" height="94"/>
   <object id="10" name="1" type="SPAWN" x="143" y="271.25">
    <point/>
   </object>
@@ -269,13 +268,7 @@
   <object id="36" type="COLLISION" x="81.2727" y="332.182" width="14.1818" height="18.3636"/>
   <object id="37" type="COLLISION" x="49.2727" y="299.636" width="13.8182" height="18"/>
   <object id="38" type="COLLISION" x="198.727" y="343.727" width="3.72727" height="6.63636"/>
-  <object id="39" name="SKELETON" type="NPC" x="1081" y="261">
-   <properties>
-    <property name="DIRECTION" value="LEFT"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="40" name="SKELETON" type="NPC" x="1076" y="294">
+  <object id="39" name="KAI" type="NPC" x="1058.5" y="276.25">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
