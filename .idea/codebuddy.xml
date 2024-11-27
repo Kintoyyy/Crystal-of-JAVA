@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CodebuddyPersistentProjectState">
+    <option name="autoFileMode" value="CURRENT_OPEN" />
     <option name="autoFileSelection" value="true" />
     <option name="promptHistory">
       <list>
@@ -32,8 +33,15 @@
         <option value="is doesnt show" />
         <option value="get the position in Enemylayout or CharacterLayout," />
         <option value="the damage should appear on top of the buttons" />
+        <option value="after pressing the play it should show a dialog scene first, make a manager for it with a parameter for background image ang text to display make it flexible so i can add as much of scenes i want, when the button next is pressed should cycle to the next scene" />
+        <option value="when i press the play in the menu it should not directly go to the game instead, it will play a scene, i want it to be able to add as much scene as i want it should have a parament of string path of the background image and the text in will display, the next button will cycle to the next scene" />
+        <option value="how to set the scenes" />
+        <option value="create a pregame dialogs/scene for story, after pressing the play in menu it will short a scene and be able to next" />
+        <option value="the pre game scene doesnt show" />
+        <option value="fix this iwant to be able to set a text to display and path of its background" />
+        <option value="update this code i want to add in the preGameDialogs a string of text and the background path" />
       </list>
     </option>
-    <option name="selectedModel" value="codebuddy:CLAUDE_3.5_SONNET_V7" />
+    <option name="selectedModel" value="codebuddy:CLAUDE_3_HAIKU_V7" />
   </component>
 </project>

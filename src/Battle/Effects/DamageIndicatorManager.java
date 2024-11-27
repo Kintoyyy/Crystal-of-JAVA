@@ -35,7 +35,12 @@ public class DamageIndicatorManager {
 
     public void render(Graphics g) {
         for (DamageIndicator indicator : indicators) {
-            indicator.render(g);
+            if(indicator.isDone()) continue;
+            try {
+                indicator.render(g);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

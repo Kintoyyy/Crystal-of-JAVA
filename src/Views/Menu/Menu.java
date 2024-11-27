@@ -17,7 +17,7 @@ public class Menu extends View {
 
     public Menu() {
         components.addComponents(
-                createChangeViewButton("play", 330, GAME),
+                createChangeViewButton("play", 330, DIALOG),
                 createChangeViewButton("setting", 400, SETTINGS),
                 new Button("Exit")
                         .setEventListener(new ComponentEventListener() {

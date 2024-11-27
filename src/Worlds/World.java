@@ -149,7 +149,7 @@ public class World {
         int playerY = (int) handler.getMovement().getPlayerScreenLocation().y;
 
         // Draw a line to visualize the connection between player and enemy
-        g.drawLine(playerX, playerY, x, y);
+//        g.drawLine(playerX, playerY, x, y);
 
         // Determine direction to face
         int dx = playerX - x;

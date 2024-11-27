@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 
 public class Dialog extends UIComponent {
     private Text text;
-    private final BufferedImage dialogImage;
+    public final BufferedImage dialogImage;
 
     private boolean renderText = true;
 
@@ -64,7 +64,7 @@ public class Dialog extends UIComponent {
     public Text getTextObj() {
         return text;
     }
-    
+
     public void setText(String newText) {
         text.setText(newText);
         text.resetTyping();
