@@ -1075,7 +1075,7 @@
   <object id="61" name="DIALOG2" type="DIALOG" x="82.8333" y="696.5" width="111" height="117">
    <ellipse/>
   </object>
-  <object id="10" x="240.667" y="1404.67" width="106.667" height="60.6663"/>
+  <object id="10" name="BATTLE4" type="BATTLE" x="240.667" y="1404.67" width="106.667" height="60.6663"/>
   <object id="65" name="SKELETON_SWORDMAN_4" type="NPC" x="430" y="977.667">
    <properties>
     <property name="DIRECTION" value="LEFT"/>

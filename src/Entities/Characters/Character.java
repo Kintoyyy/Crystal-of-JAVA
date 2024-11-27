@@ -5,6 +5,7 @@ import Entities.Common.*;
 import Battle.Effects.Effect;
 import Entities.Entity;
 import Battle.Skills.Skill;
+import Game.Handler;
 import Utils.ImageUtils;
 
 import java.awt.*;
@@ -31,7 +32,7 @@ import java.util.List;
  * @see Energy
  */
 public abstract class Character extends Entity {
-
+    private Handler handler = Handler.getInstance();
     // Character attributes
     protected Mana mana;               // Character's mana
     protected Energy energy;           // Character's energy
@@ -203,7 +204,16 @@ public abstract class Character extends Entity {
 
 
     public void takeDamage(double damage) {
-        // get effect first adjust the
+        if(health.isDead()) return;
+        if (Math.random() < getDodge()) {
+            handler.getBattleManager().getDamageIndicatorManager()
+                .addDodgeIndicator((float) getDisplayX(), (float) (getDisplayY() - 20));
+            return;
+        }
+        
+        handler.getBattleManager().getDamageIndicatorManager()
+            .addDamageIndicator(damage, (float) getDisplayX(), (float) (getDisplayY() - 20));
+        health.takeDamage(damage);
     }
 
     public float getSpeed() {

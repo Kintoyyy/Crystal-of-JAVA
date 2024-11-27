@@ -3,6 +3,7 @@ package Battle;
 import Entities.Characters.Character;
 import Entities.Characters.CharacterManager;
 import Battle.Effects.EffectsManager;
+import Battle.Effects.DamageIndicatorManager;
 import Entities.Enemies.Enemy;
 import Entities.Enemies.EnemyManager;
 import Entities.Entity;
@@ -23,6 +24,7 @@ public class BattleManager {
     private final EnemyManager enemyManager;
 
     private final EffectsManager effectsManager;
+    private final DamageIndicatorManager damageIndicatorManager;
 
     private final Timer timer = new Timer();
     private boolean isDataLoaded = false;
@@ -33,6 +35,7 @@ public class BattleManager {
         this.handler = handler;
 
         this.effectsManager = new EffectsManager();
+        this.damageIndicatorManager = new DamageIndicatorManager();
         this.enemyManager = new EnemyManager(handler);
         this.characterManager = handler.getCharacterManager();
 
@@ -81,12 +84,18 @@ public class BattleManager {
                 return;
             }
 
-            double damage = currentEnemy.attack(target);
+            if (currentEnemy.getHealth().isDead()) {
+                setCurrentEnemy(enemyManager.getNextEnemyIndex());
+            }
 
-            if (damage == 0) {
-                System.out.println("Enemy missed!");
-            } else {
-                System.out.println("Enemy dealt " + damage + " damage to " + target.getName() + "!");
+            if (!currentEnemy.getHealth().isDead()) {
+                double damage = currentEnemy.attack(target);
+
+                if (damage == -1) {
+                    damageIndicatorManager.addDodgeIndicator((float) target.getDisplayX(), (float) (target.getDisplayY() - 20));
+                } else {
+                    damageIndicatorManager.addDamageIndicator(damage, (float) target.getDisplayX(), (float) (target.getDisplayY() - 20));
+                }
             }
 
             isPlayersTurn = true;
@@ -143,6 +152,7 @@ public class BattleManager {
 
     public void tick() {
         timer.update(); // Update the timer regardless
+        damageIndicatorManager.update();
         // Check if all enemies are dead
 
         if (enemyManager.isAllEnemiesDead() && !timer.isActive()) {
@@ -223,5 +233,9 @@ public class BattleManager {
 
     public Double getTimer() {
         return timer.getTime();
+    }
+
+    public DamageIndicatorManager getDamageIndicatorManager() {
+        return damageIndicatorManager;
     }
 }

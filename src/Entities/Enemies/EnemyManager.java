@@ -57,4 +57,8 @@ public class EnemyManager {
     public void clearEnemies() {
         enemies.clear();
     }
+
+    public int getNextEnemyIndex() {
+        return currentEnemyIndex + 1 % enemies.size();
+    }
 }

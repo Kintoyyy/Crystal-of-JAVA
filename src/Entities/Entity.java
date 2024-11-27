@@ -36,6 +36,7 @@ public abstract class Entity {
     protected Rectangle bounds; // Bounding box for collision detection
 
     protected float x, y; // Position of the entity
+    protected double displayX, displayY;  // For UI positioning
     protected int width, height; // Dimensions of the entity
     protected Point location = new Point(); // Location of the entity
     protected Object object;
@@ -193,5 +194,22 @@ public abstract class Entity {
 
     public void setLocation(Point location) {
         this.location = location;
+    }
+    
+    public void setPosition(double x, double y) {
+        this.displayX = x;
+        this.displayY = y;
+    }
+    
+    public double[] getPosition() {
+        return new double[]{displayX, displayY};
+    }
+
+    public double getDisplayX() {
+        return displayX;
+    }
+
+    public double getDisplayY() {
+        return displayY;
     }
 }

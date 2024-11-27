@@ -54,6 +54,10 @@ public class EnemyButton extends Button {
 
     @Override
     public void render(Graphics g) {
+        // Get button position for damage indicator positioning
+        if (enemy != null) {
+            enemy.setPosition(this.x + width / 2, this.y + height / 2);
+        }
 
         BufferedImage buttonImage = switch (state) {
             case HOVERED -> buttonSheet[1];

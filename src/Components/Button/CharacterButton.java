@@ -51,6 +51,10 @@ public class CharacterButton extends Button {
 
     @Override
     public void render(Graphics g) {
+        if (player != null) {
+            player.setPosition(this.x + width / 2, this.y + height / 2);
+        }
+
         BufferedImage buttonImage = switch (state) {
             case HOVERED -> buttonSheet[1];
             case PRESSED -> buttonSheet[2];
@@ -61,7 +65,7 @@ public class CharacterButton extends Button {
 
         if (characterAnimation != null) {
 
-            if(player.getHealth().isDead()){
+            if (player.getHealth().isDead()) {
                 g.drawImage(characterAnimation.getFrame(TYPE.DEAD), this.x - 4, this.y + 2, width + 10, height + 10, null);
             } else {
                 g.drawImage(characterAnimation.getFrame(TYPE.IDLE, DIRECTION.RIGHT), this.x - 4, this.y + 2, width + 10, height + 10, null);
