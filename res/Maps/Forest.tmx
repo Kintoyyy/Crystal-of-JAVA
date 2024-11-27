@@ -1045,9 +1045,6 @@
   <object id="46" name="INTIAL" type="SPAWN" x="150.364" y="89.4545">
    <point/>
   </object>
-  <object id="51" name="BATTLE1" type="BATTLE" x="170.924" y="85.2727" width="13.1818" height="10.6364"/>
-  <object id="53" name="BATTLE2" type="BATTLE" x="253.227" y="65.5909" width="13.1818" height="10.6364"/>
-  <object id="54" name="BATTLE3" type="BATTLE" x="287.409" y="65.0454" width="13.1818" height="10.6364"/>
   <object id="56" type="NONE" x="210.182" y="12.1818">
    <properties>
     <property name="COLLISION" type="bool" value="true"/>
@@ -1075,7 +1072,7 @@
   <object id="61" name="DIALOG2" type="DIALOG" x="82.8333" y="696.5" width="111" height="117">
    <ellipse/>
   </object>
-  <object id="10" x="240.667" y="1404.67" width="106.667" height="60.6663"/>
+  <object id="10" name="BATTLE4" type="BATTLE" x="240.667" y="1404.67" width="106.667" height="60.6663"/>
   <object id="65" name="SKELETON_SWORDMAN_4" type="NPC" x="430" y="977.667">
    <properties>
     <property name="DIRECTION" value="LEFT"/>

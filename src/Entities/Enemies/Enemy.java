@@ -4,8 +4,10 @@ import Animations.Entities.EntityAnimation;
 import Entities.Characters.Character;
 import Entities.Common.*;
 import Battle.Effects.Effect;
+import Battle.Effects.DamageIndicatorManager;
 import Entities.Enemies.SpecialSkill.SpecialSkill;
 import Entities.Entity;
+import Game.Handler;
 import Utils.ImageUtils;
 
 import java.awt.*;
@@ -13,44 +15,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Abstract class representing an selectedEnemy entity in the game.
+ * Abstract class representing an enemy entity in the game.
  * Enemies have health, attack power, defense, and a special skill that can be used under certain conditions.
  * The class provides methods for performing regular and special attacks.
  */
 public abstract class Enemy extends Entity {
-
-    protected SpecialSkill specialSkill; // The special skill that the selectedEnemy can use
-
-    // Base chance and parameters for damage calculation
+    private Handler handler = Handler.getInstance();
+    protected SpecialSkill specialSkill; // The special skill that the enemy can use
     protected double specialSkillChance = 0.05; // 5% base chance for special attack
     protected double minDamage = 0.5; // Minimum damage multiplier
     protected double maxDamage = 1.5; // Maximum damage multiplier
     protected double lowHealthThreshold = 0.3; // Threshold to consider health as "low" (30%)
-    protected double dodge = 0.05; // Chance for the selectedEnemy to dodge attacks
+    protected double dodge = 0.05; // Chance for the enemy to dodge attacks
     protected String key;
 
     /**
-     * Constructs an selectedEnemy with health, attack power, defense, and a special skill.
+     * Constructs an enemy with health, attack power, defense, and a special skill.
      *
-     * @param health       The health of the selectedEnemy.
-     * @param attackPower  The attack power of the selectedEnemy.
-     * @param defense      The defense of the selectedEnemy.
-     * @param specialSkill The special skill of the selectedEnemy.
+     * @param health       The health of the enemy.
+     * @param attackPower  The attack power of the enemy.
+     * @param defense      The defense of the enemy.
+     * @param specialSkill The special skill of the enemy.
      */
     Enemy(Health health, AttackPower attackPower, Defense defense, SpecialSkill specialSkill) {
         this(health, attackPower, defense);
         this.name = "Enemy"; // Default name
         this.key = this.name.toUpperCase().replace(" ", "_");
-        this.description = "A generic selectedEnemy"; // Default description
+        this.description = "A generic enemy"; // Default description
         this.specialSkill = specialSkill; // Set the special skill
     }
 
     /**
-     * Constructs an selectedEnemy with health, attack power, and defense, but without a special skill.
+     * Constructs an enemy with health, attack power, and defense, but without a special skill.
      *
-     * @param health      The health of the selectedEnemy.
-     * @param attackPower The attack power of the selectedEnemy.
-     * @param defense     The defense of the selectedEnemy.
+     * @param health      The health of the enemy.
+     * @param attackPower The attack power of the enemy.
+     * @param defense     The defense of the enemy.
      */
     protected Enemy(Health health, AttackPower attackPower, Defense defense) {
         super(0, 0, 32, 32); // Initialize with default position and size
@@ -62,10 +62,10 @@ public abstract class Enemy extends Entity {
     }
 
     /**
-     * Calculates the damage dealt by the selectedEnemy based on its attack power.
+     * Calculates the damage dealt by the enemy based on its attack power.
      * The damage is randomized within the minimum and maximum damage range.
      *
-     * @return The damage value dealt by the selectedEnemy.
+     * @return The damage value dealt by the enemy.
      */
     protected double calculateDamage() {
         return attackPower.getDamage() * (Math.random() * (maxDamage - minDamage) + minDamage);
@@ -73,24 +73,24 @@ public abstract class Enemy extends Entity {
 
     @Override
     public void render(Graphics g, int xOffset, int yOffset) {
-        // Render the selectedEnemy on the screen (e.g., draw the selectedEnemy's image or animation)
-//         animation.render(); // Uncomment if animation is used
+        // Render the enemy on the screen (e.g., draw the enemy's image or animation)
+        // animation.render(); // Uncomment if animation is used
     }
 
     /**
-     * Returns whether the selectedEnemy is alive or dead based on its health.
+     * Returns whether the enemy is alive or dead based on its health.
      *
-     * @return true if the selectedEnemy is alive, false if dead.
+     * @return true if the enemy is alive, false if dead.
      */
     public boolean isAlive() {
         return !health.isDead();
     }
 
     /**
-     * The selectedEnemy attacks the selectedPlayer character.
+     * The enemy attacks the player character.
      * The attack can be either a regular attack or a special attack based on conditions.
      *
-     * @param player The selectedPlayer character to be attacked.
+     * @param player The player character to be attacked.
      */
     public double attack(Character player) {
         // Check if the special attack should be used
@@ -103,6 +103,8 @@ public abstract class Enemy extends Entity {
                 if (damage < 1) damage = 1; // Ensure minimum damage of 1
                 player.takeDamage(damage);
                 player.getHealth().takeDamage(damage);
+                Handler.getInstance().getBattleManager().getDamageIndicatorManager()
+                    .addDamageIndicator(damage, (float) player.getDisplayX(), (float) (player.getDisplayY() - 20));
                 return damage;
             } else {
 
@@ -112,8 +114,8 @@ public abstract class Enemy extends Entity {
     }
 
     /**
-     * Determines whether the selectedEnemy should use a special attack.
-     * The chance of using the special attack increases if the selectedEnemy's health is low.
+     * Determines whether the enemy should use a special attack.
+     * The chance of using the special attack increases if the enemy's health is low.
      *
      * @return true if the special attack should be used, false otherwise.
      */
@@ -130,7 +132,7 @@ public abstract class Enemy extends Entity {
     }
 
     /**
-     * Returns the accuracy of the selectedEnemy's attack.
+     * Returns the accuracy of the enemy's attack.
      *
      * @return The accuracy value for the attack.
      */
@@ -139,9 +141,9 @@ public abstract class Enemy extends Entity {
     }
 
     /**
-     * Determines whether the attack hits the target based on the selectedEnemy's accuracy and the target's dodge chance.
+     * Determines whether the attack hits the target based on the enemy's accuracy and the target's dodge chance.
      *
-     * @param accuracy The accuracy of the selectedEnemy's attack.
+     * @param accuracy The accuracy of the enemy's attack.
      * @param dodge    The dodge chance of the target.
      * @return true if the attack hits, false otherwise.
      */
@@ -150,39 +152,45 @@ public abstract class Enemy extends Entity {
     }
 
     /**
-     * Executes the special skill of the selectedEnemy if one is available.
+     * Executes the special skill of the enemy if one is available.
      *
-     * @param player The selectedPlayer character to apply the special skill to.
+     * @param player The player character to apply the special skill to.
      */
     protected void useSpecialSkill(Character player) {
         if (specialSkill != null) {
-            specialSkill.apply(player); // Apply the special skill to the selectedPlayer
+            specialSkill.apply(player); // Apply the special skill to the player
             System.out.println(this.name + " used " + specialSkill.getName() + "!");
         }
     }
 
     /**
-     * The selectedEnemy takes damage from an attack.
+     * The enemy takes damage from an attack.
      * The dodge chance is checked before applying the damage.
      *
-     * @param damage The amount of damage to be dealt to the selectedEnemy.
+     * @param damage The amount of damage to be dealt to the enemy.
      */
     public void takeDamage(double damage) {
-        // Check if the selectedEnemy dodges the attack
+        if(getHealth().isDead()){
+            return;
+        }
+        // Check if the enemy dodges the attack
         if (Math.random() < dodge) {
+            Handler.getInstance().getBattleManager().getDamageIndicatorManager()
+                .addDodgeIndicator((float) getDisplayX(), (float) (getDisplayY() - 20));
             System.out.println(this.name + " dodged the attack!");
             return;
         }
 
-        // Apply damage to the selectedEnemy's health
+        // Apply damage to the enemy's health
         System.out.println(this.name + " takes " + damage + " damage!");
+        Handler.getInstance().getBattleManager().getDamageIndicatorManager()
+            .addDamageIndicator(damage, (float) getDisplayX(), (float) (getDisplayY() - 20));
         health.takeDamage(damage);
     }
 
     public String getKey() {
         return key;
     }
-
 
     private final List<Effect> effects = new ArrayList<>();
 

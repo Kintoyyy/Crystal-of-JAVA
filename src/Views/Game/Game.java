@@ -11,16 +11,11 @@ import java.util.ArrayList;
 
 public class Game extends View {
     private final Map map;
-    //    private final BattleManager battleManager;
     private ArrayList<String> dialogs = new ArrayList<String>();
 
 
     public Game() {
         this.map = handler.getWorldManager();
-        // SHOULD BE IN VIEW MANAGER
-
-//        this.map = new Map(handler);
-//        battleManager = new BattleManager(handler, map);
 
         initComponent();
     }
@@ -36,7 +31,10 @@ public class Game extends View {
 
     @Override
     public void setData(Object data) {
-
+        if (data instanceof ArrayList) {
+            this.dialogs = (ArrayList<String>) data;
+            viewManager.setView(Views.DIALOG);
+        }
     }
 
     @Override

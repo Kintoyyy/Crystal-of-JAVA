@@ -65,8 +65,8 @@
             "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 992.4999999999999,
-                "y": 241
+                "x": 854.1666666666666,
+                "y": 217
             }
         },
         "Dungeon.tmx#Dungeon_1": {
@@ -100,8 +100,8 @@
             "scale": 2,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 330.75,
-                "y": 197
+                "x": 304.75,
+                "y": 1344.5
             }
         },
         "Forest.tmx#Dark_Tiles_1": {

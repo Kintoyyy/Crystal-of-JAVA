@@ -110,8 +110,8 @@ public class Text extends UIComponent {
 
         // Show bounds for debugging
         if (showBounds) {
-            g.setColor(Color.YELLOW);
-            g.drawRect(this.x, this.y, this.width, this.height);
+//            g.setColor(Color.YELLOW);
+//            g.drawRect(this.x, this.y, this.width, this.height);
         }
     }
 

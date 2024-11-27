@@ -94,8 +94,8 @@ public class Movement {
 
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - camera.getXOffset()), (int) (y - camera.getYOffset()), width, height, null);
-        g.setColor(Color.red);
-        g.drawRect((int) (x + bounds.x - camera.getXOffset()), (int) (y + bounds.y - camera.getYOffset()), bounds.width, bounds.height);
+//        g.setColor(Color.red);
+//        g.drawRect((int) (x + bounds.x - camera.getXOffset()), (int) (y + bounds.y - camera.getYOffset()), bounds.width, bounds.height);
     }
 
     private BufferedImage getCurrentAnimationFrame() {

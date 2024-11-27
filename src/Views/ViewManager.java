@@ -7,6 +7,7 @@ import java.util.EnumMap;
 import Game.Handler;
 import Inputs.InputMouseListener;
 import Views.Game.Game;
+import Views.Game.DialogScene;
 import Views.Menu.Menu;
 import Views.Menu.Setting;
 import Views.Battle.Battle;
@@ -43,16 +44,11 @@ public class ViewManager {
         views.put(Views.SELECT_CHARACTER, new Menu());
         views.put(Views.PAUSE, new Pause());
         views.put(Views.BATTLE, new Battle());
-//        views.put(Views.DIALOG, new BattleDialog());
-//        views.put(Views.BATTLE_DIALOG, new BattleDialog(this));
-
-//        updateViewData(Views.DIALOG, new String[]{"one", "two", "three", "four", "five"});
+        views.put(Views.DIALOG, new DialogScene());
         setView(Views.MENU);
     }
 
     public void customView(View customView) {
-//        views.put(Views.DIALOG, customView);
-
         if (customView.isOverlay) {
             if (!layers.getLast().isOverlay) {
                 layers.add(customView);
@@ -63,6 +59,7 @@ public class ViewManager {
         }
         updateInputListener();
     }
+
     public void overlayView() {
 
     }
@@ -82,7 +79,6 @@ public class ViewManager {
         }
 
         updateInputListener();
-//        tick();
     }
 
     public boolean isViewActive(Views viewEnum) {

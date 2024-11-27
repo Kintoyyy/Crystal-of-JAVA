@@ -13,9 +13,6 @@ public class Battle {
     private final ArrayList<String> preBattleDialogs = new ArrayList<>();
     private final ArrayList<String> postBattleDialogs = new ArrayList<>();
 
-    // rewards[]
-    // dialog scenes
-
     public Battle(String battleKey) {
         this.battleKey = battleKey;
     }
@@ -51,7 +48,6 @@ public class Battle {
         return true;
     }
 
-    // TODO: Add dialog scenes
     public Battle dialogBefore(String... s) {
         preBattleDialogs.addAll(List.of(s));
         return this;

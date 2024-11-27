@@ -45,11 +45,16 @@ public class SkillButton extends Button {
 
         g.drawImage(buttonImage, this.x, this.y, width, height, null);
 
+        g.setColor(new Color(0, 0, 0, 39)); // Semi-transparent black
+        g.fillRect(this.x - 4, this.y + height - 4, 104, 40);
+
         g.setColor(Color.WHITE);
 
         g.setFont( new SimplePixelFont(8));
         g.drawString(Skill.getName(), this.x, this.y + height + 10);
         g.drawString("Cost: " + Skill.getCost(), this.x, this.y + height + 20);
         g.drawString("Cooldown: " + Skill.getCooldown(), this.x, this.y + height + 30);
+
+
     }
 }

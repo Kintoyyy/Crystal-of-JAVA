@@ -10,6 +10,7 @@ import Components.Text.Text;
 import Utils.ImageUtils;
 import Utils.SpriteSheet;
 import Views.*;
+import Battle.Effects.DamageIndicatorManager;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -73,11 +74,16 @@ public class Battle extends View {
         g.drawImage(backgroundSheet.crop(0, 0, 962, 972), 0, 0, handler.getWidth(), handler.getHeight(), null);
 
         components.render(g);
+
         Worlds.Battle currentBattle = handler.getWorldManager().getCurrentWorld().getCurrentBattle();
         if (currentBattle != null) {
             text.setText(battleManager.isPlayersTurn() ? "Players turn" : "Enemy Turn : " + battleManager.getTimer());
             text.render(g);
         }
+
+
+
+        handler.getBattleManager().getDamageIndicatorManager().render(g);
     }
 
 
