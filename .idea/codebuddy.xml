@@ -6,6 +6,11 @@
       <list>
         <option value="i want the entities to layered base on the character position, render the entiy behind the player if the player is is from based on the y position" />
         <option value="modify the render &#10;&#10;            if (layer == this.playerLayer) {&#10;                map.getCurrentWorld().renderEntities(g, camera.getXOffset(), camera.getYOffset());&#10;                movement.render(g);&#10;            }&#10;&#10;this part are the rendering for entities ang character" />
+        <option value="i want to add interactivity with the entities, like a message box appears above them. you can press a key next for the dialogs." />
+        <option value="i want the dialog tobe attach to the enities" />
+        <option value="its not working no showing anything, how do i trigger it? how do i test it?" />
+        <option value="refactor the entity detection circle, also render the circle for debugging purpose. the dailog doesnt show" />
+        <option value="change the     protected Ellipse2D.Float detectionCircle;&#10;&#10;find a better way for detection all entity have default interaction circle size" />
       </list>
     </option>
     <option name="selectedModel" value="codebuddy:CLAUDE_3.5_SONNET_V7" />

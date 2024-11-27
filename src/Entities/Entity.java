@@ -7,12 +7,15 @@ import Battle.Effects.Effect;
 import Entities.Common.AttackPower;
 import Entities.Common.Defense;
 import Entities.Common.Health;
+import Game.Handler;
 import Map.Object.Object;
+import Components.Dialog.EntityDialog;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract base class representing an entity in the game.
@@ -36,8 +39,9 @@ public abstract class Entity {
     protected int width, height; // Dimensions of the entity
     protected Point location = new Point(); // Location of the entity
     protected Object object;
-    protected Ellipse2D.Float detectionCircle; // Detection circle
-
+    protected Ellipse2D.Float detectionCircle;
+    protected List<String> dialogLines = new ArrayList<>();
+    public EntityDialog dialog;
 
     /**
      * Constructs an entity at the specified position and size.
@@ -55,6 +59,7 @@ public abstract class Entity {
 
         float radius = Math.max(width, height) * 1.5f; // Example: 1.5 times the larger dimension
         this.detectionCircle = new Ellipse2D.Float(x - radius / 2, y - radius / 2, radius, radius);
+        this.dialog = new EntityDialog(this, dialogLines);
     }
 
     public void updateDetectionCircle() {
@@ -66,7 +71,7 @@ public abstract class Entity {
      * Updates the state of the entity.
      * To be implemented by subclasses to define entity behavior each tick.
      */
-    public abstract void tick();
+//    public abstract void tick();
 
     /**
      * Renders the entity on the screen.
@@ -153,5 +158,43 @@ public abstract class Entity {
             return object.getPosition().y + height;
         }
         return y + height;
+    }
+
+    public void setDialogLines(String... lines) {
+        this.dialogLines = List.of(lines);
+        if (dialog != null) {
+            dialog = new EntityDialog(this, List.of(lines));
+        }
+    }
+
+    public void showDialog() {
+        if (dialog != null && !dialogLines.isEmpty()) {
+            dialog.show();
+        }
+    }
+
+    public void nextDialog() {
+        if (dialog != null && dialog.isActive()) {
+            dialog.nextLine();
+        }
+    }
+
+    public void tick() {
+        if (dialog != null) {
+            dialog.tick();
+           
+           // Handle dialog advancement with E key
+           if (Handler.getInstance().getKeyManager().isKeyPressed('E').exactMatch()) {
+               nextDialog();
+           }
+        }
+    }
+
+    public Ellipse2D.Float getDetectionCircle() {
+        return detectionCircle;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
     }
 }

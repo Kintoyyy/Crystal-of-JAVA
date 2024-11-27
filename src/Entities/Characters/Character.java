@@ -86,12 +86,8 @@ public abstract class Character extends Entity {
     }
 
     @Override
-    public void tick() {
-        // Override this method to update character-specific behaviors each game tick
-    }
-
-    @Override
     public void render(Graphics g, int xOffset, int yOffset) {
+
         // Override this method to render the character on the screen
     }
 

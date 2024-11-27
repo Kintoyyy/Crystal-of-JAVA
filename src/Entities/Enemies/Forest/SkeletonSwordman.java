@@ -18,6 +18,15 @@ public class SkeletonSwordman extends Enemy {
         name = "Sword man";
         description = "A generic selectedEnemy";
 
+        setDialogLines(
+                "You have encountered a Skeleton Boss!",
+                "Prepare for battle!",
+                "Defeat the Skeleton Boss to continue!",
+                "Good luck!",
+                "Skeleton Boss: I will defeat you!",
+                "Skeleton Boss: You will never defeat me!"
+        );
+
         Frames sheet = new Frames(ImageUtils.loadImage("/Maps/Forest/Skeleton_Swordman.png"), 32, 32);
 
         animation = new Animation(sheet)

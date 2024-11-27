@@ -72,12 +72,6 @@ public abstract class Enemy extends Entity {
     }
 
     @Override
-    public void tick() {
-        // Update the state of the selectedEnemy (e.g., animation updates, AI behavior)
-//         animation.tick(); // Uncomment if animation is used
-    }
-
-    @Override
     public void render(Graphics g, int xOffset, int yOffset) {
         // Render the selectedEnemy on the screen (e.g., draw the selectedEnemy's image or animation)
 //         animation.render(); // Uncomment if animation is used

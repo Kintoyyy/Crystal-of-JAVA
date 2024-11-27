@@ -68,6 +68,10 @@ public class World {
         return battles;
     }
 
+    public List<Entity> getNpcs() {
+        return npcs;
+    }
+
     public void renderEntities(Graphics g, float xOffset, float yOffset, Movement playerMovement) {
         // Create a temporary class to hold renderable entities
         class RenderableEntity {
@@ -91,6 +95,7 @@ public class World {
                 (int)(entity.getObject().getPosition().x - xOffset),
                 (int)(entity.getObject().getPosition().y - yOffset)
             );
+            entity.setLocation(pos);
             renderableEntities.add(new RenderableEntity(entity, entity.getRenderY(), pos));
         }
 
@@ -109,6 +114,9 @@ public class World {
                 playerMovement.render(g);
             } else {
                 renderEntity(g, renderableEntity.entity, renderableEntity.renderPosition);
+                if (renderableEntity.entity.dialog != null) {
+                    renderableEntity.entity.dialog.render(g);
+                }
             }
         }
     }

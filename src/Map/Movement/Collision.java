@@ -1,6 +1,7 @@
 package Map.Movement;
 
 import Battle.BattleManager;
+import Entities.Entity;
 import Game.Handler;
 import Map.Object.Object;
 import Map.Object.CLASS;
@@ -8,6 +9,7 @@ import Views.Game.DialogScene;
 import Views.ViewManager;
 import Worlds.Battle;
 import Map.Map;
+import Inputs.InputKeyboardListener; // Added import for InputKeyboardListener
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,11 +19,13 @@ public class Collision {
     private final Map map;
     private final BattleManager battleManager;
     private final ViewManager viewManager;
+    private final InputKeyboardListener input; // Added InputKeyboardListener instance
 
     public Collision(Handler handler) {
         this.map = handler.getWorldManager();
         this.battleManager = handler.getBattleManager();
         this.viewManager = handler.getViewManager();
+        this.input = handler.getKeyManager(); // Initialized InputKeyboardListener
     }
 
     /**
@@ -44,6 +48,17 @@ public class Collision {
             if (object.getClassType() == CLASS.COLLISION) return false;
 
             System.out.println("Collision with object: " + object.getName() + " Type: " + object.getClassType());
+
+            // Check for entity interactions
+            for (Entity entity : map.getCurrentWorld().getNpcs()) {
+                if (entity.getDetectionCircle().intersects(collisionBounds)) {
+                    System.out.println("Collision with entity: " + entity.getName());
+                    if (input.isKeyPressed("E").exactMatch()) {
+                        entity.showDialog();
+                        return true;
+                    }
+                }
+            }
 
             switch (object.getClassType()) {
                 case TELEPORT -> {
