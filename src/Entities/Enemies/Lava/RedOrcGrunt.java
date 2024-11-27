@@ -19,7 +19,7 @@ public class RedOrcGrunt extends Enemy {
         description = "A generic selectedEnemy";
         dodge = 0.2; // 20% chance to dodge attacks
 
-        Frames sheet = new Frames(ImageUtils.loadImage("/Maps/Lava/RedOrc_Grunt.png"), 64, 64);
+        Frames sheet = new Frames(ImageUtils.loadImage("/Maps/Lava/RedOrc_Grunt.png"), 32, 32);
 
         animation = new Animation(sheet)
                 .setDefaultAnimation(sheet.extractFrames(0, 0, 3, 1))
@@ -27,6 +27,6 @@ public class RedOrcGrunt extends Enemy {
                 .addAnimation(TYPE.IDLE, DIRECTION.LEFT, sheet.extractFrames(0, 1, 6, 2, true))
                 .addAnimation(TYPE.IDLE, DIRECTION.RIGHT, sheet.extractFrames(0, 1, 6, 2))
                 .addAnimation(TYPE.IDLE, DIRECTION.UP, sheet.extractFrames(0, 2, 6, 3))
-                .addAnimation(TYPE.DEAD, sheet.extractFrame(3, 4));
+                .addAnimation(TYPE.DEAD, sheet.extractFrame(3, 12));
     }
 }

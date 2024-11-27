@@ -217,19 +217,19 @@
    <polygon points="0,0 1.63636,1.45455 3.09091,1.45455 5.45455,1.45455 6.72727,1.45455 7.63636,1.45455 8.72727,1.09091 8.90909,0 9.09091,-0.909091 9.09091,-1.81818 7.81818,-2.18182 7.27273,-3.45455 8,-4 1.45455,-4 1.09091,-1.81818 0.727273,-1.63636 0.363636,-1.45455"/>
   </object>
   <object id="48" type="COLLISION" x="1296.73" y="81.2727" width="15.2727" height="14.9091"/>
-  <object id="51" name="RED_ORC_GRUNT" type="NPC" x="516.083" y="197.583">
+  <object id="51" name="RED_ORC_ARCHER_1" type="NPC" x="516.083" y="197.583">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
    <point/>
   </object>
-  <object id="53" name="RED_ORC_GRUNT_2" type="NPC" x="890.667" y="144">
+  <object id="53" name="RED_ORC_ARCHER_2" type="NPC" x="890.667" y="144">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
    <point/>
   </object>
-  <object id="55" name="RED_ORC_ARCHER_1" type="NPC" x="914.667" y="210.667">
+  <object id="55" name="RED_ORC_GRUNT_2" type="NPC" x="914.667" y="210.667">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>
@@ -247,7 +247,7 @@
    </properties>
    <point/>
   </object>
-  <object id="59" name="RED_ORC_ARCHER_2" type="NPC" x="1309.33" y="240">
+  <object id="59" name="RED_ORC_ARCHER_3" type="NPC" x="1309.33" y="240">
    <properties>
     <property name="DIRECTION" value="LEFT"/>
    </properties>

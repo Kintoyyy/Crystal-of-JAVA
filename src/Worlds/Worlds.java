@@ -114,15 +114,15 @@ public class Worlds {
                 ).setBattleBackground("/Backgrounds/Ice.png"),
                 new World("LAVA", "res/Maps/Lava.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
-                                new RedOrcGrunt("RED_ORC_GRUNT")
+                                new RedOrcArcher("RED_ORC_ARCHER_1")
                         ),
                         new Battle("BATTLE2").enemies(
-                                new RedOrcGrunt("RED_ORC_GRUNT_2"),
-                                new RedOrcArcher("RED_ORC_ARCHER_1")
+                                new RedOrcArcher("RED_ORC_ARCHER_2"),
+                                new RedOrcGrunt("RED_ORC_GRUNT_2")
                         ),
                         new Battle("BATTLE3").enemies(
                                 new RedOrcGrunt("RED_ORC_GRUNT_3"),
-                                new RedOrcArcher("RED_ORC_ARCHER_2"),
+                                new RedOrcArcher("RED_ORC_ARCHER_3"),
                                 new ZarokAxilleBoss("ZAROK_AXILLE_BOSS")
                         )
                 ).setBattleBackground("/Backgrounds/Lava.png"),

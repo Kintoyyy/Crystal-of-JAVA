@@ -15,7 +15,7 @@ public class Map {
     private final Worlds worlds = new Worlds();
     private final Render render;
     private final AnimationManager animationManager;
-    private String currentWorld = "FOREST";
+    private String currentWorld = "ICE";
 
     public Map(Handler handler) {
         handler.setWorldManager(this);
