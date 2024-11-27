@@ -13,7 +13,7 @@ import java.awt.*;
 
 /**
  * The Render class is responsible for rendering the game world and handling
- * the graphical representation of tiles and selectedPlayer movement on the map.
+ * the graphical representation of tiles and player movement on the map.
  */
 public class Render {
 
@@ -134,10 +134,9 @@ public class Render {
                     }
                 }
             }
-            // render selectedPlayer
+            // render player
             if (layer == this.playerLayer) {
-                map.getCurrentWorld().renderEntities(g, camera.getXOffset(), camera.getYOffset());
-                movement.render(g);
+                map.getCurrentWorld().renderEntities(g, camera.getXOffset(), camera.getYOffset(), movement);
             }
         }
 

@@ -6,8 +6,8 @@ public class DebugMode {
     Handler handler;
     private static boolean isDebug = false;
     private static int layerIndex = 0;
-    private static boolean showObjects = true;
-    private static boolean showComponents = true;
+    private static boolean showObjects = false;
+    private static boolean showComponents = false;
 
     public DebugMode(Handler handler) {
         handler.setDebugMode(this);

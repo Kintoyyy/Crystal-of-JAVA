@@ -100,8 +100,8 @@
             "scale": 1.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 116.99999999999994,
-                "y": 388
+                "x": 256,
+                "y": 767.6666666666665
             }
         },
         "Forest.tmx#Dark_Tiles_1": {
@@ -164,14 +164,14 @@
         },
         "Lava.tmx": {
             "expandedObjectLayers": [
-                10,
-                6
+                6,
+                10
             ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 860.3333333333333,
-                "y": 255.3333333333333
+                "x": 860,
+                "y": 255.66666666666669
             }
         },
         "Lava.tmx#Dimensional_Portal": {

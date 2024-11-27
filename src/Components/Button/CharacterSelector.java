@@ -57,6 +57,8 @@ public class CharacterSelector extends Button {
             default -> buttonSheet[0];
         };
 
+        buttonImage = characterManager.getPlayer() == player ? buttonSheet[2] : buttonImage;
+
         g.setColor(new Color(184, 111, 80));
         g.fillRect(this.x + 10, this.y + 10, width - 20, height - 20);
 

@@ -85,6 +85,8 @@ public class EnemyButton extends Button {
 
             if (!enemy.getHealth().isDead()) {
                 g.drawImage(animation.getFrame(TYPE.IDLE, DIRECTION.LEFT), this.x - width / 2 + 8, this.y - height / 2 + 8, width * scale, height * scale, null);
+            } else {
+                g.drawImage(animation.getFrame(TYPE.DEAD), this.x - width / 2 + 8, this.y - height / 2 + 8, width * scale, height * scale, null);
             }
 
             // NOT WORKING

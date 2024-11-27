@@ -1,5 +1,6 @@
 package Components.Menu;
 
+import Components.ComponentEventListener;
 import Entities.Characters.CharacterManager;
 import Components.UIComponent;
 import Components.Button.CharacterSelector;
@@ -34,7 +35,22 @@ public class CharacterMenu extends Menu {
 
             final int index = i;
             CharacterSelector frame = (CharacterSelector) new CharacterSelector(character)
-                    .setRightClickAction(() -> characters.setPlayer(index));
+                    .setEventListener(new ComponentEventListener() {
+                        @Override
+                        public void onComponentClick(MouseEvent event) {
+                            characters.setPlayer(index);
+                        }
+
+                        @Override
+                        public void onMouseEnter(MouseEvent event) {
+
+                        }
+
+                        @Override
+                        public void onMouseExit(MouseEvent event) {
+
+                        }
+                    });
 
             children.add(frame);
         }
@@ -62,13 +78,11 @@ public class CharacterMenu extends Menu {
 
     @Override
     public void render(Graphics g) {
-        Character currentPlayer = characters.getPlayer();
         int xOffset = (int) this.x;
 
         for (UIComponent UIComponent : children) {
             if (UIComponent instanceof CharacterSelector frame) {
                 frame.setLocation(xOffset, (int) this.y);
-                frame.isActive(currentPlayer != null && currentPlayer.equals(frame.getPlayer()));
                 xOffset += frame.getWidth();
             }
 

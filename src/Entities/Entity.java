@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public abstract class Entity {
     protected String name; // Name of the entity
     protected String description = ""; // Description of the entity
+    protected int renderOrder = 0; // Base render order for layering
     protected Health health; // Health of the entity
     protected AttackPower attackPower; // Attack power of the entity
     protected Defense defense; // Defense of the entity
@@ -145,26 +146,12 @@ public abstract class Entity {
     public Object getObject() {
         return object;
     }
-
-
-    public boolean isPointInDetectionCircle(float px, float py) {
-        return detectionCircle.contains(px, py);
-    }
-
-    /**
-     * Checks if another entity is within the detection circle.
-     *
-     * @param other The other entity.
-     * @return True if the other entity is within the detection circle, false otherwise.
-     */
-    public boolean isEntityInDetectionCircle(Entity other) {
-        float otherX = other.x + other.width / 2f;
-        float otherY = other.y + other.height / 2f;
-        return detectionCircle.contains(otherX, otherY);
-    }
-
-    public boolean isPointInDetectionCircle(Point playerScreenLocation) {
-        return detectionCircle.contains(playerScreenLocation);
+    
+    // Get the Y position for render sorting
+    public float getRenderY() {
+        if (object != null) {
+            return object.getPosition().y + height;
+        }
+        return y + height;
     }
 }
-

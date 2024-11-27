@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Kent extends Character {
     public Kent() {
         // Pass all parameters, including playerSheet, to the superclass constructor
-        super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(150, AttackType.PHYSICAL), new Defense(30), new ArrayList<>());
+        super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(10000, AttackType.PHYSICAL), new Defense(30), new ArrayList<>());
 
         this.addSkill(new Warrior());
         this.addSkill(new PowerStrike());
@@ -49,7 +49,7 @@ public class Kent extends Character {
                 .addAnimation(TYPE.TIRED, DIRECTION.LEFT, sheet.extractFrames(0, 12, 6, 13, true))
                 .addAnimation(TYPE.TIRED, DIRECTION.RIGHT, sheet.extractFrames(0, 12, 6, 13))
                 .addAnimation(TYPE.DANCE, sheet.extractFrames(0, 12, 8, 13))
-                .addAnimation(TYPE.DEAD, sheet.extractFrame(0, 6));
+                .addAnimation(TYPE.DEAD, sheet.extractFrame(3, 6));
     }
 
     @Override

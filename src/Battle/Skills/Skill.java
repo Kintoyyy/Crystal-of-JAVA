@@ -76,6 +76,12 @@ public abstract class Skill {
         this.selectedPlayer = battleManager.getCharacterManager().getPlayer();
         this.characters = battleManager.getCharacterManager().getCharacters();
 
+        if(selectedPlayer.getHealth().isDead()) return;
+
+        if(selectedPlayer.getMana().getMana() < cost) return;
+
+        if(!battleManager.isPlayersTurn()) return;
+
         if (isAvailable()) {
             selectedPlayer.getMana().useMana(cost);
             if(selectedPlayer.getHealth().isDead()) return;

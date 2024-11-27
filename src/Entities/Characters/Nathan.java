@@ -52,7 +52,7 @@ public class Nathan extends Character {
                 .addAnimation(TYPE.TIRED, DIRECTION.LEFT, sheet.extractFrames(0, 12, 6, 13, true))
                 .addAnimation(TYPE.TIRED, DIRECTION.RIGHT, sheet.extractFrames(0, 12, 6, 13))
                 .addAnimation(TYPE.DANCE, sheet.extractFrames(0, 12, 8, 13))
-                .addAnimation(TYPE.DEAD, sheet.extractFrame(0, 6));
+                .addAnimation(TYPE.DEAD, sheet.extractFrame(3, 6));
     }
 
     @Override

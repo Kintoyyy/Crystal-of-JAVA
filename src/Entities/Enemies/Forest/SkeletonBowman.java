@@ -26,6 +26,6 @@ public class SkeletonBowman extends Enemy {
                 .addAnimation(TYPE.IDLE, DIRECTION.LEFT, sheet.extractFrames(0, 1, 6, 2, true))
                 .addAnimation(TYPE.IDLE, DIRECTION.RIGHT, sheet.extractFrames(0, 1, 6, 2))
                 .addAnimation(TYPE.IDLE, DIRECTION.UP, sheet.extractFrames(0, 2, 6, 3))
-                .addAnimation(TYPE.DEAD, sheet.extractFrame(3, 10));
+                .addAnimation(TYPE.DEAD, sheet.extractFrame(3, 9));
     }
 }

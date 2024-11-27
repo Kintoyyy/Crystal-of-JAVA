@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CodebuddyPersistentProjectState">
+    <option name="autoFileSelection" value="true" />
+    <option name="promptHistory">
+      <list>
+        <option value="i want the entities to layered base on the character position, render the entiy behind the player if the player is is from based on the y position" />
+        <option value="modify the render &#10;&#10;            if (layer == this.playerLayer) {&#10;                map.getCurrentWorld().renderEntities(g, camera.getXOffset(), camera.getYOffset());&#10;                movement.render(g);&#10;            }&#10;&#10;this part are the rendering for entities ang character" />
+      </list>
+    </option>
+    <option name="selectedModel" value="codebuddy:CLAUDE_3.5_SONNET_V7" />
+    <option name="ttsEnabled" value="false" />
+  </component>
+</project>

@@ -81,15 +81,15 @@ public class Worlds {
                 ).setBattleBackground("/Backgrounds/Forest.png"),
                 new World("ICE", "res/Maps/Snow.tmx").addBattles(
                         new Battle("BATTLE1").enemies(
-                                new Goblin()
+                                new Goblin("GOBLIN_1")
                         ),
                         new Battle("BATTLE2").enemies(
                                 new Orc(),
-                                new Goblin()
+                                new Goblin("GOBLIN_1")
                         ),
                         new Battle("BATTLE3").enemies(
                                 new Orc(),
-                                new Goblin(),
+                                new Goblin("GOBLIN_1"),
                                 new Orc()
                         )
                 ).setBattleBackground("/Backgrounds/Ice.png"),

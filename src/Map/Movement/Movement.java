@@ -11,6 +11,7 @@ import Map.Tile.Tile;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.Comparator;
 
 public class Movement {
     private final int width, height; // Dimensions of the character
@@ -25,6 +26,7 @@ public class Movement {
     private final CharacterManager characterManager; // Manages the character-related logic
     private final InputKeyboardListener keyboard; // Listens for keyboard input
     private final Collision collision;
+    private float renderY; // For entity layering
 
     public Movement(Handler handler, Collision collision, Camera camera) {
         handler.setMovement(this);
@@ -47,6 +49,7 @@ public class Movement {
         camera.centerOnEntity(this);
         animation.tick();
         getInput();
+        updateRenderY();
     }
 
     private void getInput() {
@@ -81,6 +84,10 @@ public class Movement {
         }
 
         move();
+    }
+
+    private void updateRenderY() {
+        renderY = y + bounds.y + bounds.height;
     }
 
     public Point getPlayerScreenLocation() {
@@ -156,5 +163,10 @@ public class Movement {
 
     public Camera getCamera(){
         return camera;
+    }
+    
+    // Get render Y position for entity layering
+    public float getRenderY() {
+        return renderY;
     }
 }
