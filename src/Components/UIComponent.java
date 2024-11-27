@@ -2,7 +2,6 @@ package Components;
 
 import Battle.BattleManager;
 import Components.enums.States;
-import Entities.Characters.Character;
 import Entities.Characters.CharacterManager;
 import Game.Handler;
 import Views.ViewManager;
@@ -158,7 +157,7 @@ public abstract class UIComponent {
 
     public abstract void render(Graphics g);
 
-    public float getX() {
+    public int getX() {
         return x;
     }
 

@@ -38,6 +38,7 @@ public class Collision {
      */
     public boolean objectCollisions(float xOffset, float yOffset, Movement movement) {
         // Precompute the collision bounds for the moving entity
+
         var collisionBounds = movement.getCollisionBounds(xOffset, yOffset);
 
         // Loop through objects and check for collisions
@@ -68,18 +69,18 @@ public class Collision {
                     map.changeWorld(object.getName());
                 }
                 case DIALOG_TRIGGER -> {
-                    System.out.println("Displaying dialog for object: " + object.getName());
-                    if (object.getClassType() == CLASS.DIALOG_TRIGGER) {
-                        Properties npcProp = object.getProperty("NPC");
-                        if (npcProp != null) {
-                            int npcId = Integer.parseInt(npcProp.value());
-                            Entity npc = map.getCurrentWorld().findNpcById(npcId);
-                            System.out.println("Found NPC: " + npc.getName());
-                            if (npc != null && input.isKeyPressed("E").ignoreCaps()) {
-                                npc.showDialog();
-                            }
-                        }
-                    }
+//                    System.out.println("Displaying dialog for object: " + object.getName());
+//                    if (object.getClassType() == CLASS.DIALOG_TRIGGER) {
+//                        Properties npcProp = object.getProperty("NPC");
+//                        if (npcProp != null) {
+//                            int npcId = Integer.parseInt(npcProp.value());
+//                            Entity npc = map.getCurrentWorld().findNpcById(npcId);
+//                            System.out.println("Found NPC: " + npc.getName());
+//                            if (npc != null && input.isKeyPressed("E").ignoreCaps()) {
+//                                npc.showDialog();
+//                            }
+//                        }
+//                    }
                 }
                 case BATTLE -> {
                     try {

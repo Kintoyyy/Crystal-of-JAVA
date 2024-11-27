@@ -14,6 +14,8 @@ public class Dialog extends UIComponent {
     private Text text;
     private final BufferedImage dialogImage;
 
+    private boolean renderText = true;
+
     public Dialog(String textContent) {
         super();
         this.width = 183;
@@ -36,13 +38,15 @@ public class Dialog extends UIComponent {
 
     @Override
     public void tick() {
-//        tickChildren();
         text.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(dialogImage, this.x, this.y, width, height, null);
+
+        if (renderText) {
+            text.render(g);
+        }
 
         if (showBounds) {
             g.setColor(Color.PINK);
@@ -52,10 +56,17 @@ public class Dialog extends UIComponent {
 
     @Override
     public void onClick(MouseEvent e) {
-        // Define behavior on dialog click
+        if (text.isTypingComplete()) {
+            text.resetTyping();
+        }
     }
 
     public Text getTextObj() {
         return text;
+    }
+    
+    public void setText(String newText) {
+        text.setText(newText);
+        text.resetTyping();
     }
 }

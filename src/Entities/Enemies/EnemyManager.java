@@ -37,6 +37,15 @@ public class EnemyManager {
         }
     }
 
+    public boolean isAllEnemiesDead() {
+        for (Enemy enemy : enemies) {
+            if (!enemy.getHealth().isDead()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean isEmpty() {
         return enemies.isEmpty();
     }

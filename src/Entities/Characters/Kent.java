@@ -17,7 +17,7 @@ public class Kent extends Character {
     public Kent() {
         // Pass all parameters, including playerSheet, to the superclass constructoraaaaaa
         super("Kent", 1, new Health(1200), new Mana(100), new AttackPower(10000, AttackType.PHYSICAL), new Defense(30), new ArrayList<>());
-
+        this.speed = 10;
         this.addSkill(new Warrior());
         this.addSkill(new PowerStrike());
         this.addSkill(new ShieldBlock());

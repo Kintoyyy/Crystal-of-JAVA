@@ -8,6 +8,7 @@ import Entities.Enemies.EnemyManager;
 import Entities.Entity;
 import Game.Handler;
 import Utils.Timer;
+import Views.Overlay.BattleDialog;
 import Views.enums.Views;
 import Views.ViewManager;
 import Worlds.Battle;
@@ -39,27 +40,30 @@ public class BattleManager {
     }
 
     public void startBattle(Battle battle) {
-
         //set battle
-        if (!battle.getPreBattleDialogs().isEmpty()) {
-            System.out.println("Loading pre battle Dialogs");
-        }
+        handler.getWorldManager().getCurrentWorld().setCurrentBattle(battle);
+
         if (battle.isComplete()) {
             System.out.println("Battle already completed: " + battle.getKey());
             abortBattle();
             return;
         }
 
-        //get battle enemies
-        enemyManager.loadEnemies(battle.getEnemies()); // load enemies to enemies array
-        this.isDataLoaded = false;// flag for ui components tobe removed
+        if (!battle.getPreBattleDialogs().isEmpty()) {
+            viewManager.customView(new BattleDialog(battle.getPreBattleDialogs(), () -> {
+                loadBattleView(battle);
+            }));
+            return;
+        }
+        loadBattleView(battle);
+    }
 
-        // load load pre battle dialogs
-//        viewManager.customView(new DialogScene( battle.getPreBattleDialogs()));
-        viewManager.setView(Views.BATTLE); // set view to battle
+    private void loadBattleView(Battle battle) {
 
-
-        // change view to battle
+        handler.getWorldManager().getCurrentWorld().setCurrentBattle(battle);
+        enemyManager.loadEnemies(battle.getEnemies());
+        this.isDataLoaded = false;
+        viewManager.setView(Views.BATTLE);
     }
 
     public void enemiesTurn() {
@@ -105,8 +109,6 @@ public class BattleManager {
             return null;
         }
 
-
-
         switch (strategy.toLowerCase()) {
             case "random":
 
@@ -139,10 +141,21 @@ public class BattleManager {
         }
     }
 
-
     public void tick() {
         timer.update(); // Update the timer regardless
         // Check if all enemies are dead
+
+        if (enemyManager.isAllEnemiesDead() && !timer.isActive()) {
+            Battle currentBattle = handler.getWorldManager().getCurrentWorld().getCurrentBattle();
+            if (!currentBattle.getPostBattleDialogs().isEmpty()) {
+                viewManager.customView(new BattleDialog(currentBattle.getPostBattleDialogs(), () -> {
+                    viewManager.setView(Views.GAME);
+                }));
+            } else {
+                viewManager.setView(Views.GAME);
+            }
+        }
+
         if (enemyManager.isEmpty()) {
             System.out.println("Battle ended");
             viewManager.setView(Views.GAME);

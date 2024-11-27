@@ -14,9 +14,20 @@
         <option value="i want to use the DIALOG_TRIGGER to trigger the dialog of the npc" />
         <option value="i want to use the DIALOG_TRIGGER to trigger the dialog of the npc. use the tmx file. please refactor the whole codebase if needed" />
         <option value="how about use the object dialog to trigger the dialog for npc it has the id for the npc, adjust the code accordingly&#10;&#10;  &lt;object id=&quot;39&quot; name=&quot;DAILOG&quot; type=&quot;DIALOG_TRIGGER&quot; x=&quot;330.5&quot; y=&quot;106.583&quot; width=&quot;64.292&quot; height=&quot;62.75&quot;&gt;&#10;   &lt;properties&gt;&#10;    &lt;property name=&quot;NPC&quot; type=&quot;object&quot; value=&quot;123&quot;/&gt;&#10;   &lt;/properties&gt;&#10;   &lt;ellipse/&gt;&#10;  &lt;/object&gt;&#10;&#10;&#10;" />
+        <option value="update all the enemies to use id instead of key. also the worlds" />
+        <option value="refactor the entities render in world use ids instead of the key" />
+        <option value="also add a method it world that i can add an npc entity to render" />
+        <option value="can you update it for me, adjust add a random id, ill adjust it later" />
+        <option value="uhm just fill it update the worlds calss" />
+        <option value="i mean on initalization i want o set an id to the entity new SkeletonSwordman(23) to be use as reference to the tmx file" />
+        <option value="show the prebattle dalog befoare starting a battle use the component to show it on top" />
+        <option value="also add the post battle dailog" />
+        <option value="show the prebattle dalog before starting a battle use the component to show it on top and alos show the post battle dialogs" />
+        <option value="fix the missing methods in text class" />
+        <option value="fix the             Battle currentBattle = handler.getWorldManager().getCurrentWorld().getCurrentBattle();&#10;&#10;&#10;it prints null and also the text doesnt show up" />
+        <option value="the preBattleDialogs.get(dialogIndex) is working but the dialog or text doesnt show it, dont include the typing effect if it cases problem" />
       </list>
     </option>
     <option name="selectedModel" value="codebuddy:CLAUDE_3.5_SONNET_V7" />
-    <option name="ttsEnabled" value="false" />
   </component>
 </project>
