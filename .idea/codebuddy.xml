@@ -25,6 +25,7 @@
         <option value="show the prebattle dalog before starting a battle use the component to show it on top and alos show the post battle dialogs" />
         <option value="fix the missing methods in text class" />
         <option value="fix the             Battle currentBattle = handler.getWorldManager().getCurrentWorld().getCurrentBattle();&#10;&#10;&#10;it prints null and also the text doesnt show up" />
+        <option value="the preBattleDialogs.get(dialogIndex) is working but the dialog or text doesnt show it, dont include the typing effect if it cases problem" />
       </list>
     </option>
     <option name="selectedModel" value="codebuddy:CLAUDE_3.5_SONNET_V7" />

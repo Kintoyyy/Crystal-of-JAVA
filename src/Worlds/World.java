@@ -23,6 +23,7 @@ public class World {
     private final String worldKey;
     private final HashMap<String, Battle> battles = new HashMap<>();
     private final List<Entity> npcs = new ArrayList<>();
+    private Battle currentBattle;
     private final List<Object> objects;
 
     public World(String worldKey, String mapPath) {
@@ -193,5 +194,13 @@ public class World {
             battleBackground = "/Backgrounds/Forest.png";
         }
         return battleBackground;
+    }
+    
+    public Battle getCurrentBattle() {
+        return currentBattle;
+    }
+
+    public void setCurrentBattle(Battle battle) {
+        this.currentBattle = battle;
     }
 }

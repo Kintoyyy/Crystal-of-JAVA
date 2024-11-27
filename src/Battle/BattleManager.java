@@ -41,6 +41,14 @@ public class BattleManager {
 
     public void startBattle(Battle battle) {
         //set battle
+        handler.getWorldManager().getCurrentWorld().setCurrentBattle(battle);
+
+        if (battle.isComplete()) {
+            System.out.println("Battle already completed: " + battle.getKey());
+            abortBattle();
+            return;
+        }
+
         if (!battle.getPreBattleDialogs().isEmpty()) {
             viewManager.customView(new BattleDialog(battle.getPreBattleDialogs(), () -> {
                 loadBattleView(battle);
@@ -51,11 +59,8 @@ public class BattleManager {
     }
 
     private void loadBattleView(Battle battle) {
-        if (battle.isComplete()) {
-            System.out.println("Battle already completed: " + battle.getKey());
-            abortBattle();
-            return;
-        }
+
+        handler.getWorldManager().getCurrentWorld().setCurrentBattle(battle);
         enemyManager.loadEnemies(battle.getEnemies());
         this.isDataLoaded = false;
         viewManager.setView(Views.BATTLE);

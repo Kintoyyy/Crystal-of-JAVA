@@ -56,6 +56,7 @@ public class Battle extends View {
     public void tick() {
         battleManager.tick();
         components.tick();
+        Worlds.Battle currentBattle = handler.getWorldManager().getCurrentWorld().getCurrentBattle();
         text.tick();
     }
 
@@ -72,14 +73,11 @@ public class Battle extends View {
         g.drawImage(backgroundSheet.crop(0, 0, 962, 972), 0, 0, handler.getWidth(), handler.getHeight(), null);
 
         components.render(g);
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString(handler.getCharacterManager().getPlayer().getSkills().toString(), 20, 50);
-//        g.drawString((battleManagerOld.getTurnState() == Turn.PLAYER ? "Player" : "Enemy") + " turn", 500, 400);
-//        g.drawString(handler.getGameState(), 20, 70);
-//        System.out.println(battleManager.isPlayersTurn());
-        text.setText(battleManager.isPlayersTurn() ? "Players turn" : "Enemy Turn : " + battleManager.getTimer());
-        text.render(g);
+        Worlds.Battle currentBattle = handler.getWorldManager().getCurrentWorld().getCurrentBattle();
+        if (currentBattle != null) {
+            text.setText(battleManager.isPlayersTurn() ? "Players turn" : "Enemy Turn : " + battleManager.getTimer());
+            text.render(g);
+        }
     }
 
 

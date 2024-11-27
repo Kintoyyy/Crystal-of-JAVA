@@ -24,8 +24,9 @@ public class Text extends UIComponent {
 
     public Text(String text) {
         super();
-        this.width = 700;
+        this.width = 800;  // Increased width to accommodate more text
         this.fullText = text;
+        this.displayedText = text;  // Initialize displayed text immediately
     }
 
     public Text setFont(Font font) {
@@ -84,9 +85,8 @@ public class Text extends UIComponent {
                 lastTick = System.currentTimeMillis();
                 isTypingComplete = (currentIndex >= fullText.length());
             }
-        } else if (displayedText.isEmpty()) {
-            displayedText = fullText;
-            isTypingComplete = true;
+        } else if (!typingEffect) {
+            displayedText = fullText;  // Show full text immediately if typing effect is disabled
         }
     }
 
@@ -94,7 +94,7 @@ public class Text extends UIComponent {
     public void render(Graphics g) {
         g.setColor(this.color);
         g.setFont(font);
-
+        
         FontMetrics fm = g.getFontMetrics();
         List<String> lines = wrapText(fm, displayedText);
         int lineHeight = fm.getHeight();
